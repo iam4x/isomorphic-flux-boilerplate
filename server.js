@@ -16,7 +16,7 @@ const app = express();
 app.engine('handlebars', exphbs({defaultLayout: 'index'}));
 app.set('view engine', 'handlebars');
 
-app.use('/assets/images', express.static(__dirname + '/app/assets/images'));
+app.use('/assets/images', express.static(__dirname + '/app/assets/'));
 app.use('/assets/javascript', express.static(__dirname + '/dist/'));
 
 app.use(router);
