@@ -1,0 +1,60 @@
+{
+  "name": "iso-react",
+  "version": "0.0.1",
+  "description": "An isomorphic ReactJS boilerplate",
+  "main": "app.js",
+  "scripts": {
+    "watch": "./node_modules/.bin/watchify ./app/app.jsx -o ./dist/app.js -v",
+    "start": "npm run watch & ./node_modules/.bin/nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/iam4x/iso-react.git"
+  },
+  "homepage": "https://github.com/iam4x/iso-react",
+  "bugs": "https://github.com/iam4x/iso-react/issues",
+  "author": "iam4x",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.11.1",
+    "express-handlebars": "^1.1.0",
+    "react": "^0.12.2",
+    "react-router": "^0.11.6"
+  },
+  "devDependencies": {
+    "browserify": "^8.1.1",
+    "node-jsx": "^0.12.4",
+    "nodemon": "^1.3.2",
+    "reactify": "^1.0.0",
+    "watchify": "^2.2.1"
+  },
+  "browserify": {
+    "transform": [
+      [
+        "reactify",
+        {
+          "es6": true
+        }
+      ]
+    ]
+  },
+  "tags": [
+    "react",
+    "react-router",
+    "isomorphic",
+    "express",
+    "browserify",
+    "jsx",
+    "es6"
+  ],
+  "keywords": [
+    "react",
+    "isomorphic",
+    "spa",
+    "ssr",
+    "express",
+    "browserify",
+    "jsx",
+    "es6"
+  ]
+}
