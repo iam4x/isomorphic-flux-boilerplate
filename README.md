@@ -28,12 +28,13 @@ After that, you will just need to clone the repo and install dependancies:
 
 To run the project:
 
-* `$ npm start`
+* `$ npm install -g gulp`
+* `$ gulp`
 
 Open your browser to `http://localhost:3000` and you will see the magic happens! Try to disable JavaScript in your browser, you will still be able to navigate between pages of the application. Enjoy the power of isomorphic applications!
 
 ## TODO
 
-* Switch to gulp.
+* Livereload or BrowserSync?
 * Flux, Fluxxor or Reflux?
 * Add async data retrieval before server rendering, currently all the Ajax calls that will change the state of a components are made on the client after rendering. (Still exploring many way to achieves this, because it breaks the Flux architecture).
