@@ -27,16 +27,21 @@ After that, you will just need to clone the repo and install dependancies:
 
 * `$ git clone https://github.com/iam4x/iso-react.git`
 * `$ cd iso-react && npm install`
-
-To run the project:
-
 * `$ npm install -g gulp`
+
+### Run the project in development:
+
 * `$ gulp dev`
 
 Open your browser to `http://localhost:8080` and you will see the magic happens! Try to disable JavaScript in your browser, you will still be able to navigate between pages of the application. Enjoy the power of isomorphic applications!
 
+### Build project:
+
+* `$ gulp build`
+
+Will produce `/dist/bundle.js` minified and uglified file to serve to the client.
+
 ## TODO
 
 * Include Reflux
-* Gulp production build
 * Add async data retrieval before server rendering, currently all the Ajax calls that will change the state of a components are made on the client after rendering. (Still exploring many way to achieves this, because it breaks the Flux architecture).

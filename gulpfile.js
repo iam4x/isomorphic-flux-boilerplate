@@ -10,9 +10,9 @@ var WebpackDevServer = require('webpack-dev-server');
 
 var webpackConfig = require('./webpack.config.js');
 
-// +------------------+
-// | DEVLOPMENT TASKS |
-// +------------------+
+// +-------------------+
+// | DEVELOPMENT TASKS |
+// +-------------------+
 
 // Proxy `/assets/javascript/` requests to
 // served files from `webpack-dev-server`
@@ -75,3 +75,32 @@ gulp.task('supervisor', function () {
 });
 
 gulp.task('dev', ['supervisor', 'webpack-dev-server', 'connect']);
+
+// +-------------+
+// | BUILD TASKS |
+// +-------------+
+
+gulp.task('webpack:build', function (callback) {
+  var config = Object.create(webpackConfig);
+  config.plugins = [
+    new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: JSON.stringify('production')
+      }
+    }),
+    new webpack.optimize.DedupePlugin(),
+    new webpack.optimize.UglifyJsPlugin()
+  ];
+
+  webpack(config, function (err, stats) {
+    if (err) {
+      throw new gutil.PluginError('webpack:build', err);
+    }
+    gutil.log('[webpack:build]', stats.toString({
+      colors: true
+    }));
+    return callback();
+  });
+});
+
+gulp.task('build', ['webpack:build']);
