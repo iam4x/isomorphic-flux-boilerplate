@@ -9,15 +9,19 @@ require('node-jsx').install({
 const express = require('express');
 const exphbs = require('express-handlebars');
 
-const router = require('./router');
+const router = require('./server.router');
 
 const app = express();
 
-app.engine('handlebars', exphbs({defaultLayout: 'index'}));
+app.engine('handlebars', exphbs({
+  layoutsDir: __dirname + '/views/layouts',
+  defaultLayout: 'index'
+}));
 app.set('view engine', 'handlebars');
+app.set('views', __dirname + '/views');
 
-app.use('/assets/images', express.static(__dirname + '/app/assets/'));
-app.use('/assets/javascript', express.static(__dirname + '/dist/'));
+app.use('/assets/images', express.static('../app/assets/'));
+app.use('/assets/javascript', express.static('../dist/'));
 
 app.use(router);
 app.listen(3000);

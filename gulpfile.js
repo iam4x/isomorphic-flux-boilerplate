@@ -68,8 +68,8 @@ gulp.task('webpack-dev-server', function () {
 });
 
 gulp.task('supervisor', function () {
-  supervisor('server.js', {
-    watch: ['views', 'server.js', 'router.jsx'],
+  supervisor(__dirname + '/server/server.js', {
+    watch: ['server'],
     extensions: ['jsx', 'js']
   });
 });
