@@ -3,7 +3,7 @@
 var gulp = require('gulp');
 var gutil = require('gulp-util');
 var connect = require('gulp-connect');
-var nodemon = require('gulp-nodemon');
+var supervisor = require('gulp-supervisor');
 var proxy = require('proxy-middleware');
 var webpack = require('webpack');
 var WebpackDevServer = require('webpack-dev-server');
@@ -67,11 +67,11 @@ gulp.task('webpack-dev-server', function () {
   });
 });
 
-gulp.task('nodemon', function () {
-  nodemon({
-    script: 'server.js',
-    ext: 'html js handlebars'
+gulp.task('supervisor', function () {
+  supervisor('server.js', {
+    watch: ['views', 'server.js', 'router.jsx'],
+    extensions: ['jsx', 'js']
   });
 });
 
-gulp.task('dev', ['webpack-dev-server', 'nodemon', 'connect']);
+gulp.task('dev', ['supervisor', 'webpack-dev-server', 'connect']);
