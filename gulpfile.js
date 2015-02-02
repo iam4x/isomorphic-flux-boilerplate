@@ -35,20 +35,24 @@ gulp.task('connect', function () {
   connect.server({
     root: __dirname,
     middleware: function () {
-      return [expressProxy(), webpackProxy()];
+      return [webpackProxy(), expressProxy()];
     }
   });
 });
 
 gulp.task('webpack-dev-server', function () {
-  var compiler = webpack(webpackConfig);
-  new WebpackDevServer(compiler)
-    .listen(8090, 'localhost', function (err) {
-      if (err) {
-        throw new gutil.PluginError('webpack-dev-server', err);
-      }
-      gutil.log('[webpack-dev-server]', 'started on port 8090');
-    });
+  var config = Object.create(webpackConfig);
+  config.devtool = 'eval';
+  config.debug = true;
+
+  new WebpackDevServer(webpack(config), {
+    publicPath: config.output.publicPath
+  }).listen(8090, 'localhost', function (err) {
+    if (err) {
+      throw new gutil.PluginError('webpack-dev-server', err);
+    }
+    gutil.log('[webpack-dev-server]', 'started on port 8090');
+  });
 });
 
 gulp.task('nodemon', function () {

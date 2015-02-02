@@ -1,6 +1,5 @@
 module.exports = {
   target: 'web',
-  debug: true,
   entry: __dirname + '/app/bundle.jsx',
   output: {
     path: __dirname + '/dist',
