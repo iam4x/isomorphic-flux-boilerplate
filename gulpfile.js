@@ -44,6 +44,18 @@ gulp.task('webpack-dev-server', function () {
   var config = Object.create(webpackConfig);
   config.devtool = 'eval';
   config.debug = true;
+  config.entry = [
+    'webpack-dev-server/client?http://localhost:8090',
+    'webpack/hot/only-dev-server',
+    __dirname + '/app/bundle.jsx'
+  ];
+  config.module.loaders = [
+    {test: /\.jsx$/, loaders: ['react-hot', 'jsx?harmony'], exclude: /node_modules/}
+  ];
+  config.plugins = [
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoErrorsPlugin()
+  ];
 
   new WebpackDevServer(webpack(config), {
     publicPath: config.output.publicPath

@@ -36,7 +36,6 @@ Open your browser to `http://localhost:8080` and you will see the magic happens!
 
 ## TODO
 
-* Hot module reloader
 * Include Reflux
 * Gulp production build
 * Add async data retrieval before server rendering, currently all the Ajax calls that will change the state of a components are made on the client after rendering. (Still exploring many way to achieves this, because it breaks the Flux architecture).
