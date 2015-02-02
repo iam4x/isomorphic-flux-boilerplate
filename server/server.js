@@ -6,6 +6,7 @@ require('node-jsx').install({
   harmony: true
 });
 
+const path = require('path');
 const express = require('express');
 const exphbs = require('express-handlebars');
 
@@ -20,8 +21,8 @@ app.engine('handlebars', exphbs({
 app.set('view engine', 'handlebars');
 app.set('views', __dirname + '/views');
 
-app.use('/assets/images', express.static('../app/assets/'));
-app.use('/assets/javascript', express.static('../dist/'));
+app.use('/assets/images', express.static(path.resolve(__dirname + '/../app/assets/')));
+app.use('/assets/javascript', express.static(path.resolve(__dirname + '/../dist/')));
 
 app.use(router);
 app.listen(3000);
