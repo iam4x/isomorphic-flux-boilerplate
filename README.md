@@ -8,6 +8,7 @@ This project is still under development, contributions are welcome!
 
 * [react](https://facebook.github.io/react/)
 * [react-router](https://github.com/rackt/react-router)
+* [react-hot-loader](https://github.com/gaearon/react-hot-loader)
 * [expressjs](http://expressjs.com/)
 * [webpack](http://webpack.github.io/)
 * [gulpjs](http://gulpjs.com/)
