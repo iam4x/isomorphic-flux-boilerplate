@@ -3,7 +3,7 @@
 const React = require('react');
 const Router = require('react-router');
 
-const routes = require('../app/routes.jsx');
+const routes = require('../app/routes');
 
 module.exports = (req, res) => {
   Router.run(routes, req.url, (Handler) => {

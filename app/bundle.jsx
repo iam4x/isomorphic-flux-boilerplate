@@ -3,7 +3,7 @@
 const React = require('react');
 const Router = require('react-router');
 
-const routes = require('./routes.jsx');
+const routes = require('./routes');
 
 const content = document.getElementById('content');
 
