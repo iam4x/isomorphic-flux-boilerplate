@@ -4,12 +4,13 @@
 
 This project is still under development, contributions are welcome!
 
-## Libraries
+## Libraries / External Tools
 
 * [react](https://facebook.github.io/react/)
 * [react-router](https://github.com/rackt/react-router)
 * [expressjs](http://expressjs.com/)
-* [browserify](http://browserify.org/)
+* [webpack](http://webpack.github.io/)
+* [gulpjs](http://gulpjs.com/)
 
 ## Installation / How-to
 
@@ -29,12 +30,13 @@ After that, you will just need to clone the repo and install dependancies:
 To run the project:
 
 * `$ npm install -g gulp`
-* `$ gulp`
+* `$ gulp dev`
 
-Open your browser to `http://localhost:3000` and you will see the magic happens! Try to disable JavaScript in your browser, you will still be able to navigate between pages of the application. Enjoy the power of isomorphic applications!
+Open your browser to `http://localhost:8080` and you will see the magic happens! Try to disable JavaScript in your browser, you will still be able to navigate between pages of the application. Enjoy the power of isomorphic applications!
 
 ## TODO
 
-* Livereload or BrowserSync?
-* Flux, Fluxxor or Reflux?
+* Hot module reloader
+* Include Reflux
+* Gulp production build
 * Add async data retrieval before server rendering, currently all the Ajax calls that will change the state of a components are made on the client after rendering. (Still exploring many way to achieves this, because it breaks the Flux architecture).
