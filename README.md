@@ -37,11 +37,11 @@ Open your browser to `http://localhost:8080` and you will see the magic happens!
 
 ### Build project:
 
-* `$ gulp build`
+Just run `$ gulp build`, it will produce these tasks:
 
-* Concat & minify styles to `/dist/css/styles.css`.
-* Concat & minify scripts to `/dist/js/app.js`.
-* Optimize & copy images to `/dist/img/`.
+* Concat & minify styles to `/dist/css/styles.css`
+* Concat & minify scripts to `/dist/js/app.js`
+* Optimize & copy images to `/dist/img/`
 
 ## TODO
 
