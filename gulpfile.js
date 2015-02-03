@@ -1,12 +1,14 @@
 'use strict';
 
 var gulp = require('gulp');
+var del = require('del');
 var gutil = require('gulp-util');
 var size = require('gulp-size');
 var connect = require('gulp-connect');
 var supervisor = require('gulp-supervisor');
 var imagemin = require('gulp-imagemin');
 var rubySass = require('gulp-ruby-sass-ns');
+var minifyCSS = require('gulp-minify-css');
 var concatCss = require('gulp-concat-css');
 var pngquant = require('imagemin-pngquant');
 var proxy = require('proxy-middleware');
@@ -14,6 +16,14 @@ var webpack = require('webpack');
 var WebpackDevServer = require('webpack-dev-server');
 
 var webpackConfig = require('./webpack.config.js');
+
+// +--------------+
+// | SHARED TASKS |
+// +--------------+
+
+gulp.task('clean', function () {
+  return del([__dirname + '/dist/**/*']);
+});
 
 // +-------------------+
 // | DEVELOPMENT TASKS |
@@ -105,6 +115,7 @@ gulp.task('styles', ['sass'], function () {
 });
 
 gulp.task('dev', [
+  'clean',
   'images',
   'styles',
   'supervisor',
@@ -142,4 +153,10 @@ gulp.task('webpack:build', function (callback) {
   });
 });
 
-gulp.task('build', ['images', 'webpack:build']);
+gulp.task('build:styles', ['styles'], function () {
+  return gulp.src(__dirname + '/dist/css/styles.css')
+    .pipe(minifyCSS())
+    .pipe(gulp.dest(__dirname + '/dist/css/'));
+});
+
+gulp.task('build', ['clean', 'build:styles', 'images', 'webpack:build']);

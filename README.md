@@ -39,7 +39,9 @@ Open your browser to `http://localhost:8080` and you will see the magic happens!
 
 * `$ gulp build`
 
-Will produce `/dist/bundle.js` minified and uglified file to serve to the client.
+* Concat & minify styles to `/dist/css/styles.css`.
+* Concat & minify scripts to `/dist/js/app.js`.
+* Optimize & copy images to `/dist/img/`.
 
 ## TODO
 
