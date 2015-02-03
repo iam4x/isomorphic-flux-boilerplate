@@ -6,6 +6,8 @@ var size = require('gulp-size');
 var connect = require('gulp-connect');
 var supervisor = require('gulp-supervisor');
 var imagemin = require('gulp-imagemin');
+var rubySass = require('gulp-ruby-sass-ns');
+var concatCss = require('gulp-concat-css');
 var pngquant = require('imagemin-pngquant');
 var proxy = require('proxy-middleware');
 var webpack = require('webpack');
@@ -90,13 +92,27 @@ gulp.task('images', function () {
     .pipe(size());
 });
 
+gulp.task('sass', function () {
+  return gulp.src(__dirname + '/app/styles/**/*.scss')
+    .pipe(rubySass())
+    .pipe(gulp.dest(__dirname + '/.tmp/css'));
+});
+
+gulp.task('styles', ['sass'], function () {
+  return gulp.src(__dirname + '/.tmp/css/**/*.css')
+    .pipe(concatCss('styles.css'))
+    .pipe(gulp.dest(__dirname + '/dist/css'));
+});
+
 gulp.task('dev', [
   'images',
+  'styles',
   'supervisor',
   'webpack-dev-server',
   'connect'
 ], function () {
   gulp.watch(__dirname + '/app/images/**/*', ['images']);
+  gulp.watch(__dirname + '/app/styles/**/*', ['styles']);
 });
 
 // +-------------+
