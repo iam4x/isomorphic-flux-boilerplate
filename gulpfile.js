@@ -2,8 +2,11 @@
 
 var gulp = require('gulp');
 var gutil = require('gulp-util');
+var size = require('gulp-size');
 var connect = require('gulp-connect');
 var supervisor = require('gulp-supervisor');
+var imagemin = require('gulp-imagemin');
+var pngquant = require('imagemin-pngquant');
 var proxy = require('proxy-middleware');
 var webpack = require('webpack');
 var WebpackDevServer = require('webpack-dev-server');
@@ -74,7 +77,27 @@ gulp.task('supervisor', function () {
   });
 });
 
-gulp.task('dev', ['supervisor', 'webpack-dev-server', 'connect']);
+gulp.task('images', function () {
+  return gulp.src(__dirname + '/app/images/**/*')
+    .pipe(imagemin({
+      optimizationLevel: 3,
+      progressive: true,
+      interlaced: true,
+      svgoPlugins: [{removeViewBox: false}],
+      use: [pngquant()]
+    }))
+    .pipe(gulp.dest(__dirname + '/dist/img'))
+    .pipe(size());
+});
+
+gulp.task('dev', [
+  'images',
+  'supervisor',
+  'webpack-dev-server',
+  'connect'
+], function () {
+  gulp.watch(__dirname + '/app/images/**/*', ['images']);
+});
 
 // +-------------+
 // | BUILD TASKS |
@@ -103,4 +126,4 @@ gulp.task('webpack:build', function (callback) {
   });
 });
 
-gulp.task('build', ['webpack:build']);
+gulp.task('build', ['images', 'webpack:build']);
