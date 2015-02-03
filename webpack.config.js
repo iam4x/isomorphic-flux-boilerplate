@@ -1,10 +1,10 @@
 module.exports = {
   target: 'web',
-  entry: __dirname + '/app/bundle.jsx',
+  entry: __dirname + '/app/main.jsx',
   output: {
-    path: __dirname + '/dist',
-    filename: 'bundle.js',
-    publicPath: '/assets/javascript/'
+    path: __dirname + '/dist/js/',
+    filename: 'app.js',
+    publicPath: '/assets/js/'
   },
   module: {
     loaders: [

@@ -21,8 +21,9 @@ app.engine('handlebars', exphbs({
 app.set('view engine', 'handlebars');
 app.set('views', __dirname + '/views');
 
-app.use('/assets/images', express.static(path.resolve(__dirname + '/../app/assets/')));
-app.use('/assets/javascript', express.static(path.resolve(__dirname + '/../dist/')));
+app.use('/assets/img', express.static(path.resolve(__dirname + '/../dist/img/')));
+app.use('/assets/js', express.static(path.resolve(__dirname + '/../dist/js')));
+app.use('/assets/css', express.static(path.resolve(__dirname + '/../dist/css')));
 
 app.use(router);
 app.listen(3000);

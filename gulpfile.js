@@ -18,8 +18,8 @@ var webpackConfig = require('./webpack.config.js');
 // served files from `webpack-dev-server`
 var webpackProxy = function () {
   var url = require('url');
-  var options = url.parse('http://localhost:8090/assets/javascript');
-  options.route = '/assets/javascript/';
+  var options = url.parse('http://localhost:8090/assets/js');
+  options.route = '/assets/js/';
   return proxy(options);
 };
 
@@ -47,7 +47,7 @@ gulp.task('webpack-dev-server', function () {
   config.entry = [
     'webpack-dev-server/client?http://localhost:8090',
     'webpack/hot/only-dev-server',
-    __dirname + '/app/bundle.jsx'
+    __dirname + '/app/main.jsx'
   ];
   config.module.loaders = [
     {test: /\.jsx$/, loaders: ['react-hot', 'jsx?harmony'], exclude: /node_modules/}

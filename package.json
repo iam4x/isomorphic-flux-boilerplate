@@ -22,6 +22,7 @@
     "browserify": "^8.1.1",
     "gulp": "^3.8.10",
     "gulp-connect": "^2.2.0",
+    "gulp-imagemin": "^2.1.0",
     "gulp-supervisor": "^0.1.2",
     "gulp-util": "^3.0.2",
     "gulp-webpack": "^1.2.0",
