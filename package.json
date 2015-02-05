@@ -1,15 +1,15 @@
 {
-  "name": "iso-react",
+  "name": "es6-react-boilerplate",
   "version": "0.0.1",
-  "description": "An isomorphic ReactJS boilerplate",
-  "main": "app.js",
+  "description": "An ES6 isomorphic ReactJS boilerplate",
+  "main": "server/server.js",
   "scripts": {},
   "repository": {
     "type": "git",
-    "url": "https://github.com/iam4x/iso-react.git"
+    "url": "https://github.com/iam4x/es6-react-boilerplate.git"
   },
-  "homepage": "https://github.com/iam4x/iso-react",
-  "bugs": "https://github.com/iam4x/iso-react/issues",
+  "homepage": "https://github.com/iam4x/es6-react-boilerplate",
+  "bugs": "https://github.com/iam4x/es6-react-boilerplate/issues",
   "author": "iam4x",
   "license": "MIT",
   "dependencies": {
@@ -37,8 +37,6 @@
     "gulp-util": "^3.0.2",
     "gulp-webpack": "^1.2.0",
     "imagemin-pngquant": "^4.0.0",
-    "jsx-loader": "^0.12.2",
-    "node-jsx": "^0.12.4",
     "proxy-middleware": "^0.11.0",
     "react-hot-loader": "^1.1.4",
     "webpack": "^1.5.3",

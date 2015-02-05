@@ -1,10 +1,12 @@
-# ISO-React: Isomorphic ReactJS Boilerplate
+# ES6 Isomorphic React Boilerplate
 
-> A complete **[isomorphic](http://nerds.airbnb.com/isomorphic-javascript-future-web-apps/)** Facebook **[React](https://facebook.github.io/react/)** boilerplate.
+> A complete isomorphic **[Facebook React](https://facebook.github.io/react/)** boilerplate.
 
-This project is still under development, contributions are welcome!
+> Including **[React-Router](https://github.com/rackt/react-router)** and **[Reflux](https://github.com/spoike/refluxjs)** for your next web application!
 
-## Libraries / External Tools
+Contributions are welcome! Please drop me a PR!
+
+## Libraries Included
 
 * [react](https://facebook.github.io/react/)
 * [react-router](https://github.com/rackt/react-router)
@@ -43,7 +45,3 @@ Just run `$ gulp build`, it will produce these tasks:
 * Concat & minify styles to `/dist/css/styles.css`
 * Concat & minify scripts to `/dist/js/app.js`
 * Optimize & copy images to `/dist/img/`
-
-## TODO
-
-* Add async data retrieval before server rendering, currently all the Ajax calls that will change the state of a components are made on the client after rendering. (Still exploring many way to achieves this, because it breaks the Flux architecture).
