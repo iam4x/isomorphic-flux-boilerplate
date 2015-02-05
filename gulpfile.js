@@ -64,9 +64,11 @@ gulp.task('webpack-dev-server', function () {
     'webpack/hot/only-dev-server',
     __dirname + '/app/main.jsx'
   ];
-  config.module.loaders = [
-    {test: /\.jsx$/, loaders: ['react-hot', 'jsx?harmony'], exclude: /node_modules/}
-  ];
+  config.module.loaders = [{
+    test: /\.js/,
+    loaders: ['react-hot', '6to5-loader'],
+    exclude: /node_modules/
+  }];
   config.plugins = [
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin()

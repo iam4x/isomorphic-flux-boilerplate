@@ -1,10 +1,7 @@
 'use strict';
 
-// Install `.jsx` into node
-require('node-jsx').install({
-  extension: '.jsx',
-  harmony: true
-});
+// Install `6to5` hook
+require('6to5/register');
 
 const path = require('path');
 const express = require('express');
