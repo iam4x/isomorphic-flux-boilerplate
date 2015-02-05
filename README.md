@@ -12,6 +12,7 @@ This project is still under development, contributions are welcome!
 * [expressjs](http://expressjs.com/)
 * [webpack](http://webpack.github.io/)
 * [gulpjs](http://gulpjs.com/)
+* [6to5](https://6to5.org/)
 
 ## Installation / How-to
 
@@ -45,5 +46,4 @@ Just run `$ gulp build`, it will produce these tasks:
 
 ## TODO
 
-* Include Reflux
 * Add async data retrieval before server rendering, currently all the Ajax calls that will change the state of a components are made on the client after rendering. (Still exploring many way to achieves this, because it breaks the Flux architecture).
