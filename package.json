@@ -17,7 +17,8 @@
     "express-handlebars": "^1.1.0",
     "normalize.css": "^3.0.2",
     "react": "^0.12.2",
-    "react-router": "^0.11.6"
+    "react-router": "^0.11.6",
+    "reflux": "^0.2.4"
   },
   "devDependencies": {
     "browserify": "^8.1.1",
