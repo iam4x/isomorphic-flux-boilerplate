@@ -1,10 +1,10 @@
 'use strict';
 
-const React = require('react');
-const {RouteHandler, Link} = require('react-router');
+import React from 'react';
+import {RouteHandler, Link} from 'react-router';
 
 const App = React.createClass({
-  render() {
+  render: function () {
     return (
       <div>
         <header>

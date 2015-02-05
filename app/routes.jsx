@@ -1,8 +1,7 @@
 'use strict';
 
-const React = require('react');
-const Router = require('react-router');
-const {Route, DefaultRoute} = Router;
+import React from 'react';
+import {Route, DefaultRoute} from 'react-router';
 
 module.exports = (
   <Route name='app' path='/' handler={require('./components/app')}>

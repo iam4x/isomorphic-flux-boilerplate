@@ -1,9 +1,9 @@
 'use strict';
 
-const React = require('react');
+import React from 'react';
 
 const Home = React.createClass({
-  render() {
+  render: function () {
     return (
       <h1>Home</h1>
     );

@@ -1,9 +1,9 @@
 'use strict';
 
-const React = require('react');
-const Router = require('react-router');
+import React from 'react';
+import Router from 'react-router';
 
-const routes = require('../app/routes');
+import routes from '../app/routes';
 
 module.exports = (req, res) => {
   let router = Router.create({
