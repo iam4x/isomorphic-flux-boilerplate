@@ -4,7 +4,7 @@ var gulp = require('gulp');
 var del = require('del');
 var gutil = require('gulp-util');
 var size = require('gulp-size');
-var connect = require('gulp-connect');
+var browserSync = require('browser-sync');
 var supervisor = require('gulp-supervisor');
 var imagemin = require('gulp-imagemin');
 var rubySass = require('gulp-ruby-sass-ns');
@@ -47,11 +47,15 @@ var expressProxy = function () {
 };
 
 gulp.task('connect', function () {
-  connect.server({
-    root: __dirname,
-    middleware: function () {
-      return [webpackProxy(), expressProxy()];
-    }
+  browserSync({
+    port: 8080,
+    server: {
+      baseDir: __dirname,
+      middleware: [
+        webpackProxy(),
+        expressProxy()
+      ]
+    },
   });
 });
 
@@ -114,7 +118,8 @@ gulp.task('sass', function () {
 gulp.task('styles', ['sass'], function () {
   return gulp.src(__dirname + '/.tmp/css/**/*.css')
     .pipe(concatCss('styles.css'))
-    .pipe(gulp.dest(__dirname + '/dist/css'));
+    .pipe(gulp.dest(__dirname + '/dist/css'))
+    .pipe(browserSync.reload({stream: true}));
 });
 
 gulp.task('dev', [
