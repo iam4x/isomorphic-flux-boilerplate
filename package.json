@@ -13,9 +13,9 @@
   "author": "iam4x",
   "license": "MIT",
   "dependencies": {
-    "6to5": "^3.3.12",
-    "6to5-core": "^3.3.9",
-    "6to5-loader": "^3.0.0",
+    "babel": "^4.1.1",
+    "babel-core": "^4.1.1",
+    "babel-loader": "^4.0.0",
     "express": "^4.11.1",
     "express-handlebars": "^1.1.0",
     "normalize.css": "^3.0.2",

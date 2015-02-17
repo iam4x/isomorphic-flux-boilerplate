@@ -2,12 +2,10 @@
 
 import React from 'react';
 
-const Home = React.createClass({
+export default React.createClass({
   render: function () {
     return (
       <h1>Home</h1>
     );
   }
 });
-
-module.exports = Home;

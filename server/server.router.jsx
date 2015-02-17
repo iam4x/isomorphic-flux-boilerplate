@@ -5,17 +5,17 @@ import Router from 'react-router';
 
 import routes from '../app/routes';
 
-module.exports = (req, res) => {
+export default (req, res) => {
   let router = Router.create({
     routes: routes,
     location: req.url,
-    onAbort: function (redirect) {
+    onAbort(redirect) {
       // TODO: Try to render the good page with re-creating a Router,
       // and with modifying req with `redirect.to`
       res.writeHead(303, {'Location': redirect.to});
       return res.send();
     },
-    onError: function (err) {
+    onError(err) {
       console.log('Routing Error');
       console.log(err);
     }

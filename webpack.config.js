@@ -8,7 +8,7 @@ module.exports = {
   },
   module: {
     loaders: [
-      {test: /\.js/, loader: '6to5-loader'}
+      {test: /\.js/, loader: 'babel-loader'}
     ],
     noParse: /\.min\.js/
   },

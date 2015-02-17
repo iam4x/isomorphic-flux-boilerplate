@@ -1,7 +1,7 @@
 'use strict';
 
-// Install `6to5` hook
-require('6to5/register');
+// Install `babel` hook
+require('babel/register');
 
 const path = require('path');
 const express = require('express');

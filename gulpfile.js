@@ -70,7 +70,7 @@ gulp.task('webpack-dev-server', function () {
   ];
   config.module.loaders = [{
     test: /\.js/,
-    loaders: ['react-hot', '6to5-loader'],
+    loaders: ['react-hot', 'babel-loader'],
     exclude: /node_modules/
   }];
   config.plugins = [

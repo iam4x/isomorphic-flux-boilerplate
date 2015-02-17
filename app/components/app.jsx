@@ -3,8 +3,8 @@
 import React from 'react';
 import {RouteHandler, Link} from 'react-router';
 
-const App = React.createClass({
-  render: function () {
+export default React.createClass({
+  render() {
     return (
       <div>
         <header>
@@ -18,5 +18,3 @@ const App = React.createClass({
     );
   }
 });
-
-module.exports = App;

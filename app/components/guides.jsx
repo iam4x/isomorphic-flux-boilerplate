@@ -2,7 +2,7 @@
 
 import React from 'react';
 
-const Guides = React.createClass({
+export default React.createClass({
   render() {
     return (
       <div>
@@ -12,5 +12,3 @@ const Guides = React.createClass({
     );
   }
 });
-
-module.exports = Guides;
