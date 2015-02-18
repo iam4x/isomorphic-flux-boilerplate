@@ -7,7 +7,7 @@ var size = require('gulp-size');
 var browserSync = require('browser-sync');
 var supervisor = require('gulp-supervisor');
 var imagemin = require('gulp-imagemin');
-var rubySass = require('gulp-ruby-sass-ns');
+var sass = require('gulp-sass');
 var minifyCSS = require('gulp-minify-css');
 var concatCss = require('gulp-concat-css');
 var pngquant = require('imagemin-pngquant');
@@ -111,7 +111,7 @@ gulp.task('images', function () {
 
 gulp.task('sass', function () {
   return gulp.src(__dirname + '/app/styles/**/*.scss')
-    .pipe(rubySass())
+    .pipe(sass({errLogToConsole: true}))
     .pipe(gulp.dest(__dirname + '/.tmp/css'));
 });
 
