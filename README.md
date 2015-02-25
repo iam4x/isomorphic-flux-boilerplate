@@ -15,7 +15,7 @@ Contributions are welcome! Please drop me a PR!
 * [expressjs](http://expressjs.com/)
 * [webpack](http://webpack.github.io/)
 * [gulpjs](http://gulpjs.com/)
-* [6to5](https://6to5.org/)
+* [babeljs](https://babeljs.io/)
 
 ## Installation / How-to
 
