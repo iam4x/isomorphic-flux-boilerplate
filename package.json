@@ -1,6 +1,6 @@
 {
   "name": "es6-react-boilerplate",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "An ES6 isomorphic ReactJS boilerplate",
   "main": "server/server.js",
   "scripts": {},
@@ -20,8 +20,10 @@
     "express-handlebars": "^1.1.0",
     "normalize.css": "^3.0.2",
     "react": "^0.12.2",
-    "react-router": "^0.11.6",
-    "reflux": "^0.2.4"
+    "react-resolver": "^0.1.0",
+    "react-router": "^0.12.4",
+    "reflux": "^0.2.4",
+    "superagent": "^0.21.0"
   },
   "devDependencies": {
     "browser-sync": "^2.0.1",

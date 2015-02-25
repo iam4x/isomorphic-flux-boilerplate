@@ -10,6 +10,7 @@ Contributions are welcome! Please drop me a PR!
 
 * [react](https://facebook.github.io/react/)
 * [react-router](https://github.com/rackt/react-router)
+* [react-resolver](https://github.com/ericclemmons/react-resolver)
 * [react-hot-loader](https://github.com/gaearon/react-hot-loader)
 * [expressjs](http://expressjs.com/)
 * [webpack](http://webpack.github.io/)

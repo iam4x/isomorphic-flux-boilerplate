@@ -2,10 +2,11 @@
 
 import React from 'react';
 import Router from 'react-router';
-
-import routes from '../app/routes';
+import Resolver from 'react-resolver';
 
 export default (req, res) => {
+  let resolver = new Resolver();
+  let routes = resolver.route(require('../app/routes'));
   let router = Router.create({
     routes: routes,
     location: req.url,
@@ -22,7 +23,9 @@ export default (req, res) => {
   });
 
   router.run((Handler) => {
-    let content = React.renderToString(<Handler/>);
-    return res.render('main', {content});
+    resolver.handle(Handler).then((resolved) => {
+      let content = React.renderToString(resolved);
+      return res.render('main', {content});
+    });
   });
 };
