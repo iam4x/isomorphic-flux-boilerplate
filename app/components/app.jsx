@@ -9,11 +9,11 @@ export default React.createClass({
       <div>
         <header>
           <ul>
-            <li><Link to='app'>Home</Link></li>
+            <li><Link to='app'>Users</Link></li>
             <li><Link to='guides'>Guides</Link></li>
           </ul>
         </header>
-        <RouteHandler/>
+        <RouteHandler />
       </div>
     );
   }

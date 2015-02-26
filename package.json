@@ -13,11 +13,13 @@
   "author": "iam4x",
   "license": "MIT",
   "dependencies": {
+    "alt": "^0.13.10",
     "babel": "^4.1.1",
     "babel-core": "^4.1.1",
     "babel-loader": "^4.0.0",
     "express": "^4.11.1",
     "express-handlebars": "^1.1.0",
+    "iso": "^4.0.2",
     "normalize.css": "^3.0.2",
     "react": "^0.12.2",
     "react-router": "^0.12.4",

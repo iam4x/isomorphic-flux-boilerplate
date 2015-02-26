@@ -1,11 +1,17 @@
 'use strict';
 
+import Iso from 'iso';
 import React from 'react';
 import Router from 'react-router';
 
-import routes from '../app/routes';
+import alt from 'utils/alt';
+import routes from 'routes';
 
 export default (req, res) => {
+  // Bootstrap data into Alt stores
+  const data = res.locals.data || {};
+  alt.bootstrap(JSON.stringify(data));
+
   const router = Router.create({
     routes: routes,
     location: req.url,
@@ -22,7 +28,12 @@ export default (req, res) => {
   });
 
   router.run((Handler) => {
-    const content = React.renderToString(<Handler />);
+    // Render the correct component
+    let content = React.renderToStaticMarkup(<Handler />);
+    // Add him data from alt stores, and flush them
+    // to have next request clean
+    content = Iso.render(content, alt.flush());
+    // Render the app
     return res.render('main', {content});
   });
 };
