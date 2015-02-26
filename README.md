@@ -32,6 +32,35 @@ Run this boilerplate, you will see the server is fetching some fake users and wi
 
 For now, you will have to declare middlewares in your **ExpressJS** application for fetching the data. But at term it should be easier and share the same logic for fetching data on client and server. (Maybe with [react-resolver](https://github.com/ericclemmons/react-resolver), I'm still exploring ways).
 
+## Alt-resolver
+
+Alt-resolver is used to resolve data before React Rendering, it shares the same services with client and server. It's specific to the boilerplate.
+
+Presume you have a route like this:
+
+```
+<Route name="users" handler={require('./components/users')} />
+```
+
+And you need to fetch users and populate an UserStore before rendering the component, declare an `user` function (that match the route name) in `shared/service.js`.
+
+This function take a callback called `done` with first argument is the `error` (should be null) and second is a formatted object for `Iso / Alt` like this:
+
+```
+users(done) {
+  return request
+    .get('http://api.randomuser.me/?results=10')
+    .end((response) => {
+      return done(null, {
+        UserStore: {users: response.body.results}
+      });
+    });
+}
+```
+
+* On server side, `users` function will be resolved before the first rendering.
+* On client-side when switching to the route, it will be resolved before rendering too!
+
 ## Installation / How-to
 
 I recommend to use [io.js](https://iojs.org/) to take advantages of `ES6` without `--harmony` flag on `NodeJS`.
