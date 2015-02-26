@@ -1,19 +1,11 @@
 'use strict';
 
-// Tell `require` calls to look into `/app` also
-// it will avoid `../../../../../` require strings
-process.env.NODE_PATH = 'app';
-require('module').Module._initPaths();
+import path from 'path';
+import express from 'express';
+import exphbs from 'express-handlebars';
+import request from 'superagent';
 
-// Install `babel` hook
-require('babel/register');
-
-const path = require('path');
-const express = require('express');
-const exphbs = require('express-handlebars');
-const request = require('superagent');
-
-const router = require('./server.router');
+import router from './router';
 
 const app = express();
 
@@ -28,10 +20,10 @@ app.use('/assets/img', express.static(path.resolve(__dirname + '/../dist/img/'))
 app.use('/assets/js', express.static(path.resolve(__dirname + '/../dist/js')));
 app.use('/assets/css', express.static(path.resolve(__dirname + '/../dist/css')));
 
-app.use(function (req, res, next) {
+app.use((req, res, next) => {
   return request
     .get('http://api.randomuser.me/?results=10')
-    .end(function (response) {
+    .end((response) => {
       res.locals.data = {
         UserStore: {users: response.body.results}
       };
