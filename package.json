@@ -1,7 +1,7 @@
 {
-  "name": "es6-react-boilerplate",
-  "version": "0.0.2",
-  "description": "An ES6 isomorphic ReactJS boilerplate",
+  "name": "isomorphic-flux-boilerplate",
+  "version": "0.0.3",
+  "description": "An ES6 isomorphic Flux/ReactJS boilerplate",
   "main": "server/server.js",
   "scripts": {},
   "repository": {
@@ -48,6 +48,11 @@
     "react",
     "react-router",
     "isomorphic",
+    "alt",
+    "iso",
+    "gulp",
+    "babel",
+    "flux",
     "express",
     "webpack",
     "jsx",
@@ -55,6 +60,9 @@
   ],
   "keywords": [
     "react",
+    "flux",
+    "alt",
+    "iso",
     "isomorphic",
     "spa",
     "ssr",

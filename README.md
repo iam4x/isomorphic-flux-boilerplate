@@ -1,21 +1,36 @@
-# ES6 Isomorphic React Boilerplate
+# ES6 Isomorphic Flux/ReactJS Boilerplate
 
-> A complete isomorphic **[Facebook React](https://facebook.github.io/react/)** boilerplate.
-
-> Including **[React-Router](https://github.com/rackt/react-router)** and **[Reflux](https://github.com/spoike/refluxjs)** for your next web application!
-
-Contributions are welcome! Please drop me a PR!
+> A wonderfull boilerplate for **Flux/ReactJS** applications, running on **ExpressJS**.
 
 ## Libraries Included
 
 * [react](https://facebook.github.io/react/)
 * [react-router](https://github.com/rackt/react-router)
-* [react-resolver](https://github.com/ericclemmons/react-resolver)
 * [react-hot-loader](https://github.com/gaearon/react-hot-loader)
+* [alt](https://github.com/goatslacker/alt)
+* [iso](https://github.com/goatslacker/iso)
 * [expressjs](http://expressjs.com/)
 * [webpack](http://webpack.github.io/)
 * [gulpjs](http://gulpjs.com/)
 * [babeljs](https://babeljs.io/)
+
+## Why use this boilerplate?
+
+I wanted to create a simple isomorphic reactjs application, but I found [ambidex](https://github.com/appsforartists/ambidex) or [fluxible](https://github.com/yahoo/fluxible) to hard to dive in, too many concepts and it's kinda killing the way of React thinking. Thinking as components, little bricks to assemble.
+
+I needed also an complete stack ready for full web-app development, with nice tools for the front-end. (Gulp and his magic tasks).
+
+With this boilerplate, you can choose easily what components you need and you won't be lost.
+
+## Concepts
+
+**ExpressJS** will be our server for the server side rendering, we use **alt** for our Flux architecture and **react-router** for routing in our app.
+
+With **iso** as helper we can populate **alt** flux stores before the first rendering and have a complete async isomorphic React application.
+
+Run this boilerplate, you will see the server is fetching some fake users and will populate the `UserStore` with this data. **ExpressJS** will render the first markup, serve the JavaScript and then it will entirely run on the client.
+
+For now, you will have to declare middlewares in your **ExpressJS** application for fetching the data. But at term it should be easier and share the same logic for fetching data on client and server. (Maybe with [react-resolver](https://github.com/ericclemmons/react-resolver), I'm still exploring ways).
 
 ## Installation / How-to
 
