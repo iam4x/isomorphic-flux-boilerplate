@@ -14,6 +14,6 @@ module.exports = {
   },
   resolve: {
     extensions: ['', '.js', '.json', '.jsx'],
-    modulesDirectories: ['node_modules']
+    modulesDirectories: ['node_modules', 'app']
   }
 };
