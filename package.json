@@ -72,5 +72,8 @@
     "webpack",
     "jsx",
     "es6"
-  ]
+  ],
+  "engines": {
+    "iojs": "1.2.0"
+  }
 }
