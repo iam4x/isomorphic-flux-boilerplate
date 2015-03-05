@@ -9,4 +9,4 @@ require('module').Module._initPaths();
 require('babel/register');
 
 // Start the server
-require('./express.js');
+require('./koa.js');
