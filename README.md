@@ -75,8 +75,8 @@ It's super easy to do with [nvm](https://github.com/creationix/nvm):
 
 After that, you will just need to clone the repo and install dependancies:
 
-* `$ git clone https://github.com/iam4x/iso-react.git`
-* `$ cd iso-react && npm install`
+* `$ git clone https://github.com/iam4x/isomorphic-flux-boilerplate.git`
+* `$ cd isomorphic-flux-boilerplate && npm install`
 * `$ npm install -g gulp`
 
 ### Run the project in development:
