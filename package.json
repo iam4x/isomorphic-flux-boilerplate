@@ -2,7 +2,7 @@
   "name": "isomorphic-flux-boilerplate",
   "version": "0.0.3",
   "description": "An ES6 isomorphic Flux/ReactJS boilerplate",
-  "main": "server/server.js",
+  "main": "server/index.js",
   "scripts": {},
   "repository": {
     "type": "git",
@@ -57,7 +57,7 @@
     "gulp",
     "babel",
     "flux",
-    "express",
+    "koa",
     "webpack",
     "jsx",
     "es6"
@@ -70,7 +70,7 @@
     "isomorphic",
     "spa",
     "ssr",
-    "express",
+    "koa",
     "webpack",
     "jsx",
     "es6"

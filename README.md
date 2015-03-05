@@ -1,6 +1,6 @@
 # ES6 Isomorphic Flux/ReactJS Boilerplate
 
-> A wonderfull boilerplate for **Flux/ReactJS** applications, running on **ExpressJS**.
+> A wonderfull boilerplate for **Flux/ReactJS** applications, running on **Koa**.
 
 ## Libraries Included
 
@@ -9,7 +9,7 @@
 * [react-hot-loader](https://github.com/gaearon/react-hot-loader)
 * [alt](https://github.com/goatslacker/alt)
 * [iso](https://github.com/goatslacker/iso)
-* [expressjs](http://expressjs.com/)
+* [koa](http://koajs.com/)
 * [webpack](http://webpack.github.io/)
 * [gulpjs](http://gulpjs.com/)
 * [babeljs](https://babeljs.io/)
@@ -24,13 +24,13 @@ With this boilerplate, you can choose easily what components you need and you wo
 
 ## Concepts
 
-**ExpressJS** will be our server for the server side rendering, we use **alt** for our Flux architecture and **react-router** for routing in our app.
+**Koa** will be our server for the server side rendering, we use **alt** for our Flux architecture and **react-router** for routing in our app.
 
 With **iso** as helper we can populate **alt** flux stores before the first rendering and have a complete async isomorphic React application.
 
-Run this boilerplate, you will see the server is fetching some fake users and will populate the `UserStore` with this data. **ExpressJS** will render the first markup, serve the JavaScript and then it will entirely run on the client.
+Run this boilerplate, you will see the server is fetching some fake users and will populate the `UserStore` with this data. **Koa** will render the first markup, serve the JavaScript and then it will entirely run on the client.
 
-For now, you will have to declare middlewares in your **ExpressJS** application for fetching the data. But at term it should be easier and share the same logic for fetching data on client and server. (Maybe with [react-resolver](https://github.com/ericclemmons/react-resolver), I'm still exploring ways).
+For now, you will have to declare middlewares in your **Koa** application for fetching the data. But at term it should be easier and share the same logic for fetching data on client and server. (Maybe with [react-resolver](https://github.com/ericclemmons/react-resolver), I'm still exploring ways).
 
 ## Alt-resolver
 
