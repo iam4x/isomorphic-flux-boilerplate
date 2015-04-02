@@ -1,6 +1,6 @@
 'use strict';
 
-import _ from 'lodash';
+import objectAssign from 'object-assign';
 
 import services from './services';
 
@@ -17,7 +17,7 @@ export default (params, callback) => {
     .all(toResolve)
     .then((results) => {
       let nextState = {};
-      results.forEach((result) => nextState = _.assign(nextState, result));
+      results.forEach((result) => nextState = objectAssign(nextState, result));
       return callback(JSON.stringify(nextState));
     });
 };
