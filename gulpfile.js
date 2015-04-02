@@ -66,7 +66,7 @@ gulp.task('webpack-dev-server', function () {
   config.entry = [
     'webpack-dev-server/client?http://localhost:8090',
     'webpack/hot/only-dev-server',
-    __dirname + '/app/main.jsx'
+    __dirname + '/app/index.js'
   ];
   config.module.loaders = [{
     test: /\.js/,

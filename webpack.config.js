@@ -1,6 +1,6 @@
 module.exports = {
   target: 'web',
-  entry: __dirname + '/app/main.jsx',
+  entry: __dirname + '/app/index.js',
   output: {
     path: __dirname + '/dist/js/',
     filename: 'app.js',
