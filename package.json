@@ -14,7 +14,6 @@
   "license": "MIT",
   "dependencies": {
     "alt": "^0.15.0",
-    "async": "^0.9.0",
     "babel": "^4.1.1",
     "babel-core": "^4.1.1",
     "babel-loader": "^4.0.0",
