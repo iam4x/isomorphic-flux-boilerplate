@@ -4,12 +4,24 @@ import path from 'path';
 
 import koa from 'koa';
 import hbs from 'koa-hbs';
-import serve from 'koa-static';
+import etag from 'koa-etag';
 import mount from 'koa-mount';
+import compressor from 'koa-compressor';
+import staticCache from 'koa-static-cache';
+import conditional from 'koa-conditional-get';
 
 import router from './router';
 
 const app = koa();
+
+app.use(conditional());
+app.use(etag());
+
+app.use(compressor());
+app.use(function *(next) {
+  this.set('Cache-Control', 'public, max-age=86400000');
+  yield next;
+});
 
 app.use(hbs.middleware({
   defaultLayout: 'index',
@@ -17,9 +29,8 @@ app.use(hbs.middleware({
   viewPath: path.join(__dirname, '/views')
 }));
 
-app.use(mount('/assets/img', serve(path.join(__dirname, '../dist/img'))));
-app.use(mount('/assets/js', serve(path.join(__dirname, '../dist/js'))));
-app.use(mount('/assets/css', serve(path.join(__dirname, '../dist/css'))));
+const cacheOpts = {maxAge: 86400000, gzip: true};
+app.use(mount('/assets', staticCache(path.join(__dirname, '../dist'), cacheOpts)));
 
 app.use(router);
 app.listen(3000);
