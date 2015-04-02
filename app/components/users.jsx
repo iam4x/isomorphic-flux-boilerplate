@@ -12,7 +12,7 @@ export default React.createClass({
   getInitialState() {
     return UserStore.getState();
   },
-  componentWillMount() {
+  componentDidMount() {
     this.listenTo(UserStore, () => this.setState(this.getInitialState()));
   },
   addUser() {
