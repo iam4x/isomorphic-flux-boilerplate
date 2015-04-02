@@ -22,8 +22,16 @@ var webpackConfig = require('./webpack.config.js');
 // | SHARED TASKS |
 // +--------------+
 
-gulp.task('clean', function () {
-  return del([__dirname + '/dist/**/*']);
+gulp.task('clean:img', function () {
+  return del([__dirname + '/dist/img/**/*']);
+});
+
+gulp.task('clean:css', function () {
+  return del([__dirname + '/dist/css/**/*']);
+});
+
+gulp.task('clean:js', function () {
+  return del([__dirname + '/dist/js/**/*']);
 });
 
 // +-------------------+
@@ -60,7 +68,7 @@ gulp.task('connect', function () {
   });
 });
 
-gulp.task('webpack-dev-server', function () {
+gulp.task('webpack-dev-server', ['clean:js'], function () {
   var config = objectAssign({}, webpackConfig);
   config.devtool = 'source-map';
   config.debug = true;
@@ -97,7 +105,7 @@ gulp.task('supervisor', function () {
   });
 });
 
-gulp.task('images', function () {
+gulp.task('images', ['clean:img'], function () {
   return gulp.src(__dirname + '/app/images/**/*')
     .pipe(imagemin({
       optimizationLevel: 3,
@@ -116,7 +124,7 @@ gulp.task('sass', function () {
     .pipe(gulp.dest(__dirname + '/.tmp/css'));
 });
 
-gulp.task('styles', ['sass'], function () {
+gulp.task('styles', ['sass', 'clean:css'], function () {
   return gulp.src(__dirname + '/.tmp/css/**/*.css')
     .pipe(concatCss('styles.css'))
     .pipe(gulp.dest(__dirname + '/dist/css'))
@@ -124,7 +132,6 @@ gulp.task('styles', ['sass'], function () {
 });
 
 gulp.task('dev', [
-  'clean',
   'images',
   'styles',
   'supervisor',
@@ -139,7 +146,7 @@ gulp.task('dev', [
 // | BUILD TASKS |
 // +-------------+
 
-gulp.task('webpack:build', function (callback) {
+gulp.task('webpack:build', ['clean:js'], function (callback) {
   var config = objectAssign({}, webpackConfig);
   config.plugins = [
     new webpack.DefinePlugin({
@@ -191,4 +198,4 @@ gulp.task('build:styles', ['styles'], function () {
     .pipe(gulp.dest(__dirname + '/dist/css/'));
 });
 
-gulp.task('build', ['clean', 'build:styles', 'images', 'webpack:build']);
+gulp.task('build', ['build:styles', 'images', 'webpack:build']);
