@@ -65,13 +65,11 @@ users(done) {
 
 I recommend to use [io.js](https://iojs.org/) to take advantages of `ES6` without `--harmony` flag on `NodeJS`.
 
-**Note:** We're using [io.js](https://iojs.org/) **1.2.0**. `node-sass` (`gulp-sass` dependency) **does not yet support io.js > 1.2.0**. See [#699](https://github.com/sass/node-sass/issues/699)
-
 It's super easy to do with [nvm](https://github.com/creationix/nvm):
 
-* `$ nvm install iojs-v1.2.0`
-* `$ nvm use iojs-v1.2.0`
-* `$ nvm alias default iojs-v1.2.0` (to make `node` default to `iojs-v1.2.0`)
+* `$ nvm install iojs`
+* `$ nvm use iojs`
+* `$ nvm alias default iojs` (to make `node` default to `iojs`)
 
 After that, you will just need to clone the repo and install dependancies:
 
