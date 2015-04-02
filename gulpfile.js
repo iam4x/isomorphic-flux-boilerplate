@@ -14,6 +14,7 @@ var pngquant = require('imagemin-pngquant');
 var proxy = require('proxy-middleware');
 var webpack = require('webpack');
 var WebpackDevServer = require('webpack-dev-server');
+var objectAssign = require('object-assign');
 
 var webpackConfig = require('./webpack.config.js');
 
@@ -60,8 +61,8 @@ gulp.task('connect', function () {
 });
 
 gulp.task('webpack-dev-server', function () {
-  var config = Object.create(webpackConfig);
-  config.devtool = 'eval';
+  var config = objectAssign({}, webpackConfig);
+  config.devtool = 'source-map';
   config.debug = true;
   config.entry = [
     'webpack-dev-server/client?http://localhost:8090',
@@ -139,7 +140,7 @@ gulp.task('dev', [
 // +-------------+
 
 gulp.task('webpack:build', function (callback) {
-  var config = Object.create(webpackConfig);
+  var config = objectAssign({}, webpackConfig);
   config.plugins = [
     new webpack.DefinePlugin({
       'process.env': {
@@ -147,7 +148,30 @@ gulp.task('webpack:build', function (callback) {
       }
     }),
     new webpack.optimize.DedupePlugin(),
-    new webpack.optimize.UglifyJsPlugin()
+    new webpack.optimize.UglifyJsPlugin({
+      compress: {
+        warnings: false,
+        screw_ie8: true,
+        sequences: true,
+        dead_code: true,
+        drop_debugger: true,
+        comparisons: true,
+        conditionals: true,
+        evaluate: true,
+        booleans: true,
+        loops: true,
+        unused: true,
+        hoist_funs: true,
+        if_return: true,
+        join_vars: true,
+        cascade: true,
+        drop_console: true
+      },
+      output: {
+        comments: false
+      },
+      sourceMap: false
+    })
   ];
 
   webpack(config, function (err, stats) {
