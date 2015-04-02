@@ -20,9 +20,7 @@ export default (params, callback) => {
     toResolve,
     (service, done) => service(done),
     (err, results) => {
-      // Maybe we have already a state
-      let nextState = params.state ? JSON.parse(params.state) : {};
-      // Merge results into `nextState`
+      let nextState = {};
       results.forEach((result) => nextState = _.assign(nextState, result));
       // All services are resolved, let's fire the callback
       return callback(JSON.stringify(nextState));
