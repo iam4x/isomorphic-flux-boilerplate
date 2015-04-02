@@ -16,7 +16,7 @@ const render = (router) => {
         (nextState) => {
           alt.bootstrap(nextState);
           return resolve(Iso.render(
-            React.renderToStaticMarkup(<Handler />),
+            React.renderToString(<Handler />),
             alt.flush()
           ));
         }
