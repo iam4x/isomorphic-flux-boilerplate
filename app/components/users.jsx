@@ -26,12 +26,11 @@ export default React.createClass({
   },
   renderUsers() {
     return this.state.users.map((user, index) => {
-      let boundRemove = () => UserActions.remove(index);
       return (
         <li key={user.seed}>
           <strong>{user.user.email}</strong>
           {` `}
-          <button onClick={boundRemove}>X</button>
+          <button onClick={UserActions.remove.bind(this, index)}>X</button>
         </li>
       );
     });
