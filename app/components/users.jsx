@@ -25,10 +25,8 @@ export default React.createClass({
       let boundRemove = () => UserActions.remove(index);
       return (
         <li key={user.seed}>
-          <strong>
-            {user.user.name}
-          </strong>
-          {` - ${user.user.email} - `}
+          <strong>{user.user.email}</strong>
+          {` `}
           <button onClick={boundRemove}>X</button>
         </li>
       );
