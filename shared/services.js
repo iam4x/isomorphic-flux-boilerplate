@@ -14,7 +14,14 @@ const fetchUsers = (resolve, reject) => {
   else {
     return request
       .get('http://api.randomuser.me/?results=10')
-      .end((response) => resolve({UserStore: {users: response.body.results}}));
+      .end((err, res) => {
+        if (err) {
+          return reject(err);
+        }
+        else {
+          return resolve({UserStore: {users: res.body.results}});
+        }
+      });
   }
 };
 

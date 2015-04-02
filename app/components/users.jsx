@@ -18,7 +18,11 @@ export default React.createClass({
   addUser() {
     request
       .get('http://api.randomuser.me/')
-      .end((res) => UserActions.add(res.body.results[0]));
+      .end((err, res) => {
+        if (!err) {
+          return UserActions.add(res.body.results[0]);
+        }
+      });
   },
   renderUsers() {
     return this.state.users.map((user, index) => {
