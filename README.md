@@ -30,8 +30,6 @@ With **iso** as helper we can populate **alt** flux stores before the first rend
 
 Run this boilerplate, you will see the server is fetching some fake users and will populate the `UserStore` with this data. **Koa** will render the first markup, serve the JavaScript and then it will entirely run on the client.
 
-For now, you will have to declare middlewares in your **Koa** application for fetching the data. But at term it should be easier and share the same logic for fetching data on client and server. (Maybe with [react-resolver](https://github.com/ericclemmons/react-resolver), I'm still exploring ways).
-
 ## Alt-resolver
 
 Alt-resolver is used to resolve data before React Rendering, it shares the same services with client and server. It's specific to the boilerplate.
