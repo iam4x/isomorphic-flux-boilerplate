@@ -8,6 +8,7 @@ var browserSync = require('browser-sync');
 var supervisor = require('gulp-supervisor');
 var imagemin = require('gulp-imagemin');
 var sass = require('gulp-sass');
+var sourcemaps = require('gulp-sourcemaps');
 var minifyCSS = require('gulp-minify-css');
 var concatCss = require('gulp-concat-css');
 var pngquant = require('imagemin-pngquant');
@@ -120,11 +121,13 @@ gulp.task('images', ['clean:img'], function () {
 
 gulp.task('sass', function () {
   return gulp.src(__dirname + '/app/styles/**/*.scss')
+    .pipe(sourcemaps.init())
     .pipe(sass({errLogToConsole: true}))
+    .pipe(sourcemaps.write())
     .pipe(gulp.dest(__dirname + '/.tmp/css'));
 });
 
-gulp.task('styles', ['sass', 'clean:css'], function () {
+gulp.task('styles', ['clean:css', 'sass'], function () {
   return gulp.src(__dirname + '/.tmp/css/**/*.css')
     .pipe(concatCss('styles.css'))
     .pipe(gulp.dest(__dirname + '/dist/css'))

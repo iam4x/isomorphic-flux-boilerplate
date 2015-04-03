@@ -41,6 +41,7 @@
     "gulp-minify-css": "^1.0.0",
     "gulp-sass": "^1.3.3",
     "gulp-size": "^1.2.0",
+    "gulp-sourcemaps": "^1.5.1",
     "gulp-supervisor": "^0.1.2",
     "gulp-util": "^3.0.2",
     "gulp-webpack": "^1.2.0",
