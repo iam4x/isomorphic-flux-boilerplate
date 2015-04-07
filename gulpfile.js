@@ -38,6 +38,7 @@ gulp.task('clean', del.bind(null, ['.tmp', 'dist/*'], {dot: true}));
 gulp.task('lint:code', function () {
   return gulp.src(CODE_FILES)
   .pipe($.plumber())
+  .pipe($.jscs())
   .pipe($.lintspaces({
     editorconfig: '.editorconfig'
   }))
