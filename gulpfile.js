@@ -12,14 +12,24 @@ var sourcemaps = require('gulp-sourcemaps');
 var minifyCSS = require('gulp-minify-css');
 var concatCss = require('gulp-concat-css');
 var karma = require('gulp-karma');
+var eslint = require('gulp-eslint');
 var pngquant = require('imagemin-pngquant');
 var proxy = require('proxy-middleware');
 var webpack = require('webpack');
 var WebpackDevServer = require('webpack-dev-server');
 var objectAssign = require('object-assign');
 
-
 var webpackConfig = require('./webpack.config.js');
+
+var CODE_FILES = [
+  'app/**/*.jsx',
+  'app/**/*.js',
+  'shared/**/*.js',
+  'server/**/*.jsx',
+  'server/**/*.js',
+  'test/**/*.jsx',
+  'test/**/*.js'
+];
 
 // +--------------+
 // | SHARED TASKS |
@@ -35,6 +45,14 @@ gulp.task('clean:css', function () {
 
 gulp.task('clean:js', function () {
   return del([__dirname + '/dist/js/**/*']);
+});
+
+gulp.task('lint:code', function () {
+  return gulp.src(CODE_FILES)
+  .pipe(eslint({
+    useEslintrc: true
+  }))
+  .pipe(eslint.format());
 });
 
 // +-------------------+
@@ -156,6 +174,7 @@ gulp.task('test:watch', function () {
 });
 
 gulp.task('dev', [
+  'lint:code',
   'images',
   'styles',
   'supervisor',
@@ -163,6 +182,7 @@ gulp.task('dev', [
   'connect',
   'test:watch'
 ], function () {
+  gulp.watch(CODE_FILES, ['lint:code']);
   gulp.watch(__dirname + '/app/images/**/*', ['images']);
   gulp.watch(__dirname + '/app/styles/**/*', ['styles']);
 });
@@ -235,4 +255,10 @@ gulp.task('test:build', function () {
 });
 
 
-gulp.task('build', ['test:build', 'build:styles', 'images', 'webpack:build']);
+gulp.task('build', [
+  'lint:code',
+  'test:build',
+  'build:styles',
+  'images',
+  'webpack:build'
+]);

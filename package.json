@@ -32,11 +32,14 @@
     "superagent": "^1.1.0"
   },
   "devDependencies": {
+    "babel-eslint": "^2.0.2",
     "browser-sync": "^2.0.1",
     "chai": "^2.2.0",
     "del": "^1.1.1",
+    "eslint": "^0.18.0",
     "gulp": "^3.8.11",
     "gulp-concat-css": "^2.0.0",
+    "gulp-eslint": "^0.8.0",
     "gulp-imagemin": "^2.1.0",
     "gulp-import-css": "^0.1.2",
     "gulp-karma": "0.0.4",
