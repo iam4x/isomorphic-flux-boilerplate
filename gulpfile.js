@@ -135,10 +135,37 @@ gulp.task(
   }
 );
 
-gulp.task('supervisor', function () {
-  $.supervisor('server/index.js', {
-    watch: ['server'],
-    extensions: ['jsx', 'js']
+gulp.task('server', function (done) {
+  // thank's https://github.com/kriasoft/react-starter-kit/blob/master/gulpfile.js#L127
+  var started = false;
+  var cp = require('child_process');
+  var assign = require('react/lib/Object.assign');
+
+  var server = (function startup() {
+    var child = cp.fork('server/index.js', {
+      env: assign({NODE_ENV: 'development'}, process.env)
+    });
+    child.once('message', function(message) {
+      if (message.match(/^online$/)) {
+        if (browserSync) {
+          browserSync.reload();
+        }
+        if (!started) {
+          started = true;
+          gulp.watch(['server/**/*'], function () {
+            $.util.log('Restarting development server.');
+            server.kill('SIGTERM');
+            server = startup();
+          });
+          done();
+        }
+      }
+    });
+    return child;
+  })();
+
+  process.on('exit', function() {
+    server.kill('SIGTERM');
   });
 });
 
@@ -178,7 +205,7 @@ gulp.task('test:watch', function (done) {
 gulp.task('dev', [
   'images',
   'styles',
-  'supervisor',
+  'server',
   'webpack-dev-server',
   'connect',
   'test:watch'

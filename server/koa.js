@@ -36,3 +36,6 @@ app.use(router);
 app.listen(3000);
 
 console.log('Application started on port 3000');
+if (process.send) {
+  process.send('online');
+}
