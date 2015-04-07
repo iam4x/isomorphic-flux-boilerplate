@@ -83,7 +83,7 @@ gulp.task('connect', function () {
   });
 });
 
-gulp.task('webpack-dev-server', function () {
+gulp.task('webpack-dev-server', function (done) {
   var config = objectAssign({}, webpackConfig);
   config.devtool = 'source-map';
   config.debug = true;
@@ -120,6 +120,7 @@ gulp.task('webpack-dev-server', function () {
       throw new $.util.PluginError('webpack-dev-server', err);
     }
     $.util.log('[webpack-dev-server]', 'started on port 8090');
+    return done();
   });
 });
 
