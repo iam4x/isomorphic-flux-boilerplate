@@ -6,6 +6,8 @@ import koa from 'koa';
 import hbs from 'koa-hbs';
 import etag from 'koa-etag';
 import mount from 'koa-mount';
+import helmet from 'koa-helmet';
+import logger from 'koa-logger';
 import compressor from 'koa-compressor';
 import staticCache from 'koa-static-cache';
 import conditional from 'koa-conditional-get';
@@ -13,9 +15,10 @@ import conditional from 'koa-conditional-get';
 import router from './router';
 
 const app = koa();
+const env = process.env.NODE_ENV || 'development';
 
 // Cache client-side content on production
-if (process.env.NODE_ENV === 'production') {
+if (env === 'production') {
   app.use(conditional());
   app.use(etag());
   app.use(compressor());
@@ -24,6 +27,16 @@ if (process.env.NODE_ENV === 'production') {
     yield next;
   });
 }
+
+if (env === 'development') {
+  // log http requests
+  app.use(logger());
+  // log when process is blocked
+  require('blocked')((ms) => console.log(`blocked for ${ms}ms`));
+}
+
+// various security headers
+app.use(helmet.defaults());
 
 app.use(hbs.middleware({
   defaultLayout: 'index',
