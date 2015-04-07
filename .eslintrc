@@ -12,11 +12,18 @@
     "no-underscore-dangle": [0],
     "camelcase": 2,
     "dot-notation": [2, {"allowSnakeCase": true}],
-    "curly": false
+    "curly": false,
+    "no-unused-expressions": false
   },
   "ecmaFeatures": {
     "jsx": true,
     "modules": true,
     "blockBindings": true,
+  },
+  "globals": {
+    "it": true,
+    "describe": true,
+    "beforeEach": true,
+    "afterEach": true,
   }
 }

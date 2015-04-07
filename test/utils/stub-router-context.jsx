@@ -3,10 +3,8 @@
 import objectAssign from 'object-assign';
 import React from 'react';
 
-const TestUtils = React.addons.TestUtils;
-
 export default (Component, props, stubs) => {
-  function RouterStub() { }
+  function RouterStub() {}
 
   objectAssign(RouterStub, {
     makePath () {},
@@ -19,8 +17,8 @@ export default (Component, props, stubs) => {
     getCurrentPathname () {},
     getCurrentParams () {},
     getCurrentQuery () {},
-    isActive () {},
-  }, stubs)
+    isActive () {}
+  }, stubs);
 
   return React.createClass({
     childContextTypes: {
@@ -35,7 +33,7 @@ export default (Component, props, stubs) => {
     },
 
     render () {
-      return <Component {...props} />
+      return <Component {...props} />;
     }
   });
 };

@@ -12,6 +12,6 @@ export default React.createClass({
           <li><Link to='guides'>Guides</Link></li>
         </ul>
       </header>
-    )
+    );
   }
 });

@@ -7,7 +7,7 @@ import reactRouterStub from '../utils/stub-router-context';
 
 import Header from 'components/header';
 
-const should = chai.should();
+chai.should();
 
 describe('Header', () => {
 
@@ -16,7 +16,7 @@ describe('Header', () => {
 
   beforeEach(() => {
     const Stubbed = reactRouterStub(Header);
-    instance = TestUtils.renderIntoDocument(<Stubbed />);
+    instance = TestUtils.renderIntoDocument(React.createElement(Stubbed));
   });
 
   afterEach(() => {

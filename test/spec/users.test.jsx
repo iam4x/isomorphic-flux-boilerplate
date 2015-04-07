@@ -5,7 +5,7 @@ import React from 'react/addons';
 
 import Users from 'components/users';
 
-const should = chai.should();
+chai.should();
 
 describe('Users', () => {
 
@@ -19,7 +19,7 @@ describe('Users', () => {
   afterEach(() => {
     if (instance && instance.isMounted()) {
       React.unmountComponentAtNode(instance.getDOMNode());
-    };
+    }
   });
 
   it('should render correctly', () => {
