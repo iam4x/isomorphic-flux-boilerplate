@@ -92,7 +92,17 @@ gulp.task('webpack-dev-server', ['clean:js'], function () {
 
   new WebpackDevServer(webpack(config), {
     publicPath: config.output.publicPath,
-    hot: true
+    hot: true,
+    color: true,
+    stats: {
+      assets: true,
+      colors: true,
+      version: false,
+      hash: false,
+      timings: true,
+      chunks: false,
+      chunkModules: false
+    }
   }).listen(8090, 'localhost', function (err) {
     if (err) {
       throw new gutil.PluginError('webpack-dev-server', err);
