@@ -159,6 +159,7 @@ gulp.task('sass', function () {
   return gulp.src('app/styles/**/*.scss')
     .pipe($.sourcemaps.init())
     .pipe($.sass({errLogToConsole: true}))
+    .pipe($.autoprefixer())
     .pipe($.sourcemaps.write())
     .pipe(gulp.dest('.tmp/css'));
 });
