@@ -17,6 +17,9 @@ import router from './router';
 const app = koa();
 const env = process.env.NODE_ENV || 'development';
 
+// various security headers
+app.use(helmet.defaults());
+
 // Cache client-side content on production
 if (env === 'production') {
   app.use(conditional());
@@ -34,9 +37,6 @@ if (env === 'development') {
   // log when process is blocked
   require('blocked')((ms) => console.log(`blocked for ${ms}ms`));
 }
-
-// various security headers
-app.use(helmet.defaults());
 
 app.use(hbs.middleware({
   defaultLayout: 'index',
