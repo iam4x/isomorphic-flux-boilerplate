@@ -42,16 +42,14 @@ Presume you have a route like this:
 
 And you need to fetch users and populate an UserStore before rendering the component, declare an `user` function (that match the route name) in `shared/service.js`.
 
-This function take a callback called `done` with first argument is the `error` (should be null) and second is a formatted object for `Iso / Alt` like this:
+This function take two arguments from promise `resolve, reject`, you should resolve it with a formatted object for `Iso / Alt` like this:
 
 ```
-users(done) {
+users(resolve, reject) {
   return request
     .get('http://api.randomuser.me/?results=10')
-    .end((response) => {
-      return done(null, {
-        UserStore: {users: response.body.results}
-      });
+    .end((err, response) => {
+      return resolve({UserStore: {users: response.body.results}});
     });
 }
 ```
