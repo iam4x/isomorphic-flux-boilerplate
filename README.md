@@ -81,10 +81,18 @@ After that, you will just need to clone the repo and install dependancies:
 
 Open your browser to `http://localhost:8080` and you will see the magic happens! Try to disable JavaScript in your browser, you will still be able to navigate between pages of the application. Enjoy the power of isomorphic applications!
 
+
+### Run tests
+
+When using `$ gulp dev` tests will be run when you change a file `test/spec/**/*.test.jsx`
+
+To run them once use: `gulp test:build`
+
 ### Build project:
 
 Just run `$ gulp build`, it will produce these tasks:
 
+* Run tests from `test/spec/**/*.jsx`
 * Concat & minify styles to `/dist/css/styles.css`
 * Concat & minify scripts to `/dist/js/app.js`
 * Optimize & copy images to `/dist/img/`

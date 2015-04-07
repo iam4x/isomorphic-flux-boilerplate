@@ -11,11 +11,13 @@ var sass = require('gulp-sass');
 var sourcemaps = require('gulp-sourcemaps');
 var minifyCSS = require('gulp-minify-css');
 var concatCss = require('gulp-concat-css');
+var karma = require('gulp-karma');
 var pngquant = require('imagemin-pngquant');
 var proxy = require('proxy-middleware');
 var webpack = require('webpack');
 var WebpackDevServer = require('webpack-dev-server');
 var objectAssign = require('object-assign');
+
 
 var webpackConfig = require('./webpack.config.js');
 
@@ -134,12 +136,22 @@ gulp.task('styles', ['clean:css', 'sass'], function () {
     .pipe(browserSync.reload({stream: true}));
 });
 
+gulp.task('test:watch', function () {
+  return gulp.src(__dirname + 'test/spec/**/*.test.jsx')
+    .pipe(karma({
+      configFile: 'karma.conf.js',
+      action: 'watch'
+    }))
+    .on('error', console.warn);
+});
+
 gulp.task('dev', [
   'images',
   'styles',
   'supervisor',
   'webpack-dev-server',
-  'connect'
+  'connect',
+  'test:watch'
 ], function () {
   gulp.watch(__dirname + '/app/images/**/*', ['images']);
   gulp.watch(__dirname + '/app/styles/**/*', ['styles']);
@@ -201,4 +213,16 @@ gulp.task('build:styles', ['styles'], function () {
     .pipe(gulp.dest(__dirname + '/dist/css/'));
 });
 
-gulp.task('build', ['build:styles', 'images', 'webpack:build']);
+gulp.task('test:build', function () {
+  return gulp.src(__dirname + 'test/spec/**/*.test.jsx')
+    .pipe(karma({
+      configFile: 'karma.conf.js',
+      action: 'run'
+    }))
+    .on('error', function (err) {
+      throw err;
+    });
+});
+
+
+gulp.task('build', ['test:build', 'build:styles', 'images', 'webpack:build']);
