@@ -24,13 +24,16 @@ export default React.createClass({
         }
       });
   },
+  removeUser(index) {
+    return UserActions.remove(index);
+  },
   renderUsers() {
     return this.state.users.map((user, index) => {
       return (
-        <li key={user.seed}>
+        <li key={index}>
           <strong>{user.user.email}</strong>
           {` `}
-          <button onClick={UserActions.remove.bind(this, index)}>X</button>
+          <button onClick={this.removeUser.bind(this, index)}>X</button>
         </li>
       );
     });
