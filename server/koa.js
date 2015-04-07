@@ -4,13 +4,10 @@ import path from 'path';
 
 import koa from 'koa';
 import hbs from 'koa-hbs';
-import etag from 'koa-etag';
 import mount from 'koa-mount';
 import helmet from 'koa-helmet';
 import logger from 'koa-logger';
-import compressor from 'koa-compressor';
 import staticCache from 'koa-static-cache';
-import conditional from 'koa-conditional-get';
 import responseTime from 'koa-response-time';
 
 import router from './router';
@@ -21,15 +18,15 @@ const env = process.env.NODE_ENV || 'development';
 
 // add header `X-Response-Time`
 app.use(responseTime());
+app.use(logger());
 
 // various security headers
 app.use(helmet.defaults());
 
-// Cache client-side content on production
 if (env === 'production') {
-  app.use(conditional());
-  app.use(etag());
-  app.use(compressor());
+  app.use(require('koa-conditional-get')());
+  app.use(require('koa-etag')());
+  app.use(require('koa-compressor')());
 
   // Cache pages
   const cache = require('lru-cache')({maxAge: 3000});
@@ -44,8 +41,6 @@ if (env === 'production') {
 }
 
 if (env === 'development') {
-  // log http requests
-  app.use(logger());
   // log when process is blocked
   require('blocked')((ms) => console.log(`blocked for ${ms}ms`));
 }
