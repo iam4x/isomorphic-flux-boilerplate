@@ -30,10 +30,17 @@ if (env === 'production') {
   app.use(conditional());
   app.use(etag());
   app.use(compressor());
-  app.use(function *(next) {
-    this.set('Cache-Control', 'public, max-age=86400000');
-    yield next;
-  });
+
+  // Cache pages
+  const cache = require('lru-cache')({maxAge: 3000});
+  app.use(require('koa-cash')({
+    get: function* (key) {
+      return cache.get(key);
+    },
+    set: function* (key, value) {
+      cache.set(key, value);
+    }
+  }));
 }
 
 if (env === 'development') {
