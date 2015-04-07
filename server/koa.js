@@ -11,12 +11,16 @@ import logger from 'koa-logger';
 import compressor from 'koa-compressor';
 import staticCache from 'koa-static-cache';
 import conditional from 'koa-conditional-get';
+import responseTime from 'koa-response-time';
 
 import router from './router';
 import config from './config/init';
 
 const app = koa();
 const env = process.env.NODE_ENV || 'development';
+
+// add header `X-Response-Time`
+app.use(responseTime());
 
 // various security headers
 app.use(helmet.defaults());
