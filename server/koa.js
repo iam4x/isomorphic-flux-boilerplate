@@ -13,6 +13,7 @@ import staticCache from 'koa-static-cache';
 import conditional from 'koa-conditional-get';
 
 import router from './router';
+import config from './config/init';
 
 const app = koa();
 const env = process.env.NODE_ENV || 'development';
@@ -48,9 +49,9 @@ const cacheOpts = {maxAge: 86400000, gzip: true};
 app.use(mount('/assets', staticCache(path.join(__dirname, '../dist'), cacheOpts)));
 
 app.use(router);
-app.listen(3000);
+app.listen(config.port);
 
-console.log('Application started on port 3000');
+console.log(`Application started on port ${config.port}`);
 if (process.send) {
   process.send('online');
 }
