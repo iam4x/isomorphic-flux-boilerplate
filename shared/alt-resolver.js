@@ -1,6 +1,6 @@
 'use strict';
 
-import objectAssign from 'object-assign';
+import objectAssign from 'react/lib/Object.assign';
 
 import services from './services';
 

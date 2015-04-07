@@ -22,7 +22,7 @@ var proxy = require('proxy-middleware');
 var webpack = require('webpack');
 var karma = require('karma').server;
 var WebpackDevServer = require('webpack-dev-server');
-var objectAssign = require('object-assign');
+var objectAssign = require('react/lib/Object.assign');
 
 var webpackConfig = require('./webpack.config.js');
 
