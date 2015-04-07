@@ -1,11 +1,13 @@
 'use strict';
 
-import Iso from 'iso';
 import React from 'react';
 import Router from 'react-router';
+import isoRenderer from 'alt/utils/IsomorphicRenderer';
 
+// Paths are relative to `app` directory
 import alt from 'utils/alt';
 import routes from 'routes';
+
 import altResolver from '../shared/alt-resolver';
 
 const render = (router) => {
@@ -15,10 +17,7 @@ const render = (router) => {
         {routes: state.routes},
         (nextState) => {
           alt.bootstrap(nextState);
-          return resolve(Iso.render(
-            React.renderToString(<Handler />),
-            alt.flush()
-          ));
+          return resolve(isoRenderer(alt, Handler));
         }
       );
     });
