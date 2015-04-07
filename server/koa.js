@@ -14,14 +14,16 @@ import router from './router';
 
 const app = koa();
 
-app.use(conditional());
-app.use(etag());
-
-app.use(compressor());
-app.use(function *(next) {
-  this.set('Cache-Control', 'public, max-age=86400000');
-  yield next;
-});
+// Cache client-side content on production
+if (process.env.NODE_ENV === 'production') {
+  app.use(conditional());
+  app.use(etag());
+  app.use(compressor());
+  app.use(function *(next) {
+    this.set('Cache-Control', 'public, max-age=86400000');
+    yield next;
+  });
+}
 
 app.use(hbs.middleware({
   defaultLayout: 'index',
