@@ -5,6 +5,7 @@
 var path = require('path');
 var gulp = require('gulp');
 var del = require('del');
+var plumber = require('gulp-plumber');
 var gutil = require('gulp-util');
 var size = require('gulp-size');
 var browserSync = require('browser-sync');
@@ -15,6 +16,7 @@ var sourcemaps = require('gulp-sourcemaps');
 var minifyCSS = require('gulp-minify-css');
 var concatCss = require('gulp-concat-css');
 var eslint = require('gulp-eslint');
+var lintspaces = require('gulp-lintspaces');
 var pngquant = require('imagemin-pngquant');
 var proxy = require('proxy-middleware');
 var webpack = require('webpack');
@@ -52,6 +54,11 @@ gulp.task('clean:js', function () {
 
 gulp.task('lint:code', function () {
   return gulp.src(CODE_FILES)
+  .pipe(plumber())
+  .pipe(lintspaces({
+    editorconfig: '.editorconfig'
+  }))
+  .pipe(lintspaces.reporter())
   .pipe(eslint({
     useEslintrc: true
   }))
