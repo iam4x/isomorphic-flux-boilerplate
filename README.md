@@ -1,3 +1,5 @@
+[![Dependency Status](https://david-dm.org/iam4x/isomorphic-flux-boilerplate.svg)](https://david-dm.org/iam4x/isomorphic-flux-boilerplate)
+
 # ES6 Isomorphic Flux/ReactJS Boilerplate
 
 > A wonderfull boilerplate for **Flux/ReactJS** applications, running on **Koa**.
