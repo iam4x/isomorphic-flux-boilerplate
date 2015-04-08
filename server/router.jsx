@@ -44,6 +44,8 @@ export default function *() {
     });
 
     const content = yield render(router);
-    yield this.render('main', {content});
+    const assets = require('./webpack-stats.json');
+
+    yield this.render('main', {content, assets});
   }
 };
