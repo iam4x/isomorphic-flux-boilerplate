@@ -3,7 +3,8 @@
   "env": {
     "es6": true,
     "browser": true,
-    "node": true
+    "node": true,
+    "mocha": true
   },
   "rules": {
     "quotes": [2, "single"],
@@ -19,11 +20,5 @@
     "jsx": true,
     "modules": true,
     "blockBindings": true,
-  },
-  "globals": {
-    "it": true,
-    "describe": true,
-    "beforeEach": true,
-    "afterEach": true,
   }
 }
