@@ -8,14 +8,18 @@ module.exports = function (config) {
       'tests.webpack.js'
     ],
     preprocessors: {
-      'tests.webpack.js': [ 'webpack', 'sourcemap' ]
+      'tests.webpack.js': ['webpack', 'sourcemap']
     },
-    reporters: [ 'dots' ],
+    reporters: ['progress', 'coverage'],
+    coverageReporter: {
+      type: 'text'
+    },
     webpack: {
       devtool: 'inline-source-map',
       module: {
         loaders: [
-          {test: /\.js$|.jsx$/, loader: 'babel-loader', exclude: /node_modules/}
+          {test: /\.js$|.jsx$/, loader: 'babel-loader', exclude: /node_modules/},
+          {test: /\.js$|.jsx$/, loader: 'isparta', exclude: /node_modules|test/}
         ],
         noParse: /\.min\.js/
       },
