@@ -15,7 +15,7 @@ var writeStats = require('./utils/write-stats');
 require('./utils/clean-dist')();
 
 module.exports = {
-  devtool: 'cheap-source-map',
+  devtool: 'source-map',
   entry: {
     app: './app/index.js'
   },
