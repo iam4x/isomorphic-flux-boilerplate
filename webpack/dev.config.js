@@ -19,19 +19,23 @@ export default {
     ]
   },
   output: {
-    path: path.join(__dirname, '../dist/js/'),
+    path: path.join(__dirname, '../dist'),
     filename: '[name]-[chunkhash].js',
-    publicPath: `http://${WEBPACK_HOST}:${WEBPACK_PORT}/assets/js`
+    publicPath: `http://${WEBPACK_HOST}:${WEBPACK_PORT}/assets/`
   },
   module: {
     preLoaders: [
-      {test: /\.js$|.jsx$/, exclude: /node_modules/, loaders: ['eslint-loader']}
+      {test: /\.js$|.jsx$/, exclude: /node_modules/, loader: 'eslint'}
     ],
     loaders: [
       {
         test: /\.js$|.jsx$/,
         exclude: /node_modules/,
         loaders: ['react-hot', 'babel-loader']
+      },
+      {
+        test: /\.scss$/,
+        loader: 'style!css!autoprefixer?browsers=last 2 version!sass?outputStyle=expanded&sourceMap'
       }
     ]
   },

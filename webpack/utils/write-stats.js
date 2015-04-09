@@ -27,7 +27,8 @@ export default function (stats) {
   };
 
   const script = getChunks('app', 'js');
-  const content = {script};
+  const style = getChunks('app', 'css');
+  const content = {script, style};
 
   fs.writeFileSync(filepath, JSON.stringify(content));
   debug('dev')('`webpack-stats.json` updated');

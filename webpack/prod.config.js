@@ -7,6 +7,7 @@ require('babel/register');
 
 var path = require('path');
 var webpack = require('webpack');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 var writeStats = require('./utils/write-stats');
 
@@ -14,38 +15,49 @@ var writeStats = require('./utils/write-stats');
 require('./utils/clean-dist')();
 
 module.exports = {
-  devtool: 'source-map',
+  devtool: 'cheap-source-map',
   entry: {
     app: './app/index.js'
   },
   output: {
-    path: path.join(__dirname, '../dist/js'),
+    path: path.join(__dirname, '../dist'),
     filename: '[name]-[hash].js',
-    publicPath: '/assets/js/'
+    publicPath: '/assets/'
   },
   module: {
     preLoaders: [
       {
         test: /\.js$|.jsx$/,
         exclude: /node_modules/,
-        loaders: ['eslint-loader']
+        loader: 'eslint'
       }
     ],
     loaders: [
       {
         test: /\.js$|.jsx$/,
         exclude: /node_modules/,
-        loaders: ['babel-loader']
+        loader: 'babel'
+      },
+      {
+        test: /\.scss$/,
+        loader: ExtractTextPlugin.extract('style', 'css!autoprefixer?browsers=last 2 version!sass')
       }
     ]
   },
   plugins: [
+
+    // extract css
+    new ExtractTextPlugin('[name]-[hash].css'),
+
+    // set env
     new webpack.DefinePlugin({
       'process.env': {
         BROWSER: JSON.stringify(true),
         NODE_ENV: JSON.stringify('production')
       }
     }),
+
+    // optimizations
     new webpack.optimize.DedupePlugin(),
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.optimize.UglifyJsPlugin({
@@ -71,7 +83,10 @@ module.exports = {
         comments: false
       }
     }),
+
+    // write webpack stats
     function () { this.plugin('done', writeStats); }
+
   ],
   resolve: {
     extensions: ['', '.js', '.json', '.jsx'],
