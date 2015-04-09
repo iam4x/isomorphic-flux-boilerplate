@@ -10,6 +10,9 @@ var webpack = require('webpack');
 
 var writeStats = require('./utils/write-stats');
 
+// clean `.tmp` && `dist`
+require('./utils/clean-dist')();
+
 module.exports = {
   devtool: 'source-map',
   entry: {
