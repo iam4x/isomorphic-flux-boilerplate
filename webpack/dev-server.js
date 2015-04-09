@@ -2,6 +2,7 @@
 
 require('babel/register');
 
+var debug = require('debug')('dev');
 var webpack = require('webpack');
 var WebpackDevServer = require('webpack-dev-server');
 
@@ -25,5 +26,5 @@ var compiler = webpack(config);
 var devServer = new WebpackDevServer(compiler, serverOptions);
 
 devServer.listen(3001, 'localhost', function () {
-  console.log('devServer started on http://localhost:3001');
+  debug('`webpack-dev-server` listen on port 3001');
 });

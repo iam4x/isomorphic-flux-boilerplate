@@ -3,6 +3,7 @@
 // borrowed from https://github.com/gpbl/isomorphic500/blob/master/webpack%2Futils%2Fwrite-stats.js
 import fs from 'fs';
 import path from 'path';
+import debug from 'debug';
 
 const filepath = path.resolve(__dirname, '../../server/webpack-stats.json');
 
@@ -29,4 +30,5 @@ export default function (stats) {
   const content = {script};
 
   fs.writeFileSync(filepath, JSON.stringify(content));
+  debug('dev')('`webpack-stats.json` updated');
 };
