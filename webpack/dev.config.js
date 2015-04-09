@@ -25,7 +25,11 @@ export default {
   },
   module: {
     preLoaders: [
-      {test: /\.js$|.jsx$/, exclude: /node_modules/, loader: 'eslint'}
+      {
+        test: /\.js$|.jsx$/,
+        exclude: /node_modules/,
+        loaders: ['eslint', 'jscs']
+      }
     ],
     loaders: [
       {
