@@ -5,7 +5,8 @@
   "main": "server/index.js",
   "scripts": {
     "build": "./node_modules/.bin/webpack --stats --config ./webpack/prod.config.js",
-    "dev": "DEBUG=dev node ./webpack/dev-server.js"
+    "dev": "DEBUG=dev node ./webpack/dev-server.js",
+    "postinstall": "npm run build"
   },
   "repository": {
     "type": "git",
