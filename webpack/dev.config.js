@@ -33,6 +33,10 @@ export default {
     ],
     loaders: [
       {
+        test: /\.(woff|eot|ttf)$/,
+        loader: 'url?limit=10000&name=[sha512:hash:base64:7].[ext]'
+      },
+      {
         test: /\.(jpe?g|png|gif|svg)$/,
         loader: 'url?limit=10000&name=[sha512:hash:base64:7].[ext]'
       },
