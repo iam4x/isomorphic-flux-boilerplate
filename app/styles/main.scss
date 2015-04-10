@@ -2,7 +2,14 @@
 @import '../../node_modules/modularized-normalize-scss/_normalize.scss';
 
 // mixins
-@import './mixins/_hide-text.scss';
+@import 'mixins/_hide-text.scss';
+
+// import fonts
+@import '_fonts.scss';
+
+body {
+  font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
 
 .logo {
   display: block;
