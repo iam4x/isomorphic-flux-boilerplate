@@ -47,7 +47,7 @@
     "babel-eslint": "^2.0.2",
     "browser-sync": "^2.5.3",
     "chai": "^2.2.0",
-    "css-loader": "^0.9.1",
+    "css-loader": "^0.10.1",
     "del": "^1.1.1",
     "eslint": "^0.18.0",
     "eslint-loader": "^0.9.0",
@@ -69,7 +69,7 @@
     "node-sass": "^2.0.1",
     "react-hot-loader": "^1.1.4",
     "sass-loader": "^0.4.2",
-    "style-loader": "^0.9.0",
+    "style-loader": "^0.10.1",
     "url-loader": "^0.5.5",
     "webpack": "^1.5.3",
     "webpack-dev-server": "^1.7.0"
