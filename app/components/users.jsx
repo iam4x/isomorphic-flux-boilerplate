@@ -4,31 +4,22 @@ import request from 'superagent';
 import React from 'react';
 import ListenerMixin from 'alt/mixins/ListenerMixin';
 
-import UserStore from 'stores/user';
-import UserActions from 'actions/user';
+import UsersStore from 'stores/users';
+import UsersActions from 'actions/users';
 
 export default React.createClass({
   mixins: [ListenerMixin],
   getInitialState() {
-    return UserStore.getState();
+    return UsersStore.getState();
   },
   componentWillMount() {
-    UserActions.fetch();
+    UsersActions.fetch();
   },
   componentDidMount() {
-    this.listenTo(UserStore, () => this.setState(this.getInitialState()));
-  },
-  addUser() {
-    request
-      .get('http://api.randomuser.me/')
-      .end((err, res) => {
-        if (!err) {
-          return UserActions.add(res.body.results[0]);
-        }
-      });
+    this.listenTo(UsersStore, () => this.setState(this.getInitialState()));
   },
   removeUser(index) {
-    return UserActions.remove(index);
+    return UsersActions.remove(index);
   },
   renderUsers() {
     return this.state.users.map((user, index) => {
@@ -44,7 +35,7 @@ export default React.createClass({
   render() {
     return (
       <div>
-        <h1>Users <button onClick={this.addUser}>Add User</button></h1>
+        <h1>Users <button onClick={UsersActions.add}>Add User</button></h1>
         <ul>
           {this.renderUsers()}
         </ul>

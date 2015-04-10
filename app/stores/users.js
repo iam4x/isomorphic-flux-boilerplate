@@ -1,11 +1,11 @@
 'use strict';
 
 import alt from 'utils/alt';
-import UserActions from 'actions/user';
+import UsersActions from 'actions/users';
 
 class UserStore {
   constructor() {
-    this.bindActions(UserActions);
+    this.bindActions(UsersActions);
     this.users = [];
   }
   onRemove(index) {

@@ -36,6 +36,7 @@
     "koa-mount": "^1.3.0",
     "koa-response-time": "^1.0.2",
     "koa-static-cache": "^3.1.0",
+    "lodash": "^3.6.0",
     "lru-cache": "^2.5.0",
     "modularized-normalize-scss": "git://github.com/hail2u/normalize.scss.git",
     "react": "^0.13.1",
