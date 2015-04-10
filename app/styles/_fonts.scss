@@ -1,15 +1,15 @@
-$font_0: 'Roboto';
+$font-0: 'Roboto';
 
-$url_0: url('../fonts/Roboto-Medium-webfont.eot');
-$url_1: url('../fonts/Roboto-Medium-webfont.eot?#iefix');
-$url_2: url('../fonts/Roboto-Medium-webfont.woff');
-$url_3: url('../fonts/Roboto-Medium-webfont.ttf');
-$url_4: url('../fonts/Roboto-Medium-webfont.svg#robotomedium');
+$url-0: url('../fonts/Roboto-Medium-webfont.eot');
+$url-1: url('../fonts/Roboto-Medium-webfont.eot?#iefix');
+$url-2: url('../fonts/Roboto-Medium-webfont.woff');
+$url-3: url('../fonts/Roboto-Medium-webfont.ttf');
+$url-4: url('../fonts/Roboto-Medium-webfont.svg#robotomedium');
 
 @font-face {
-	font-family: $font_0;
-	src: $url_0;
-	src: $url_1 format('embedded-opentype'), $url_2 format('woff'), $url_3 format('truetype'), $url_4 format('svg');
-	font-weight: normal;
-	font-style: normal;
+  font-family: $font-0;
+  src: $url-0;
+  src: $url-1 format('embedded-opentype'), $url-2 format('woff'), $url-3 format('truetype'), $url-4 format('svg');
+  font-weight: normal;
+  font-style: normal;
 }

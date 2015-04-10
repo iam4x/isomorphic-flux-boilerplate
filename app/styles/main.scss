@@ -1,24 +1,24 @@
 // vendors
-@import '../../node_modules/modularized-normalize-scss/_normalize.scss';
+@import '../../node_modules/modularized-normalize-scss/normalize';
 
 // mixins
-@import 'mixins/_hide-text.scss';
+@import 'mixins/hide-text';
 
 // import fonts
-@import '_fonts.scss';
+@import 'fonts';
 
 body {
   font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
 .logo {
-  display: block;
+  @extend %hide-text;
+
   background-image: url('../images/react-logo.png');
   background-repeat: no-repeat;
   background-size: contain;
+  display: block;
   height: 200px;
-  width: 200px;
   margin: 0 auto;
-
-  @extend .hide-text;
+  width: 200px;
 }
