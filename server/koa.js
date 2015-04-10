@@ -60,7 +60,7 @@ app.use(mount('/assets', staticCache(path.join(__dirname, '../dist'), cacheOpts)
 app.use(router);
 app.listen(config.port);
 
-debug('koa')(`Application started on port ${config.port}`);
+console.log(`Application started on port ${config.port}`);
 if (process.send) {
   process.send('online');
 }

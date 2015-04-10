@@ -5,7 +5,7 @@
   "main": "server/index.js",
   "scripts": {
     "build": "./node_modules/.bin/webpack --progress --stats --config ./webpack/prod.config.js",
-    "dev": "DEBUG=dev node ./webpack/dev-server.js",
+    "dev": "DEBUG=dev,koa node ./webpack/dev-server.js",
     "test": "./node_modules/.bin/karma start --single-run",
     "postinstall": "npm run build"
   },
