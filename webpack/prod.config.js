@@ -34,6 +34,10 @@ module.exports = {
     ],
     loaders: [
       {
+        test: /\.(jpe?g|png|gif|svg)$/,
+        loader: 'url?limit=10000&name=[sha512:hash:base64:7].[ext]!image?optimizationLevel=7&progressive&interlaced'
+      },
+      {
         test: /\.js$|.jsx$/,
         exclude: /node_modules/,
         loader: 'babel'
