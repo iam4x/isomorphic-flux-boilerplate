@@ -1,6 +1,7 @@
 'use strict';
 
 import path from 'path';
+import debug from 'debug';
 
 import koa from 'koa';
 import hbs from 'koa-hbs';
@@ -42,7 +43,7 @@ if (env === 'production') {
 
 if (env === 'development') {
   // log when process is blocked
-  require('blocked')((ms) => console.log(`blocked for ${ms}ms`));
+  require('blocked')((ms) => debug('koa')(`blocked for ${ms}ms`));
 }
 
 app.use(hbs.middleware({
@@ -57,7 +58,7 @@ app.use(mount('/assets', staticCache(path.join(__dirname, '../dist'), cacheOpts)
 app.use(router);
 app.listen(config.port);
 
-console.log(`Application started on port ${config.port}`);
+debug('koa')(`Application started on port ${config.port}`);
 if (process.send) {
   process.send('online');
 }

@@ -1,5 +1,7 @@
 'use strict';
 
+import debug from 'debug';
+
 import React from 'react';
 import Router from 'react-router';
 import isoRenderer from 'alt/utils/IsomorphicRenderer';
@@ -36,8 +38,8 @@ export default function *() {
         this.redirect(redirect.to);
       },
       onError(err) {
-        console.log('Routing Error');
-        console.log(err);
+        debug('koa')('Routing Error');
+        debug('koa')(err);
       }
     });
 
