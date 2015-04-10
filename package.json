@@ -30,6 +30,7 @@
     "koa-compressor": "^1.0.3",
     "koa-conditional-get": "^1.0.2",
     "koa-etag": "^2.0.0",
+    "koa-favicon": "^1.2.0",
     "koa-hbs": "^0.7.0",
     "koa-helmet": "0.0.3",
     "koa-logger": "^1.2.2",

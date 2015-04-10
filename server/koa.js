@@ -8,6 +8,7 @@ import hbs from 'koa-hbs';
 import mount from 'koa-mount';
 import helmet from 'koa-helmet';
 import logger from 'koa-logger';
+import favicon from 'koa-favicon';
 import staticCache from 'koa-static-cache';
 import responseTime from 'koa-response-time';
 
@@ -46,6 +47,7 @@ if (env === 'development') {
   require('blocked')((ms) => debug('koa')(`blocked for ${ms}ms`));
 }
 
+app.use(favicon(path.join(__dirname, '../app/images/favicon.ico')));
 app.use(hbs.middleware({
   defaultLayout: 'index',
   layoutsPath: path.join(__dirname, '/views/layouts'),
