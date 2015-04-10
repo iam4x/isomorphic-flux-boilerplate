@@ -5,24 +5,22 @@ import Router from 'react-router';
 import isoRenderer from 'alt/utils/IsomorphicRenderer';
 
 // Paths are relative to `app` directory
-import alt from 'utils/alt';
 import routes from 'routes';
-
-import altResolver from '../shared/alt-resolver';
+import alt from 'utils/alt';
+import altResolver from 'utils/alt-resolver';
 
 const render = (router) => {
-  const promise = new Promise((resolve) => {
-    router.run((Handler, state) => {
-      altResolver(
-        {routes: state.routes},
-        (nextState) => {
-          alt.bootstrap(nextState);
-          return resolve(isoRenderer(alt, Handler));
-        }
-      );
+  return new Promise((resolve) => {
+    return router.run((Handler) => {
+      // Fire first render to catch all promises
+      // into altResolver
+      React.renderToString(<Handler />);
+      // actions filled the promises store
+      Promise
+        .all(altResolver.getPromises())
+        .then(() => resolve(altResolver.render(Handler)));
     });
   });
-  return promise;
 };
 
 export default function *() {

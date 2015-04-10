@@ -8,8 +8,6 @@ import Router from 'react-router';
 import alt from 'utils/alt';
 import routes from 'routes';
 
-import altResolver from '../shared/alt-resolver';
-
 Iso.bootstrap((initialState, __, container) => {
   // Bootstrap data into client Alt
   alt.bootstrap(initialState);
@@ -17,17 +15,6 @@ Iso.bootstrap((initialState, __, container) => {
   Router.run(
     routes,
     Router.HistoryLocation,
-    (Handler, state) => {
-      altResolver(
-        {
-          routes: state.routes,
-          state: initialState
-        },
-        (nextState) => {
-          alt.bootstrap(nextState);
-          React.render(<Handler />, container);
-        }
-      );
-    }
+    (Handler) => React.render(React.createElement(Handler), container)
   );
 });

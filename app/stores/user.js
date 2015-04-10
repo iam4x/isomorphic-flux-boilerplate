@@ -8,11 +8,14 @@ class UserStore {
     this.bindActions(UserActions);
     this.users = [];
   }
-  onAdd(user) {
-    this.users.push(user);
-  }
   onRemove(index) {
     this.users.splice(index, 1);
+  }
+  onAddSuccess(user) {
+    this.users.push(user);
+  }
+  onFetchSuccess(users) {
+    this.users = users;
   }
 }
 

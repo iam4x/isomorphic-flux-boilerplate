@@ -2,4 +2,4 @@
 require('babel/polyfill');
 
 // Start application
-require('./main.jsx');
+require('./main');

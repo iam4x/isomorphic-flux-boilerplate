@@ -12,6 +12,9 @@ export default React.createClass({
   getInitialState() {
     return UserStore.getState();
   },
+  componentWillMount() {
+    UserActions.fetch();
+  },
   componentDidMount() {
     this.listenTo(UserStore, () => this.setState(this.getInitialState()));
   },
