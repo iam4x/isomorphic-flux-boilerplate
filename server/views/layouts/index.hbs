@@ -3,11 +3,15 @@
   <head>
     <meta charset="utf-8">
     <link rel="icon" type="image/ico" href="/assets/img/favicon.ico">
-    <link rel="stylesheet" href="/assets/css/styles.css">
+    {{#each assets.style}}
+      <link rel="stylesheet" href="{{this}}">
+    {{/each}}
     <title>ISO-ReactJS</title>
   </head>
   <body>
     {{{body}}}
-    <script src="/assets/js/app.js" async defer></script>
+    {{#each assets.script}}
+      <script src="{{this}}"></script>
+    {{/each}}
   </body>
 </html>

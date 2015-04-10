@@ -1,26 +1,44 @@
 {
-  "esnext": true,
-  "esprima": "esprima-fb",
-
-  "maximumLineLength": 140,
-
-  "validateJSDoc": {
-    "checkParamNames": true,
-    "checkRedundantParams": true,
-    "requireParamTypes": true
+  "disallowSpacesInNamedFunctionExpression": {
+    "beforeOpeningRoundBrace": true
   },
-
-  "validateLineBreaks": "LF",
-  "validateQuoteMarks": true,
-
-  "requireCurlyBraces": [
-    "for",
-    "while",
-    "do",
-    "try",
-    "catch"
+  "disallowSpacesInFunctionDeclaration": {
+    "beforeOpeningRoundBrace": true
+  },
+  "disallowEmptyBlocks": true,
+  "disallowSpacesInsideArrayBrackets": true,
+  "disallowSpacesInsideParentheses": true,
+  "disallowQuotedKeysInObjects": true,
+  "disallowSpaceAfterObjectKeys": true,
+  "disallowSpaceAfterPrefixUnaryOperators": true,
+  "disallowSpaceBeforePostfixUnaryOperators": true,
+  "disallowSpaceBeforeBinaryOperators": [
+    ","
   ],
+  "disallowMixedSpacesAndTabs": true,
+  "disallowTrailingWhitespace": true,
+  "disallowTrailingComma": true,
+  "disallowYodaConditions": true,
+  "disallowKeywords": ["with"],
+  "disallowMultipleLineBreaks": true,
+  "disallowMultipleVarDecl": true,
 
+  "requireSpaceBeforeBlockStatements": true,
+  "requireParenthesesAroundIIFE": true,
+  "requireSpacesInConditionalExpression": true,
+  "requireBlocksOnNewline": 1,
+  "requireCommaBeforeLineBreak": true,
+  "requireSpaceBeforeBinaryOperators": true,
+  "requireSpaceAfterBinaryOperators": true,
+  "requireCamelCaseOrUpperCaseIdentifiers": true,
+  "requireLineFeedAtFileEnd": true,
+  "requireCapitalizedConstructors": true,
+  "requireDotNotation": true,
+  "requireSpacesInForStatement": true,
+  "requireSpaceBetweenArguments": true,
+  "requireKeywordsOnNewLine": ["else"],
+  "requireCurlyBraces": [ "do" ],
+  "requireSpaceBeforeKeywords": ["if"],
   "requireSpaceAfterKeywords": [
     "if",
     "else",
@@ -28,102 +46,16 @@
     "while",
     "do",
     "switch",
+    "case",
     "return",
     "try",
-    "catch"
-  ],
-
-  "requireOperatorBeforeLineBreak": [
-    "?",
-    "+",
-    "-",
-    "/",
-    "*",
-    "=",
-    "==",
-    "===",
-    "!=",
-    "!==",
-    ">",
-    ">=",
-    "<",
-    "<="
-  ],
-
-  "requireSpaceBeforeBinaryOperators": [
-    "+",
-    "-",
-    "/",
-    "*",
-    "=",
-    "==",
-    "===",
-    "!=",
-    "!=="
-  ],
-
-  "requireSpaceAfterBinaryOperators": [
-    "+",
-    "-",
-    "/",
-    "*",
-    "=",
-    "==",
-    "===",
-    "!=",
-    "!=="
-  ],
-
-  "requireKeywordsOnNewLine": [
     "catch",
-    "while"
+    "typeof"
   ],
-
-  "requireSpacesInFunctionExpression": {
-    "beforeOpeningCurlyBrace": true
-  },
-
-  "requireParenthesesAroundIIFE": true,
-  "requireCommaBeforeLineBreak": true,
-  "requireCapitalizedConstructors": true,
-  "requireDotNotation": true,
-
-  "disallowSpaceAfterPrefixUnaryOperators": [
-    "++",
-    "--",
-    "+",
-    "-",
-    "~",
-    "!"
-  ],
-
-  "disallowSpaceBeforePostfixUnaryOperators": [
-    "++",
-    "--"
-  ],
-
-  "disallowImplicitTypeConversion": [
-    "numeric",
-    "boolean",
-    "binary",
-    "string"
-  ],
-
-  "disallowKeywords": [
-    "with"
-  ],
-
-  "disallowMultipleLineStrings": true,
-  "disallowMultipleLineBreaks": true,
-  "disallowEmptyBlocks": true,
-  "disallowSpacesInsideArrayBrackets": true,
-  "disallowSpacesInsideParentheses": true,
-  "disallowSpacesInsideObjectBrackets": true,
-  "disallowQuotedKeysInObjects": true,
-  "disallowSpaceAfterObjectKeys": true,
-  "disallowTrailingWhitespace": true,
-  "disallowMixedSpacesAndTabs": "smart",
-  "safeContextKeyword": "self",
+  "safeContextKeyword": "_this",
+  "validateLineBreaks": "LF",
+  "validateQuoteMarks": "'",
   "validateIndentation": 2,
-  "excludeFiles": ["node_modules/**", "app/bower_components/**" ]
+  "esnext": true,
+  "esprima": "esprima-fb"
 }

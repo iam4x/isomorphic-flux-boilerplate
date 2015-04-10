@@ -19,14 +19,18 @@ module.exports = function (config) {
       devtool: 'inline-source-map',
       module: {
         loaders: [
+          // TODO: fix sourcemaps
+          // see: https://github.com/deepsweet/isparta-loader/issues/1
           {test: /\.js$|.jsx$/, loader: 'babel-loader', exclude: /node_modules/},
           {test: /\.js$|.jsx$/, loader: 'isparta', exclude: /node_modules|test/}
-        ],
-        noParse: /\.min\.js/
+        ]
       },
       plugins: [
         new webpack.DefinePlugin({
-          'process.env.NODE_ENV': JSON.stringify('test')
+          'process.env': {
+            BROWSER: JSON.stringify(true),
+            NODE_ENV: JSON.stringify('test')
+          }
         })
       ],
       resolve: {
