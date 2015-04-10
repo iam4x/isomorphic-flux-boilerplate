@@ -1,8 +1,9 @@
 // vendors
 @import '../../node_modules/modularized-normalize-scss/normalize';
 
-// import fonts
+// mixins / helpers
 @import 'fonts';
+@import 'mixins/class-helper';
 
 body {
   font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;

@@ -18,6 +18,7 @@ export default React.createClass({
           <li><Link to='app'>Users</Link></li>
           <li><Link to='guides'>Guides</Link></li>
         </ul>
+        <hr />
       </header>
     );
   }

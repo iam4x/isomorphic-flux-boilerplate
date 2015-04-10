@@ -1,0 +1,14 @@
+$black: #000;
+
+.app--users {
+  margin: 0 auto;
+
+  td,
+  th {
+    padding: 5px 10px;
+  }
+
+  thead {
+    border-bottom: 1px solid $black;
+  }
+}
