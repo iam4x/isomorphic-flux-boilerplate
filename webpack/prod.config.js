@@ -34,6 +34,10 @@ module.exports = {
     ],
     loaders: [
       {
+        test: /\.json$/,
+        loader: 'json'
+      },
+      {
         test: /\.(woff|eot|ttf)$/,
         loader: 'url?limit=10000&name=[sha512:hash:base64:7].[ext]'
       },
