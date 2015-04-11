@@ -5,7 +5,7 @@ import Iso from 'iso';
 import debug from 'debug';
 
 import alt from 'utils/alt';
-import ErrorPage from 'pages/error';
+import ErrorPage from 'pages/server-error';
 
 const toResolve = [];
 
