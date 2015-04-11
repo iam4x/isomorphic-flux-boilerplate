@@ -15,7 +15,7 @@ import promisify from 'utils/promisify';
 export default function *() {
   const isCashed = this.cashed ? yield this.cashed() : false;
   if (!isCashed) {
-    let router = Router.create({
+    const router = Router.create({
       routes: routes,
       location: this.request.url,
       onAbort(redirect) {
