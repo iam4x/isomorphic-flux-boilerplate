@@ -10,25 +10,12 @@ import isoRenderer from 'alt/utils/IsomorphicRenderer';
 import routes from 'routes';
 import alt from 'utils/alt';
 import altResolver from 'utils/alt-resolver';
-
-const render = (router) => {
-  return new Promise((resolve) => {
-    return router.run((Handler) => {
-      // Fire first render to catch all promises
-      // into altResolver
-      React.renderToString(<Handler />);
-      // actions filled the promises store
-      Promise
-        .all(altResolver.getPromises())
-        .then(() => resolve(altResolver.render(Handler)));
-    });
-  });
-};
+import promisify from 'utils/promisify';
 
 export default function *() {
   const isCashed = this.cashed ? yield this.cashed() : false;
   if (!isCashed) {
-    const router = Router.create({
+    let router = Router.create({
       routes: routes,
       location: this.request.url,
       onAbort(redirect) {
@@ -43,7 +30,8 @@ export default function *() {
       }
     });
 
-    const content = yield render(router);
+    const handler = yield promisify(router.run);
+    const content = yield altResolver.render(handler);
     const assets = require('./webpack-stats.json');
 
     yield this.render('main', {content, assets});
