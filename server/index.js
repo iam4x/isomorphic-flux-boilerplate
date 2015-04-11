@@ -6,7 +6,7 @@ process.env.NODE_PATH = 'app';
 require('module').Module._initPaths();
 
 // Install `babel` hook for ES6
-require('babel/register');
+require('babel/register')({experimental: true});
 
 // Start the server
 require('./koa.js');
