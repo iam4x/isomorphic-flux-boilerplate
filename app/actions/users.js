@@ -12,7 +12,10 @@ import data from 'data/users.json';
 
 class UsersActions {
   constructor() {
-    this.generateActions('remove', 'fetchSuccess', 'addSuccess');
+    this.generateActions(
+      'remove', 'fetchSuccess', 'addSuccess',
+      'fetchBySeedSuccess'
+    );
   }
   add() {
     const promise = (resolve) => {
@@ -31,6 +34,18 @@ class UsersActions {
       RequestsActions.start();
       setTimeout(() => {
         this.actions.fetchSuccess(take(data.users, 10));
+        RequestsActions.success();
+        return resolve();
+      }, 300);
+    };
+    altResolver.resolve(promise);
+  }
+  fetchBySeed(seed) {
+    const promise = (resolve) => {
+      RequestsActions.start();
+      setTimeout(() => {
+        const user = data.users.find((user) => user.seed === seed);
+        this.actions.fetchBySeedSuccess(user);
         RequestsActions.success();
         return resolve();
       }, 300);
