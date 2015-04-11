@@ -3,7 +3,7 @@
 import alt from 'utils/alt';
 import UsersActions from 'actions/users';
 
-class UserStore {
+class UsersStore {
   constructor() {
     this.bindActions(UsersActions);
     this.users = [];
@@ -19,4 +19,4 @@ class UserStore {
   }
 }
 
-export default alt.createStore(UserStore, 'UserStore');
+export default alt.createStore(UsersStore, 'UsersStore');

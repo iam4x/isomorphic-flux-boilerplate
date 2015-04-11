@@ -5,19 +5,22 @@ import {sample, take} from 'lodash';
 
 import alt from 'utils/alt';
 import altResolver from 'utils/alt-resolver';
-import UsersStore from 'stores/users';
+
+import RequestsActions from 'actions/requests';
 
 import data from 'data/users.json';
 
-class UserActions {
+class UsersActions {
   constructor() {
     this.generateActions('remove', 'fetchSuccess', 'addSuccess');
   }
   add() {
     const promise = (resolve) => {
       // fake xhr
+      RequestsActions.start();
       setTimeout(() => {
         this.actions.addSuccess(sample(data.users));
+        RequestsActions.success();
         return resolve();
       }, 300);
     };
@@ -25,13 +28,15 @@ class UserActions {
   }
   fetch() {
     const promise = (resolve) => {
+      RequestsActions.start();
       setTimeout(() => {
         this.actions.fetchSuccess(take(data.users, 10));
+        RequestsActions.success();
         return resolve();
-      });
+      }, 300);
     };
     altResolver.resolve(promise);
   }
 }
 
-export default alt.createActions(UserActions);
+export default alt.createActions(UsersActions);
