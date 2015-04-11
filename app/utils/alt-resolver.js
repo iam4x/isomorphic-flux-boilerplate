@@ -42,6 +42,8 @@ export default {
       }
       catch (error) {
         // catch script error, render 500 page
+        debug('koa')('`rendering error`');
+        debug('koa')(error);
         content = React.renderToString(React.createElement(ErrorPage));
       }
       // clean server for next request
