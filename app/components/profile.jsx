@@ -32,9 +32,7 @@ export default React.createClass({
     return (
       <div className='app--profile'>
         <h2>{`${capitalize(user.name.first)} ${capitalize(user.name.last)}`}</h2>
-        <div className='picture'>
-          <img src={user.picture.medium} />
-        </div>
+        <img src={user.picture.medium} />
       </div>
     );
   }
