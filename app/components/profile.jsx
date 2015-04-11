@@ -28,12 +28,19 @@ export default React.createClass({
     this.listenTo(UsersStore, () => this.setState(this.getInitialState()));
   },
   render() {
-    const user = this.state.user.user;
-    return (
-      <div className='app--profile'>
-        <h2>{`${capitalize(user.name.first)} ${capitalize(user.name.last)}`}</h2>
-        <img src={user.picture.medium} />
-      </div>
-    );
+    if (this.state.user) {
+      const user = this.state.user.user;
+      return (
+        <div className='app--profile'>
+          <h2>{`${capitalize(user.name.first)} ${capitalize(user.name.last)}`}</h2>
+          <img src={user.picture.medium} />
+        </div>
+      );
+    }
+    else {
+      return (
+        <h2>User not found</h2>
+      );
+    }
   }
 });
