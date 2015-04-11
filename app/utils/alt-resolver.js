@@ -5,6 +5,7 @@ import Iso from 'iso';
 import debug from 'debug';
 
 import alt from 'utils/alt';
+import ErrorPage from 'pages/error';
 
 const toResolve = [];
 
@@ -29,13 +30,20 @@ export default {
     }
     else {
       // Fire first render to collect XHR promises
-      React.renderToString(React.createElement(Handler));
-      // Resolve all promises
-      await Promise.all(this.mapPromises());
-      // Get the new content with promises resolved
-      const app = React.renderToString(React.createElement(Handler));
-      // Render the html with state in it
-      const content = Iso.render(app, alt.takeSnapshot());
+      let content;
+      try {
+        React.renderToString(React.createElement(Handler));
+        // Resolve all promises
+        await Promise.all(this.mapPromises());
+        // Get the new content with promises resolved
+        const app = React.renderToString(React.createElement(Handler));
+        // Render the html with state in it
+        content = Iso.render(app, alt.takeSnapshot());
+      }
+      catch (error) {
+        // catch script error, render 500 page
+        content = React.renderToString(React.createElement(ErrorPage));
+      }
       // clean server for next request
       this.cleanPromises();
       alt.flush();
