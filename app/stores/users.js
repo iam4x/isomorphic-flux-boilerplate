@@ -54,7 +54,7 @@ class UsersStore {
     if (occurrence) {
       occurrence = user;
     }
-    else {
+    else if (user) {
       users.push(user);
     }
     this.users = users;
