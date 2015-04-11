@@ -1,7 +1,7 @@
 'use strict';
 
 import React from 'react';
-import {Route, DefaultRoute} from 'react-router';
+import {Route, DefaultRoute, NotFoundRoute} from 'react-router';
 
 export default (
   <Route name='app' path='/' handler={require('./components/app')}>
@@ -15,5 +15,6 @@ export default (
       name='profile'
       path='profile/:seed'
       handler={require('./components/profile')} />
+    <NotFoundRoute handler={require('./pages/not-found')} />
   </Route>
 );
