@@ -13,7 +13,7 @@ describe('Header', () => {
   const TestUtils = React.addons.TestUtils;
 
   beforeEach(() => {
-    instance = TestUtils.renderIntoDocument(<Stubbed />);
+    instance = TestUtils.renderIntoDocument(<ServerError />);
   });
 
   afterEach(() => {
