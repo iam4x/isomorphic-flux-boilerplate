@@ -15,6 +15,8 @@ describe('Users', () => {
   const TestUtils = React.addons.TestUtils;
 
   beforeEach(() => {
+    // clean stores
+    alt.flush();
     instance = TestUtils.renderIntoDocument(<Users />);
   });
 
@@ -22,8 +24,6 @@ describe('Users', () => {
     if (instance && instance.isMounted()) {
       React.unmountComponentAtNode(instance.getDOMNode());
     }
-    // clean stores
-    alt.flush();
   });
 
   it('should render correctly', () => {
