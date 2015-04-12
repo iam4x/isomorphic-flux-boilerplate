@@ -1,5 +1,6 @@
 'use strict';
 
+import debug from 'debug';
 import objectAssign from 'react/lib/Object.assign';
 
 import baseConfig from './all.json';
@@ -10,7 +11,7 @@ try {
   config = require(`./${env}.json`);
 }
 catch (error) {
-  console.log(`No specific configuration for env ${env}`);
+  debug('dev')(`No specific configuration for env ${env}`);
 }
 
 export default objectAssign(baseConfig, config);

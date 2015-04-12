@@ -33,13 +33,17 @@ export default {
     ],
     loaders: [
       {
+        test: /\.json$/,
+        loader: 'json'
+      },
+      {
         test: /\.(jpe?g|png|gif|svg|woff|eot|ttf)$/,
         loader: 'url?limit=10000&name=[sha512:hash:base64:7].[ext]'
       },
       {
         test: /\.js$|.jsx$/,
         exclude: /node_modules/,
-        loaders: ['react-hot', 'babel-loader']
+        loaders: ['react-hot', 'babel?experimental']
       },
       {
         test: /\.scss$/,

@@ -1,29 +1,16 @@
 'use strict';
 
+import debug from 'debug';
+
 import React from 'react';
 import Router from 'react-router';
 import isoRenderer from 'alt/utils/IsomorphicRenderer';
 
 // Paths are relative to `app` directory
-import alt from 'utils/alt';
 import routes from 'routes';
-
-import altResolver from '../shared/alt-resolver';
-
-const render = (router) => {
-  const promise = new Promise((resolve) => {
-    router.run((Handler, state) => {
-      altResolver(
-        {routes: state.routes},
-        (nextState) => {
-          alt.bootstrap(nextState);
-          return resolve(isoRenderer(alt, Handler));
-        }
-      );
-    });
-  });
-  return promise;
-};
+import alt from 'utils/alt';
+import altResolver from 'utils/alt-resolver';
+import promisify from 'utils/promisify';
 
 export default function *() {
   const isCashed = this.cashed ? yield this.cashed() : false;
@@ -38,12 +25,13 @@ export default function *() {
         this.redirect(redirect.to);
       },
       onError(err) {
-        console.log('Routing Error');
-        console.log(err);
+        debug('koa')('Routing Error');
+        debug('koa')(err);
       }
     });
 
-    const content = yield render(router);
+    const handler = yield promisify(router.run);
+    const content = yield altResolver.render(handler);
     const assets = require('./webpack-stats.json');
 
     yield this.render('main', {content, assets});

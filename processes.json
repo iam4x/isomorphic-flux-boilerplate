@@ -1,0 +1,21 @@
+{
+  "apps": [
+    {
+      "name": "app",
+      "script": "./server/index.js",
+      "instances": 1,
+      "log_date_format": "YYYY-MM-DD HH:mm Z",
+      "log_file": "./logs/app.log",
+      "error_file": "./logs/app-err.log",
+      "out_file": "./logs/app-out.log",
+      "exec_mode": "cluster_mode",
+      "max_memory_restart": "500M",
+      "watch": false,
+      "env": {
+        "NODE_ENV": "production",
+        "DEBUG": "koa"
+      },
+      "nord_args": "--max_old_space_size=300"
+    }
+  ]
+}

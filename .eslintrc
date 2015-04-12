@@ -8,7 +8,7 @@
   },
   "rules": {
     "quotes": [2, "single"],
-    "eol-last": [0],
+    "eol-last": [2],
     "no-mixed-requires": [0],
     "no-underscore-dangle": [0],
     "camelcase": 2,
@@ -19,6 +19,6 @@
   "ecmaFeatures": {
     "jsx": true,
     "modules": true,
-    "blockBindings": true,
+    "blockBindings": true
   }
 }

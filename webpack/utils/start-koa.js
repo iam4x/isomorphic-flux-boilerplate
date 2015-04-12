@@ -57,9 +57,4 @@ export default function () {
   if (!server) {
     return startServer();
   }
-  else {
-    debug('dev')('restarting koa application');
-    server.kill('SIGTERM');
-    return startServer();
-  }
 };

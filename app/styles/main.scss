@@ -1,24 +1,10 @@
 // vendors
 @import '../../node_modules/modularized-normalize-scss/normalize';
 
-// mixins
-@import 'mixins/hide-text';
-
-// import fonts
+// mixins / helpers
 @import 'fonts';
+@import 'mixins/class-helper';
 
 body {
   font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-}
-
-.logo {
-  @extend %hide-text;
-
-  background-image: url('../images/react-logo.png');
-  background-repeat: no-repeat;
-  background-size: contain;
-  display: block;
-  height: 200px;
-  margin: 0 auto;
-  width: 200px;
 }

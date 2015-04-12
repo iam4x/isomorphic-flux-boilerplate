@@ -4,47 +4,78 @@ import request from 'superagent';
 import React from 'react';
 import ListenerMixin from 'alt/mixins/ListenerMixin';
 
-import UserStore from 'stores/user';
-import UserActions from 'actions/user';
+import UsersStore from 'stores/users';
+import UsersActions from 'actions/users';
+
+if (process.env.BROWSER) {
+  require('styles/users.scss');
+}
 
 export default React.createClass({
   mixins: [ListenerMixin],
+  contextTypes: {
+    router: React.PropTypes.func
+  },
   getInitialState() {
-    return UserStore.getState();
+    return UsersStore.getState();
+  },
+  componentWillMount() {
+    return UsersActions.fetch();
   },
   componentDidMount() {
-    this.listenTo(UserStore, () => this.setState(this.getInitialState()));
-  },
-  addUser() {
-    request
-      .get('http://api.randomuser.me/')
-      .end((err, res) => {
-        if (!err) {
-          return UserActions.add(res.body.results[0]);
-        }
-      });
+    this.listenTo(UsersStore, () => this.setState(this.getInitialState()));
   },
   removeUser(index) {
-    return UserActions.remove(index);
+    return UsersActions.remove(index);
+  },
+  showProfile(seed) {
+    return this.context.router.transitionTo('profile', {seed});
   },
   renderUsers() {
     return this.state.users.map((user, index) => {
       return (
-        <li key={index}>
-          <strong>{user.user.email}</strong>
-          {` `}
-          <button onClick={this.removeUser.bind(this, index)}>X</button>
-        </li>
+        <tr key={index} className='user--row'>
+          <td>{user.user.email}</td>
+          <td className='text-center'>
+            <button
+              onClick={this.showProfile.bind(this, user.seed)}>
+              Profile
+            </button>
+          </td>
+          <td className='text-center'>
+            <button
+              onClick={this.removeUser.bind(this, index)}>
+              X
+            </button>
+          </td>
+        </tr>
       );
     });
   },
   render() {
     return (
       <div>
-        <h1>Users <button onClick={this.addUser}>Add User</button></h1>
-        <ul>
-          {this.renderUsers()}
-        </ul>
+        <h1 className='text-center'>Users</h1>
+        <table className='app--users'>
+          <thead>
+            <tr>
+              <th>email</th>
+              <th colSpan='2'>
+                actions
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {this.renderUsers()}
+          </tbody>
+        </table>
+        <p className='text-center'>
+          <button
+            ref='add-button'
+            onClick={UsersActions.add}>
+            Add User
+          </button>
+        </p>
       </div>
     );
   }
