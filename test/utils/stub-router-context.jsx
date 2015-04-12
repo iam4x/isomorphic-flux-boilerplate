@@ -17,18 +17,21 @@ export default (Component, props, stubs) => {
     getCurrentPathname () {},
     getCurrentParams () {},
     getCurrentQuery () {},
-    isActive () {}
+    isActive () {},
+    getRouteAtDepth() {},
+    setRouteComponentAtDepth() {}
   }, stubs);
 
   return React.createClass({
     childContextTypes: {
-      routeDepth: React.PropTypes.number.isRequired,
-      router: React.PropTypes.func
+      router: React.PropTypes.func,
+      routeDepth: React.PropTypes.number.isRequired
     },
 
     getChildContext () {
       return {
-        router: RouterStub
+        router: RouterStub,
+        routeDepth: 0
       };
     },
 
