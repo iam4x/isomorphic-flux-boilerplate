@@ -2,7 +2,7 @@
 
 import chai from 'chai';
 import React from 'react/addons';
-import reactRouterStub from '../utils/stub-router-context';
+import reactRouterStub from '../../utils/stub-router-context';
 
 import Header from 'components/header';
 
