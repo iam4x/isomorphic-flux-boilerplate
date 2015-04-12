@@ -24,7 +24,7 @@ describe('Users', () => {
 
   it('should render correctly', () => {
     const title = TestUtils.findRenderedDOMComponentWithTag(instance, 'h1');
-    title.getDOMNode().textContent.should.eql('Users Add User');
+    title.getDOMNode().textContent.should.eql('Users');
   });
 
   it('should render without users', () => {
