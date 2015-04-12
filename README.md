@@ -1,9 +1,12 @@
 [![Dependency Status](https://david-dm.org/iam4x/isomorphic-flux-boilerplate.svg)](https://david-dm.org/iam4x/isomorphic-flux-boilerplate)
+[![devDependency Status](https://david-dm.org/iam4x/isomorphic-flux-boilerplate/dev-status.svg)](https://david-dm.org/iam4x/isomorphic-flux-boilerplate#info=devDependencies)
 [![NPM Version](http://img.shields.io/npm/v/isomorphic-flux-boilerplate.svg?style=flat)](https://www.npmjs.com/package/isomorphic-flux-boilerplate)
 
 # ES6 Isomorphic Flux/ReactJS Boilerplate
 
-> A wonderfull boilerplate for **Flux/ReactJS** applications, running on **Koa**.
+> A wonderfull boilerplate for **Flux/ReactJS** [isomorphic](http://nerds.airbnb.com/isomorphic-javascript-future-web-apps/) applications, running on **Koa**.
+
+**Demo:** http://isomorphic.iam4x.fr
 
 ## Libraries Included
 
@@ -72,8 +75,10 @@ It's super easy to do with [nvm](https://github.com/creationix/nvm):
 
 After that, you will just need to clone the repo and install dependancies:
 
-* `$ git clone https://github.com/iam4x/isomorphic-flux-boilerplate.git`
-* `$ cd isomorphic-flux-boilerplate && npm install`
+* `$ git clone -o upstream https://github.com/iam4x/isomorphic-flux-boilerplate.git app`
+* `$ cd app && npm install`
+
+(Don't forget to add your remote origin: `$ git remote origin git@github.com:xxx/xxx.git`)
 
 ### Run the project in development:
 
@@ -93,3 +98,12 @@ Just run `$ npm run build`, it will produce these tasks:
 * Run tests from `test/spec/**/*.jsx`
 * Concat & minify styles to `/dist/app-[hash].css`
 * Concat & minify scripts to `/dist/js/app-[hash].js`
+
+### Update the boilerplate
+
+You can fetch the upstream branch and merge it into your master:
+
+* `$ git checkout master`
+* `$ git fetch upstream`
+* `$ git merge upstream/master`
+* `$ npm install`
