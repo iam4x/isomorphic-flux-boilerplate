@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/iam4x/isomorphic-flux-boilerplate.svg?branch=new-alt-resolver)](https://travis-ci.org/iam4x/isomorphic-flux-boilerplate)
 [![Dependency Status](https://david-dm.org/iam4x/isomorphic-flux-boilerplate.svg)](https://david-dm.org/iam4x/isomorphic-flux-boilerplate)
 [![devDependency Status](https://david-dm.org/iam4x/isomorphic-flux-boilerplate/dev-status.svg)](https://david-dm.org/iam4x/isomorphic-flux-boilerplate#info=devDependencies)
 [![NPM Version](http://img.shields.io/npm/v/isomorphic-flux-boilerplate.svg?style=flat)](https://www.npmjs.com/package/isomorphic-flux-boilerplate)
