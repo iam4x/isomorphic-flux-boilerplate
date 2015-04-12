@@ -20,8 +20,6 @@ describe('Profile', () => {
   const TestUtils = React.addons.TestUtils;
 
   beforeEach(() => {
-    // clean stores
-    alt.flush();
     const Stubbed = reactRouterStub(Profile, {}, {
       getCurrentParams() {
         return {seed};
@@ -31,6 +29,8 @@ describe('Profile', () => {
   });
 
   afterEach(() => {
+    // clean stores
+    alt.flush();
     if (instance && instance.isMounted()) {
       React.unmountComponentAtNode(instance.getDOMNode());
     }

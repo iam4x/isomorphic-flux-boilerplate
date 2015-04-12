@@ -15,12 +15,12 @@ describe('Users', () => {
   const TestUtils = React.addons.TestUtils;
 
   beforeEach(() => {
-    // clean stores
-    alt.flush();
     instance = TestUtils.renderIntoDocument(<Users />);
   });
 
   afterEach(() => {
+    // clean stores
+    alt.flush();
     if (instance && instance.isMounted()) {
       React.unmountComponentAtNode(instance.getDOMNode());
     }
