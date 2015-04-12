@@ -21,8 +21,27 @@ module.exports = function (config) {
         loaders: [
           // TODO: fix sourcemaps
           // see: https://github.com/deepsweet/isparta-loader/issues/1
-          {test: /\.js$|.jsx$/, loader: 'babel-loader', exclude: /node_modules/},
-          {test: /\.js$|.jsx$/, loader: 'isparta', exclude: /node_modules|test/}
+          {
+            test: /\.js$|.jsx$/,
+            loader: 'babel?experimental',
+            exclude: /node_modules/
+          },
+          {
+            test: /\.js$|.jsx$/,
+            loader: 'isparta?{babel: {stage: 1}}',
+            exclude: /node_modules|test/
+          },
+          {
+            test: /\.scss$/,
+            loader: 'style!css!sass'
+          },
+          {
+            test: /\.(jpe?g|png|gif|svg|woff|eot|ttf)$/,
+            loader: 'file?name=[sha512:hash:base64:7].[ext]'
+          },
+          {
+            test: /\.json$/, loader: 'json'
+          }
         ]
       },
       plugins: [
