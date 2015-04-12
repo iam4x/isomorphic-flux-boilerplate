@@ -10,8 +10,8 @@ import ErrorPage from 'pages/server-error';
 const toResolve = [];
 
 export default {
-  resolve(promise) {
-    if (process.env.BROWSER) {
+  resolve(promise, later) {
+    if (process.env.BROWSER && !later) {
       return new Promise(promise);
     }
     else {
@@ -24,9 +24,10 @@ export default {
   cleanPromises() {
     toResolve.length = 0;
   },
-  async render(Handler) {
-    if (process.env.BROWSER) {
+  async render(Handler, force) {
+    if (process.env.BROWSER && !force) {
       debug('dev')('`altResolver.render` should not be used in browser, something went wrong');
+      return null;
     }
     else {
       // Fire first render to collect XHR promises
