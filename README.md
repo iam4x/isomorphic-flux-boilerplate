@@ -15,14 +15,6 @@
 * [webpack](http://webpack.github.io/)
 * [babeljs](https://babeljs.io/)
 
-## Why use this boilerplate?
-
-I wanted to create a simple isomorphic reactjs application, but I found [ambidex](https://github.com/appsforartists/ambidex) or [fluxible](https://github.com/yahoo/fluxible) to hard to dive in, too many concepts and it's kinda killing the way of React thinking. Thinking as components, little bricks to assemble.
-
-I needed also an complete stack ready for full web-app development, with nice tools for the front-end. (Gulp and his magic tasks).
-
-With this boilerplate, you can choose easily what components you need and you won't be lost.
-
 ## Concepts
 
 **Koa** will be our server for the server side rendering, we use **alt** for our Flux architecture and **react-router** for routing in our app.
@@ -33,30 +25,39 @@ Run this boilerplate, you will see the server is fetching some fake users and wi
 
 ## Alt-resolver
 
-Alt-resolver is used to resolve data before React Rendering, it shares the same services with client and server. It's specific to the boilerplate.
+Alt-resolver is the magic thing about the boilerplate, it will be our tool for resolving promises (data-fetching) before server side rendering.
 
-Presume you have a route like this:
-
-```
-<Route name="users" handler={require('./components/users')} />
-```
-
-And you need to fetch users and populate an UserStore before rendering the component, declare an `user` function (that match the route name) in `shared/service.js`.
-
-This function take two arguments from promise `resolve, reject`, you should resolve it with a formatted object for `Iso / Alt` like this:
+Wrap data-fetching requests from actions into promises and send them to `altResolver` like:
 
 ```
-users(resolve, reject) {
-  return request
-    .get('http://api.randomuser.me/?results=10')
-    .end((err, response) => {
-      return resolve({UserStore: {users: response.body.results}});
-    });
+fetch() {
+  const promise = (resolve) => {
+    request
+      .get('http://example.com/api/users')
+      .end((response) => {
+        // fire new action to send data to store
+        this.actions.fetchSuccess(response.body);
+        return resolve()
+      });
+  };
+  // Send the `promise` to altResolver
+  altResolver.resolve(promise);
 }
 ```
 
-* On server side, `users` function will be resolved before the first rendering.
-* On client-side when switching to the route, it will be resolved before rendering too!
+Call the fetch action from component in the `componentWillMount` method:
+
+```
+componentWillMount() {
+  UsersActions.fetch()
+}
+```
+
+On browser side, the rendering won't be stopped and will resolve the promise instantly.
+
+On server side, `altResolver.render` will fire a first render to collect all the promises needed for a complete rendering. It will then resolve them, and try to re-render the application for a complete markup.
+
+Open `app/actions/users.js`, `app/utils/alt-resolver.js`, `app/stores/users.js` for more information about data-fetching.
 
 ## Installation / How-to
 
@@ -82,7 +83,7 @@ Open your browser to `http://localhost:8080` and you will see the magic happens!
 ### Run tests
 
 * `$ npm test` will run the tests once
-* `$ karma start` will watch for changes and run the tests on change
+* `$ ./node_modules/.bin/karma start` will watch for changes and run the tests on change
 
 ### Build project:
 
