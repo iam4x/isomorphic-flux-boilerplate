@@ -34,7 +34,7 @@ export default React.createClass({
   renderUsers() {
     return this.state.users.map((user, index) => {
       return (
-        <tr key={index}>
+        <tr key={index} className='user--row'>
           <td>{user.user.email}</td>
           <td className='text-center'>
             <button
@@ -70,7 +70,9 @@ export default React.createClass({
           </tbody>
         </table>
         <p className='text-center'>
-          <button onClick={UsersActions.add}>
+          <button
+            ref='add-button'
+            onClick={UsersActions.add}>
             Add User
           </button>
         </p>
