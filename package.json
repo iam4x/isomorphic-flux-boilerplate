@@ -1,6 +1,6 @@
 {
   "name": "isomorphic-flux-boilerplate",
-  "version": "0.0.3",
+  "version": "0.1.0",
   "description": "An ES6 isomorphic Flux/ReactJS boilerplate",
   "main": "server/index.js",
   "scripts": {
@@ -82,16 +82,28 @@
   },
   "tags": [
     "react",
-    "react-router",
-    "isomorphic",
+    "flux",
     "alt",
     "iso",
-    "babel",
-    "flux",
+    "isomorphic",
+    "spa",
+    "ssr",
     "koa",
     "webpack",
     "jsx",
-    "es6"
+    "es6",
+    "babel",
+    "sass",
+    "scss",
+    "eslint",
+    "jscs",
+    "react-router",
+    "react-hot-loader",
+    "hot-loader",
+    "async",
+    "server",
+    "generator",
+    "es7"
   ],
   "keywords": [
     "react",
@@ -104,7 +116,19 @@
     "koa",
     "webpack",
     "jsx",
-    "es6"
+    "es6",
+    "babel",
+    "sass",
+    "scss",
+    "eslint",
+    "jscs",
+    "react-router",
+    "react-hot-loader",
+    "hot-loader",
+    "async",
+    "server",
+    "generator",
+    "es7"
   ],
   "engines": {
     "iojs": "^1.6.0"
