@@ -1,22 +1,5 @@
 var webpack = require('webpack');
 
-var coverage;
-var reporters;
-if (process.env.CONTINUOUS_INTEGRATION) {
-  coverage = {
-    type: 'lcov',
-    dir: 'coverage/'
-  };
-  reporters = ['coverage', 'coveralls'];
-}
-else {
-  coverage = {
-    type: 'html',
-    dir: 'coverage/'
-  };
-  reporters = ['progress', 'coverage'];
-}
-
 module.exports = function (config) {
   config.set({
     browsers: [process.env.CONTINUOUS_INTEGRATION ? 'Firefox' : 'Chrome'],
@@ -27,8 +10,11 @@ module.exports = function (config) {
     preprocessors: {
       'tests.webpack.js': ['webpack', 'sourcemap']
     },
-    reporters: reporters,
-    coverageReporter: coverage,
+    reporters: ['progress', 'coverage'],
+    coverageReporter: {
+      type: 'html',
+      dir: 'coverage/'
+    },
     webpack: {
       devtool: 'inline-source-map',
       module: {
