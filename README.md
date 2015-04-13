@@ -1,8 +1,4 @@
-[![Build Status](https://travis-ci.org/iam4x/isomorphic-flux-boilerplate.svg?branch=new-alt-resolver)](https://travis-ci.org/iam4x/isomorphic-flux-boilerplate)
-[![Coverage Status](https://coveralls.io/repos/iam4x/isomorphic-flux-boilerplate/badge.svg?branch=new-alt-resolver)](https://coveralls.io/r/iam4x/isomorphic-flux-boilerplate?branch=new-alt-resolver)
-[![Dependency Status](https://david-dm.org/iam4x/isomorphic-flux-boilerplate.svg)](https://david-dm.org/iam4x/isomorphic-flux-boilerplate)
-[![devDependency Status](https://david-dm.org/iam4x/isomorphic-flux-boilerplate/dev-status.svg)](https://david-dm.org/iam4x/isomorphic-flux-boilerplate#info=devDependencies)
-[![NPM Version](http://img.shields.io/npm/v/isomorphic-flux-boilerplate.svg?style=flat)](https://www.npmjs.com/package/isomorphic-flux-boilerplate)
+[![Build Status](https://semaphoreci.com/api/v1/projects/78ca7991-8a6f-4523-88e7-4e05a5579254/397136/shields_badge.svg)](https://semaphoreci.com/iam4x/react-frontend)
 
 # ES6 Isomorphic Flux/ReactJS Boilerplate
 
