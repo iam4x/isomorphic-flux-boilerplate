@@ -109,3 +109,16 @@ You can fetch the upstream branch and merge it into your master:
 * `$ git fetch upstream`
 * `$ git merge upstream/master`
 * `$ npm install`
+
+### Common errors
+
+```
+Error: `libsass` bindings not found. Try reinstalling `node-sass`
+```
+
+* Be sure you are running with iojs > 1.6.0 (check node version `node -v`)
+* Delete node_modules `mv node_modules /tmp` (`mv` is much faster than `rm -rf`)
+* Clear npm cache `npm cache clear`
+* Re-install modules `npm install`
+
+This is an issue with `node-sass` it is reported almost everywhere on the internet.
