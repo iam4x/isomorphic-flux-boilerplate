@@ -10,6 +10,7 @@ if (process.env.BROWSER) {
 }
 
 export default React.createClass({
+  displayName: 'Header',
   render() {
     return (
       <header className='app--header'>

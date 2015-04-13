@@ -10,6 +10,7 @@ if (process.env.BROWSER) {
 }
 
 export default React.createClass({
+  displayName: 'App',
   render() {
     return (
       <div>

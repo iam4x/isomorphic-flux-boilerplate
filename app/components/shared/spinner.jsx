@@ -11,12 +11,16 @@ if (process.env.BROWSER) {
 }
 
 export default React.createClass({
+  displayName: 'Spinner',
   mixins: [ListenerMixin],
   getInitialState() {
     return RequestsStore.getState();
   },
   componentDidMount() {
-    this.listenTo(RequestsStore, () => this.setState(this.getInitialState()));
+    this.listenTo(RequestsStore, this.handleStoreChange);
+  },
+  handleStoreChange() {
+    this.setState(this.getInitialState());
   },
   render() {
     const klass = classNames(

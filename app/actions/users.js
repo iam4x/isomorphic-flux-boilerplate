@@ -1,6 +1,5 @@
 'use strict';
 
-import request from 'superagent';
 import {sample, take} from 'lodash';
 
 import alt from 'utils/alt';
@@ -44,7 +43,7 @@ class UsersActions {
     const promise = (resolve) => {
       RequestsActions.start();
       setTimeout(() => {
-        const user = data.users.find((user) => user.seed === seed);
+        const user = data.users.find((u) => u.seed === seed);
         this.actions.fetchBySeedSuccess(user);
         RequestsActions.success();
         return resolve();

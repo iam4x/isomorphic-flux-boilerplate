@@ -1,6 +1,5 @@
 'use strict';
 
-import request from 'superagent';
 import React from 'react';
 import ListenerMixin from 'alt/mixins/ListenerMixin';
 
@@ -12,6 +11,7 @@ if (process.env.BROWSER) {
 }
 
 export default React.createClass({
+  displayName: 'UsersList',
   mixins: [ListenerMixin],
   contextTypes: {
     router: React.PropTypes.func
@@ -23,7 +23,10 @@ export default React.createClass({
     return UsersActions.fetch();
   },
   componentDidMount() {
-    this.listenTo(UsersStore, () => this.setState(this.getInitialState()));
+    this.listenTo(UsersStore, this.handleStoreChange);
+  },
+  handleStoreChange() {
+    this.setState(this.getInitialState());
   },
   removeUser(index) {
     return UsersActions.remove(index);
@@ -34,7 +37,7 @@ export default React.createClass({
   renderUsers() {
     return this.state.users.map((user, index) => {
       return (
-        <tr key={index} className='user--row'>
+        <tr className='user--row' key={index}>
           <td>{user.user.email}</td>
           <td className='text-center'>
             <button

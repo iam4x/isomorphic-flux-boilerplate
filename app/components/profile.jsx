@@ -12,6 +12,7 @@ if (process.env.BROWSER) {
 }
 
 export default React.createClass({
+  displayName: 'Profile',
   mixins: [ListenerMixin],
   contextTypes: {
     router: React.PropTypes.func
@@ -25,7 +26,10 @@ export default React.createClass({
     return UsersActions.fetchBySeed(seed);
   },
   componentDidMount() {
-    this.listenTo(UsersStore, () => this.setState(this.getInitialState()));
+    this.listenTo(UsersStore, this.handleStoreChange);
+  },
+  handleStoreChange() {
+    this.setState(this.getInitialState());
   },
   render() {
     if (this.state.user) {
