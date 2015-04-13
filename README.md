@@ -110,6 +110,15 @@ You can fetch the upstream branch and merge it into your master:
 * `$ git merge upstream/master`
 * `$ npm install`
 
+### Learn more
+
+* [Official ReactJS website](http://facebook.github.io/react/)
+* [Official ReactJS wiki](https://github.com/facebook/react/wiki)
+* [Official Flux website](http://facebook.github.io/flux/)
+* [ReactJS Conf 2015 links](https://gist.github.com/yannickcr/148110d3ca658ad96c2b)
+* [Learn ES6](https://babeljs.io/docs/learn-es6/)
+* [ES6 Features](https://github.com/lukehoban/es6features#readme)
+
 ### Common errors
 
 ```
