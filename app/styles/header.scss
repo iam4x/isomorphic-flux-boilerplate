@@ -1,0 +1,29 @@
+@import 'mixins/hide-text';
+@import 'mixins/reset-list';
+
+.app--header {
+  .app--logo {
+    @extend %hide-text;
+    background-image: url('../images/react-logo.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    display: block;
+    height: 200px;
+    margin: 0 auto;
+    width: 200px;
+  }
+
+  .app--navbar {
+    @extend %reset-list;
+    text-align: center;
+
+    li {
+      display: inline-block;
+      margin-right: 10px;
+    }
+
+    li:last-child {
+      margin-right: 0;
+    }
+  }
+}
