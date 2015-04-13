@@ -54,6 +54,7 @@
     "del": "^1.1.1",
     "eslint": "^0.18.0",
     "eslint-loader": "^0.9.0",
+    "eslint-plugin-react": "yannickcr/eslint-plugin-react#master",
     "esprima-fb": "^14001.1.0-dev-harmony-fb",
     "extract-text-webpack-plugin": "^0.5.0",
     "file-loader": "^0.8.1",
