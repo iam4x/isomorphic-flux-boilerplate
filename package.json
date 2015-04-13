@@ -1,7 +1,7 @@
 {
-  "name": "isomorphic-flux-boilerplate",
-  "version": "0.1.0",
-  "description": "An ES6 isomorphic Flux/ReactJS boilerplate",
+  "name": "react-frontend",
+  "version": "0.0.1",
+  "description": "FrontEnd app of savemysmartphone.com",
   "main": "server/index.js",
   "scripts": {
     "build": "./node_modules/.bin/webpack --progress --stats --config ./webpack/prod.config.js",
@@ -11,10 +11,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/iam4x/isomorphic-flux-boilerplate.git"
+    "url": "https://github.com/savemysmartphone/react-frontend.git"
   },
-  "homepage": "https://github.com/iam4x/isomorphic-flux-boilerplate",
-  "bugs": "https://github.com/iam4x/isomorphic-flux-boilerplate/issues",
+  "homepage": "https://github.com/savemysmartphone/react-frontend",
+  "bugs": "https://github.com/savemysmartphone/react-frontend/issues",
   "author": "iam4x",
   "license": "MIT",
   "dependencies": {
