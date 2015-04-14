@@ -2,13 +2,10 @@
 
 import debug from 'debug';
 
-import React from 'react';
 import Router from 'react-router';
-import isoRenderer from 'alt/utils/IsomorphicRenderer';
 
 // Paths are relative to `app` directory
 import routes from 'routes';
-import alt from 'utils/alt';
 import altResolver from 'utils/alt-resolver';
 import promisify from 'utils/promisify';
 
@@ -36,4 +33,4 @@ export default function *() {
 
     yield this.render('main', {content, assets});
   }
-};
+}
