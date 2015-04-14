@@ -58,7 +58,8 @@ app.use(hbs.middleware({
 const cacheOpts = {maxAge: 86400000, gzip: true};
 
 if (env === 'development') {
-  app.use(mount('/assets', proxy({ host: 'http://localhost:8081/assets/' })));
+  var webpackConfig = require('./../webpack/dev.config');
+  app.use(mount('/assets', proxy({ host: `http://localhost:${webpackConfig.server.port}` })));
 } else {
   app.use(mount('/assets', staticCache(path.join(__dirname, '../dist'), cacheOpts)));
 }
