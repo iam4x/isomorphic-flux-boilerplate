@@ -8,23 +8,9 @@ var WebpackDevServer = require('webpack-dev-server');
 
 var config = require('./dev.config');
 
-var serverOptions = {
-  publicPath: '/',
-  hot: true,
-  stats: {
-    assets: true,
-    colors: true,
-    version: false,
-    hash: false,
-    timings: true,
-    chunks: false,
-    chunkModules: false
-  }
-};
+var compiler = webpack(config.webpack);
+var devServer = new WebpackDevServer(compiler, config.server.options);
 
-var compiler = webpack(config);
-var devServer = new WebpackDevServer(compiler, serverOptions);
-
-devServer.listen(config.port, 'localhost', function () {
-  debug(`\`webpack-dev-server\` listen on port ${config.port}`);
+devServer.listen(config.server.port, 'localhost', function () {
+  debug(`\`webpack-dev-server\` listen on port ${config.server.port}`);
 });
