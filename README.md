@@ -43,7 +43,6 @@ Clone and install dependencies:
 * `$ git clone git@github.com:savemysmartphone/react-frontend.git && cd react-frontend`
 * `$ npm install`
 
-
 ### Run the project in development:
 
 * `$ npm run dev`
