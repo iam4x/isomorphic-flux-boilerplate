@@ -15,6 +15,7 @@
 * [react](https://facebook.github.io/react/)
 * [react-router](https://github.com/rackt/react-router)
 * [react-hot-loader](https://github.com/gaearon/react-hot-loader)
+* [react-a11y](https://github.com/rackt/react-a11y)
 * [alt](https://github.com/goatslacker/alt)
 * [iso](https://github.com/goatslacker/iso)
 * [koa](http://koajs.com/)
