@@ -37,7 +37,7 @@ module.exports = function (config) {
           // see: https://github.com/deepsweet/isparta-loader/issues/1
           {
             test: /\.js$|.jsx$/,
-            loader: 'babel?experimental',
+            loader: 'babel',
             exclude: /node_modules/
           },
           {
