@@ -6,6 +6,7 @@ import Router from 'react-router';
 
 // Paths are relative to `app` directory
 import alt from 'utils/alt';
+import routes from 'routes';
 import intlLoader from 'utils/intl-loader';
 import LocaleStore from 'stores/locale';
 import LocaleActions from 'actions/locale';
@@ -36,7 +37,7 @@ const boostrap = () => {
 
   // Render the app at correct URL
   Router.run(
-    require('routes'),
+    routes,
     Router.HistoryLocation,
     (Handler) => {
       const app = React.createElement(Handler);
