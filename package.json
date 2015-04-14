@@ -11,11 +11,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/jaulz/isomorphic-flux-boilerplate.git"
+    "url": "https://github.com/iam4x/isomorphic-flux-boilerplate.git"
   },
-  "homepage": "https://github.com/jaulz/isomorphic-flux-boilerplate",
-  "bugs": "https://github.com/jaulz/isomorphic-flux-boilerplate/issues",
-  "author": "jaulz",
+  "homepage": "https://github.com/iam4x/isomorphic-flux-boilerplate",
+  "bugs": "https://github.com/iam4x/isomorphic-flux-boilerplate/issues",
+  "author": "iam4x",
   "license": "MIT",
   "dependencies": {
     "alt": "^0.15.3",
