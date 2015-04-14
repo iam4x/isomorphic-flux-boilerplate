@@ -8,7 +8,7 @@ import startKoa from './utils/start-koa';
 
 const PROTOCOL = (process.env.C9_HOSTNAME) ? 'https' : 'http';
 const HOST = process.env.C9_HOSTNAME || 'localhost';
-const PORT = (process.env.C9_HOSTNAME) ? '443' : '80';
+const PORT = (process.env.C9_HOSTNAME) ? '443' : '3001';
 const PUBLIC_PATH = `${PROTOCOL}://${HOST}:${PORT}/assets/`;
 
 const WEBPACK_PORT = parseInt(process.env.PORT) + 1 || 3001;
@@ -17,7 +17,7 @@ export default {
   server: {
     port: WEBPACK_PORT,
     options: {
-      publicPath: '/',
+      publicPath: (process.env.C9_HOSTNAME) ? '/' : PUBLIC_PATH,
       hot: true,
       stats: {
         assets: true,
