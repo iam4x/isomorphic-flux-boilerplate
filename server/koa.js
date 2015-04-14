@@ -60,7 +60,8 @@ const cacheOpts = {maxAge: 86400000, gzip: true};
 if (env === 'development') {
   var webpackConfig = require('./../webpack/dev.config');
   app.use(mount('/assets', require('koa-proxy')({ host: `http://localhost:${webpackConfig.server.port}` })));
-} else {
+} 
+else {
   app.use(mount('/assets', staticCache(path.join(__dirname, '../dist'), cacheOpts)));
 }
 

@@ -7,7 +7,7 @@ import writeStats from './utils/write-stats';
 import startKoa from './utils/start-koa';
 
 const PROTOCOL = (process.env.C9_HOSTNAME) ? 'https' : 'http';
-const HOST = process.env.C9_HOSTNAME || require('os').hostname();
+const HOST = process.env.C9_HOSTNAME || 'localhost';
 const PORT = (process.env.C9_HOSTNAME) ? '443' : '80';
 const PUBLIC_PATH = `${PROTOCOL}://${HOST}:${PORT}/assets/`;
 
