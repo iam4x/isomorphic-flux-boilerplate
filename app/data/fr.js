@@ -1,3 +1,4 @@
+const lang = `
 {
   "messages": {
     "header": {
@@ -10,5 +11,7 @@
       "actions": "Opérations",
       "add": "Ajouter un utilisateur"
     }
-  }
 }
+`;
+
+export default JSON.pasrse(lang);

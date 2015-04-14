@@ -1,3 +1,4 @@
+const lang = `
 {
   "messages": {
     "header": {
@@ -12,3 +13,6 @@
     }
   }
 }
+`;
+
+export default JSON.parse(lang);
