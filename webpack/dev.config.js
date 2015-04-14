@@ -43,7 +43,7 @@ export default {
       {
         test: /\.js$|.jsx$/,
         exclude: /node_modules/,
-        loaders: ['react-hot', 'babel?experimental']
+        loaders: ['react-hot', 'babel']
       },
       {
         test: /\.scss$/,

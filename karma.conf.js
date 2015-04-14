@@ -20,6 +20,7 @@ else {
 module.exports = function (config) {
   config.set({
     browsers: [process.env.CONTINUOUS_INTEGRATION ? 'Firefox' : 'Chrome'],
+    browserNoActivityTimeout: 30000,
     frameworks: ['mocha'],
     files: [
       'tests.webpack.js'
@@ -37,7 +38,7 @@ module.exports = function (config) {
           // see: https://github.com/deepsweet/isparta-loader/issues/1
           {
             test: /\.js$|.jsx$/,
-            loader: 'babel?experimental',
+            loader: 'babel',
             exclude: /node_modules/
           },
           {
