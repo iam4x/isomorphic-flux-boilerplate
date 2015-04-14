@@ -9,7 +9,6 @@ import mount from 'koa-mount';
 import helmet from 'koa-helmet';
 import logger from 'koa-logger';
 import favicon from 'koa-favicon';
-import proxy from 'koa-proxy';
 import staticCache from 'koa-static-cache';
 import responseTime from 'koa-response-time';
 
@@ -57,9 +56,10 @@ app.use(hbs.middleware({
 
 const cacheOpts = {maxAge: 86400000, gzip: true};
 
+// Proxy asset folder to webpack development server in development mode
 if (env === 'development') {
   var webpackConfig = require('./../webpack/dev.config');
-  app.use(mount('/assets', proxy({ host: `http://localhost:${webpackConfig.server.port}` })));
+  app.use(mount('/assets', require('koa-proxy')({ host: `http://localhost:${webpackConfig.server.port}` })));
 } else {
   app.use(mount('/assets', staticCache(path.join(__dirname, '../dist'), cacheOpts)));
 }
