@@ -9,7 +9,7 @@ var WebpackDevServer = require('webpack-dev-server');
 var config = require('./dev.config');
 
 var serverOptions = {
-  publicPath: config.output.publicPath,
+  publicPath: '/',
   hot: true,
   stats: {
     assets: true,
@@ -25,6 +25,6 @@ var serverOptions = {
 var compiler = webpack(config);
 var devServer = new WebpackDevServer(compiler, serverOptions);
 
-devServer.listen(3001, 'localhost', function () {
-  debug('`webpack-dev-server` listen on port 3001');
+devServer.listen(config.port, 'localhost', function () {
+  debug(`\`webpack-dev-server\` listen on port ${config.port}`);
 });

@@ -6,14 +6,17 @@ import webpack from 'webpack';
 import writeStats from './utils/write-stats';
 import startKoa from './utils/start-koa';
 
-const WEBPACK_HOST = 'localhost';
+const HOST = 'https://react-jaulz.c9.io';
+const PORT = 443;
 const WEBPACK_PORT = parseInt(process.env.PORT) + 1 || 3001;
 
 export default {
   devtool: 'eval-source-map',
+  host: HOST,
+  port: WEBPACK_PORT,
   entry: {
     app: [
-      `webpack-dev-server/client?http://${WEBPACK_HOST}:${WEBPACK_PORT}`,
+      `webpack-dev-server/client?http://localhost:${WEBPACK_PORT}`,
       'webpack/hot/only-dev-server',
       './app/index.js'
     ]
@@ -21,7 +24,7 @@ export default {
   output: {
     path: path.join(__dirname, '../dist'),
     filename: '[name]-[chunkhash].js',
-    publicPath: `http://${WEBPACK_HOST}:${WEBPACK_PORT}/assets/`
+    publicPath: `${HOST}:${PORT}/assets/`
   },
   module: {
     preLoaders: [
