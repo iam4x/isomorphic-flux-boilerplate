@@ -21,6 +21,17 @@
 * [webpack](http://webpack.github.io/)
 * [babeljs](https://babeljs.io/)
 
+## TL;DR
+
+Use with `iojs^1.6.0`, clone the repo, `npm install` and `npm run dev`.
+
+Learn React ([react-prime-draft](https://github.com/mikechau/react-primer-draft)), learn Flux and Alt ([alt guide](http://alt.js.org/guide/)).
+
+
+Wrap you async actions into promises, send them to `altResolver` with `altResolver.resolve(xxx)` for async server side rendering (see [app/actions/users.js:31](https://github.com/iam4x/isomorphic-flux-boilerplate/blob/master/app/actions/users.js#L31)).
+
+Build for production with `npm run build`, don't forget to run the tests before `npm test`.
+
 ## Concepts
 
 **Koa** will be our server for the server side rendering, we use **alt** for our Flux architecture and **react-router** for routing in our app.
