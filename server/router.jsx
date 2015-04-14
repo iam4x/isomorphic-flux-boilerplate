@@ -1,5 +1,7 @@
 'use strict';
 
+import fs from 'fs';
+import path from 'path';
 import debug from 'debug';
 
 import Router from 'react-router';
@@ -10,7 +12,7 @@ import altResolver from 'utils/alt-resolver';
 import promisify from 'utils/promisify';
 
 export default function *() {
-  const isCashed = this.cashed ? yield this.cashed() : false;
+  const isCashed = this.isCashed ? this.isCashed() : false;
   if (!isCashed) {
     const router = Router.create({
       routes: routes,
@@ -27,9 +29,22 @@ export default function *() {
       }
     });
 
+    // Get request locale for rendering
+    const locale = this.acceptsLanguages(require('./config/init').locales);
+
     const handler = yield promisify(router.run);
-    const content = yield altResolver.render(handler);
-    const assets = require('./webpack-stats.json');
+    const content = yield altResolver.render(handler, locale);
+
+    // Reload './webpack-stats.json' on dev
+    // cache it on production
+    let assets;
+    if (process.env.NODE_ENV === 'development') {
+      assets = fs.readFileSync(path.resolve(__dirname, './webpack-stats.json'));
+      assets = JSON.parse(assets);
+    }
+    else {
+      assets = require('./webpack-stats.json');
+    }
 
     yield this.render('main', {content, assets});
   }

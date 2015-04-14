@@ -2,6 +2,7 @@
 
 import React from 'react';
 import ListenerMixin from 'alt/mixins/ListenerMixin';
+import {IntlMixin} from 'react-intl';
 
 import UsersStore from 'stores/users';
 import UsersActions from 'actions/users';
@@ -12,7 +13,7 @@ if (process.env.BROWSER) {
 
 export default React.createClass({
   displayName: 'UsersList',
-  mixins: [ListenerMixin],
+  mixins: [ListenerMixin, IntlMixin],
   contextTypes: {
     router: React.PropTypes.func
   },
@@ -58,13 +59,13 @@ export default React.createClass({
   render() {
     return (
       <div>
-        <h1 className='text-center'>Users</h1>
+        <h1 className='text-center'>{this.getIntlMessage('users.title')}</h1>
         <table className='app--users'>
           <thead>
             <tr>
-              <th>email</th>
+              <th>{this.getIntlMessage('users.email')}</th>
               <th colSpan='2'>
-                actions
+                {this.getIntlMessage('users.actions')}
               </th>
             </tr>
           </thead>
@@ -76,7 +77,7 @@ export default React.createClass({
           <button
             ref='add-button'
             onClick={UsersActions.add}>
-            Add User
+            {this.getIntlMessage('users.add')}
           </button>
         </p>
       </div>
