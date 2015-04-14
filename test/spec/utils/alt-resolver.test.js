@@ -3,7 +3,6 @@
 import chai from 'chai';
 import React from 'react';
 
-import alt from 'utils/alt';
 import altResolver from 'utils/alt-resolver';
 
 const should = chai.should();
