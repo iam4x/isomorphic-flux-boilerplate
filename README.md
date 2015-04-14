@@ -1,4 +1,6 @@
 [![Build Status](https://semaphoreci.com/api/v1/projects/78ca7991-8a6f-4523-88e7-4e05a5579254/397136/shields_badge.svg)](https://semaphoreci.com/iam4x/react-frontend)
+[![Dependency Status](https://david-dm.org/savemysmartphone/react-frontend.svg)](https://david-dm.org/savemysmartphone/react-frontend)
+[![devDependency Status](https://david-dm.org/savemysmartphone/react-frontend/dev-status.svg)](https://david-dm.org/savemysmartphone/react-frontend#info=devDependencies)
 
 # Savemysmartphone - React FrontEnd
 
