@@ -25,7 +25,7 @@ export default {
   cleanPromises() {
     toResolve.length = 0;
   },
-  async render(Handler, locale, force) {
+  async render(Handler, locale, messages, force) {
     if (process.env.BROWSER && !force) {
       debug('dev')('`altResolver.render` should not be used in browser, something went wrong');
       return null;
@@ -34,7 +34,6 @@ export default {
       let content;
       try {
         // Set the locale and correct `data/[locale].js`
-        const {messages} = require(`data/${locale}.js`);
         LocaleActions.switchLocaleSuccess({locale, messages});
 
         // Fire first render to collect XHR promises

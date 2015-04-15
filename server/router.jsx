@@ -31,9 +31,10 @@ export default function *() {
 
     // Get request locale for rendering
     const locale = this.acceptsLanguages(require('./config/init').locales);
+    const {messages} = require(`data/${locale}`);
 
     const handler = yield promisify(router.run);
-    const content = yield altResolver.render(handler, locale);
+    const content = yield altResolver.render(handler, locale, messages);
 
     // Reload './webpack-stats.json' on dev
     // cache it on production
