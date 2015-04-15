@@ -33,8 +33,8 @@ export default {
     else {
       let content;
       try {
-        // Set the locale and correct `data/[locale].json`
-        const {messages} = require(`data/${locale}.json`);
+        // Set the locale and correct `data/[locale].js`
+        const {messages} = require(`data/${locale}.js`);
         LocaleActions.switchLocaleSuccess({locale, messages});
 
         // Fire first render to collect XHR promises

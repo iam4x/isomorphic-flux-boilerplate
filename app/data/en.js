@@ -1,18 +1,14 @@
-const lang = `
-{
-  "messages": {
-    "header": {
-      "users": "Users List",
-      "guides": "Documentation"
+export default {
+  messages: {
+    header: {
+      users: 'Users List',
+      guides: 'Guides'
     },
-    "users": {
-      "title": "Some random users",
-      "email": "Email address",
-      "actions": "Actions",
-      "add": "Add a random user"
+    users: {
+      title: 'Some random users',
+      email: 'Email address',
+      actions: 'Actions',
+      add: 'Add random user'
     }
   }
-}
-`;
-
-export default JSON.parse(lang);
+};
