@@ -22,7 +22,7 @@ export default React.createClass({
         <h1 className='app--logo'>
           React Isomorphic
         </h1>
-        <ul className='app--navbar'>
+        <ul className='app--navbar un-select'>
           <li>
             <Link to='app'>
               {this.getIntlMessage('header.users')}
