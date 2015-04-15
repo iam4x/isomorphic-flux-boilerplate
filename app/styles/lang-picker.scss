@@ -1,5 +1,8 @@
 @import 'mixins/reset-list';
 
+$black: #000;
+$white: #fff;
+
 .lang--picker {
   @extend %reset-list;
   bottom: 9px;
@@ -16,11 +19,15 @@
 
     a {
       cursor: pointer;
+      opacity: .5;
+      padding: 0 5px;
       text-transform: uppercase;
     }
 
     .active {
-      text-decoration: underline;
+      background-color: $black;
+      color: $white;
+      opacity: 1;
     }
   }
 }
