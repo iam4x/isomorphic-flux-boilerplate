@@ -50,6 +50,6 @@ export default function *() {
     }
 
     debug('dev')('return html content');
-    yield this.render('main', {content, assets});
+    yield this.render('main', {content, assets, locale});
   }
 }
