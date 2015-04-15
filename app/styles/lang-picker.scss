@@ -1,0 +1,25 @@
+@import 'mixins/reset-list';
+
+.lang--picker {
+  @extend %reset-list;
+  bottom: 9px;
+  position: absolute;
+  right: 9px;
+
+  li {
+    display: inline-block;
+    margin-right: 10px;
+
+    &:last-child {
+      margin-right: 0;
+    }
+
+    a {
+      cursor: pointer;
+    }
+
+    .active {
+      text-decoration: underline;
+    }
+  }
+}
