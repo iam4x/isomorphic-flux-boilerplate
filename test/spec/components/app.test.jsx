@@ -3,6 +3,7 @@
 import chai from 'chai';
 import React from 'react/addons';
 import reactRouterStub from '../../utils/stub-router-context';
+import injectLang from '../../utils/inject-lang';
 
 import App from 'components/app';
 
@@ -10,17 +11,24 @@ const should = chai.should();
 
 describe('App', () => {
 
+  let node;
   let instance;
   const TestUtils = React.addons.TestUtils;
 
+  // Inject language
+  before(() => injectLang.initialize());
+  after(() => injectLang.clean());
+
   beforeEach(() => {
     const Stubbed = reactRouterStub(App);
-    instance = TestUtils.renderIntoDocument(React.createElement(Stubbed));
+    const element = React.createElement(Stubbed);
+    node = window.document.createElement('div');
+    instance = React.render(element, node);
   });
 
   afterEach(() => {
     if (instance && instance.isMounted()) {
-      React.unmountComponentAtNode(instance.getDOMNode());
+      React.unmountComponentAtNode(node);
     }
   });
 

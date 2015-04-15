@@ -7,7 +7,7 @@ import ServerError from 'pages/server-error';
 
 chai.should();
 
-describe('Header', () => {
+describe('ErrorPage', () => {
 
   let instance;
   const TestUtils = React.addons.TestUtils;

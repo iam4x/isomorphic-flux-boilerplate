@@ -7,7 +7,7 @@ import NotFound from 'pages/not-found';
 
 chai.should();
 
-describe('Header', () => {
+describe('NotFoundPage', () => {
 
   let instance;
   const TestUtils = React.addons.TestUtils;

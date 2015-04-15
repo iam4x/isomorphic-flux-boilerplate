@@ -2,6 +2,7 @@
 
 import chai from 'chai';
 import React from 'react/addons';
+import injectLang from '../../utils/inject-lang';
 
 import alt from 'utils/alt';
 import UsersStore from 'stores/users';
@@ -11,24 +12,30 @@ chai.should();
 
 describe('Users', () => {
 
+  let node;
   let instance;
   const TestUtils = React.addons.TestUtils;
 
   beforeEach(() => {
-    instance = TestUtils.renderIntoDocument(<Users />);
+    injectLang.initialize();
+    const element = React.createElement(Users, injectLang.getProps());
+
+    node = window.document.createElement('div');
+    instance = React.render(element, node);
   });
 
   afterEach(() => {
     // clean stores
     alt.flush();
     if (instance && instance.isMounted()) {
-      React.unmountComponentAtNode(instance.getDOMNode());
+      React.unmountComponentAtNode(node);
     }
   });
 
   it('should render correctly', () => {
+    const {messages} = injectLang.getProps();
     const title = TestUtils.findRenderedDOMComponentWithTag(instance, 'h1');
-    title.getDOMNode().textContent.should.eql('Users');
+    title.getDOMNode().textContent.should.eql(messages.users.title);
   });
 
   it('should render without users', () => {

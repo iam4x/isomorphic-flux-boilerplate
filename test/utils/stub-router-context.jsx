@@ -23,19 +23,18 @@ export default (Component, props, stubs) => {
   }, stubs);
 
   return React.createClass({
+    displayName: 'RouterStub',
     childContextTypes: {
       router: React.PropTypes.func,
       routeDepth: React.PropTypes.number.isRequired
     },
-
-    getChildContext () {
+    getChildContext() {
       return {
         router: RouterStub,
         routeDepth: 0
       };
     },
-
-    render () {
+    render() {
       return <Component {...props} />;
     }
   });
