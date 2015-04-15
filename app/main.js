@@ -14,6 +14,7 @@ import LocaleActions from 'actions/locale';
 if (process.env.NODE_ENV === 'development') {
   // Warns about potential accessibility issues with your React elements
   require('react-a11y')();
+  require('debug').enable('dev,koa');
 }
 
 const boostrap = () => {
