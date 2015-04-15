@@ -13,7 +13,9 @@ if (process.env.BROWSER) {
 export default React.createClass({
   displayName: 'LangPicker',
   handleClick(locale) {
-    LocaleActions.switchLocale(locale);
+    if (locale !== LocaleStore.getLocale()) {
+      LocaleActions.switchLocale(locale);
+    }
   },
   renderLocales(locales) {
     const activeLocale = LocaleStore.getLocale();
