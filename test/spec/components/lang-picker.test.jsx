@@ -15,10 +15,9 @@ describe('LangPicker', () => {
   let instance;
   const TestUtils = React.addons.TestUtils;
 
-  before(() => injectLang.initialize());
-  after(() => injectLang.clean());
-
   beforeEach(() => {
+    injectLang.initialize();
+
     const element = React.createElement(LangPicker);
 
     node = window.document.createElement('div');
@@ -26,6 +25,8 @@ describe('LangPicker', () => {
   });
 
   afterEach(() => {
+    injectLang.clean();
+
     if (instance && instance.isMounted()) {
       React.unmountComponentAtNode(node);
     }
@@ -61,6 +62,14 @@ describe('LangPicker', () => {
 
     // fire click for changing locale
     TestUtils.Simulate.click(locale);
+  });
+
+  it('should do nothing on same locale click', () => {
+    const active = TestUtils.findRenderedDOMComponentWithClass(instance, 'active');
+    should.exist(active);
+    active.props.children.should.eql('en');
+    TestUtils.Simulate.click(active);
+    active.props.className.should.eql('active');
   });
 
 });
