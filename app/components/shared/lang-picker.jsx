@@ -2,6 +2,7 @@
 
 import React from 'react';
 import classNames from 'classnames';
+import ListenerMixin from 'alt/mixins/ListenerMixin';
 
 import LocaleActions from 'actions/locale';
 import LocaleStore from 'stores/locale';
@@ -12,15 +13,24 @@ if (process.env.BROWSER) {
 
 export default React.createClass({
   displayName: 'LangPicker',
+  mixins: [ListenerMixin],
+  getInitialState() {
+    return {locale: LocaleStore.getLocale()};
+  },
+  componentDidMount() {
+    this.listenTo(LocaleStore, this.handleStoreChange);
+  },
+  handleStoreChange() {
+    this.setState(this.getInitialState());
+  },
   handleClick(locale) {
-    if (locale !== LocaleStore.getLocale()) {
+    if (locale !== this.state.locale) {
       LocaleActions.switchLocale(locale);
     }
   },
   renderLocales(locales) {
-    const activeLocale = LocaleStore.getLocale();
     return locales.map((locale, index) => {
-      const klass = classNames({active: locale === activeLocale});
+      const klass = classNames({active: locale === this.state.locale});
       return (
         <li key={index}>
           <a
