@@ -5,9 +5,9 @@ import debug from 'debug';
 import RequestsActions from 'actions/requests';
 
 const loaders = {
-  en(callback) {
+  en(callback, force) {
     RequestsActions.start();
-    if (!window.Intl) {
+    if (!window.Intl || force) {
       require.ensure([
         'intl/Intl',
         'intl/locale-data/jsonp/en.js',
@@ -28,9 +28,9 @@ const loaders = {
       });
     }
   },
-  fr(callback) {
+  fr(callback, force) {
     RequestsActions.start();
-    if (!window.Intl) {
+    if (!window.Intl || force) {
       require.ensure([
         'intl/Intl',
         'intl/locale-data/jsonp/fr.js',
@@ -53,8 +53,8 @@ const loaders = {
   }
 };
 
-export default (locale) => {
+export default (locale, force) => {
   debug('dev')(`loading lang ${locale}`);
-  const promise = new Promise((resolve) => loaders[locale](resolve));
+  const promise = new Promise((resolve) => loaders[locale](resolve, force));
   return promise;
 };
