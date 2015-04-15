@@ -30,8 +30,10 @@ export default function *() {
     });
 
     // Get request locale for rendering
-    const locale = this.acceptsLanguages(require('./config/init').locales);
+    const locale = this.cookies.get('_lang') || this.acceptsLanguages(require('./config/init').locales) || 'en';
     const {messages} = require(`data/${locale}`);
+
+    debug('dev')(`locale of request: ${locale}`);
 
     const handler = yield promisify(router.run);
     const content = yield altResolver.render(handler, locale, messages);
@@ -47,6 +49,7 @@ export default function *() {
       assets = require('./webpack-stats.json');
     }
 
+    debug('dev')('return html content');
     yield this.render('main', {content, assets});
   }
 }

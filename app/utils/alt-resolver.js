@@ -37,6 +37,7 @@ export default {
         LocaleActions.switchLocaleSuccess({locale, messages});
 
         // Fire first render to collect XHR promises
+        debug('dev')('first render');
         React.renderToString(React.createElement(Handler));
 
         // Resolve all promises
@@ -46,6 +47,7 @@ export default {
         // maybe another requests at the same time already fired `alt.flush()`
         //
         // TODO: find a cleaner way to keep alt stores unique to requests
+        debug('dev')('second render');
         LocaleActions.switchLocaleSuccess({locale, messages});
 
         // Get the new content with promises resolved

@@ -5,7 +5,7 @@ import intlLoader from 'utils/intl-loader';
 
 class LocaleActions {
   constructor() {
-    this.generateActions('setLocale', 'switchLocaleSuccess');
+    this.generateActions('switchLocaleSuccess');
   }
 
   async switchLocale(locale) {
