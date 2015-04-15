@@ -74,28 +74,28 @@ export default {
       ]
     },
     plugins: [
-  
+
       // hot reload
       new webpack.HotModuleReplacementPlugin(),
       new webpack.NoErrorsPlugin(),
-  
+
       new webpack.DefinePlugin({
         'process.env': {
           BROWSER: JSON.stringify(true),
           NODE_ENV: JSON.stringify('development')
         }
       }),
-  
+
       new webpack.optimize.DedupePlugin(),
       new webpack.optimize.OccurenceOrderPlugin(),
-  
+
       function () { this.plugin('done', writeStats); },
       function () { this.plugin('done', startKoa); }
-  
+
     ],
     resolve: {
       extensions: ['', '.js', '.json', '.jsx'],
       modulesDirectories: ['node_modules', 'app']
     }
   }
-}
+};
