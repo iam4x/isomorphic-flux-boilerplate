@@ -45,7 +45,7 @@ Run this boilerplate, you will see the server is fetching some fake users and wi
 
 We use [react-intl](https://github.com/yahoo/react-intl) for internationalization, it uses browser implementation of [Intl](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl). For older browser and for node, we load the polyfill.
 
-* Support localized strings (see [data/en.js](https://github.com/iam4x/isomorphic-flux-boilerplate/blob/master/data/en.js))
+* Support localized strings (see [data/en.js](https://github.com/iam4x/isomorphic-flux-boilerplate/blob/master/app%2Fdata%2Fen.js))
 * Support localized dates, times and currencies.
 
 Lang files and Intl polyfill are compiled into webpack chunks, for lazy-loading depending the locale of the user.
