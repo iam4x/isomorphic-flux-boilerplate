@@ -16,6 +16,7 @@
 * [react-router](https://github.com/rackt/react-router)
 * [react-hot-loader](https://github.com/gaearon/react-hot-loader)
 * [react-a11y](https://github.com/rackt/react-a11y)
+* [react-intl](https://github.com/yahoo/react-intl)
 * [alt](https://github.com/goatslacker/alt)
 * [iso](https://github.com/goatslacker/iso)
 * [koa](http://koajs.com/)
@@ -27,7 +28,6 @@
 Use with `iojs^1.6.0`, clone the repo, `npm install` and `npm run dev`.
 
 Learn React ([react-prime-draft](https://github.com/mikechau/react-primer-draft)), learn Flux and Alt ([alt guide](http://alt.js.org/guide/)).
-
 
 Wrap you async actions into promises, send them to `altResolver` with `altResolver.resolve(xxx)` for async server side rendering (see [app/actions/users.js:31](https://github.com/iam4x/isomorphic-flux-boilerplate/blob/master/app/actions/users.js#L31)).
 
@@ -41,7 +41,20 @@ With **iso** as helper we can populate **alt** flux stores before the first rend
 
 Run this boilerplate, you will see the server is fetching some fake users and will populate the `UserStore` with this data. **Koa** will render the first markup, serve the JavaScript and then it will entirely run on the client.
 
-## Alt-resolver
+## Internationalization (i18n)
+
+We use [react-intl](https://github.com/yahoo/react-intl) for internationalization, it uses browser implementation of [Intl](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl). For older browser and for node, we load the polyfill.
+
+* Support localized strings (see [data/en.js](https://github.com/iam4x/isomorphic-flux-boilerplate/blob/master/data/en.js))
+* Support localized dates, times and currencies.
+
+Lang files and Intl polyfill are compiled into webpack chunks, for lazy-loading depending the locale of the user.
+
+If user changes locale, it is saved into a cookie `_lang` and used by the server to know the locale of rendering. If there's no `_lang` cookie, server will rely on `Accept-Language` request header. Server will set `<html lang='x'>` on rendering.
+
+Thank's to [gpbl/react-locale-hot-switch](https://github.com/gpbl/react-locale-hot-switch) for the implementation example!
+
+## Async data-fetching
 
 Alt-resolver is the magic thing about the boilerplate, it will be our tool for resolving promises (data-fetching) before server side rendering.
 

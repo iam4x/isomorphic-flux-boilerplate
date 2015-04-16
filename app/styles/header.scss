@@ -2,6 +2,8 @@
 @import 'mixins/reset-list';
 
 .app--header {
+  position: relative;
+
   .app--logo {
     @extend %hide-text;
     background-image: url('../images/react-logo.png');

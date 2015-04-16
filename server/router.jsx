@@ -1,19 +1,18 @@
 'use strict';
 
+import fs from 'fs';
+import path from 'path';
 import debug from 'debug';
 
-import React from 'react';
 import Router from 'react-router';
-import isoRenderer from 'alt/utils/IsomorphicRenderer';
 
 // Paths are relative to `app` directory
 import routes from 'routes';
-import alt from 'utils/alt';
 import altResolver from 'utils/alt-resolver';
 import promisify from 'utils/promisify';
 
 export default function *() {
-  const isCashed = this.cashed ? yield this.cashed() : false;
+  const isCashed = this.isCashed ? this.isCashed() : false;
   if (!isCashed) {
     const router = Router.create({
       routes: routes,
@@ -30,10 +29,27 @@ export default function *() {
       }
     });
 
-    const handler = yield promisify(router.run);
-    const content = yield altResolver.render(handler);
-    const assets = require('./webpack-stats.json');
+    // Get request locale for rendering
+    const locale = this.cookies.get('_lang') || this.acceptsLanguages(require('./config/init').locales) || 'en';
+    const {messages} = require(`data/${locale}`);
 
-    yield this.render('main', {content, assets});
+    debug('dev')(`locale of request: ${locale}`);
+
+    const handler = yield promisify(router.run);
+    const content = yield altResolver.render(handler, locale, messages);
+
+    // Reload './webpack-stats.json' on dev
+    // cache it on production
+    let assets;
+    if (process.env.NODE_ENV === 'development') {
+      assets = fs.readFileSync(path.resolve(__dirname, './webpack-stats.json'));
+      assets = JSON.parse(assets);
+    }
+    else {
+      assets = require('./webpack-stats.json');
+    }
+
+    debug('dev')('return html content');
+    yield this.render('main', {content, assets, locale});
   }
-};
+}
