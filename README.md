@@ -25,7 +25,7 @@
 
 ## TL;DR
 
-Use with `iojs^1.6.0`, clone the repo, `npm install` and `npm run dev`.
+Use with `iojs^1.7.0`, clone the repo, `npm install` and `npm run dev`.
 
 Learn React ([react-prime-draft](https://github.com/mikechau/react-primer-draft)), learn Flux and Alt ([alt guide](http://alt.js.org/guide/)).
 
@@ -150,7 +150,7 @@ You can fetch the upstream branch and merge it into your master:
 Error: `libsass` bindings not found. Try reinstalling `node-sass`
 ```
 
-* Be sure you are running with iojs > 1.6.0 (check node version `node -v`)
+* Be sure you are running with iojs > 1.7.0 (check node version `node -v`)
 * Delete node_modules `mv node_modules /tmp` (`mv` is much faster than `rm -rf`)
 * Clear npm cache `npm cache clear`
 * Re-install modules `npm install`
