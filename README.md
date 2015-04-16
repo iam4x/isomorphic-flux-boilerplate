@@ -50,9 +50,9 @@ We use [react-intl](https://github.com/yahoo/react-intl) for internationalizatio
 
 Lang files and Intl polyfill are compiled into webpack chunks, for lazy-loading depending the locale of the user.
 
-If user changes locale, it is saved into a cookie `_lang` and used by the server to know the locale of rendering. It there's no `_lang` cookie, server will rely on `Accept-Language` request header. Server will set `<html lang='x'>` on rendering.
+If user changes locale, it is saved into a cookie `_lang` and used by the server to know the locale of rendering. If there's no `_lang` cookie, server will rely on `Accept-Language` request header. Server will set `<html lang='x'>` on rendering.
 
-Thank's to [gpbl/react-locale-hot-switch](https://github.com/gpbl/react-locale-hot-switch) for the implementation!
+Thank's to [gpbl/react-locale-hot-switch](https://github.com/gpbl/react-locale-hot-switch) for the implementation example!
 
 ## Async data-fetching
 
