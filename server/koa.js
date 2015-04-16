@@ -55,7 +55,15 @@ app.use(hbs.middleware({
 }));
 
 const cacheOpts = {maxAge: 86400000, gzip: true};
-app.use(mount('/assets', staticCache(path.join(__dirname, '../dist'), cacheOpts)));
+
+// Proxy asset folder to webpack development server in development mode
+if (env === 'development') {
+  var webpackConfig = require('./../webpack/dev.config');
+  app.use(mount('/assets', require('koa-proxy')({ host: `http://localhost:${webpackConfig.server.port}` })));
+} 
+else {
+  app.use(mount('/assets', staticCache(path.join(__dirname, '../dist'), cacheOpts)));
+}
 
 app.use(router);
 app.listen(config.port);
