@@ -2,6 +2,8 @@
 
 import chai from 'chai';
 import React from 'react/addons';
+import Flux from 'utils/alt';
+
 import reactRouterStub from '../../utils/stub-router-context';
 import injectLang from '../../utils/inject-lang';
 
@@ -13,14 +15,17 @@ describe('App', () => {
 
   let node;
   let instance;
+  let flux;
   const TestUtils = React.addons.TestUtils;
 
   // Inject language
-  before(() => injectLang.initialize());
-  after(() => injectLang.clean());
+  beforeEach(() => {
+    flux = new Flux();
+    injectLang(flux);
+  });
 
   beforeEach(() => {
-    const Stubbed = reactRouterStub(App);
+    const Stubbed = reactRouterStub(App, {flux});
     const element = React.createElement(Stubbed);
     node = window.document.createElement('div');
     instance = React.render(element, node);
