@@ -5,9 +5,8 @@ import React from 'react/addons';
 import reactRouterStub from '../../utils/stub-router-context';
 import {capitalize} from 'lodash';
 
-import alt from 'utils/alt';
+import Flux from 'utils/alt';
 import Profile from 'components/profile';
-import UsersStore from 'stores/users';
 
 import {users} from 'data/users.json';
 
@@ -17,20 +16,23 @@ const seed = '7729a1ef4ba6ef68';
 describe('Profile', () => {
 
   let instance;
+  let flux;
   const TestUtils = React.addons.TestUtils;
 
   beforeEach(() => {
-    const Stubbed = reactRouterStub(Profile, {}, {
+    flux = new Flux();
+
+    const Stubbed = reactRouterStub(Profile, {flux}, {
       getCurrentParams() {
         return {seed};
       }
     });
+
     instance = TestUtils.renderIntoDocument(React.createElement(Stubbed));
   });
 
   afterEach(() => {
     // clean stores
-    alt.flush();
     if (instance && instance.isMounted()) {
       React.unmountComponentAtNode(instance.getDOMNode());
     }
@@ -43,10 +45,10 @@ describe('Profile', () => {
       const user = users.find((u) => u.seed === seed);
       should.exist(user.user);
       fullName.getDOMNode().textContent.should.eql(`${capitalize(user.user.name.first)} ${capitalize(user.user.name.last)}`);
-      UsersStore.unlisten(handleChange);
+      flux.getStore('users').unlisten(handleChange);
       return done();
     };
-    UsersStore.listen(handleChange);
+    flux.getStore('users').listen(handleChange);
   });
 
   it('should render user picture after request', (done) => {
@@ -56,10 +58,10 @@ describe('Profile', () => {
       const user = users.find((u) => u.seed === seed);
       should.exist(user.user);
       picture.getDOMNode().src.should.eql(user.user.picture.medium);
-      UsersStore.unlisten(handleChange);
+      flux.getStore('users').unlisten(handleChange);
       return done();
     };
-    UsersStore.listen(handleChange);
+    flux.getStore('users').listen(handleChange);
   });
 
 });
