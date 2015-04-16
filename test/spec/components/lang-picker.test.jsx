@@ -2,9 +2,11 @@
 
 import chai from 'chai';
 import React from 'react/addons';
+import objectAssign from 'react/lib/Object.assign';
+import Flux from 'utils/alt';
+
 import injectLang from '../../utils/inject-lang';
 
-import LocaleStore from 'stores/locale';
 import LangPicker from 'components/shared/lang-picker';
 
 const should = chai.should();
@@ -13,20 +15,23 @@ describe('LangPicker', () => {
 
   let node;
   let instance;
+  let flux;
   const TestUtils = React.addons.TestUtils;
 
   beforeEach(() => {
-    injectLang.initialize();
+    flux = new Flux();
 
-    const element = React.createElement(LangPicker);
+    const props = objectAssign(
+      {store: flux.getStore('locale'), actions: flux.getActions('locale')},
+      injectLang(flux)
+    );
+    const element = React.createElement(LangPicker, props);
 
     node = window.document.createElement('div');
     instance = React.render(element, node);
   });
 
   afterEach(() => {
-    injectLang.clean();
-
     if (instance && instance.isMounted()) {
       React.unmountComponentAtNode(node);
     }
@@ -46,7 +51,7 @@ describe('LangPicker', () => {
       active.props.children.should.eql('fr');
 
       // clean
-      LocaleStore.unlisten(handleChange);
+      flux.getStore('locale').unlisten(handleChange);
       return done();
     };
 
@@ -58,7 +63,7 @@ describe('LangPicker', () => {
     locale.props.children.should.eql('fr');
 
     // register handler on store change
-    LocaleStore.listen(handleChange);
+    flux.getStore('locale').listen(handleChange);
 
     // fire click for changing locale
     TestUtils.Simulate.click(locale);
