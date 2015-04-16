@@ -2,13 +2,10 @@
 
 import {isEmpty} from 'lodash';
 
-import alt from 'utils/alt';
-import UsersActions from 'actions/users';
-
 class UsersStore {
 
   constructor() {
-    this.bindActions(UsersActions);
+    this.bindActions(this.alt.getActions('users'));
     this.users = [];
   }
 
@@ -62,4 +59,4 @@ class UsersStore {
 
 }
 
-export default alt.createStore(UsersStore, 'UsersStore');
+export default UsersStore;

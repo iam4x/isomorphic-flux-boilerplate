@@ -1,6 +1,5 @@
 'use strict';
 
-import alt from 'utils/alt';
 import intlLoader from 'utils/intl-loader';
 
 class LocaleActions {
@@ -16,4 +15,4 @@ class LocaleActions {
   }
 }
 
-export default alt.createActions(LocaleActions);
+export default LocaleActions;

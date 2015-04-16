@@ -2,11 +2,7 @@
 
 import {sample, take} from 'lodash';
 
-import alt from 'utils/alt';
 import altResolver from 'utils/alt-resolver';
-
-import RequestsActions from 'actions/requests';
-
 import data from 'data/users.json';
 
 class UsersActions {
@@ -19,10 +15,10 @@ class UsersActions {
   add() {
     const promise = (resolve) => {
       // fake xhr
-      RequestsActions.start();
+      this.alt.getActions('requests').start();
       setTimeout(() => {
         this.actions.addSuccess(sample(data.users));
-        RequestsActions.success();
+        this.alt.getActions('requests').success();
         return resolve();
       }, 300);
     };
@@ -30,10 +26,10 @@ class UsersActions {
   }
   fetch() {
     const promise = (resolve) => {
-      RequestsActions.start();
+      this.alt.getActions('requests').start();
       setTimeout(() => {
         this.actions.fetchSuccess(take(data.users, 10));
-        RequestsActions.success();
+        this.alt.getActions('requests').success();
         return resolve();
       }, 300);
     };
@@ -41,11 +37,11 @@ class UsersActions {
   }
   fetchBySeed(seed) {
     const promise = (resolve) => {
-      RequestsActions.start();
+      this.alt.getActions('requests').start();
       setTimeout(() => {
         const user = data.users.find((u) => u.seed === seed);
         this.actions.fetchBySeedSuccess(user);
-        RequestsActions.success();
+        this.alt.getActions('requests').success();
         return resolve();
       }, 300);
     };
@@ -53,4 +49,4 @@ class UsersActions {
   }
 }
 
-export default alt.createActions(UsersActions);
+export default UsersActions;

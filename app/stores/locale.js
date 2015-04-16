@@ -2,12 +2,9 @@
 
 import debug from 'debug';
 
-import alt from 'utils/alt';
-import LocaleActions from 'actions/locale';
-
 class LocaleStore {
   constructor() {
-    this.bindActions(LocaleActions);
+    this.bindActions(this.alt.getActions('locale'));
     this.locales = [''];
     this.messages = {};
   }
@@ -17,7 +14,6 @@ class LocaleStore {
   }
 
   onSwitchLocaleSuccess(data) {
-
     // Save locale into a cookie
     // that will be read from server on requests
     if (process.env.BROWSER) {
@@ -31,4 +27,4 @@ class LocaleStore {
   }
 }
 
-export default alt.createStore(LocaleStore, 'LocaleStore');
+export default LocaleStore;

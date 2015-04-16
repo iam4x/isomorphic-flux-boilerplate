@@ -4,9 +4,6 @@ import React from 'react';
 import ListenerMixin from 'alt/mixins/ListenerMixin';
 import {capitalize} from 'lodash';
 
-import UsersActions from 'actions/users';
-import UsersStore from 'stores/users';
-
 if (process.env.BROWSER) {
   require('styles/profile.scss');
 }
@@ -17,16 +14,19 @@ export default React.createClass({
   contextTypes: {
     router: React.PropTypes.func
   },
+  propTypes: {
+    flux: React.PropTypes.object.isRequired
+  },
   getInitialState() {
     const seed = this.context.router.getCurrentParams().seed;
-    return UsersStore.getBySeed(seed);
+    return this.props.flux.getStore('users').getBySeed(seed);
   },
   componentWillMount() {
     const seed = this.context.router.getCurrentParams().seed;
-    return UsersActions.fetchBySeed(seed);
+    return this.props.flux.getActions('users').fetchBySeed(seed);
   },
   componentDidMount() {
-    this.listenTo(UsersStore, this.handleStoreChange);
+    this.listenTo(this.props.flux.getStore('users'), this.handleStoreChange);
   },
   handleStoreChange() {
     this.setState(this.getInitialState());

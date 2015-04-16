@@ -1,10 +1,9 @@
 'use strict';
 
 import React from 'react';
-import {RouteHandler} from 'react-router';
+import objectAssign from 'react/lib/Object.assign';
 import ListenerMixin from 'alt/mixins/ListenerMixin';
-
-import LocaleStore from 'stores/locale';
+import {RouteHandler} from 'react-router';
 
 import Header from 'components/header';
 
@@ -15,20 +14,24 @@ if (process.env.BROWSER) {
 export default React.createClass({
   displayName: 'App',
   mixins: [ListenerMixin],
+  propTypes: {
+    flux: React.PropTypes.object.isRequired
+  },
   getInitialState() {
-    return LocaleStore.getState();
+    return this.props.flux.getStore('locale').getState();
   },
   componentDidMount() {
-    this.listenTo(LocaleStore, this.handleStoreChange);
+    this.listenTo(this.props.flux.getStore('locale'), this.handleStoreChange);
   },
   handleStoreChange() {
-    this.setState(LocaleStore.getState());
+    this.setState(this.props.flux.getStore('locale').getState());
   },
   render() {
+    const props = objectAssign(this.state, this.props);
     return (
       <div>
-        <Header {...this.state} />
-        <RouteHandler {...this.state} />
+        <Header {...props} />
+        <RouteHandler {...props} />
       </div>
     );
   }

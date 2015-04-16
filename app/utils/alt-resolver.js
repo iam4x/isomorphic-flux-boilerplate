@@ -4,8 +4,6 @@ import React from 'react';
 import Iso from 'iso';
 import debug from 'debug';
 
-import alt from 'utils/alt';
-import LocaleActions from 'actions/locale';
 import ErrorPage from 'pages/server-error';
 
 const toResolve = [];
@@ -25,7 +23,7 @@ export default {
   cleanPromises() {
     toResolve.length = 0;
   },
-  async render(Handler, locale, messages, force) {
+  async render(Handler, flux, force) {
     if (process.env.BROWSER && !force) {
       debug('dev')('`altResolver.render` should not be used in browser, something went wrong');
       return null;
@@ -33,35 +31,26 @@ export default {
     else {
       let content;
       try {
-        // Set the locale and correct `data/[locale].js`
-        LocaleActions.switchLocaleSuccess({locale, messages});
-
         // Fire first render to collect XHR promises
         debug('dev')('first render');
-        React.renderToString(React.createElement(Handler));
+        React.renderToString(React.createElement(Handler, {flux}));
 
         // Resolve all promises
         await Promise.all(this.mapPromises());
 
-        // We have done async operations, re-set the Locale store
-        // maybe another requests at the same time already fired `alt.flush()`
-        //
-        // TODO: find a cleaner way to keep alt stores unique to requests
         debug('dev')('second render');
-        LocaleActions.switchLocaleSuccess({locale, messages});
-
         // Get the new content with promises resolved
-        const app = React.renderToString(React.createElement(Handler));
+        const app = React.renderToString(React.createElement(Handler, {flux}));
 
         // Render the html with state in it
-        content = Iso.render(app, alt.flush());
+        content = Iso.render(app, flux.flush());
       }
       catch (error) {
         // catch script error, render 500 page
         debug('koa')('`rendering error`');
         debug('koa')(error);
         const app = React.renderToString(React.createElement(ErrorPage));
-        content = Iso.render(app, alt.flush());
+        content = Iso.render(app, flux.flush());
       }
 
       // clean server for next request
