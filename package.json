@@ -1,6 +1,6 @@
 {
   "name": "isomorphic-flux-boilerplate",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "An ES6 isomorphic Flux/ReactJS boilerplate",
   "main": "server/index.js",
   "scripts": {
@@ -111,7 +111,9 @@
     "async",
     "server",
     "generator",
-    "es7"
+    "es7",
+    "i18n",
+    "intl"
   ],
   "keywords": [
     "react",
@@ -136,7 +138,9 @@
     "async",
     "server",
     "generator",
-    "es7"
+    "es7",
+    "i18n",
+    "intl"
   ],
   "engines": {
     "iojs": "^1.7.0"
