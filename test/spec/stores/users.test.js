@@ -1,7 +1,7 @@
 'use strict';
 
 import chai from 'chai';
-import Flux from 'utils/alt';
+import Flux from 'utils/flux';
 
 chai.should();
 

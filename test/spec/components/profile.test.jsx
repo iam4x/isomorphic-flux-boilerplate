@@ -5,7 +5,7 @@ import React from 'react/addons';
 import reactRouterStub from '../../utils/stub-router-context';
 import {capitalize} from 'lodash';
 
-import Flux from 'utils/alt';
+import Flux from 'utils/flux';
 import Profile from 'components/profile';
 
 import {users} from 'data/users.json';

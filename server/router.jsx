@@ -8,7 +8,7 @@ import Router from 'react-router';
 
 // Paths are relative to `app` directory
 import routes from 'routes';
-import Flux from 'utils/alt';
+import Flux from 'utils/flux';
 import altResolver from 'utils/alt-resolver';
 import promisify from 'utils/promisify';
 

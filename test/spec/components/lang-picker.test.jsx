@@ -3,7 +3,7 @@
 import chai from 'chai';
 import React from 'react/addons';
 import objectAssign from 'react/lib/Object.assign';
-import Flux from 'utils/alt';
+import Flux from 'utils/flux';
 
 import injectLang from '../../utils/inject-lang';
 

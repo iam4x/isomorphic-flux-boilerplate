@@ -2,7 +2,7 @@
 
 import chai from 'chai';
 import React from 'react/addons';
-import Flux from 'utils/alt';
+import Flux from 'utils/flux';
 import objectAssign from 'react/lib/Object.assign';
 
 import reactRouterStub from '../../utils/stub-router-context';

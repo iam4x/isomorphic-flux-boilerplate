@@ -2,7 +2,7 @@
 
 import chai from 'chai';
 import React from 'react';
-import Flux from 'utils/alt';
+import Flux from 'utils/flux';
 import altResolver from 'utils/alt-resolver';
 
 import injectLang from '../../utils/inject-lang';

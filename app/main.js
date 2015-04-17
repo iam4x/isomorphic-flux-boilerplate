@@ -5,7 +5,7 @@ import React from 'react';
 import Router from 'react-router';
 
 // Paths are relative to `app` directory
-import Flux from 'utils/alt';
+import Flux from 'utils/flux';
 import routes from 'routes';
 import intlLoader from 'utils/intl-loader';
 
