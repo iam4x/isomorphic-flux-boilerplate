@@ -14,11 +14,16 @@ if (process.env.BROWSER) {
 export default React.createClass({
   displayName: 'Header',
   mixins: [IntlMixin],
+  propTypes: {
+    flux: React.PropTypes.object.isRequired
+  },
   render() {
     return (
       <header className='app--header'>
-        <Spinner />
-        <LangPicker />
+        <Spinner store={this.props.flux.getStore('requests')} />
+        <LangPicker
+          store={this.props.flux.getStore('locale')}
+          actions={this.props.flux.getActions('locale')} />
         <h1 className='app--logo'>
           React Isomorphic
         </h1>

@@ -4,9 +4,6 @@ import React from 'react';
 import ListenerMixin from 'alt/mixins/ListenerMixin';
 import {IntlMixin} from 'react-intl';
 
-import UsersStore from 'stores/users';
-import UsersActions from 'actions/users';
-
 if (process.env.BROWSER) {
   require('styles/users.scss');
 }
@@ -17,20 +14,23 @@ export default React.createClass({
   contextTypes: {
     router: React.PropTypes.func
   },
+  propTypes: {
+    flux: React.PropTypes.object.isRequired
+  },
   getInitialState() {
-    return UsersStore.getState();
+    return this.props.flux.getStore('users').getState();
   },
   componentWillMount() {
-    return UsersActions.fetch();
+    return this.props.flux.getActions('users').fetch();
   },
   componentDidMount() {
-    this.listenTo(UsersStore, this.handleStoreChange);
+    this.listenTo(this.props.flux.getStore('users'), this.handleStoreChange);
   },
   handleStoreChange() {
     this.setState(this.getInitialState());
   },
   removeUser(index) {
-    return UsersActions.remove(index);
+    return this.props.flux.getActions('users').remove(index);
   },
   showProfile(seed) {
     return this.context.router.transitionTo('profile', {seed});
@@ -48,6 +48,7 @@ export default React.createClass({
           </td>
           <td className='text-center'>
             <button
+              className='user--remove'
               onClick={this.removeUser.bind(this, index)}>
               X
             </button>
@@ -76,7 +77,7 @@ export default React.createClass({
         <p className='text-center'>
           <button
             ref='add-button'
-            onClick={UsersActions.add}>
+            onClick={this.props.flux.getActions('users').add}>
             {this.getIntlMessage('users.add')}
           </button>
         </p>

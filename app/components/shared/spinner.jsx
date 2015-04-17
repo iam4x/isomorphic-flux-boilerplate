@@ -4,8 +4,6 @@ import React from 'react';
 import classNames from 'classnames';
 import ListenerMixin from 'alt/mixins/ListenerMixin';
 
-import RequestsStore from 'stores/requests';
-
 if (process.env.BROWSER) {
   require('styles/spinner.scss');
 }
@@ -13,11 +11,14 @@ if (process.env.BROWSER) {
 export default React.createClass({
   displayName: 'Spinner',
   mixins: [ListenerMixin],
+  propTypes: {
+    store: React.PropTypes.object.isRequired
+  },
   getInitialState() {
-    return RequestsStore.getState();
+    return this.props.store.getState();
   },
   componentDidMount() {
-    this.listenTo(RequestsStore, this.handleStoreChange);
+    this.listenTo(this.props.store, this.handleStoreChange);
   },
   handleStoreChange() {
     this.setState(this.getInitialState());

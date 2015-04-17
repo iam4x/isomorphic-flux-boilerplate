@@ -2,38 +2,40 @@
 
 import chai from 'chai';
 import React from 'react/addons';
+import Flux from 'utils/flux';
+import objectAssign from 'react/lib/Object.assign';
+
 import injectLang from '../../utils/inject-lang';
 
-import alt from 'utils/alt';
-import UsersStore from 'stores/users';
 import Users from 'components/users';
 
-chai.should();
+const should = chai.should();
 
 describe('Users', () => {
 
   let node;
   let instance;
+  let flux;
   const TestUtils = React.addons.TestUtils;
 
   beforeEach(() => {
-    injectLang.initialize();
-    const element = React.createElement(Users, injectLang.getProps());
+    flux = new Flux();
+
+    const props = objectAssign({flux}, injectLang(flux));
+    const element = React.createElement(Users, props);
 
     node = window.document.createElement('div');
     instance = React.render(element, node);
   });
 
   afterEach(() => {
-    // clean stores
-    alt.flush();
     if (instance && instance.isMounted()) {
       React.unmountComponentAtNode(node);
     }
   });
 
   it('should render correctly', () => {
-    const {messages} = injectLang.getProps();
+    const {messages} = flux.getStore('locale').getState();
     const title = TestUtils.findRenderedDOMComponentWithTag(instance, 'h1');
     title.getDOMNode().textContent.should.eql(messages.users.title);
   });
@@ -50,10 +52,10 @@ describe('Users', () => {
     const handleChange = () => {
       const td = TestUtils.scryRenderedDOMComponentsWithClass(instance, 'user--row');
       td.length.should.eql(10);
-      UsersStore.unlisten(handleChange);
+      flux.getStore('users').unlisten(handleChange);
       return done();
     };
-    UsersStore.listen(handleChange);
+    flux.getStore('users').listen(handleChange);
   });
 
   it('should add an user after click on add button', (done) => {
@@ -64,12 +66,40 @@ describe('Users', () => {
       if (++count === 2) {
         const td = TestUtils.scryRenderedDOMComponentsWithClass(instance, 'user--row');
         td.length.should.eql(11);
-        UsersStore.unlisten(handleChange);
+        flux.getStore('users').unlisten(handleChange);
         return done();
       }
     };
-    UsersStore.listen(handleChange);
+    flux.getStore('users').listen(handleChange);
     const addButton = instance.refs['add-button'];
     TestUtils.Simulate.click(addButton);
   });
+
+  it('should remove an user', (done) => {
+    const handleChange = () => {
+      // 10 users after fetch
+      let td = TestUtils.scryRenderedDOMComponentsWithClass(instance, 'user--row');
+      td.length.should.eql(10);
+
+      // remove an user
+      const removeButton = TestUtils.scryRenderedDOMComponentsWithClass(instance, 'user--remove')[0];
+      should.exist(removeButton);
+
+      // wait for dispatch to be done before
+      // calling another action
+      setTimeout(() => {
+        TestUtils.Simulate.click(removeButton);
+
+        // it should have 9 users
+        td = TestUtils.scryRenderedDOMComponentsWithClass(instance, 'user--row');
+        td.length.should.eql(9);
+
+        // clean
+        flux.getStore('users').unlisten(handleChange);
+        return done();
+      }, 0);
+    };
+    flux.getStore('users').listen(handleChange);
+  });
+
 });

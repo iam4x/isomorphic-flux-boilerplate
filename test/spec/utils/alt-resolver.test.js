@@ -2,9 +2,10 @@
 
 import chai from 'chai';
 import React from 'react';
-import injectLang from '../../utils/inject-lang';
-
+import Flux from 'utils/flux';
 import altResolver from 'utils/alt-resolver';
+
+import injectLang from '../../utils/inject-lang';
 
 const should = chai.should();
 
@@ -22,8 +23,12 @@ const DummyError = React.createClass({
 
 describe('Alt Resolver', () => {
 
-  before(() => injectLang.initialize());
-  after(() => injectLang.clean());
+  let flux;
+
+  before(() => {
+    flux = new Flux();
+    injectLang(flux);
+  });
 
   afterEach(() => {
     altResolver.cleanPromises();
@@ -45,8 +50,7 @@ describe('Alt Resolver', () => {
 
   it('should render async a dummy component', (done) => {
     (async function () {
-      const props = injectLang.getProps();
-      const content = await altResolver.render(Dummy, props.locales[0], props.messages, true);
+      const content = await altResolver.render(Dummy, flux, true);
       should.exist(content);
       return done();
     })();
@@ -62,8 +66,7 @@ describe('Alt Resolver', () => {
 
   it('should render 500 on error', (done) => {
     (async function () {
-      const props = injectLang.getProps();
-      const content = await altResolver.render(DummyError, props.locales[0], props.messages, true);
+      const content = await altResolver.render(DummyError, flux, true);
       should.exist(content);
       content.should.have.string('500');
       return done();

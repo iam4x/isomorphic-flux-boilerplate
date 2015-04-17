@@ -5,11 +5,9 @@ import React from 'react';
 import Router from 'react-router';
 
 // Paths are relative to `app` directory
-import alt from 'utils/alt';
+import Flux from 'utils/flux';
 import routes from 'routes';
 import intlLoader from 'utils/intl-loader';
-import LocaleStore from 'stores/locale';
-import LocaleActions from 'actions/locale';
 
 if (process.env.NODE_ENV === 'development') {
   // Warns about potential accessibility issues with your React elements
@@ -26,22 +24,25 @@ const boostrap = () => {
 };
 
 (async () => {
+  // Init alt instance
+  const flux = new Flux();
+
   // bootstrap application with data from server
   const boot = await boostrap();
-  alt.bootstrap(boot.initialState);
+  flux.bootstrap(boot.initialState);
 
   // load the intl-polyfill if needed
   // load the correct data/{lang}.json into app
-  const locale = LocaleStore.getLocale();
+  const locale = flux.getStore('locale').getLocale();
   const {messages} = await intlLoader(locale);
-  LocaleActions.switchLocaleSuccess({locale, messages});
+  flux.getActions('locale').switchLocaleSuccess({locale, messages});
 
   // Render the app at correct URL
   Router.run(
     routes,
     Router.HistoryLocation,
     (Handler) => {
-      const app = React.createElement(Handler);
+      const app = React.createElement(Handler, {flux});
       React.render(app, boot.container);
     }
   );

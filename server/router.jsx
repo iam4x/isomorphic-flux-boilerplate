@@ -8,6 +8,7 @@ import Router from 'react-router';
 
 // Paths are relative to `app` directory
 import routes from 'routes';
+import Flux from 'utils/flux';
 import altResolver from 'utils/alt-resolver';
 import promisify from 'utils/promisify';
 
@@ -29,14 +30,22 @@ export default function *() {
       }
     });
 
+    // Init alt instance
+    const flux = new Flux();
+
     // Get request locale for rendering
     const locale = this.cookies.get('_lang') || this.acceptsLanguages(require('./config/init').locales) || 'en';
     const {messages} = require(`data/${locale}`);
 
+    // Populate store with locale
+    flux
+      .getActions('locale')
+      .switchLocaleSuccess({locale, messages});
+
     debug('dev')(`locale of request: ${locale}`);
 
     const handler = yield promisify(router.run);
-    const content = yield altResolver.render(handler, locale, messages);
+    const content = yield altResolver.render(handler, flux);
 
     // Reload './webpack-stats.json' on dev
     // cache it on production

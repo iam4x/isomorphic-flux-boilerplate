@@ -1,11 +1,8 @@
 'use strict';
 
-import alt from 'utils/alt';
-import RequestsActions from 'actions/requests';
-
 class RequestsStore {
   constructor() {
-    this.bindActions(RequestsActions);
+    this.bindActions(this.alt.getActions('requests'));
     this.inProgress = false;
   }
   onStart() {
@@ -19,4 +16,4 @@ class RequestsStore {
   }
 }
 
-export default alt.createStore(RequestsStore, 'RequestsStore');
+export default RequestsStore;
