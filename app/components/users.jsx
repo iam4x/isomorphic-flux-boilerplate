@@ -48,6 +48,7 @@ export default React.createClass({
           </td>
           <td className='text-center'>
             <button
+              className='user--remove'
               onClick={this.removeUser.bind(this, index)}>
               X
             </button>

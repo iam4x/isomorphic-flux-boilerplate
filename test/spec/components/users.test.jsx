@@ -9,7 +9,7 @@ import injectLang from '../../utils/inject-lang';
 
 import Users from 'components/users';
 
-chai.should();
+const should = chai.should();
 
 describe('Users', () => {
 
@@ -74,4 +74,32 @@ describe('Users', () => {
     const addButton = instance.refs['add-button'];
     TestUtils.Simulate.click(addButton);
   });
+
+  it('should remove an user', (done) => {
+    const handleChange = () => {
+      // 10 users after fetch
+      let td = TestUtils.scryRenderedDOMComponentsWithClass(instance, 'user--row');
+      td.length.should.eql(10);
+
+      // remove an user
+      const removeButton = TestUtils.scryRenderedDOMComponentsWithClass(instance, 'user--remove')[0];
+      should.exist(removeButton);
+
+      // wait for dispatch to be done before
+      // calling another action
+      setTimeout(() => {
+        TestUtils.Simulate.click(removeButton);
+
+        // it should have 9 users
+        td = TestUtils.scryRenderedDOMComponentsWithClass(instance, 'user--row');
+        td.length.should.eql(9);
+
+        // clean
+        flux.getStore('users').unlisten(handleChange);
+        return done();
+      }, 0);
+    };
+    flux.getStore('users').listen(handleChange);
+  });
+
 });
