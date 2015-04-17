@@ -53,7 +53,6 @@
     "typeof"
   ],
   "safeContextKeyword": "_this",
-  "validateLineBreaks": "LF",
   "validateQuoteMarks": "'",
   "validateIndentation": 2,
   "esnext": true,
