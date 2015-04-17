@@ -43,6 +43,8 @@ if (env === 'production') {
 }
 
 if (env === 'development') {
+  // set debug env, must be programmaticaly for windows
+  debug.enable('dev,koa');
   // log when process is blocked
   require('blocked')((ms) => debug('koa')(`blocked for ${ms}ms`));
 }
@@ -60,7 +62,7 @@ const cacheOpts = {maxAge: 86400000, gzip: true};
 if (env === 'development') {
   var webpackConfig = require('./../webpack/dev.config');
   app.use(mount('/assets', require('koa-proxy')({ host: `http://localhost:${webpackConfig.server.port}` })));
-} 
+}
 else {
   app.use(mount('/assets', staticCache(path.join(__dirname, '../dist'), cacheOpts)));
 }
