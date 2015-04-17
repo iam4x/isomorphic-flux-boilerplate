@@ -6,7 +6,6 @@ import Router from 'react-router';
 
 // Paths are relative to `app` directory
 import Flux from 'utils/flux';
-import routes from 'routes';
 import intlLoader from 'utils/intl-loader';
 
 if (process.env.NODE_ENV === 'development') {
@@ -36,6 +35,11 @@ const boostrap = () => {
   const locale = flux.getStore('locale').getLocale();
   const {messages} = await intlLoader(locale);
   flux.getActions('locale').switchLocaleSuccess({locale, messages});
+
+  // load routes after int-polyfill
+  // routes.jsx imports components using the `window.Intl`
+  // it should be defined before
+  const routes = require('routes');
 
   // Render the app at correct URL
   Router.run(
