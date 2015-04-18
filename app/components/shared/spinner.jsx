@@ -24,7 +24,7 @@ export default React.createClass({
     this.setState(this.getInitialState());
   },
   render() {
-    const klass = classNames(
+    const klass: string = classNames(
       'app--spinner',
       {active: this.state.inProgress}
     );

@@ -24,14 +24,14 @@ export default React.createClass({
   handleStoreChange() {
     this.setState(this.getInitialState());
   },
-  handleClick(locale) {
+  handleClick(locale: string) {
     if (locale !== this.state.locale) {
       this.props.actions.switchLocale(locale);
     }
   },
-  renderLocales(locales) {
+  renderLocales(locales: Array) {
     return locales.map((locale, index) => {
-      const klass = classNames({active: locale === this.state.locale});
+      const klass: string = classNames({active: locale === this.state.locale});
       return (
         <li key={index}>
           <a

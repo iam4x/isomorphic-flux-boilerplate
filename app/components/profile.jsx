@@ -18,11 +18,11 @@ export default React.createClass({
     flux: React.PropTypes.object.isRequired
   },
   getInitialState() {
-    const seed = this.context.router.getCurrentParams().seed;
+    const seed: string = this.context.router.getCurrentParams().seed;
     return this.props.flux.getStore('users').getBySeed(seed);
   },
   componentWillMount() {
-    const seed = this.context.router.getCurrentParams().seed;
+    const seed: string = this.context.router.getCurrentParams().seed;
     return this.props.flux.getActions('users').fetchBySeed(seed);
   },
   componentDidMount() {
@@ -33,7 +33,7 @@ export default React.createClass({
   },
   render() {
     if (this.state.user) {
-      const user = this.state.user.user;
+      const user: Object = this.state.user.user;
       return (
         <div className='app--profile'>
           <h2>{`${capitalize(user.name.first)} ${capitalize(user.name.last)}`}</h2>

@@ -9,7 +9,7 @@ import ErrorPage from 'pages/server-error';
 const toResolve = [];
 
 export default {
-  resolve(promise, later) {
+  resolve(promise: Function, later = false) {
     if (process.env.BROWSER && !later) {
       return new Promise(promise);
     }
@@ -23,13 +23,13 @@ export default {
   cleanPromises() {
     toResolve.length = 0;
   },
-  async render(Handler, flux, force) {
+  async render(Handler: object, flux: object, force: ?boolean = false) {
     if (process.env.BROWSER && !force) {
       debug('dev')('`altResolver.render` should not be used in browser, something went wrong');
       return null;
     }
     else {
-      let content;
+      let content: string;
       try {
         // Fire first render to collect XHR promises
         debug('dev')('first render');
@@ -40,7 +40,7 @@ export default {
 
         debug('dev')('second render');
         // Get the new content with promises resolved
-        const app = React.renderToString(React.createElement(Handler, {flux}));
+        const app: string = React.renderToString(React.createElement(Handler, {flux}));
 
         // Render the html with state in it
         content = Iso.render(app, flux.flush());
@@ -49,7 +49,7 @@ export default {
         // catch script error, render 500 page
         debug('koa')('`rendering error`');
         debug('koa')(error);
-        const app = React.renderToString(React.createElement(ErrorPage));
+        const app: string = React.renderToString(React.createElement(ErrorPage));
         content = Iso.render(app, flux.flush());
       }
 
