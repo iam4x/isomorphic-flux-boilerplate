@@ -62,6 +62,8 @@
     "esprima-fb": "^14001.1.0-dev-harmony-fb",
     "extract-text-webpack-plugin": "^0.5.0",
     "file-loader": "^0.8.1",
+    "flowcheck": "^0.2.3",
+    "flowcheck-loader": "^1.0.0",
     "image-webpack-loader": "^1.4.0",
     "imagemin": "^3.1.0",
     "isparta-loader": "^0.2.0",
