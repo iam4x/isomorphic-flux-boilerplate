@@ -171,6 +171,18 @@ Error: `libsass` bindings not found. Try reinstalling `node-sass`
 * Be sure you are running with iojs > 1.7.0 (check node version `node -v`)
 * Delete node_modules `mv node_modules /tmp` (`mv` is much faster than `rm -rf`)
 * Clear npm cache `npm cache clear`
+* Build `node-sass` for your system `$ npm install node-sass`
 * Re-install modules `npm install`
 
 This is an issue with `node-sass` it is reported almost everywhere on the internet.
+
+**Windows 7:**
+
+On windows for building `node-sass` before running the commands you need:
+
+* Install [python27](https://www.python.org/downloads/release/python-279/) and set it your path (http://stackoverflow.com/a/6318188)
+* Install Visual Studio Express 2013 ([download](https://www.visualstudio.com/en-us/products/free-developer-offers-vs.aspx))
+
+**Windows 8:**
+
+There's an issue with [node-sass #870](https://github.com/sass/node-sass/issues/870) open.

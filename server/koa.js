@@ -43,6 +43,8 @@ if (env === 'production') {
 }
 
 if (env === 'development') {
+  // set debug env, must be programmaticaly for windows
+  debug.enable('dev,koa');
   // log when process is blocked
   require('blocked')((ms) => debug('koa')(`blocked for ${ms}ms`));
 }
