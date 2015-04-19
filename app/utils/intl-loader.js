@@ -3,7 +3,7 @@
 import debug from 'debug';
 
 const loaders = {
-  en(callback, force) {
+  en(callback: Function, force = false) {
     if (!window.Intl || force) {
       require.ensure([
         'intl/Intl',
@@ -23,7 +23,7 @@ const loaders = {
       });
     }
   },
-  fr(callback, force) {
+  fr(callback: Function, force = false) {
     if (!window.Intl || force) {
       require.ensure([
         'intl/Intl',
@@ -47,6 +47,6 @@ const loaders = {
 
 export default (locale, force) => {
   debug('dev')(`loading lang ${locale}`);
-  const promise = new Promise((resolve) => loaders[locale](resolve, force));
+  const promise: Promise = new Promise((resolve) => loaders[locale](resolve, force));
   return promise;
 };

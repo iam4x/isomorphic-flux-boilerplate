@@ -13,7 +13,7 @@ class UsersActions {
     );
   }
   add() {
-    const promise = (resolve) => {
+    const promise: Function = (resolve) => {
       // fake xhr
       this.alt.getActions('requests').start();
       setTimeout(() => {
@@ -25,7 +25,7 @@ class UsersActions {
     altResolver.resolve(promise);
   }
   fetch() {
-    const promise = (resolve) => {
+    const promise: Function = (resolve) => {
       this.alt.getActions('requests').start();
       setTimeout(() => {
         this.actions.fetchSuccess(take(data.users, 10));
@@ -35,11 +35,11 @@ class UsersActions {
     };
     altResolver.resolve(promise);
   }
-  fetchBySeed(seed) {
+  fetchBySeed(seed: string) {
     const promise = (resolve) => {
       this.alt.getActions('requests').start();
       setTimeout(() => {
-        const user = data.users.find((u) => u.seed === seed);
+        const user: Object = data.users.find((u) => u.seed === seed);
         this.actions.fetchBySeedSuccess(user);
         this.alt.getActions('requests').success();
         return resolve();

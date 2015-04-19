@@ -7,9 +7,9 @@ class LocaleActions {
     this.generateActions('switchLocaleSuccess');
   }
 
-  async switchLocale(locale) {
+  async switchLocale(locale: string) {
     if (locale) {
-      const {messages} = await intlLoader(locale);
+      const {messages}: Object = await intlLoader(locale);
       return this.actions.switchLocaleSuccess({locale, messages});
     }
   }

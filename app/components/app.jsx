@@ -27,7 +27,7 @@ export default React.createClass({
     this.setState(this.props.flux.getStore('locale').getState());
   },
   render() {
-    const props = objectAssign(this.state, this.props);
+    const props: Object = objectAssign(this.state, this.props);
     return (
       <div>
         <Header {...props} />

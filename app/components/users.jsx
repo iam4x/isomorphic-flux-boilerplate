@@ -29,10 +29,10 @@ export default React.createClass({
   handleStoreChange() {
     this.setState(this.getInitialState());
   },
-  removeUser(index) {
+  removeUser(index: number) {
     return this.props.flux.getActions('users').remove(index);
   },
-  showProfile(seed) {
+  showProfile(seed: string) {
     return this.context.router.transitionTo('profile', {seed});
   },
   renderUsers() {
