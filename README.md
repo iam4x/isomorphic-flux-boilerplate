@@ -174,9 +174,13 @@ Error: `libsass` bindings not found. Try reinstalling `node-sass`
 
 This is an issue with `node-sass` it is reported almost everywhere on the internet.
 
-**Windows:**
+**Windows 7:**
 
 On windows for building `node-sass` before running the commands you need:
 
 * Install [python27](https://www.python.org/downloads/release/python-279/) and set it your path (http://stackoverflow.com/a/6318188)
 * Install Visual Studio Express 2013 ([download](https://www.visualstudio.com/en-us/products/free-developer-offers-vs.aspx))
+
+**Windows 8:**
+
+There's an issue with [node-sass #870](https://github.com/sass/node-sass/issues/870) open.
