@@ -9,7 +9,7 @@ export default (imagePath, webpackStats, force) => {
   }
   else {
     // Load images compiled from `webpack-stats`
-    const images = webpackStats.images || require('../../server/webpack-stats.json').images;
+    const images = webpackStats || require('../../server/webpack-stats.json').images;
 
     // Find the correct image
     const regex = new RegExp(`${imagePath}$`);
