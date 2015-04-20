@@ -35,12 +35,23 @@ export default {
         debug('dev')('first render');
         React.renderToString(React.createElement(Handler, {flux}));
 
-        // Resolve all promises
-        await Promise.all(this.mapPromises());
+        // Get the promises collected from the first rendering
+        const promises: Array = this.mapPromises();
+
+        // Clean the promises for the next request
+        this.cleanPromises();
+
+        // Resolve all promises collected
+        await Promise.all(promises);
 
         debug('dev')('second render');
         // Get the new content with promises resolved
         const app: string = React.renderToString(React.createElement(Handler, {flux}));
+
+        // Clean the promises collected from the second rendering
+        // we won't use them, and we need to clean for
+        // the next request
+        this.cleanPromises();
 
         // Render the html with state in it
         content = Iso.render(app, flux.flush());
@@ -52,9 +63,6 @@ export default {
         const app: string = React.renderToString(React.createElement(ErrorPage));
         content = Iso.render(app, flux.flush());
       }
-
-      // clean server for next request
-      this.cleanPromises();
 
       // return the content
       return content;
