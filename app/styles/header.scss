@@ -5,14 +5,14 @@
   position: relative;
 
   .app--logo {
-    @extend %hide-text;
-    background-image: url('../images/react-logo.png');
-    background-repeat: no-repeat;
-    background-size: contain;
     display: block;
     height: 200px;
     margin: 0 auto;
     width: 200px;
+
+    img {
+      width: 100%;
+    }
   }
 
   .app--navbar {
