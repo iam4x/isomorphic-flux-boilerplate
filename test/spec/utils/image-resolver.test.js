@@ -29,4 +29,13 @@ describe('ImageResolver', () => {
     imagePath.should.be.eql('');
   });
 
+  it('should throw an error using on browser', () => {
+    try {
+      imageResolver();
+    }
+    catch (error) {
+      should.exist(error);
+    }
+  });
+
 });
