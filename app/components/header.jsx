@@ -34,6 +34,7 @@ export default React.createClass({
           store={this.props.flux.getStore('locale')}
           actions={this.props.flux.getActions('locale')} />
         <Link to='app' className='app--logo'>
+          React Isomorphic
           <img src={reactLogo} alt='react-logo' />
         </Link>
         <ul className='app--navbar un-select'>
