@@ -108,6 +108,43 @@ On server side, `altResolver.render` will fire a first render to collect all the
 
 Open `app/actions/users.js`, `app/utils/alt-resolver.js`, `app/stores/users.js` for more information about data-fetching.
 
+## How to `require()` images on server side
+
+On client with webpack, you can directly `require()` images for your images DOM element like:
+
+```
+<img src={require('images/logo.png')} />
+```
+
+Webpack will load them through the `url-loader` and if it's too big it will sent through `file-loader` for minification/compilation. The results is an image with a new filename for cache busting.
+
+But on node, `require()` an image will just throw an exception. There's an util for loading image on server side to achieve this:
+
+```
+import imageResolver from 'utils/image-resolver'
+
+let image;
+// On browser just require() the image as usual
+if (process.env.BROWSER) {
+  image = require('images/logo.png');
+}
+else {
+  image = imageResolver('images/logo.png');
+}
+
+...
+render () {
+  return (
+    <img src={image} />
+  );
+}
+...
+```
+
+The utils/image-resolver with match the original image name with the compiled one.
+
+Voilà! You can `require()` images on server side too.
+
 ## Installation / How-to
 
 I recommend to use [io.js](https://iojs.org/) to take advantages of `ES6` without `--harmony` flag on `NodeJS`.
