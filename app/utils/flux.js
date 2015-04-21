@@ -1,6 +1,7 @@
 'use strict';
 
 import Alt from 'alt';
+import AltResolver from './alt-resolver.js';
 
 import RequestsActions from 'actions/requests';
 import LocaleActions from 'actions/locale';
@@ -15,6 +16,8 @@ class Flux extends Alt {
   constructor(config = {}) {
     super(config);
 
+    this._resolver = new AltResolver();
+
     // Register Actions
     this.addActions('requests', RequestsActions);
     this.addActions('locale', LocaleActions);
@@ -26,6 +29,13 @@ class Flux extends Alt {
     this.addStore('users', UsersStore);
   }
 
+  resolve(result) {
+    this._resolver.resolve(result);
+  }
+
+  render(handler) {
+    return this._resolver.render(handler, this);
+  }
 }
 
 export default Flux;

@@ -2,7 +2,6 @@
 
 import {sample, take} from 'lodash';
 
-import altResolver from 'utils/alt-resolver';
 import data from 'data/users.json';
 
 class UsersActions {
@@ -22,7 +21,7 @@ class UsersActions {
         return resolve();
       }, 300);
     };
-    altResolver.resolve(promise);
+    this.alt.resolve(promise);
   }
   fetch() {
     const promise: Function = (resolve) => {
@@ -33,7 +32,7 @@ class UsersActions {
         return resolve();
       }, 300);
     };
-    altResolver.resolve(promise);
+    this.alt.resolve(promise);
   }
   fetchBySeed(seed: string) {
     const promise = (resolve) => {
@@ -45,7 +44,8 @@ class UsersActions {
         return resolve();
       }, 300);
     };
-    altResolver.resolve(promise);
+
+    this.alt.resolve(promise);
   }
 }
 
