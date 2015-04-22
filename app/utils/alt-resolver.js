@@ -6,23 +6,24 @@ import debug from 'debug';
 
 import ErrorPage from 'pages/server-error';
 
-const toResolve = [];
-
-export default {
+export default class AltResolver {
+  constructor() {
+    this._toResolve = [];
+  }
   resolve(promise: Function, later = false) {
     if (process.env.BROWSER && !later) {
       return new Promise(promise);
     }
     else {
-      toResolve.push(promise);
+      this._toResolve.push(promise);
     }
-  },
+  }
   mapPromises() {
-    return toResolve.map((promise) => new Promise(promise));
-  },
+    return this._toResolve.map((promise) => new Promise(promise));
+  }
   cleanPromises() {
-    toResolve.length = 0;
-  },
+    this._toResolve.length = 0;
+  }
   async render(Handler: object, flux: object, force: ?boolean = false) {
     if (process.env.BROWSER && !force) {
       debug('dev')('`altResolver.render` should not be used in browser, something went wrong');
@@ -68,4 +69,4 @@ export default {
       return content;
     }
   }
-};
+}

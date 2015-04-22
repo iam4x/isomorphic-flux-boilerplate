@@ -9,7 +9,6 @@ import Router from 'react-router';
 // Paths are relative to `app` directory
 import routes from 'routes';
 import Flux from 'utils/flux';
-import altResolver from 'utils/alt-resolver';
 import promisify from 'utils/promisify';
 
 export default function *() {
@@ -45,7 +44,7 @@ export default function *() {
     debug('dev')(`locale of request: ${locale}`);
 
     const handler = yield promisify(router.run);
-    const content = yield altResolver.render(handler, flux);
+    const content = yield flux.render(handler);
 
     // Reload './webpack-stats.json' on dev
     // cache it on production

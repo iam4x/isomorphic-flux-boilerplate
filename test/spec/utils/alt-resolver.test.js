@@ -3,7 +3,7 @@
 import chai from 'chai';
 import React from 'react';
 import Flux from 'utils/flux';
-import altResolver from 'utils/alt-resolver';
+import AltResolver from 'utils/alt-resolver';
 
 import injectLang from '../../utils/inject-lang';
 
@@ -24,9 +24,11 @@ const DummyError = React.createClass({
 describe('Alt Resolver', () => {
 
   let flux;
+  let altResolver;
 
   before(() => {
     flux = new Flux();
+    altResolver = new AltResolver();
     injectLang(flux);
   });
 
