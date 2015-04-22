@@ -164,7 +164,8 @@ After that, you will just need to clone the repo and install dependancies:
 
 ### Run the project in development:
 
-* `$ npm run dev`
+* `$ npm run dev` (iojs)
+* `$ node --harmony webpack/dev-server.js` (nodejs 0.12.x)
 
 Open your browser to `http://localhost:8080` and you will see the magic happens! Try to disable JavaScript in your browser, you will still be able to navigate between pages of the application. Enjoy the power of isomorphic applications!
 
@@ -189,6 +190,21 @@ You can fetch the upstream branch and merge it into your master:
 * `$ git fetch upstream`
 * `$ git merge upstream/master`
 * `$ npm install`
+
+### Run in production
+
+Build the project first:
+
+* `$ npm run build`
+
+Then start the koa server:
+
+* `$ NODE_ENV=production node server/index.js` (iojs)
+* `$ NODE_ENV=production node --harmony server/index.js` (nodejs 0.12.x)
+
+You can also use `processes.json` to run the application with [PM2 Monitor](https://github.com/Unitech/pm2) on your production server (customize it for your use):
+
+* `$ pm2 start processes.json`
 
 ### Learn more
 
