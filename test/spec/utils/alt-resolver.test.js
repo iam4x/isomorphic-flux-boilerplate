@@ -26,28 +26,16 @@ describe('Alt Resolver', () => {
   let flux;
   let altResolver;
 
-  before(() => {
+  beforeEach(() => {
     flux = new Flux();
     altResolver = new AltResolver();
     injectLang(flux);
-  });
-
-  afterEach(() => {
-    altResolver.cleanPromises();
   });
 
   it('should map promises on env server', () => {
     altResolver.mapPromises().should.be.empty;
     altResolver.resolve(function () {}, true);
     altResolver.mapPromises().should.not.be.empty;
-  });
-
-  it('should clean promises', () => {
-    altResolver.mapPromises().should.be.empty;
-    altResolver.resolve(function () {}, true);
-    altResolver.mapPromises().should.not.be.empty;
-    altResolver.cleanPromises();
-    altResolver.mapPromises().should.be.empty;
   });
 
   it('should render async a dummy component', (done) => {
