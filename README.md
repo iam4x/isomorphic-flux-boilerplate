@@ -82,11 +82,11 @@ fetch() {
       .end((response) => {
         // fire new action to send data to store
         this.actions.fetchSuccess(response.body);
-        return resolve()
+        return resolve();
       });
   };
   // Send the `promise` to altResolver
-  altResolver.resolve(promise);
+  this.alt.resolve(promise);
 }
 ```
 
