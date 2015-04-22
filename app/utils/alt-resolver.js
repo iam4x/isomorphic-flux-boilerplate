@@ -21,9 +21,6 @@ export default class AltResolver {
   mapPromises() {
     return this._toResolve.map((promise) => new Promise(promise));
   }
-  cleanPromises() {
-    this._toResolve.length = 0;
-  }
   async render(Handler: object, flux: object, force: ?boolean = false) {
     if (process.env.BROWSER && !force) {
       debug('dev')('`altResolver.render` should not be used in browser, something went wrong');
@@ -39,20 +36,12 @@ export default class AltResolver {
         // Get the promises collected from the first rendering
         const promises: Array = this.mapPromises();
 
-        // Clean the promises for the next request
-        this.cleanPromises();
-
         // Resolve all promises collected
         await Promise.all(promises);
 
         debug('dev')('second render');
         // Get the new content with promises resolved
         const app: string = React.renderToString(React.createElement(Handler, {flux}));
-
-        // Clean the promises collected from the second rendering
-        // we won't use them, and we need to clean for
-        // the next request
-        this.cleanPromises();
 
         // Render the html with state in it
         content = Iso.render(app, flux.flush());
