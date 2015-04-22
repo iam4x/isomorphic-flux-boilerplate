@@ -6,6 +6,7 @@ import ListenerMixin from 'alt/mixins/ListenerMixin';
 import {RouteHandler} from 'react-router';
 
 import Header from 'components/header';
+import Footer from 'components/footer';
 
 if (process.env.BROWSER) {
   require('styles/main.scss');
@@ -32,6 +33,7 @@ export default React.createClass({
       <div>
         <Header {...props} />
         <RouteHandler {...props} />
+        <Footer />
       </div>
     );
   }
