@@ -9,7 +9,19 @@ export default (imagePath) => {
   }
   else {
     // Load images compiled from `webpack-stats`
-    const images = require('../../server/webpack-stats.json').images;
+    // don't cache the `webpack-stats.json` on dev
+    // so we gonna read the file on each request
+    let images;
+    if (process.env.NODE_ENV === 'development') {
+      const fs = require('fs');
+      const path = require('path');
+      images = fs.readFileSync(path.resolve(__dirname, '../../server/webpack-stats.json'));
+      images = JSON.parse(images).images;
+    }
+    // on production, use simple `require` to cache the file
+    else {
+      images = require('../../server/webpack-stats.json').images;
+    }
 
     // Find the correct image
     const regex = new RegExp(`${imagePath}$`);
