@@ -13,7 +13,7 @@ import altResolver from 'utils/alt-resolver';
 import promisify from 'utils/promisify';
 
 export default function *() {
-  const isCashed = this.isCashed ? this.isCashed() : false;
+  const isCashed = this.cashed ? yield *this.cashed() : false;
   if (!isCashed) {
     const router = Router.create({
       routes: routes,
