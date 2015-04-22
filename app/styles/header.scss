@@ -5,8 +5,6 @@
   position: relative;
 
   .app--logo {
-    @extend %hide-text;
-
     display: block;
     height: 200px;
     margin: 0 auto;

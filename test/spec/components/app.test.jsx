@@ -45,6 +45,5 @@ describe('App', () => {
   it('should render logo correctly', () => {
     const logo = TestUtils.findRenderedDOMComponentWithClass(instance, 'app--logo');
     should.exist(logo);
-    logo.getDOMNode().textContent.should.eql('React Isomorphic');
   });
 });
