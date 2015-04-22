@@ -5,29 +5,10 @@ import imageResolver from 'utils/image-resolver';
 
 const should = chai.should();
 
-const webpackStats = {
-  images: [
-    {
-      original: 'logo.png',
-      compiled: '2uierwi2.png'
-    }
-  ]
-};
-
 describe('ImageResolver', () => {
 
-  it('should resolve for the correct image', () => {
-    const image = webpackStats.images[0];
-    const imagePath = imageResolver(image.original, webpackStats.images, true);
-    should.exist(imagePath);
-    imagePath.should.be.eql(image.compiled);
-  });
-
-  it('should resolve to empty string when no image is matched', () => {
-    const imagePath = imageResolver('foo.png', webpackStats.images, true);
-    should.exist(imagePath);
-    imagePath.should.be.eql('');
-  });
+  // TODO: Set up TDD for server
+  // `ImageResolver` is mainly used on the server
 
   it('should throw an error using on browser', () => {
     try {
