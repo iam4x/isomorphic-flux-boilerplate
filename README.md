@@ -27,7 +27,7 @@
 
 ## TL;DR
 
-Use with `iojs^1.7.0`, clone the repo, `npm install` and `npm run dev`.
+Use with `iojs^1.8.0` or `nodejs^0.12.0`, clone the repo, `npm install` and `npm run dev`.
 
 Learn React ([react-prime-draft](https://github.com/mikechau/react-primer-draft)), learn Flux and Alt ([alt guide](http://alt.js.org/guide/)).
 
@@ -155,6 +155,8 @@ It's super easy to do with [nvm](https://github.com/creationix/nvm):
 * `$ nvm use iojs`
 * `$ nvm alias default iojs` (to make `node` default to `iojs`)
 
+But it works well with `nodejs^0.12.0` as well :)
+
 After that, you will just need to clone the repo and install dependancies:
 
 * `$ git clone -o upstream https://github.com/iam4x/isomorphic-flux-boilerplate.git app`
@@ -164,8 +166,7 @@ After that, you will just need to clone the repo and install dependancies:
 
 ### Run the project in development:
 
-* `$ npm run dev` (iojs)
-* `$ node --harmony webpack/dev-server.js` (nodejs 0.12.x)
+* `$ npm run dev`
 
 Open your browser to `http://localhost:8080` and you will see the magic happens! Try to disable JavaScript in your browser, you will still be able to navigate between pages of the application. Enjoy the power of isomorphic applications!
 
