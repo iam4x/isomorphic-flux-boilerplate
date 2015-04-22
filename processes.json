@@ -15,7 +15,7 @@
         "NODE_ENV": "production",
         "DEBUG": "koa"
       },
-      "nord_args": "--max_old_space_size=300"
+      "node_args": "--max_old_space_size=300 --harmony"
     }
   ]
 }
