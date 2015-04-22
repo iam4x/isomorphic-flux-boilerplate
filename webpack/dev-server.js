@@ -12,5 +12,5 @@ var compiler = webpack(config.webpack);
 var devServer = new WebpackDevServer(compiler, config.server.options);
 
 devServer.listen(config.server.port, 'localhost', function () {
-  debug(`\`webpack-dev-server\` listen on port ${config.server.port}`);
+  debug('webpack-dev-server listen on port %s', config.server.port);
 });
