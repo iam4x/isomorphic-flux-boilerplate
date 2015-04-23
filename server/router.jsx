@@ -17,15 +17,22 @@ export default function *() {
     const router = Router.create({
       routes: routes,
       location: this.request.url,
-      onAbort(redirect) {
-        // TODO: Try to render the good page with re-creating a Router,
-        // and with modifying req with `redirect.to`
-        this.status = 303;
+      onAbort: (redirect) => {
+        // Allow transition with `willTransitionTo`
+        // to redirect request with `302` status code
+        debug('dev')('Redirect request to `%s`', redirect.to);
         this.redirect(redirect.to);
+        return this.res.end();
       },
-      onError(err) {
+      onError: (error) => {
+        // Allow server to respond with 500
+        // when something went wrong with router
+        //
+        // TODO: Render `pages/server-error` in production?
         debug('koa')('Routing Error');
-        debug('koa')(err);
+        debug('koa')(error);
+        this.throw(error);
+        return this.res.end();
       }
     });
 
