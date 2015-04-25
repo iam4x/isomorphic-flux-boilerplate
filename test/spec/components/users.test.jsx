@@ -59,20 +59,35 @@ describe('Users', () => {
   });
 
   it('should add an user after click on add button', (done) => {
-    let count = 0;
-    const handleChange = () => {
-      // it should end at second store change,
-      // after the second request is resolved
-      if (++count === 2) {
-        const td = TestUtils.scryRenderedDOMComponentsWithClass(instance, 'user--row');
-        td.length.should.eql(11);
-        flux.getStore('users').unlisten(handleChange);
-        return done();
-      }
+    const handleFetchChange = () => {
+      // 10 users after fetch
+      let td = TestUtils.scryRenderedDOMComponentsWithClass(instance, 'user--row');
+      td.length.should.eql(10);
+
+      // clean
+      flux.getStore('users').unlisten(handleFetchChange);
+
+      // add an user
+      flux.getStore('users').listen(handleAddChange);
+      const addButton = instance.refs['add-button'];
+      should.exist(addButton);
+
+      setTimeout(() => {
+        TestUtils.Simulate.click(addButton);
+      }, 0);
     };
-    flux.getStore('users').listen(handleChange);
-    const addButton = instance.refs['add-button'];
-    TestUtils.Simulate.click(addButton);
+
+    const handleAddChange = () => {
+      // 11 users after add
+      let td = TestUtils.scryRenderedDOMComponentsWithClass(instance, 'user--row');
+      td.length.should.eql(11);
+
+      // clean
+      flux.getStore('users').unlisten(handleAddChange);
+      return done();
+    };
+
+    flux.getStore('users').listen(handleFetchChange);
   });
 
   it('should remove an user', (done) => {
