@@ -59,8 +59,6 @@ describe('Users', () => {
   });
 
   it('should add an user after click on add button', (done) => {
-
-  it('should add an user after click on add button', (done) => {
     const handleFetchChange = () => {
       // 10 users after fetch
       let td = TestUtils.scryRenderedDOMComponentsWithClass(instance, 'user--row');
