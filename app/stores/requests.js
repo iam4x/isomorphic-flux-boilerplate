@@ -5,14 +5,21 @@ class RequestsStore {
     this.bindActions(this.alt.getActions('requests'));
     this.inProgress = false;
   }
+
   onStart() {
-    this.inProgress = true;
+    this._setInProgress(true);
   }
+
   onSuccess() {
-    this.inProgress = false;
+    this._setInProgress(false);
   }
+
   onFail() {
-    this.inProgress = false;
+    this._setInProgress(false);
+  }
+
+  _setInProgress(inProgress: boolean) {
+    return this.setState({inProgress});
   }
 }
 

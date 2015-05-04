@@ -15,18 +15,24 @@ class UsersStore {
   }
 
   onRemove(index) {
-    this.users.splice(index, 1);
+    const users: Array<Object> = this.users.slice();
+    users.splice(index, 1);
+
+    return this.setState({users});
   }
 
   onAddSuccess(user) {
-    this.users.push(user);
+    const users: Array<Object> = this.users.slice();
+    users.push(user);
+
+    return this.setState({users});
   }
 
   onFetchSuccess(users) {
     if (isEmpty(this.users)) {
       // just apply the new users
       // this is called on every server rendering
-      this.users = users;
+      return this.setState({users});
     }
     else {
       const merged: Array<Object> = this.users.slice();
@@ -41,7 +47,8 @@ class UsersStore {
           merged.push(user);
         }
       });
-      this.users = merged;
+
+      return this.setState({users: merged});
     }
   }
 
@@ -54,7 +61,8 @@ class UsersStore {
     else if (user) {
       users.push(user);
     }
-    this.users = users;
+
+    return this.setState({users});
   }
 
 }

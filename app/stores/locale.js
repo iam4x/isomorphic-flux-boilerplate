@@ -13,7 +13,7 @@ class LocaleStore {
     return this.getState().locales[0];
   }
 
-  onSwitchLocaleSuccess(data) {
+  onSwitchLocaleSuccess(data: Object) {
     // Save locale into a cookie
     // that will be read from server on requests
     if (process.env.BROWSER) {
@@ -22,8 +22,10 @@ class LocaleStore {
       debug('dev')(`updated _lang cookie to ${data.locale}`);
     }
 
-    this.locales = [data.locale];
-    this.messages = data.messages;
+    return this.setState({
+      messages: data.messages,
+      locales: [data.locale]
+    });
   }
 }
 
