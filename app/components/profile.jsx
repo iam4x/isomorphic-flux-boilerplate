@@ -48,7 +48,7 @@ export default React.createClass({
 
     }
     else {
-      title = this.getIntalMessage('profile.not-found-page-title');
+      title = this.getIntlMessage('profile.not-found-page-title');
     }
 
     // Set page title
