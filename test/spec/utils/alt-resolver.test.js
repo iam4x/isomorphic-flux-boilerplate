@@ -58,7 +58,7 @@ describe('Alt Resolver', () => {
     (async function () {
       const content = await altResolver.render(DummyError, flux, true);
       should.exist(content);
-      content.should.have.string('500');
+      content.body.should.have.string('500');
       return done();
     })();
   });
