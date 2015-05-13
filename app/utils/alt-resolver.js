@@ -42,16 +42,20 @@ export default class AltResolver {
         debug('dev')('second render');
         // Get the new content with promises resolved
         const app: string = React.renderToString(React.createElement(Handler, {flux}));
+        const {title}: string = flux.getStore('page-title').getState();
 
         // Render the html with state in it
-        content = Iso.render(app, flux.flush());
+        content = {body: Iso.render(app, flux.flush()), title};
       }
       catch (error) {
         // catch script error, render 500 page
         debug('koa')('`rendering error`');
         debug('koa')(error);
+
         const app: string = React.renderToString(React.createElement(ErrorPage));
-        content = Iso.render(app, flux.flush());
+        const {title}: string = flux.getStore('page-title').getState();
+
+        content = {body: Iso.render(app, flux.flush()), title};
       }
 
       // return the content

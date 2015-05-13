@@ -2,8 +2,11 @@
 
 import chai from 'chai';
 import React from 'react/addons';
-import reactRouterStub from '../../utils/stub-router-context';
+import objectAssign from 'react/lib/Object.assign';
 import {capitalize} from 'lodash';
+
+import reactRouterStub from '../../utils/stub-router-context';
+import injectLang from '../../utils/inject-lang';
 
 import Flux from 'utils/flux';
 import Profile from 'components/profile';
@@ -22,7 +25,8 @@ describe('Profile', () => {
   beforeEach(() => {
     flux = new Flux();
 
-    const Stubbed = reactRouterStub(Profile, {flux}, {
+    const props = objectAssign({flux}, injectLang(flux));
+    const Stubbed = reactRouterStub(Profile, props, {
       getCurrentParams() {
         return {seed};
       }
