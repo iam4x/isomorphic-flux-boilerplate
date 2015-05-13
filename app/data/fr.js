@@ -4,6 +4,9 @@ export default {
       users: 'Utilisateurs',
       guides: 'Guides'
     },
+    guides: {
+      'page-title': 'Guides'
+    },
     profile: {
       'page-title': 'Profil - {fullName}',
       'not-found-page-title': 'User profile not found'
