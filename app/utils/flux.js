@@ -3,14 +3,6 @@
 import Alt from 'alt';
 import AltResolver from './alt-resolver.js';
 
-import RequestsActions from 'actions/requests';
-import LocaleActions from 'actions/locale';
-import UsersActions from 'actions/users';
-
-import RequestsStore from 'stores/requests';
-import LocaleStore from 'stores/locale';
-import UsersStore from 'stores/users';
-
 class Flux extends Alt {
 
   constructor(config = {}) {
@@ -19,14 +11,16 @@ class Flux extends Alt {
     this._resolver = new AltResolver();
 
     // Register Actions
-    this.addActions('requests', RequestsActions);
-    this.addActions('locale', LocaleActions);
-    this.addActions('users', UsersActions);
+    this.addActions('requests', require('actions/requests'));
+    this.addActions('locale', require('actions/locale'));
+    this.addActions('users', require('actions/users'));
+    this.addActions('page-title', require('actions/page-title'));
 
     // Register Stores
-    this.addStore('requests', RequestsStore);
-    this.addStore('locale', LocaleStore);
-    this.addStore('users', UsersStore);
+    this.addStore('requests', require('stores/requests'));
+    this.addStore('locale', require('stores/locale'));
+    this.addStore('users', require('stores/users'));
+    this.addStore('page-title', require('stores/page-title'));
   }
 
   resolve(result) {

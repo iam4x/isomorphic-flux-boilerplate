@@ -51,7 +51,7 @@ export default function *() {
     debug('dev')(`locale of request: ${locale}`);
 
     const handler = yield promisify(router.run);
-    const content = yield flux.render(handler);
+    const {body, title} = yield flux.render(handler);
 
     // Reload './webpack-stats.json' on dev
     // cache it on production
@@ -65,6 +65,6 @@ export default function *() {
     }
 
     debug('dev')('return html content');
-    yield this.render('main', {content, assets, locale});
+    yield this.render('main', {body, assets, locale, title});
   }
 }

@@ -21,6 +21,12 @@ export default React.createClass({
     return this.props.flux.getStore('users').getState();
   },
   componentWillMount() {
+    // Set page title
+    this.props.flux
+      .getActions('page-title')
+      .set(this.getIntlMessage('users.page-title'));
+
+    // Fetch users
     return this.props.flux.getActions('users').fetch();
   },
   componentDidMount() {

@@ -22,10 +22,15 @@ export default React.createClass({
     return this.props.flux.getStore('locale').getState();
   },
   componentDidMount() {
-    this.listenTo(this.props.flux.getStore('locale'), this.handleStoreChange);
+    this.listenTo(this.props.flux.getStore('locale'), this.handleLocaleChange);
+    this.listenTo(this.props.flux.getStore('page-title'), this.handlePageTitleChange);
   },
-  handleStoreChange() {
+  handleLocaleChange() {
     this.setState(this.props.flux.getStore('locale').getState());
+  },
+  handlePageTitleChange() {
+    const {title} = this.props.flux.getStore('page-title').getState();
+    document.title = title;
   },
   render() {
     const props: Object = objectAssign(this.state, this.props);
