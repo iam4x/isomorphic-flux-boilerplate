@@ -29,8 +29,8 @@ const startServer = () => {
         started = true;
         // Start browserSync
         browserSync({
-          port: 8080,
-          proxy: 'http://localhost:3000'
+          port: parseInt(process.env.PORT) + 2 || 3002,
+          proxy: parseInt(process.env.PORT) || 3000
         });
         // Start watcher on server files
         // and reload browser on change
@@ -57,4 +57,4 @@ export default function () {
   if (!server) {
     return startServer();
   }
-};
+}
