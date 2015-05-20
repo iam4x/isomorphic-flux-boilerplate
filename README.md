@@ -242,3 +242,7 @@ On windows for building `node-sass` before running the commands you need:
 **Windows 8:**
 
 There's an issue with [node-sass #870](https://github.com/sass/node-sass/issues/870) open.
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/iam4x/isomorphic-flux-boilerplate/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
