@@ -20,12 +20,15 @@ else {
   reactLogo = imageResolver('images/react-logo.png');
 }
 
-export default React.createClass({
-  displayName: 'Header',
-  mixins: [IntlMixin],
-  propTypes: {
+export default class Header extends React.Component {
+  displayName = 'Header'
+
+  static propTypes: {
     flux: React.PropTypes.object.isRequired
-  },
+  }
+
+  _getIntlMessage = IntlMixin.getIntlMessage
+
   render() {
     return (
       <header className='app--header'>
@@ -39,12 +42,12 @@ export default React.createClass({
         <ul className='app--navbar un-select'>
           <li>
             <Link to='app'>
-              {this.getIntlMessage('header.users')}
+              {this._getIntlMessage('header.users')}
             </Link>
           </li>
           <li>
             <Link to='guides'>
-              {this.getIntlMessage('header.guides')}
+              {this._getIntlMessage('header.guides')}
             </Link>
           </li>
         </ul>
@@ -52,4 +55,4 @@ export default React.createClass({
       </header>
     );
   }
-});
+}

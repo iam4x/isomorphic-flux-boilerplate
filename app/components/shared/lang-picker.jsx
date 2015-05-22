@@ -8,41 +8,56 @@ if (process.env.BROWSER) {
   require('styles/lang-picker.scss');
 }
 
-export default React.createClass({
-  displayName: 'LangPicker',
-  mixins: [ListenerMixin],
-  propTypes: {
+export default class LangPicker extends React.Component {
+  displayName = 'LangPicker'
+
+  static propTypes = {
     store: React.PropTypes.object.isRequired,
     actions: React.PropTypes.object.isRequired
-  },
-  getInitialState() {
-    return {locale: this.props.store.getLocale()};
-  },
+  }
+
+  constructor(props: ?Object = {}) {
+    super(props);
+
+    const locale: string = props.store.getLocale();
+    this.state = {locale};
+  }
+
   componentDidMount() {
-    this.listenTo(this.props.store, this.handleStoreChange);
-  },
-  handleStoreChange() {
-    this.setState(this.getInitialState());
-  },
-  handleClick(locale: string) {
+    this.props.store.listen(this._handleStoreChange);
+  }
+
+  componentWillUnmount() {
+    this.props.store.unlisten(this._handleStoreChange);
+  }
+
+  _handleStoreChange = this._handleStoreChange.bind(this)
+  _handleStoreChange() {
+    const locale: string = this.props.store.getLocale();
+    return this.setState({locale});
+  }
+
+  _handleClick(locale: string) {
     if (locale !== this.state.locale) {
       this.props.actions.switchLocale(locale);
     }
-  },
-  renderLocales(locales: Array) {
+  }
+
+  renderLocales(locales: Array = []) {
     return locales.map((locale, index) => {
       const klass: string = classNames({active: locale === this.state.locale});
       return (
         <li key={index}>
           <a
             className={klass}
-            onClick={this.handleClick.bind(this, locale)}>
+            onClick={this._handleClick.bind(this, locale)}>
             {locale}
           </a>
         </li>
       );
     });
-  },
+  }
+
   render() {
     return (
       <ul className='lang--picker un-select'>
@@ -50,4 +65,4 @@ export default React.createClass({
       </ul>
     );
   }
-});
+}

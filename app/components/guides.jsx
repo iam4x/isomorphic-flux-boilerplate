@@ -3,17 +3,21 @@
 import React from 'react';
 import {IntlMixin} from 'react-intl';
 
-export default React.createClass({
-  displayName: 'Guides',
-  mixins: [IntlMixin],
-  propTypes: {
+export default class Guides extends React.Component {
+  displayName = 'Guides'
+
+  static propTypes = {
     flux: React.PropTypes.object.isRequired
-  },
+  }
+
+  _getIntlMessage = IntlMixin.getIntlMessage
+
   componentWillMount() {
     this.props.flux
       .getActions('page-title')
-      .set(this.getIntlMessage('guides.page-title'));
-  },
+      .set(this._getIntlMessage('guides.page-title'));
+  }
+
   render() {
     return (
       <div>
@@ -22,4 +26,4 @@ export default React.createClass({
       </div>
     );
   }
-});
+}
