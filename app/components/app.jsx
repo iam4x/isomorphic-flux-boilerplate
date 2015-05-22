@@ -38,7 +38,7 @@ export default class App extends React.Component {
       .unlisten(this._handleLocaleChange);
 
     this.props.flux
-      .getSotre('page-title')
+      .getStore('page-title')
       .unlisten(this._handlePageTitleChange);
   }
 
