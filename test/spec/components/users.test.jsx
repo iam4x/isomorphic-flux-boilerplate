@@ -29,7 +29,7 @@ describe('Users', () => {
   });
 
   afterEach(() => {
-    if (instance && instance.isMounted()) {
+    if (instance) {
       React.unmountComponentAtNode(node);
     }
   });

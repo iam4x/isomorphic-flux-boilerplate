@@ -32,7 +32,7 @@ describe('LangPicker', () => {
   });
 
   afterEach(() => {
-    if (instance && instance.isMounted()) {
+    if (instance) {
       React.unmountComponentAtNode(node);
     }
   });
