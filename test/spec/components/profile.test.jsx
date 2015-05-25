@@ -25,12 +25,8 @@ describe('Profile', () => {
   beforeEach(() => {
     flux = new Flux();
 
-    const props = objectAssign({flux}, injectLang(flux));
-    const Stubbed = reactRouterStub(Profile, props, {
-      getCurrentParams() {
-        return {seed};
-      }
-    });
+    const props = objectAssign({params: {seed}}, {flux}, injectLang(flux));
+    const Stubbed = reactRouterStub(Profile, props);
 
     instance = TestUtils.renderIntoDocument(React.createElement(Stubbed));
   });

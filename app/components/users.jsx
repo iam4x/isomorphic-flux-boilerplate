@@ -8,86 +8,113 @@ if (process.env.BROWSER) {
   require('styles/users.scss');
 }
 
-export default React.createClass({
-  displayName: 'UsersList',
-  mixins: [ListenerMixin, IntlMixin],
-  contextTypes: {
+export default class Users extends React.Component {
+  displayName = 'Users'
+
+  static contextTypes = {
     router: React.PropTypes.func
-  },
-  propTypes: {
+  }
+
+  static propTypes = {
     flux: React.PropTypes.object.isRequired
-  },
-  getInitialState() {
-    return this.props.flux.getStore('users').getState();
-  },
+  }
+
+  _getIntlMessage = IntlMixin.getIntlMessage
+
+  state = this.props.flux
+    .getStore('users')
+    .getState();
+
   componentWillMount() {
-    // Set page title
     this.props.flux
       .getActions('page-title')
-      .set(this.getIntlMessage('users.page-title'));
+      .set(this._getIntlMessage('users.page-title'));
 
-    // Fetch users
-    return this.props.flux.getActions('users').fetch();
-  },
+    this.props.flux
+      .getActions('users')
+      .fetch();
+  }
+
   componentDidMount() {
-    this.listenTo(this.props.flux.getStore('users'), this.handleStoreChange);
-  },
-  handleStoreChange() {
-    this.setState(this.getInitialState());
-  },
-  removeUser(index: number) {
-    return this.props.flux.getActions('users').remove(index);
-  },
-  showProfile(seed: string) {
-    return this.context.router.transitionTo('profile', {seed});
-  },
-  renderUsers() {
+    this.props.flux
+      .getStore('users')
+      .listen(this._handleStoreChange);
+  }
+
+  componentWillUnmount() {
+    this.props.flux
+      .getStore('users')
+      .unlisten(this._handleStoreChange);
+  }
+
+  _handleStoreChange = this._handleStoreChange.bind(this)
+  _handleStoreChange(state: Object) {
+    return this.setState(state);
+  }
+
+  _removeUser(index: number) {
+    this.props.flux
+      .getActions('users')
+      .remove(index);
+  }
+
+  _showProfile(seed: string) {
+    this.context.router
+      .transitionTo('profile', {seed});
+  }
+
+  _renderUsers() {
     return this.state.users.map((user, index) => {
       return (
         <tr className='user--row' key={index}>
           <td>{user.user.email}</td>
           <td className='text-center'>
             <button
-              onClick={this.showProfile.bind(this, user.seed)}>
+              onClick={this._showProfile.bind(this, user.seed)}>
               Profile
             </button>
           </td>
           <td className='text-center'>
             <button
               className='user--remove'
-              onClick={this.removeUser.bind(this, index)}>
+              onClick={this._removeUser.bind(this, index)}>
               X
             </button>
           </td>
         </tr>
       );
     });
-  },
+  }
+
   render() {
     return (
       <div>
-        <h1 className='text-center'>{this.getIntlMessage('users.title')}</h1>
+        <h1 className='text-center'>
+          {this._getIntlMessage('users.title')}
+        </h1>
         <table className='app--users'>
           <thead>
             <tr>
-              <th>{this.getIntlMessage('users.email')}</th>
+              <th>
+                {this._getIntlMessage('users.email')}
+              </th>
               <th colSpan='2'>
-                {this.getIntlMessage('users.actions')}
+                {this._getIntlMessage('users.actions')}
               </th>
             </tr>
           </thead>
           <tbody>
-            {this.renderUsers()}
+            {this._renderUsers()}
           </tbody>
         </table>
         <p className='text-center'>
           <button
             ref='add-button'
             onClick={this.props.flux.getActions('users').add}>
-            {this.getIntlMessage('users.add')}
+            {this._getIntlMessage('users.add')}
           </button>
         </p>
       </div>
     );
   }
-});
+}

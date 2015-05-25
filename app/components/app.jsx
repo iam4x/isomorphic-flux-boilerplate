@@ -1,8 +1,7 @@
 'use strict';
 
 import React from 'react';
-import objectAssign from 'react/lib/Object.assign';
-import ListenerMixin from 'alt/mixins/ListenerMixin';
+import {assign} from 'lodash';
 import {RouteHandler} from 'react-router';
 
 import Header from 'components/header';
@@ -12,28 +11,48 @@ if (process.env.BROWSER) {
   require('styles/main.scss');
 }
 
-export default React.createClass({
-  displayName: 'App',
-  mixins: [ListenerMixin],
-  propTypes: {
+export default class App extends React.Component {
+  displayName = 'App'
+
+  static propTypes = {
     flux: React.PropTypes.object.isRequired
-  },
-  getInitialState() {
-    return this.props.flux.getStore('locale').getState();
-  },
+  }
+
+  state = this.props.flux
+    .getStore('locale')
+    .getState();
+
   componentDidMount() {
-    this.listenTo(this.props.flux.getStore('locale'), this.handleLocaleChange);
-    this.listenTo(this.props.flux.getStore('page-title'), this.handlePageTitleChange);
-  },
-  handleLocaleChange() {
-    this.setState(this.props.flux.getStore('locale').getState());
-  },
-  handlePageTitleChange() {
-    const {title} = this.props.flux.getStore('page-title').getState();
+    this.props.flux
+      .getStore('locale')
+      .listen(this._handleLocaleChange);
+
+    this.props.flux
+      .getStore('page-title')
+      .listen(this._handlePageTitleChange);
+  }
+
+  componentWillUnmount() {
+    this.props.flux
+      .getStore('locale')
+      .unlisten(this._handleLocaleChange);
+
+    this.props.flux
+      .getStore('page-title')
+      .unlisten(this._handlePageTitleChange);
+  }
+
+  _handleLocaleChange = this._handleLocaleChange.bind(this)
+  _handleLocaleChange(state: Object) {
+    return this.setState(state);
+  }
+
+  _handlePageTitleChange({title}) {
     document.title = title;
-  },
+  }
+
   render() {
-    const props: Object = objectAssign(this.state, this.props);
+    const props: Object = assign({}, this.state, this.props);
     return (
       <div>
         <Header {...props} />
@@ -42,4 +61,4 @@ export default React.createClass({
       </div>
     );
   }
-});
+}

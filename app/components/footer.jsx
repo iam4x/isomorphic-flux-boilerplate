@@ -6,8 +6,9 @@ if (process.env.BROWSER) {
   require('styles/footer.scss');
 }
 
-export default React.createClass({
-  displayName: 'footer',
+export default class Footer extends React.Component {
+  displayName = 'footer'
+
   render() {
     return (
       <footer className='app--footer'>
@@ -24,4 +25,4 @@ export default React.createClass({
       </footer>
     );
   }
-});
+}
