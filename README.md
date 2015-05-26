@@ -45,7 +45,7 @@ Run this boilerplate, you will see the server is fetching some fake users and wi
 
 ## Flux
 
-We use [alt](alt.js.org) instance as [Flux](http://facebook.github.io/react/blog/2014/05/06/flux.html) implementation.
+We use [alt](http://alt.js.org) instance as [Flux](http://facebook.github.io/react/blog/2014/05/06/flux.html) implementation.
 
 We need to use instances for isomorphic applications, to have a unique store/actions per requests on the server.
 
@@ -53,7 +53,7 @@ On the client, Flux is initialized in `app/main.js` and sent to our first React 
 
 On the server, it's similar but Flux is initialized in `server/router.jsx`. The instance is sent to `alt-resolver` for rendering components with the correct props.
 
-Learn more about [alt instances](alt.js.org/docs/altInstances) in the alt documentation.
+Learn more about [alt instances](http://alt.js.org/docs/altInstances) in the alt documentation.
 
 ## Internationalization (i18n)
 
