@@ -47,7 +47,7 @@
     "superagent": "^1.1.0"
   },
   "devDependencies": {
-    "autoprefixer-loader": "^1.2.0",
+    "autoprefixer-loader": "^2.0.0",
     "babel": "^5.1.8",
     "babel-core": "^5.1.8",
     "babel-eslint": "^3.0.0",
