@@ -1,12 +1,6 @@
 {
   "parser": "babel-eslint",
   "extends": "future/react",
-  "env": {
-    "es6": true,
-    "browser": true,
-    "node": true,
-    "mocha": true
-  },
   "rules": {
     "quotes": [2, "single"],
     "eol-last": [2],
@@ -17,8 +11,9 @@
     "curly": false,
     "no-unused-expressions": false,
     "no-unused-vars": false,
-    "comma-dangle": 0,
-    "brace-style": [2, "stroustrup", { "allowSingleLine": false }]
+    "brace-style": [2, "stroustrup", {"allowSingleLine": false }],
+    "space-before-function-paren": [2, {"anonymous": "always", "named": "never"}],
+    "comma-dangle": 0
   },
   "ecmaFeatures": {
     "jsx": true,
