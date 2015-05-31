@@ -17,7 +17,8 @@
     "curly": false,
     "no-unused-expressions": false,
     "no-unused-vars": false,
-    "comma-dangle": 0
+    "comma-dangle": 0,
+    "brace-style": [2, "stroustrup", { "allowSingleLine": false }]
   },
   "ecmaFeatures": {
     "jsx": true,
