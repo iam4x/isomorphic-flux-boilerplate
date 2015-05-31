@@ -30,7 +30,7 @@ const startServer = () => {
         // Start browserSync
         browserSync({
           port: parseInt(process.env.PORT) + 2 || 3002,
-          proxy: `localhost:${parseInt(process.env.PORT) || 3000}`
+          proxy: `0.0.0.0:${parseInt(process.env.PORT) || 3000}`
         });
         // Start watcher on server files
         // and reload browser on change
