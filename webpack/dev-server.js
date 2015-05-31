@@ -2,6 +2,7 @@
 
 require('babel/register');
 
+var debug = require('debug');
 var webpack = require('webpack');
 var WebpackDevServer = require('webpack-dev-server');
 
@@ -11,5 +12,5 @@ var compiler = webpack(config.webpack);
 var devServer = new WebpackDevServer(compiler, config.server.options);
 
 devServer.listen(config.server.port, 'localhost', function () {
-  console.log('webpack-dev-server listen on port %s', config.server.port);
+  debug('dev')('webpack-dev-server listen on port %s', config.server.port);
 });

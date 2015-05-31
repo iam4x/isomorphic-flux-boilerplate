@@ -61,7 +61,7 @@ const cacheOpts: Object = {maxAge: 86400000, gzip: true};
 // Proxy asset folder to webpack development server in development mode
 if (env === 'development') {
   var webpackConfig: Object = require('./../webpack/dev.config');
-  app.use(mount('/assets', require('koa-proxy')({ host: `http://localhost:${webpackConfig.server.port}` })));
+  app.use(mount('/assets', require('koa-proxy')({host: `http://localhost:${webpackConfig.server.port}`})));
 }
 else {
   app.use(mount('/assets', staticCache(path.join(__dirname, '../dist'), cacheOpts)));
@@ -70,7 +70,7 @@ else {
 app.use(router);
 app.listen(config.port);
 
-console.log(`Application started on port ${config.port}`);
+debug('*')(`Application started on port ${config.port}`);
 if (process.send) {
   process.send('online');
 }

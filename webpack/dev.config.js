@@ -88,8 +88,13 @@ export default {
       new webpack.optimize.DedupePlugin(),
       new webpack.optimize.OccurenceOrderPlugin(),
 
-      function () { this.plugin('done', writeStats); },
-      function () { this.plugin('done', startKoa); }
+      function () {
+        this.plugin('done', writeStats);
+      },
+
+      function () {
+        this.plugin('done', startKoa);
+      }
 
     ],
     resolve: {

@@ -98,7 +98,9 @@ module.exports = {
     }),
 
     // write webpack stats
-    function () { this.plugin('done', writeStats); }
+    function () {
+      this.plugin('done', writeStats);
+    }
 
   ],
   resolve: {
