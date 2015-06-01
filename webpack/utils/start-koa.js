@@ -13,6 +13,13 @@ let started;
 let serverReload;
 const KOA_PATH = path.join(__dirname, '../../server/index');
 
+const restartServer = () => {
+  debug('dev')('restarting koa application');
+  serverReload = true;
+  server.kill('SIGTERM');
+  return startServer();
+};
+
 const startServer = () => {
   // merge env for the new process
   const env = assign({NODE_ENV: 'development'}, process.env);
@@ -27,11 +34,21 @@ const startServer = () => {
       }
       if (!started) {
         started = true;
+
         // Start browserSync
         browserSync({
           port: parseInt(process.env.PORT) + 2 || 3002,
           proxy: `0.0.0.0:${parseInt(process.env.PORT) || 3000}`
         });
+
+        // Listen for `rs` in stdin to restart server
+        debug('dev')('type `rs` in console for restarting koa application');
+        process.stdin.setEncoding('utf8');
+        process.stdin.on('data', function (data) {
+          data = (data + '').trim().toLowerCase();
+          if (data === 'rs') return restartServer();
+        });
+
         // Start watcher on server files
         // and reload browser on change
         watch(
@@ -45,6 +62,7 @@ const startServer = () => {
             }
           }
         );
+
       }
     }
   });
