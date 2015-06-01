@@ -14,13 +14,7 @@ export default class Footer extends React.Component {
       <footer className='app--footer'>
         <hr />
         <div className='app--footer-content'>
-          <iframe
-            src='https://ghbtns.com/github-btn.html?user=iam4x&repo=isomorphic-flux-boilerplate&type=star&count=true&size=large'
-            frameBorder='0'
-            scrolling='0'
-            width='120px'
-            height='30px'>
-          </iframe>
+          <span dangerouslySetInnerHTML={{__html: '<a class="github-button" href="https://github.com/iam4x/isomorphic-flux-boilerplate" data-icon="octicon-star" data-style="mega" data-count-href="/iam4x/isomorphic-flux-boilerplate/stargazers" data-count-api="/repos/iam4x/isomorphic-flux-boilerplate#stargazers_count" data-count-aria-label="# stargazers on GitHub" aria-label="Star iam4x/isomorphic-flux-boilerplate on GitHub">Star</a><a class="github-button" href="https://github.com/iam4x/isomorphic-flux-boilerplate/fork" data-icon="octicon-git-branch" data-style="mega" data-count-href="/iam4x/isomorphic-flux-boilerplate/network" data-count-api="/repos/iam4x/isomorphic-flux-boilerplate#forks_count" data-count-aria-label="# forks on GitHub" aria-label="Fork iam4x/isomorphic-flux-boilerplate on GitHub">Fork</a>'}}/>
         </div>
       </footer>
     );

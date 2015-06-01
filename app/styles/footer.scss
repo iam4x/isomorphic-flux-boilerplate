@@ -5,4 +5,12 @@
     padding-top: 10px;
     text-align: center;
   }
+
+  iframe {
+    margin-right: 25px;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
 }
