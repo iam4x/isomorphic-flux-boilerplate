@@ -2,12 +2,15 @@
 
 import path from 'path';
 import webpack from 'webpack';
+import {isArray} from 'lodash';
 
 import writeStats from './utils/write-stats';
 import startKoa from './utils/start-koa';
 
+const LOCAL_IP = require('dev-ip')();
+
 const PROTOCOL = (process.env.C9_HOSTNAME) ? 'https' : 'http';
-const HOST = process.env.C9_HOSTNAME || require('dev-ip')() || 'localhost';
+const HOST = process.env.C9_HOSTNAME || isArray(LOCAL_IP) && LOCAL_IP[0] || LOCAL_IP || 'localhost';
 const PORT = (process.env.C9_HOSTNAME) ? '443' : parseInt(process.env.PORT) + 1 || 3001;
 const PUBLIC_PATH = `${PROTOCOL}://${HOST}:${PORT}/assets/`;
 
