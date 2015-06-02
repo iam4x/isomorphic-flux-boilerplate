@@ -5,7 +5,6 @@ import path from 'path';
 import debug from 'debug';
 
 import Router from 'react-router';
-
 // Paths are relative to `app` directory
 import routes from 'routes';
 import Flux from 'utils/flux';
@@ -17,22 +16,20 @@ export default function *() {
     const router = Router.create({
       routes: routes,
       location: this.request.url,
-      onAbort: (redirect) => {
-        // Allow transition with `willTransitionTo`
-        // to redirect request with `302` status code
-        debug('dev')('Redirect request to `%s`', redirect.to);
-        this.redirect(redirect.to);
-        return this.res.end();
+      onAbort: abortReason => {
+        const error = new Error();
+        if (abortReason.constructor.name === 'Redirect') {
+          const { to, params, query } = abortReason;
+          const url = router.makePath(to, params, query);
+          error.redirect = url;
+          debug('dev')('Redirect request to `%s`', url);
+        }
+        throw(error);
       },
-      onError: (error) => {
-        // Allow server to respond with 500
-        // when something went wrong with router
-        //
-        // TODO: Render `pages/server-error` in production?
+      onError: error => {
         debug('koa')('Routing Error');
         debug('koa')(error);
-        this.throw(error);
-        return this.res.end();
+        throw(error);
       }
     });
 
@@ -50,21 +47,29 @@ export default function *() {
 
     debug('dev')(`locale of request: ${locale}`);
 
-    const handler = yield promisify(router.run);
-    const {body, title} = yield flux.render(handler);
+    try {
+      const handler = yield promisify(router.run);
+      const {body, title} = yield flux.render(handler);
 
-    // Reload './webpack-stats.json' on dev
-    // cache it on production
-    let assets;
-    if (process.env.NODE_ENV === 'development') {
-      assets = fs.readFileSync(path.resolve(__dirname, './webpack-stats.json'));
-      assets = JSON.parse(assets);
-    }
-    else {
-      assets = require('./webpack-stats.json');
-    }
+      // Reload './webpack-stats.json' on dev
+      // cache it on production
+      let assets;
+      if (process.env.NODE_ENV === 'development') {
+        assets = fs.readFileSync(path.resolve(__dirname, './webpack-stats.json'));
+        assets = JSON.parse(assets);
+      }
+      else {
+        assets = require('./webpack-stats.json');
+      }
 
-    debug('dev')('return html content');
-    yield this.render('main', {body, assets, locale, title});
+      debug('dev')('return html content');
+      yield this.render('main', {body, assets, locale, title});
+
+    } catch (error) {
+      if (error.redirect) {
+        return this.redirect(error.redirect);
+      }
+      throw error;
+    }
   }
 }
