@@ -50,6 +50,11 @@ export default class Header extends React.Component {
               {this._getIntlMessage('header.guides')}
             </Link>
           </li>
+          <li>
+            <Link to='protected'>
+              {this._getIntlMessage('header.protected')}
+            </Link>
+          </li>
         </ul>
         <hr />
       </header>

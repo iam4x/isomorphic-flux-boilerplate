@@ -7,6 +7,9 @@ export default {
     guides: {
       'page-title': 'Guides'
     },
+    protected: {
+      'page-title': 'Protected Page'
+    },
     profile: {
       'page-title': 'Profil - {fullName}',
       'not-found-page-title': 'User profile not found'
