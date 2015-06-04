@@ -1,44 +1,34 @@
-import React, {Component, PropTypes} from 'react';
+import React, {Component} from 'react';
+import AltIso from 'alt/utils/AltIso';
 import {Link} from 'react-router';
 import {IntlMixin} from 'react-intl';
 import {replaceParams} from 'utils/localized-routes';
+
+import UsersStore from 'flux/stores/users';
+import UsersActions from 'flux/actions/users';
+import PageTitleActions from 'flux/actions/page-title';
 
 if (process.env.BROWSER) {
   require('styles/users.scss');
 }
 
+@AltIso.define(() => UsersStore.fetch())
 class Users extends Component {
-
-  static propTypes = {
-    flux: PropTypes.object.isRequired
-  }
 
   _getIntlMessage = IntlMixin.getIntlMessage
 
-  state = this.props.flux
-    .getStore('users')
-    .getState()
+  state = UsersStore.getState();
 
   componentWillMount() {
-    this.props.flux
-      .getActions('page-title')
-      .set(this._getIntlMessage('users.page-title'));
-
-    this.props.flux
-      .getActions('users')
-      .fetch();
+    PageTitleActions.set(this._getIntlMessage('users.page-title'));
   }
 
   componentDidMount() {
-    this.props.flux
-      .getStore('users')
-      .listen(this._handleStoreChange);
+    UsersStore.listen(this._handleStoreChange);
   }
 
   componentWillUnmount() {
-    this.props.flux
-      .getStore('users')
-      .unlisten(this._handleStoreChange);
+    UsersStore.unlisten(this._handleStoreChange);
   }
 
   _handleStoreChange = ::this._handleStoreChange
@@ -46,10 +36,8 @@ class Users extends Component {
     return this.setState(state);
   }
 
-  _removeUser(index) {
-    this.props.flux
-      .getActions('users')
-      .remove(index);
+  _removeUser(index: number) {
+    UsersActions.remove(index);
   }
 
   renderUser = ::this.renderUser
@@ -101,8 +89,8 @@ class Users extends Component {
         </table>
         <p className='text-center'>
           <button
-            className='add--button'
-            onClick={this.props.flux.getActions('users').add}>
+            ref='add-button'
+            onClick={UsersStore.add}>
             {this._getIntlMessage('users.add')}
           </button>
         </p>

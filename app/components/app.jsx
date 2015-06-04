@@ -1,4 +1,8 @@
-import React, {Component, PropTypes} from 'react/addons';
+import React, {Component} from 'react/addons';
+import AltIso from 'alt/utils/AltIso';
+
+import LocaleStore from 'flux/stores/locale';
+import PageTitleStore from 'flux/stores/page-title';
 
 import Header from 'components/header';
 import Footer from 'components/footer';
@@ -7,11 +11,8 @@ if (process.env.BROWSER) {
   require('styles/main.scss');
 }
 
+@AltIso.define(({locale}) => LocaleStore.initialize(locale))
 class App extends Component {
-
-  static propTypes = {
-    flux: PropTypes.object.isRequired
-  }
 
   constructor(props, context) {
     super(props, context);
@@ -24,23 +25,13 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.props.flux
-      .getStore('locale')
-      .listen(this._handleLocaleChange);
-
-    this.props.flux
-      .getStore('page-title')
-      .listen(this._handlePageTitleChange);
+    LocaleStore.listen(this._handleLocaleChange);
+    PageTitleStore.listen(this._handlePageTitleChange);
   }
 
   componentWillUnmount() {
-    this.props.flux
-      .getStore('locale')
-      .unlisten(this._handleLocaleChange);
-
-    this.props.flux
-      .getStore('page-title')
-      .unlisten(this._handlePageTitleChange);
+    LocaleStore.unlisten(this._handleLocaleChange);
+    PageTitleStore.unlisten(this._handlePageTitleChange);
   }
 
   _handleLocaleChange = ::this._handleLocaleChange

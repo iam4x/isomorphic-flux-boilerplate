@@ -3,8 +3,6 @@ import {Link} from 'react-router';
 import {IntlMixin} from 'react-intl';
 
 import imageResolver from 'utils/image-resolver';
-import Spinner from 'components/shared/spinner';
-import LangPicker from 'components/shared/lang-picker';
 
 // Load styles for the header
 // and load the `react-logo.png` image
