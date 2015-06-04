@@ -3,10 +3,13 @@ import debug from 'debug';
 import React from 'react';
 import Router from 'react-router';
 import Location from 'react-router/lib/Location';
+import AltIso from 'alt/utils/AltIso';
 
 // Paths are relative to `app` directory
 import routes from 'routes';
-import Flux from 'utils/flux';
+import alt from 'utils/alt';
+
+import PageTitleStore from 'flux/stores/page-title';
 
 // We need wrap `Router.run` into a promise
 // in order to use the keyword `yield` and keep
@@ -18,18 +21,8 @@ const promisifiedRouter = (customRoutes, location) => {
 };
 
 export default function *() {
-  // Init alt instance
-  const flux = new Flux();
-
   // Get request locale for rendering
   const locale = this.cookies.get('_lang') || this.acceptsLanguages(require('./config/init').locales) || 'en';
-  const {messages} = require(`data/${locale}`);
-
-  // Populate store with locale
-  flux
-    .getActions('locale')
-    .switchLocaleSuccess({locale, messages});
-
   debug('dev')(`locale of request: ${locale}`);
 
   try {
@@ -41,26 +34,9 @@ export default function *() {
     // Render 500 error page from server
     if (error) throw error;
 
-    // Render application of correct location
-    // We need to re-define `createElement` of `react-router`
-    // in order to include `flux` on children components props
-    const routerProps = Object.assign({}, initialState,
-      {
-        location,
-        createElement: (component, props) => {
-          // Take locale and messages from `locale` store
-          // and pass them to every components rendered from `Router`
-          const i18n = flux.getStore('locale').getState();
-          return React.createElement(
-            component,
-            Object.assign(props, {flux, ...i18n})
-          );
-        }
-      }
-    );
-
-    // Use `alt-resolver` to render component with fetched data
-    const {body, title} = yield flux.render(<Router {...routerProps} />);
+    const routerProps = Object.assign({}, initialState, {location});
+    const body = yield AltIso.render(alt, <Router {...routerProps} />, {locale});
+    const {title} = PageTitleStore.getState();
 
     // Assets name are found into `webpack-stats`
     const assets = require('./webpack-stats.json');
