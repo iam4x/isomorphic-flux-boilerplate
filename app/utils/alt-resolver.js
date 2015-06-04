@@ -1,3 +1,4 @@
+/*eslint-disable no-undef */
 'use strict';
 
 import React from 'react';

@@ -14,9 +14,15 @@ export default (
       name='guides'
       handler={require('./components/guides')} />
     <Route
+      name='protected'
+      handler={require('./components/protected')} />
+    <Route
       name='profile'
       path='profile/:seed'
       handler={require('./components/profile')} />
+    <Route
+      name='login-info'
+      handler={require('./pages/login-info')} />
     <NotFoundRoute handler={require('./pages/not-found')} />
   </Route>
 );
