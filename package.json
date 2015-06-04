@@ -18,7 +18,7 @@
   "author": "iam4x",
   "license": "MIT",
   "dependencies": {
-    "alt": "^0.16.1",
+    "alt": "0.16.7",
     "blocked": "^1.1.0",
     "classnames": "^2.0.0",
     "cookies-js": "^1.2.1",
