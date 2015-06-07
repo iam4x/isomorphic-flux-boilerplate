@@ -13,7 +13,8 @@
     "no-unused-vars": false,
     "brace-style": [2, "stroustrup", {"allowSingleLine": false }],
     "space-before-function-paren": [2, {"anonymous": "always", "named": "never"}],
-    "comma-dangle": 0
+    "comma-dangle": 0,
+    "react/display-name": 0
   },
   "ecmaFeatures": {
     "jsx": true,
