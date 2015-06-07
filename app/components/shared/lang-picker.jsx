@@ -9,8 +9,6 @@ if (process.env.BROWSER) {
 }
 
 export default class LangPicker extends React.Component {
-  displayName = 'LangPicker'
-
   static propTypes = {
     store: React.PropTypes.object.isRequired,
     actions: React.PropTypes.object.isRequired

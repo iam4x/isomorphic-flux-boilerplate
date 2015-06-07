@@ -5,8 +5,6 @@ import {IntlMixin} from 'react-intl';
 import requireAuth from 'components/shared/require-auth';
 
 const Protected = requireAuth(class Protected extends React.Component {
-  displayName = 'Protected'
-
   static propTypes = {
     flux: React.PropTypes.object.isRequired
   }

@@ -7,8 +7,6 @@ if (process.env.BROWSER) {
 }
 
 export default class Footer extends React.Component {
-  displayName = 'footer'
-
   render() {
     return (
       <footer className='app--footer'>

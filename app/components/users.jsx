@@ -9,8 +9,6 @@ if (process.env.BROWSER) {
 }
 
 export default class Users extends React.Component {
-  displayName = 'Users'
-
   static contextTypes = {
     router: React.PropTypes.func
   }

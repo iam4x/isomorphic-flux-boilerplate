@@ -12,8 +12,6 @@ if (process.env.BROWSER) {
 }
 
 export default class App extends React.Component {
-  displayName = 'App'
-
   static propTypes = {
     flux: React.PropTypes.object.isRequired
   }
