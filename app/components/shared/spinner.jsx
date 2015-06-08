@@ -9,8 +9,6 @@ if (process.env.BROWSER) {
 }
 
 export default class Spinner extends React.Component {
-  displayName = 'Spinner'
-
   static propTypes = {
     store: React.PropTypes.object.isRequired
   }

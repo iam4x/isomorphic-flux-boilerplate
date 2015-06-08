@@ -21,8 +21,6 @@ else {
 }
 
 export default class Header extends React.Component {
-  displayName = 'Header'
-
   static propTypes: {
     flux: React.PropTypes.object.isRequired
   }

@@ -4,8 +4,6 @@ import React from 'react';
 
 const requireAuth = (Component) => {
   class Authenticated extends React.Component {
-  displayName = 'Require Auth'
-
     render() {
       return <Component {...this.props}/>;
     }

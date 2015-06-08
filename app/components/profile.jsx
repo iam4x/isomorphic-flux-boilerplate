@@ -10,8 +10,6 @@ if (process.env.BROWSER) {
 }
 
 export default class Profile extends React.Component {
-  displayName = 'Profile'
-
   static propTypes = {
     flux: React.PropTypes.object.isRequired
   }

@@ -4,8 +4,6 @@ import React from 'react';
 import {IntlMixin} from 'react-intl';
 
 export default class Guides extends React.Component {
-  displayName = 'Guides'
-
   static propTypes = {
     flux: React.PropTypes.object.isRequired
   }
