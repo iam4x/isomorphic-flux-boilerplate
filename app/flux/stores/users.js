@@ -9,8 +9,10 @@ class UsersStore {
   static displayName = 'UsersStore'
 
   static getBySeed(seed: string) {
-    return this.getState().users
-      .find((user) => user.seed === seed);
+    const user = this.getState().users
+      .find((user) => user.seed === seed) || null;
+
+    return {user};
   }
 
   constructor() {
