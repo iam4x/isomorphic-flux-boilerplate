@@ -15,7 +15,6 @@
 * [react](https://facebook.github.io/react/)
 * [react-router](https://github.com/rackt/react-router)
 * [react-hot-loader](https://github.com/gaearon/react-hot-loader)
-* [react-a11y](https://github.com/rackt/react-a11y)
 * [react-intl](https://github.com/yahoo/react-intl)
 * [alt](https://github.com/goatslacker/alt)
 * [iso](https://github.com/goatslacker/iso)
@@ -245,4 +244,3 @@ There's an issue with [node-sass #870](https://github.com/sass/node-sass/issues/
 
 
 [![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/iam4x/isomorphic-flux-boilerplate/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
-
