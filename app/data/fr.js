@@ -2,13 +2,14 @@ export default {
   messages: {
     header: {
       users: 'Utilisateurs',
-      guides: 'Guides'
+      guides: 'Guides',
+      protected: 'Privé'
     },
     guides: {
       'page-title': 'Guides'
     },
     protected: {
-      'page-title': 'Protected Page'
+      'page-title': 'Page protégée'
     },
     profile: {
       'page-title': 'Profil - {fullName}',
