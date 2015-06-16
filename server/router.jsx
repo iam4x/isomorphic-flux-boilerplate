@@ -11,25 +11,41 @@ import Flux from 'utils/flux';
 import promisify from 'utils/promisify';
 
 export default function *() {
+
+  // TODO: Find strategy for removing cache on specific url
   const isCashed = this.cashed ? yield *this.cashed() : false;
+
   if (!isCashed) {
     const router = Router.create({
       routes: routes,
       location: this.request.url,
-      onAbort: abortReason => {
+      onAbort(abortReason) {
         const error = new Error();
+
+        // Create specific error for creating
+        // a redirection on the server
         if (abortReason.constructor.name === 'Redirect') {
           const { to, params, query } = abortReason;
           const url = router.makePath(to, params, query);
-          error.redirect = url;
           debug('dev')('Redirect request to `%s`', url);
+          error.redirect = url;
         }
-        throw(error);
+
+        // Throw an error to be catch
+        // from the rendering process
+        throw error;
       },
-      onError: error => {
-        debug('koa')('Routing Error');
-        debug('koa')(error);
-        throw(error);
+      onError(error) {
+
+        // Don't flood the console output
+        // with redirection information
+        if (!error.redirect) {
+          debug('koa')('Routing Error');
+          debug('koa')(error);
+        }
+
+        // Continue to throw the err
+        throw error;
       }
     });
 
@@ -65,10 +81,18 @@ export default function *() {
       debug('dev')('return html content');
       yield this.render('main', {body, assets, locale, title});
 
-    } catch (error) {
+    }
+    // Catch error from rendering procress
+    catch (error) {
+
+      // If the error got a `redirect` key
+      // we should trigger a redirection from
+      // the server to keep things isomorphic
       if (error.redirect) {
         return this.redirect(error.redirect);
       }
+
+      // In other cases just return the error
       throw error;
     }
   }
