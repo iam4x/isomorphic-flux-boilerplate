@@ -21,8 +21,6 @@
 * [koa](http://koajs.com/)
 * [webpack](http://webpack.github.io/)
 * [babeljs](https://babeljs.io/)
-* [flowtype](http://flowtype.org/)
-* [flowcheck](https://gcanti.github.io/flowcheck/)
 
 ## TL;DR
 
