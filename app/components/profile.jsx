@@ -1,7 +1,4 @@
-'use strict';
-
-import React from 'react';
-import ListenerMixin from 'alt/mixins/ListenerMixin';
+import React, {Component, PropTypes} from 'react';
 import {IntlMixin} from 'react-intl';
 import {capitalize, assign} from 'lodash';
 
@@ -9,9 +6,10 @@ if (process.env.BROWSER) {
   require('styles/profile.scss');
 }
 
-export default class Profile extends React.Component {
+class Profile extends Component {
+
   static propTypes = {
-    flux: React.PropTypes.object.isRequired
+    flux: PropTypes.object.isRequired
   }
 
   _getIntlMessage = IntlMixin.getIntlMessage
@@ -60,7 +58,6 @@ export default class Profile extends React.Component {
 
       title = this._getIntlMessage('profile.page-title');
       title = this._formatMessage(title, {fullName});
-
     }
     else {
       title = this._getIntlMessage('profile.not-found-page-title');
@@ -88,10 +85,12 @@ export default class Profile extends React.Component {
         </div>
       );
     }
-    else {
-      return (
-        <h2>User not found</h2>
-      );
-    }
+
+    return (
+      <h2>User not found</h2>
+    );
   }
+
 }
+
+export default Profile;

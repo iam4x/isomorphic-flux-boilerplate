@@ -1,5 +1,3 @@
-'use strict';
-
 import chai from 'chai';
 import React from 'react/addons';
 import objectAssign from 'react/lib/Object.assign';
@@ -17,7 +15,6 @@ const should = chai.should();
 const seed = '7729a1ef4ba6ef68';
 
 describe('Profile', () => {
-
   let instance;
   let flux;
   const TestUtils = React.addons.TestUtils;
@@ -63,5 +60,4 @@ describe('Profile', () => {
     };
     flux.getStore('users').listen(handleChange);
   });
-
 });

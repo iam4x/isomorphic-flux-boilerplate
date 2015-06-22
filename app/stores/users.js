@@ -1,5 +1,3 @@
-'use strict';
-
 import {isEmpty} from 'lodash';
 
 class UsersStore {
@@ -34,22 +32,21 @@ class UsersStore {
       // this is called on every server rendering
       return this.setState({users});
     }
-    else {
-      const merged: Array<Object> = this.users.slice();
-      users.forEach((user) => {
-        // update the most recent data into store
-        let match: ?Object = merged.find((u) => u.seed === user.seed) || null;
-        if (match) {
-          match = user;
-        }
-        // push the new user
-        else {
-          merged.push(user);
-        }
-      });
 
-      return this.setState({users: merged});
-    }
+    const merged: Array<Object> = this.users.slice();
+    users.forEach((user) => {
+      // update the most recent data into store
+      let match: ?Object = merged.find((u) => u.seed === user.seed) || null;
+      if (match) {
+        match = user;
+      }
+      // push the new user
+      else {
+        merged.push(user);
+      }
+    });
+
+    return this.setState({users: merged});
   }
 
   onFetchBySeedSuccess(user) {

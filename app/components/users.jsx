@@ -1,16 +1,14 @@
-'use strict';
-
-import React from 'react';
-import ListenerMixin from 'alt/mixins/ListenerMixin';
+import React, {Component, PropTypes} from 'react';
 import {IntlMixin} from 'react-intl';
 
 if (process.env.BROWSER) {
   require('styles/users.scss');
 }
 
-export default class Users extends React.Component {
+class Users extends Component {
+
   static contextTypes = {
-    router: React.PropTypes.func
+    router: PropTypes.func
   }
 
   static propTypes = {
@@ -115,4 +113,7 @@ export default class Users extends React.Component {
       </div>
     );
   }
+
 }
+
+export default Users;

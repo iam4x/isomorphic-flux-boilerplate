@@ -1,5 +1,3 @@
-'use strict';
-
 import debug from 'debug';
 
 const hasBuiltInLocaleData = (locale) => {

@@ -1,12 +1,11 @@
-'use strict';
-
-import React from 'react';
+import React, {Component} from 'react';
 
 if (process.env.BROWSER) {
   require('styles/footer.scss');
 }
 
-export default class Footer extends React.Component {
+class Footer extends Component {
+
   render() {
     return (
       <footer className='app--footer'>
@@ -17,4 +16,7 @@ export default class Footer extends React.Component {
       </footer>
     );
   }
+
 }
+
+export default Footer;

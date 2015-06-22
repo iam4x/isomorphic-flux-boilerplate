@@ -1,5 +1,3 @@
-'use strict';
-
 import chai from 'chai';
 import React from 'react/addons';
 import Flux from 'utils/flux';
@@ -13,7 +11,6 @@ import Header from 'components/header';
 chai.should();
 
 describe('Header', () => {
-
   let node;
   let instance;
   let flux;
@@ -44,5 +41,4 @@ describe('Header', () => {
     const langs = TestUtils.findRenderedDOMComponentWithClass(instance, 'lang--picker');
     langs.props.children.length.should.eql(2);
   });
-
 });

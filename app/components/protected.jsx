@@ -1,12 +1,11 @@
-'use strict';
-
-import React from 'react';
+import React, {Component, PropTypes} from 'react';
 import {IntlMixin} from 'react-intl';
 import requireAuth from 'components/shared/require-auth';
 
-const Protected = requireAuth(class Protected extends React.Component {
+const Protected = requireAuth(class Protected extends Component {
+
   static propTypes = {
-    flux: React.PropTypes.object.isRequired
+    flux: PropTypes.object.isRequired
   }
 
   _getIntlMessage = IntlMixin.getIntlMessage
@@ -25,6 +24,7 @@ const Protected = requireAuth(class Protected extends React.Component {
       </div>
     );
   }
+
 });
 
 export default Protected;

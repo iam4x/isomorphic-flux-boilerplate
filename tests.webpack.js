@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 'use strict';
 
 // Browser ES6 Polyfill

@@ -1,6 +1,4 @@
-'use strict';
-
-import React from 'react';
+import React, {Component, PropTypes} from 'react';
 import {assign} from 'lodash';
 import {RouteHandler} from 'react-router';
 
@@ -11,9 +9,10 @@ if (process.env.BROWSER) {
   require('styles/main.scss');
 }
 
-export default class App extends React.Component {
+class App extends Component {
+
   static propTypes = {
-    flux: React.PropTypes.object.isRequired
+    flux: PropTypes.object.isRequired
   }
 
   state = this.props.flux
@@ -59,4 +58,7 @@ export default class App extends React.Component {
       </div>
     );
   }
+
 }
+
+export default App;

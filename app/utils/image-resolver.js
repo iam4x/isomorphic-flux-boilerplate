@@ -1,5 +1,3 @@
-'use strict';
-
 import debug from 'debug';
 
 export default (imagePath) => {
@@ -27,12 +25,10 @@ export default (imagePath) => {
     const regex = new RegExp(`${imagePath}$`);
     const image = images.find(img => regex.test(img.original));
 
-    if (image) {
-      return image.compiled;
-    }
-    else {
-      // Serve a not-found asset maybe?
-      return '';
-    }
+    // Serve image.
+    if (image) return image.compiled;
+
+    // Serve a not-found asset maybe?
+    return '';
   }
 };

@@ -1,12 +1,9 @@
-'use strict';
-
 import chai from 'chai';
 import Flux from 'utils/flux';
 
 chai.should();
 
 describe('UsersStore', () => {
-
   let flux;
   let store;
   let actions;
@@ -35,5 +32,4 @@ describe('UsersStore', () => {
     store.listen(handleChange);
     actions.fetch();
   });
-
 });

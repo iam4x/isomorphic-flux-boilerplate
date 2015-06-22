@@ -1,11 +1,10 @@
-'use strict';
-
-import React from 'react';
+import React, {Component, PropTypes} from 'react';
 import {IntlMixin} from 'react-intl';
 
-export default class Guides extends React.Component {
+class Guides extends Component {
+
   static propTypes = {
-    flux: React.PropTypes.object.isRequired
+    flux: PropTypes.object.isRequired
   }
 
   _getIntlMessage = IntlMixin.getIntlMessage
@@ -24,4 +23,7 @@ export default class Guides extends React.Component {
       </div>
     );
   }
+
 }
+
+export default Guides;

@@ -1,5 +1,3 @@
-'use strict';
-
 import Alt from 'alt';
 import AltResolver from './alt-resolver.js';
 

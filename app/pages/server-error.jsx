@@ -1,11 +1,11 @@
-'use strict';
+import React, {Component} from 'react';
 
-import React from 'react';
+class ServerError extends Component {
 
-export default React.createClass({
   render() {
-    return (
-      <h1>500</h1>
-    );
+    return (<h1>500</h1>);
   }
-});
+
+}
+
+export default ServerError;

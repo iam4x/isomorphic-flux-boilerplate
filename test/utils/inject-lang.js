@@ -1,5 +1,3 @@
-'use strict';
-
 export default (flux, locale='en') => {
   const {messages} = require(`data/${locale}`);
 

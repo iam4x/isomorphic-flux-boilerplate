@@ -1,5 +1,3 @@
-'use strict';
-
 import chai from 'chai';
 
 import intlLoader from 'utils/intl-loader';
@@ -7,7 +5,6 @@ import intlLoader from 'utils/intl-loader';
 const should = chai.should();
 
 describe('IntlLoader', () => {
-
   it('should load english lang without polyfill', (done) => {
     (async function () {
       const lang = await intlLoader('en');
@@ -47,5 +44,4 @@ describe('IntlLoader', () => {
       return done();
     })();
   });
-
 });

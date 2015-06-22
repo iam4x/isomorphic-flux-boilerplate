@@ -1,5 +1,3 @@
-'use strict';
-
 import chai from 'chai';
 import React from 'react/addons';
 import Flux from 'utils/flux';
@@ -12,7 +10,6 @@ import App from 'components/app';
 const should = chai.should();
 
 describe('App', () => {
-
   let node;
   let instance;
   let flux;

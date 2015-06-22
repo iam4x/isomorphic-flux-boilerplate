@@ -1,5 +1,3 @@
-'use strict';
-
 import chai from 'chai';
 import React from 'react';
 import Flux from 'utils/flux';
@@ -22,7 +20,6 @@ const DummyError = React.createClass({
 });
 
 describe('Alt Resolver', () => {
-
   let flux;
   let altResolver;
 
@@ -34,7 +31,7 @@ describe('Alt Resolver', () => {
 
   it('should map promises on env server', () => {
     altResolver.mapPromises().should.be.empty;
-    altResolver.resolve(function () {}, true);
+    altResolver.resolve(function() {}, true);
     altResolver.mapPromises().should.not.be.empty;
   });
 
@@ -62,5 +59,4 @@ describe('Alt Resolver', () => {
       return done();
     })();
   });
-
 });

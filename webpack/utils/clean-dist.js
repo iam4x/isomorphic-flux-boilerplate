@@ -1,5 +1,3 @@
-'use strict';
-
 import del from 'del';
 import path from 'path';
 import debug from 'debug';

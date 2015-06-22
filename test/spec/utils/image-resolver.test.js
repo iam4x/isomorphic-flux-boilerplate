@@ -1,12 +1,9 @@
-'use strict';
-
 import chai from 'chai';
 import imageResolver from 'utils/image-resolver';
 
 const should = chai.should();
 
 describe('ImageResolver', () => {
-
   // TODO: Set up TDD for server
   // `ImageResolver` is mainly used on the server
 
@@ -18,5 +15,4 @@ describe('ImageResolver', () => {
       should.exist(error);
     }
   });
-
 });

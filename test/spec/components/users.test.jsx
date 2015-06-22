@@ -1,5 +1,3 @@
-'use strict';
-
 import chai from 'chai';
 import React from 'react/addons';
 import Flux from 'utils/flux';
@@ -12,7 +10,6 @@ import Users from 'components/users';
 const should = chai.should();
 
 describe('Users', () => {
-
   let node;
   let instance;
   let flux;
@@ -59,6 +56,16 @@ describe('Users', () => {
   });
 
   it('should add an user after click on add button', (done) => {
+    const handleAddChange = () => {
+      // 11 users after add
+      let td = TestUtils.scryRenderedDOMComponentsWithClass(instance, 'user--row');
+      td.length.should.eql(11);
+
+      // clean
+      flux.getStore('users').unlisten(handleAddChange);
+      return done();
+    };
+
     const handleFetchChange = () => {
       // 10 users after fetch
       let td = TestUtils.scryRenderedDOMComponentsWithClass(instance, 'user--row');
@@ -75,16 +82,6 @@ describe('Users', () => {
       setTimeout(() => {
         TestUtils.Simulate.click(addButton);
       }, 0);
-    };
-
-    const handleAddChange = () => {
-      // 11 users after add
-      let td = TestUtils.scryRenderedDOMComponentsWithClass(instance, 'user--row');
-      td.length.should.eql(11);
-
-      // clean
-      flux.getStore('users').unlisten(handleAddChange);
-      return done();
     };
 
     flux.getStore('users').listen(handleFetchChange);
@@ -116,5 +113,4 @@ describe('Users', () => {
     };
     flux.getStore('users').listen(handleChange);
   });
-
 });

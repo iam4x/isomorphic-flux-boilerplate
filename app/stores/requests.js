@@ -1,5 +1,3 @@
-'use strict';
-
 class RequestsStore {
   constructor() {
     this.bindActions(this.alt.getActions('requests'));

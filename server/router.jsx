@@ -1,5 +1,3 @@
-'use strict';
-
 import fs from 'fs';
 import path from 'path';
 import debug from 'debug';
@@ -11,7 +9,6 @@ import Flux from 'utils/flux';
 import promisify from 'utils/promisify';
 
 export default function *() {
-
   // TODO: Find strategy for removing cache on specific url
   const isCashed = this.cashed ? yield *this.cashed() : false;
 
@@ -36,7 +33,6 @@ export default function *() {
         throw error;
       },
       onError(error) {
-
         // Don't flood the console output
         // with redirection information
         if (!error.redirect) {
@@ -80,11 +76,9 @@ export default function *() {
 
       debug('dev')('return html content');
       yield this.render('main', {body, assets, locale, title});
-
     }
     // Catch error from rendering procress
     catch (error) {
-
       // If the error got a `redirect` key
       // we should trigger a redirection from
       // the server to keep things isomorphic

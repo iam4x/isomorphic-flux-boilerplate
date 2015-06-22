@@ -1,5 +1,3 @@
-'use strict';
-
 import path from 'path';
 import webpack from 'webpack';
 import {isArray} from 'lodash';
@@ -11,7 +9,7 @@ const LOCAL_IP = require('dev-ip')();
 
 const PROTOCOL = (process.env.C9_HOSTNAME) ? 'https' : 'http';
 const HOST = process.env.C9_HOSTNAME || isArray(LOCAL_IP) && LOCAL_IP[0] || LOCAL_IP || 'localhost';
-const PORT = (process.env.C9_HOSTNAME) ? '443' : parseInt(process.env.PORT) + 1 || 3001;
+const PORT = (process.env.C9_HOSTNAME) ? '443' : parseInt(process.env.PORT, 10) + 1 || 3001;
 const PUBLIC_PATH = `${PROTOCOL}://${HOST}:${PORT}/assets/`;
 
 export default {
@@ -91,11 +89,11 @@ export default {
       new webpack.optimize.DedupePlugin(),
       new webpack.optimize.OccurenceOrderPlugin(),
 
-      function () {
+      function() {
         this.plugin('done', writeStats);
       },
 
-      function () {
+      function() {
         this.plugin('done', startKoa);
       }
 

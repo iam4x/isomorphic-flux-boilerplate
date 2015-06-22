@@ -1,17 +1,15 @@
-'use strict';
-
-import React from 'react';
+import React, {Component, PropTypes} from 'react';
 import classNames from 'classnames';
-import ListenerMixin from 'alt/mixins/ListenerMixin';
 
 if (process.env.BROWSER) {
   require('styles/lang-picker.scss');
 }
 
-export default class LangPicker extends React.Component {
+class LangPicker extends Component {
+
   static propTypes = {
-    store: React.PropTypes.object.isRequired,
-    actions: React.PropTypes.object.isRequired
+    store: PropTypes.object.isRequired,
+    actions: PropTypes.object.isRequired
   }
 
   constructor(props: ?Object = {}) {
@@ -64,3 +62,5 @@ export default class LangPicker extends React.Component {
     );
   }
 }
+
+export default LangPicker;

@@ -1,5 +1,3 @@
-'use strict';
-
 import {sample, take} from 'lodash';
 
 import data from 'data/users.json';

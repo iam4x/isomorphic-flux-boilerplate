@@ -1,11 +1,11 @@
-'use strict';
+import React, {Component} from 'react';
 
-import React from 'react';
+class LoginInfo extends Component {
 
-export default React.createClass({
   render() {
-    return (
-      <h1>Please Log In.</h1>
-    );
+    return (<h1>Please log-in</h1>);
   }
-});
+
+}
+
+export default LoginInfo;

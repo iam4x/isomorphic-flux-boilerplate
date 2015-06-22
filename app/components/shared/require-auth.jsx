@@ -1,9 +1,7 @@
-'use strict';
+import React, {Component} from 'react';
 
-import React from 'react';
-
-const requireAuth = (Component) => {
-  class Authenticated extends React.Component {
+const requireAuth = (ChildComponent) => {
+  class Authenticated extends Component {
 
     static willTransitionTo(transition) {
       const nextPath = transition.path;
@@ -16,7 +14,7 @@ const requireAuth = (Component) => {
     }
 
     render() {
-      return <Component {...this.props} />;
+      return <ChildComponent {...this.props} />;
     }
   }
 

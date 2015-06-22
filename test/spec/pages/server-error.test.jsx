@@ -1,5 +1,3 @@
-'use strict';
-
 import chai from 'chai';
 import React from 'react/addons';
 
@@ -8,7 +6,6 @@ import ServerError from 'pages/server-error';
 chai.should();
 
 describe('ErrorPage', () => {
-
   let instance;
   const TestUtils = React.addons.TestUtils;
 
@@ -26,5 +23,4 @@ describe('ErrorPage', () => {
     const title = TestUtils.findRenderedDOMComponentWithTag(instance, 'h1');
     title.getDOMNode().textContent.should.eql('500');
   });
-
 });

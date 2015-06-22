@@ -1,5 +1,3 @@
-'use strict';
-
 import intlLoader from 'utils/intl-loader';
 
 class LocaleActions {

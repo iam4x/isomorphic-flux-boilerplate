@@ -1,5 +1,3 @@
-'use strict';
-
 import chai from 'chai';
 import React from 'react/addons';
 import objectAssign from 'react/lib/Object.assign';
@@ -12,7 +10,6 @@ import LangPicker from 'components/shared/lang-picker';
 const should = chai.should();
 
 describe('LangPicker', () => {
-
   let node;
   let instance;
   let flux;
@@ -76,5 +73,4 @@ describe('LangPicker', () => {
     TestUtils.Simulate.click(active);
     active.props.className.should.eql('active');
   });
-
 });

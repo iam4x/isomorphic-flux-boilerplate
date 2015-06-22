@@ -1,5 +1,3 @@
-'use strict';
-
 import Iso from 'iso';
 import React from 'react';
 import Router from 'react-router';

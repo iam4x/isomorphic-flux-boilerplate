@@ -1,5 +1,3 @@
-'use strict';
-
 // borrowed from https://github.com/gpbl/isomorphic500/blob/master/webpack%2Futils%2Fwrite-stats.js
 import fs from 'fs';
 import path from 'path';
@@ -7,14 +5,12 @@ import debug from 'debug';
 
 const filepath = path.resolve(__dirname, '../../server/webpack-stats.json');
 
-export default function (stats) {
-
+export default function(stats) {
   const publicPath = this.options.output.publicPath;
   const json = stats.toJson();
 
   // get chunks by name and extensions
-  const getChunks = function (name, ext) {
-    ext = ext || /.js$/;
+  const getChunks = function(name, ext = /.js$/) {
     let chunks = json.assetsByChunkName[name];
 
     // a chunk could be a string or an array, so make sure it is an array

@@ -1,5 +1,3 @@
-'use strict';
-
 import chai from 'chai';
 import React from 'react/addons';
 
@@ -8,7 +6,6 @@ import NotFound from 'pages/not-found';
 chai.should();
 
 describe('NotFoundPage', () => {
-
   let instance;
   const TestUtils = React.addons.TestUtils;
 
@@ -26,5 +23,4 @@ describe('NotFoundPage', () => {
     const title = TestUtils.findRenderedDOMComponentWithTag(instance, 'h1');
     title.getDOMNode().textContent.should.eql('404');
   });
-
 });

@@ -1,5 +1,3 @@
-'use strict';
-
 import debug from 'debug';
 import objectAssign from 'react/lib/Object.assign';
 

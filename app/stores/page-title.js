@@ -1,5 +1,3 @@
-'use strict';
-
 import debug from 'debug';
 
 class PageTitleStore {
@@ -14,10 +12,8 @@ class PageTitleStore {
   }
 
   onSet(title: ?string) {
-    title = `${this.baseTitle} ${this.delimeter} ${title}`;
-
     debug('dev')(`update page title to '${title}'`);
-    return this.setState({title});
+    return this.setState({title: `${this.baseTitle} ${this.delimeter} ${title}`});
   }
 }
 

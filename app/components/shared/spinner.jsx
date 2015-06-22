@@ -1,16 +1,14 @@
-'use strict';
-
-import React from 'react';
+import React, {Component, PropTypes} from 'react';
 import classNames from 'classnames';
-import ListenerMixin from 'alt/mixins/ListenerMixin';
 
 if (process.env.BROWSER) {
   require('styles/spinner.scss');
 }
 
-export default class Spinner extends React.Component {
+class Spinner extends Component {
+
   static propTypes = {
-    store: React.PropTypes.object.isRequired
+    store: PropTypes.object.isRequired
   }
 
   constructor(props: ?Object = {}) {
@@ -38,3 +36,5 @@ export default class Spinner extends React.Component {
     return (<div className={klass} />);
   }
 }
+
+export default Spinner;

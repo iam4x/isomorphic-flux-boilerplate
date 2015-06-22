@@ -1,6 +1,4 @@
-'use strict';
-
-import React from 'react';
+import React, {Component, PropTypes} from 'react';
 import {Link} from 'react-router';
 import {IntlMixin} from 'react-intl';
 
@@ -20,9 +18,10 @@ else {
   reactLogo = imageResolver('images/react-logo.png');
 }
 
-export default class Header extends React.Component {
+class Header extends Component {
+
   static propTypes: {
-    flux: React.PropTypes.object.isRequired
+    flux: PropTypes.object.isRequired
   }
 
   _getIntlMessage = IntlMixin.getIntlMessage
@@ -59,3 +58,5 @@ export default class Header extends React.Component {
     );
   }
 }
+
+export default Header;
