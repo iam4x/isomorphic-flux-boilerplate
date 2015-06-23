@@ -7,16 +7,16 @@ chai.should();
 
 describe('NotFoundPage', () => {
   let instance;
+  let node;
   const TestUtils = React.addons.TestUtils;
 
   beforeEach(() => {
-    instance = TestUtils.renderIntoDocument(<NotFound />);
+    node = window.document.createElement('div');
+    instance = React.render(<NotFound />, node);
   });
 
   afterEach(() => {
-    if (instance && instance.isMounted()) {
-      React.unmountComponentAtNode(instance.getDOMNode());
-    }
+    if (instance) React.unmountComponentAtNode(node);
   });
 
   it('should render correctly', () => {
