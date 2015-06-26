@@ -41,8 +41,8 @@ export default {
     publicPath: PUBLIC_PATH,
     output: {
       path: path.join(__dirname, '../dist'),
-      filename: '[name]-[chunkhash].js',
-      chunkFilename: '[name]-[chunkhash].js',
+      filename: '[name]-[chunkhash:12].js',
+      chunkFilename: '[name]-[chunkhash:12].js',
       publicPath: PUBLIC_PATH
     },
     module: {
