@@ -3,8 +3,7 @@ import path from 'path';
 import debug from 'debug';
 import browserSync from 'browser-sync';
 import watch from 'node-watch';
-
-import assign from 'react/lib/Object.assign';
+import {assign, noop} from 'lodash';
 
 let server;
 let started;
@@ -21,7 +20,7 @@ const startServer = () => {
   };
 
   // merge env for the new process
-  const env = assign({NODE_ENV: 'development'}, process.env);
+  const env = assign({}, {NODE_ENV: 'development'}, process.env);
   // start the server procress
   server = cp.fork(KOA_PATH, {env});
   // when server is `online`
@@ -52,14 +51,7 @@ const startServer = () => {
         // and reload browser on change
         watch(
           path.join(__dirname, '../../server'),
-          (file) => {
-            if (!file.match('webpack-stats.json')) {
-              debug('dev')('restarting koa application');
-              serverReload = true;
-              server.kill('SIGTERM');
-              return startServer();
-            }
-          }
+          (file) => !file.match('webpack-stats.json') ? restartServer() : noop()
         );
       }
     }
@@ -68,5 +60,4 @@ const startServer = () => {
 
 // kill server on exit
 process.on('exit', () => server.kill('SIGTERM'));
-
-export default () => startServer();
+export default () => !server ? startServer() : noop();
