@@ -85,7 +85,7 @@
     "sass-loader": "^1.0.1",
     "style-loader": "^0.12.1",
     "url-loader": "^0.5.5",
-    "webpack": "^1.9.11",
+    "webpack": "1.9.11",
     "webpack-dev-server": "^1.9.0"
   },
   "tags": [
