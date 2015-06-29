@@ -24,6 +24,11 @@ app.use(logger());
 app.use(helmet.defaults());
 
 if (env === 'production') {
+  // set debug env to `koa` only
+  // must be set programmaticaly for windows
+  debug.enable('koa');
+
+  // load production middleware
   app.use(require('koa-conditional-get')());
   app.use(require('koa-etag')());
   app.use(require('koa-compressor')());
@@ -70,4 +75,4 @@ app.listen(config.port);
 
 // Tell parent process koa-server is started
 if (process.send) process.send('online');
-debug('*')(`Application started on port ${config.port}`);
+debug('koa')(`Application started on port ${config.port}`);
