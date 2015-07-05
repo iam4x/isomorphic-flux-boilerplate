@@ -65,6 +65,14 @@ If user changes locale, it is saved into a cookie `_lang` and used by the server
 
 Thank's to [gpbl/react-locale-hot-switch](https://github.com/gpbl/react-locale-hot-switch) for the implementation example!
 
+In order to use `FormattedRelative` you have to pass `{...this.props}` to component:
+
+```
+<FormattedRelative
+  {...this.props}
+  value={Date.now() - (1000 * 60 * 60 * 24)} />
+```
+
 ## Async data-fetching
 
 Alt-resolver is the magic thing about the boilerplate, it will be our tool for resolving promises (data-fetching) before server side rendering.
