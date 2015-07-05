@@ -1,5 +1,10 @@
 import debug from 'debug';
 
+// We need to define `ReactIntl` on the global scope
+// in order to load specific locale data from `ReactIntl`
+// see: https://github.com/iam4x/isomorphic-flux-boilerplate/issues/64
+if (process.env.BROWSER) window.ReactIntl = require('react-intl');
+
 const loaders = {
   en(callback: Function, force = false) {
     if (!window.Intl || force) {
@@ -15,7 +20,11 @@ const loaders = {
       });
     }
     else {
-      require.ensure(['data/en'], (require) => {
+      require.ensure([
+        'react-intl/dist/locale-data/en.js',
+        'data/en'
+      ], (require) => {
+        require('react-intl/dist/locale-data/en.js');
         const lang = require('data/en');
         return callback(lang);
       });
@@ -35,7 +44,11 @@ const loaders = {
       });
     }
     else {
-      require.ensure(['data/fr'], (require) => {
+      require.ensure([
+        'react-intl/dist/locale-data/fr.js',
+        'data/fr'
+      ], (require) => {
+        require('react-intl/dist/locale-data/fr.js');
         const lang = require('data/fr');
         return callback(lang);
       });
