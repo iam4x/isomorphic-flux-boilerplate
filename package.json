@@ -43,7 +43,7 @@
     "modularized-normalize-scss": "git://github.com/hail2u/normalize.scss.git",
     "react": "^0.13.1",
     "react-intl": "^1.2.0",
-    "react-router": "^0.13.2",
+    "react-router": "^1.0.0-beta3",
     "superagent": "^1.1.0"
   },
   "devDependencies": {
