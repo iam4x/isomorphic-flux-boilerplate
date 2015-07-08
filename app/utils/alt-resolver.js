@@ -1,10 +1,11 @@
+import debug from 'debug';
+
 import React from 'react';
 import Iso from 'iso';
-import debug from 'debug';
 
 import ErrorPage from 'pages/server-error';
 
-export default class AltResolver {
+class AltResolver {
   constructor() {
     this._toResolve = [];
   }
@@ -21,7 +22,7 @@ export default class AltResolver {
     return this._toResolve.map((promise) => new Promise(promise));
   }
 
-  async render(Handler: Object, flux: Object, force: ?boolean = false) {
+  async render(Handler, flux, force = false) {
     if (process.env.BROWSER && !force) {
       debug('dev')('`altResolver.render` should not be used in browser, something went wrong');
       return null;
@@ -31,17 +32,17 @@ export default class AltResolver {
     try {
       // Fire first render to collect XHR promises
       debug('dev')('first render');
-      React.renderToString(React.createElement(Handler, {flux}));
+      React.renderToString(Handler);
 
       // Get the promises collected from the first rendering
-      const promises: Array = this.mapPromises();
+      const promises = this.mapPromises();
 
       // Resolve all promises collected
       await Promise.all(promises);
 
       debug('dev')('second render');
       // Get the new content with promises resolved
-      const app: string = React.renderToString(React.createElement(Handler, {flux}));
+      const app: string = React.renderToString(Handler);
       const {title}: string = flux.getStore('page-title').getState();
 
       // Render the html with state in it
@@ -63,3 +64,5 @@ export default class AltResolver {
   }
 
 }
+
+export default AltResolver;

@@ -1,93 +1,88 @@
-import fs from 'fs';
-import path from 'path';
 import debug from 'debug';
 
+import React from 'react';
 import Router from 'react-router';
+import Location from 'react-router/lib/Location';
+
 // Paths are relative to `app` directory
 import routes from 'routes';
 import Flux from 'utils/flux';
-import promisify from 'utils/promisify';
+
+// We need wrap `Router.run` into a promise
+// in order to use the keyword `yield` and keep
+// the correct way `koajs` works
+const promisifiedRouter = (customRoutes, location) => {
+  return new Promise((resolve) => {
+    Router.run(customRoutes, location, (error, initialState) => resolve({error, initialState}));
+  });
+};
 
 export default function *() {
-  // TODO: Find strategy for removing cache on specific url
-  const isCashed = this.cashed ? yield *this.cashed() : false;
+  // Init alt instance
+  const flux = new Flux();
 
-  if (!isCashed) {
-    const router = Router.create({
-      routes: routes,
-      location: this.request.url,
-      onAbort(abortReason) {
-        const error = new Error();
+  // Get request locale for rendering
+  const locale = this.cookies.get('_lang') || this.acceptsLanguages(require('./config/init').locales) || 'en';
+  const {messages} = require(`data/${locale}`);
 
-        // Create specific error for creating
-        // a redirection on the server
-        if (abortReason.constructor.name === 'Redirect') {
-          const { to, params, query } = abortReason;
-          const url = router.makePath(to, params, query);
-          debug('dev')('Redirect request to `%s`', url);
-          error.redirect = url;
+  // Populate store with locale
+  flux
+    .getActions('locale')
+    .switchLocaleSuccess({locale, messages});
+
+  debug('dev')(`locale of request: ${locale}`);
+
+  try {
+    // Pass correct location of the request to `react-router`
+    // it will return the matched components for the route into `initialState`
+    const location = new Location(this.request.path, this.request.querystring);
+    const {error, initialState} = yield promisifiedRouter(routes, location);
+
+    // Render 500 error page from server
+    if (error) throw error;
+
+    // Render application of correct location
+    // We need to re-define `createElement` of `react-router`
+    // in order to include `flux` on children components props
+    const routerProps = Object.assign({}, initialState,
+      {
+        location,
+        createElement: (component, props) => {
+          // Take locale and messages from `locale` store
+          // and pass them to every components rendered from `Router`
+          const i18n = flux.getStore('locale').getState();
+          return React.createElement(
+            component,
+            Object.assign(props, {flux, ...i18n})
+          );
         }
-
-        // Throw an error to be catch
-        // from the rendering process
-        throw error;
-      },
-      onError(error) {
-        // Don't flood the console output
-        // with redirection information
-        if (!error.redirect) {
-          debug('koa')('Routing Error');
-          debug('koa')(error);
-        }
-
-        // Continue to throw the err
-        throw error;
       }
-    });
+    );
 
-    // Init alt instance
-    const flux = new Flux();
+    // Use `alt-resolver` to render component with fetched data
+    const {body, title} = yield flux.render(<Router {...routerProps} />);
 
-    // Get request locale for rendering
-    const locale = this.cookies.get('_lang') || this.acceptsLanguages(require('./config/init').locales) || 'en';
-    const {messages} = require(`data/${locale}`);
+    // Assets name are found into `webpack-stats`
+    const assets = require('./webpack-stats.json');
 
-    // Populate store with locale
-    flux
-      .getActions('locale')
-      .switchLocaleSuccess({locale, messages});
-
-    debug('dev')(`locale of request: ${locale}`);
-
-    try {
-      const handler = yield promisify(router.run);
-      const {body, title} = yield flux.render(handler);
-
-      // Reload './webpack-stats.json' on dev
-      // cache it on production
-      let assets;
-      if (process.env.NODE_ENV === 'development') {
-        assets = fs.readFileSync(path.resolve(__dirname, './webpack-stats.json'));
-        assets = JSON.parse(assets);
-      }
-      else {
-        assets = require('./webpack-stats.json');
-      }
-
-      debug('dev')('return html content');
-      yield this.render('main', {body, assets, locale, title});
+    // Don't cache assets name on dev
+    if (process.env.NODE_ENV === 'development') {
+      delete require.cache[require.resolve('./webpack-stats.json')];
     }
-    // Catch error from rendering procress
-    catch (error) {
-      // If the error got a `redirect` key
-      // we should trigger a redirection from
-      // the server to keep things isomorphic
-      if (error.redirect) {
-        return this.redirect(error.redirect);
-      }
 
-      // In other cases just return the error
-      throw error;
+    debug('dev')('return html content');
+    yield this.render('main', {body, assets, locale, title});
+  }
+  // Catch error from rendering procress
+  catch (error) {
+    // If the error got a `redirect` key
+    // we should trigger a redirection from
+    // the server to keep things isomorphic
+    if (error.redirect) {
+      return this.redirect(error.redirect);
     }
+
+    // In other cases just return the error
+    throw error;
   }
 }

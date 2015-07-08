@@ -1,6 +1,7 @@
 import Iso from 'iso';
 import React from 'react';
 import Router from 'react-router';
+import BrowserHistory from 'react-router/lib/BrowserHistory';
 
 // Paths are relative to `app` directory
 import Flux from 'utils/flux';
@@ -35,15 +36,23 @@ const boostrap = () => {
   // load routes after int-polyfill
   // routes.jsx imports components using the `window.Intl`
   // it should be defined before
-  const routes = require('routes');
-
-  // Render the app at correct URL
-  Router.run(
-    routes,
-    Router.HistoryLocation,
-    (Handler) => {
-      const app = React.createElement(Handler, {flux});
-      React.render(app, boot.container);
+  const routerProps = {
+    routes: require('routes'),
+    history: new BrowserHistory(),
+    createElement: (component, props) => {
+      // Take locale and messages from `locale` store
+      // and pass them to every components rendered from `Router`
+      const i18n = flux.getStore('locale').getState();
+      return React.createElement(
+        component,
+        Object.assign(props, {flux, ...i18n})
+      );
     }
+  };
+
+  // Render `<Router />` in the same container as the SSR
+  return React.render(
+    React.createElement(Router, {...routerProps}),
+    boot.container
   );
 })();
