@@ -1,5 +1,5 @@
 import Alt from 'alt';
-import AltResolver from './alt-resolver.js';
+import AltResolver from './alt-resolver';
 
 class Flux extends Alt {
 
@@ -8,17 +8,14 @@ class Flux extends Alt {
 
     this._resolver = new AltResolver();
 
-    // Register Actions
-    this.addActions('requests', require('actions/requests'));
-    this.addActions('locale', require('actions/locale'));
-    this.addActions('users', require('actions/users'));
-    this.addActions('page-title', require('actions/page-title'));
+    ['requests', 'locale', 'users', 'page-title']
+      .map(this.registerCouple);
+  }
 
-    // Register Stores
-    this.addStore('requests', require('stores/requests'));
-    this.addStore('locale', require('stores/locale'));
-    this.addStore('users', require('stores/users'));
-    this.addStore('page-title', require('stores/page-title'));
+  registerCouple = ::this.registerCouple
+  registerCouple(name) {
+    this.addActions(name, require(`actions/${name}`));
+    this.addStore(name, require(`stores/${name}`));
   }
 
   resolve(result) {
