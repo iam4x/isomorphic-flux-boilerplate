@@ -22,6 +22,13 @@ export default {
       actions: 'Opérations',
       add: 'Ajouter un utilisateur',
       profile: 'Profil'
+    },
+    routes: {
+      users: '/utilisateurs',
+      guides: '/guides',
+      protected: '/protege',
+      profile: '/profil/:seed',
+      'login-info': '/info-client'
     }
   }
 };

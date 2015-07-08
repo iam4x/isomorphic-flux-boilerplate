@@ -1,5 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import {IntlMixin} from 'react-intl';
+import {replaceParams} from 'utils/localized-routes';
 
 if (process.env.BROWSER) {
   require('styles/users.scss');
@@ -55,8 +56,18 @@ class Users extends Component {
   }
 
   _showProfile(seed) {
+    // We use `utils/localized-routes` to
+    // replace params in `/profile/:seed`
+    // which comes from `data/{lang}`
+    const route = replaceParams(
+      this._getIntlMessage('routes.profile'),
+      {seed}
+    );
+
+    // Transition to route with router coming
+    // from the context of component
     this.context.router
-      .transitionTo(`/profile/${seed}`);
+      .transitionTo(route);
   }
 
   _renderUsers() {

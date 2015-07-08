@@ -22,6 +22,13 @@ export default {
       actions: 'Actions',
       add: 'Add random user',
       profile: 'Profile'
+    },
+    routes: {
+      users: '/users',
+      guides: '/guides',
+      protected: '/protected',
+      profile: '/profile/:seed',
+      'login-info': '/login-info'
     }
   }
 };

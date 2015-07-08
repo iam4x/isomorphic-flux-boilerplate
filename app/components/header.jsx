@@ -60,17 +60,17 @@ class Header extends Component {
         {/* Links in the navbar */}
         <ul className='app--navbar un-select'>
           <li>
-            <Link to='/'>
+            <Link to={this._getIntlMessage('routes.users')}>
               {this._getIntlMessage('header.users')}
             </Link>
           </li>
           <li>
-            <Link to='/guides'>
+            <Link to={this._getIntlMessage('routes.guides')}>
               {this._getIntlMessage('header.guides')}
             </Link>
           </li>
           <li>
-            <Link to='/protected'>
+            <Link to={this._getIntlMessage('routes.protected')}>
               {this._getIntlMessage('header.protected')}
             </Link>
           </li>
