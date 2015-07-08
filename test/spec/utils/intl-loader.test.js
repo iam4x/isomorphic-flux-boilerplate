@@ -1,5 +1,3 @@
-import chai from 'chai';
-
 import intlLoader from 'utils/intl-loader';
 
 const should = chai.should();

@@ -1,4 +1,3 @@
-import chai from 'chai';
 import React from 'react/addons';
 
 import NotFound from 'pages/not-found';

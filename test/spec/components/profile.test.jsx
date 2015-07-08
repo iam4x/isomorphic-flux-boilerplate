@@ -1,4 +1,3 @@
-import chai from 'chai';
 import React from 'react/addons';
 import objectAssign from 'react/lib/Object.assign';
 import {capitalize} from 'lodash';

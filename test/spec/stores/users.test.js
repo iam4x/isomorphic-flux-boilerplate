@@ -1,4 +1,3 @@
-import chai from 'chai';
 import Flux from 'utils/flux';
 
 chai.should();

@@ -23,13 +23,9 @@ module.exports = function (config) {
   config.set({
     browsers: [process.env.CONTINUOUS_INTEGRATION ? 'Firefox' : 'Chrome'],
     browserNoActivityTimeout: 30000,
-    frameworks: ['mocha'],
-    files: [
-      'tests.webpack.js'
-    ],
-    preprocessors: {
-      'tests.webpack.js': ['webpack', 'sourcemap']
-    },
+    frameworks: ['mocha', 'chai', 'sinon-chai'],
+    files: ['tests.webpack.js'],
+    preprocessors: {'tests.webpack.js': ['webpack', 'sourcemap']},
     reporters: reporters,
     coverageReporter: coverage,
     webpack: {
@@ -45,7 +41,7 @@ module.exports = function (config) {
           },
           {
             test: /\.js$|.jsx$/,
-            loader: 'isparta?{babel: {stage: 1}}',
+            loader: 'isparta?{babel: {stage: 0}}',
             exclude: /node_modules|test/
           },
           {

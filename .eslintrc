@@ -2,6 +2,10 @@
 {
   "parser": "babel-eslint",
   "extends": "future/react",
+  "globals": {
+    "sinon": true,
+    "chai": true
+  },
   "rules": {
     "react/display-name": 0,
 
