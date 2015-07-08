@@ -8,19 +8,19 @@ class UsersStore {
   }
 
   static getBySeed(seed) {
-    const users: Array<Object> = this.getState().users;
+    const users = this.getState().users;
     return {user: users.find((user) => user.seed === seed)};
   }
 
   onRemove(index) {
-    const users: Array<Object> = this.users.slice();
+    const users = this.users.slice();
     users.splice(index, 1);
 
     return this.setState({users});
   }
 
   onAddSuccess(user) {
-    const users: Array<Object> = this.users.slice();
+    const users = this.users.slice();
     users.push(user);
 
     return this.setState({users});
@@ -33,10 +33,10 @@ class UsersStore {
       return this.setState({users});
     }
 
-    const merged: Array<Object> = this.users.slice();
+    const merged = this.users.slice();
     users.forEach((user) => {
       // update the most recent data into store
-      let match: ?Object = merged.find((u) => u.seed === user.seed) || null;
+      let match = merged.find((u) => u.seed === user.seed) || null;
       if (match) {
         match = user;
       }
@@ -50,8 +50,8 @@ class UsersStore {
   }
 
   onFetchBySeedSuccess(user) {
-    const users: Array<Object> = this.users.slice();
-    let occurrence: ?Object = users.find((u) => u.seed === user.seed);
+    const users = this.users.slice();
+    let occurrence = users.find((u) => u.seed === user.seed);
     if (occurrence) {
       occurrence = user;
     }

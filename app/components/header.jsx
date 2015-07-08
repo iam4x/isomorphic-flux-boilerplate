@@ -26,16 +26,38 @@ class Header extends Component {
 
   _getIntlMessage = IntlMixin.getIntlMessage
 
+  state = {
+    spinner: false
+  }
+
+  componentDidMount() {
+    this.props.flux
+      .getStore('requests')
+      .listen(this._handleRequestStoreChange);
+  }
+
+  _handleRequestStoreChange = ::this._handleRequestStoreChange
+  _handleRequestStoreChange({inProgress}) {
+    return this.setState({spinner: inProgress});
+  }
+
   render() {
     return (
       <header className='app--header'>
-        <Spinner store={this.props.flux.getStore('requests')} />
+        {/* Spinner in the top right corner */}
+        <Spinner active={this.state.spinner} />
+
+        {/* LangPicker on the right side */}
         <LangPicker
-          store={this.props.flux.getStore('locale')}
-          actions={this.props.flux.getActions('locale')} />
+          activeLocale={this.props.locales[0]}
+          onChange={this.props.flux.getActions('locale').switchLocale} />
+
+        {/* React Logo in header */}
         <Link to='/' className='app--logo'>
           <img src={reactLogo} alt='react-logo' />
         </Link>
+
+        {/* Links in the navbar */}
         <ul className='app--navbar un-select'>
           <li>
             <Link to='/'>
@@ -53,7 +75,6 @@ class Header extends Component {
             </Link>
           </li>
         </ul>
-        <hr />
       </header>
     );
   }

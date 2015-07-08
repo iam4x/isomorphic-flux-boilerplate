@@ -43,18 +43,18 @@ class Users extends Component {
       .unlisten(this._handleStoreChange);
   }
 
-  _handleStoreChange = this._handleStoreChange.bind(this)
-  _handleStoreChange(state: Object) {
+  _handleStoreChange = ::this._handleStoreChange
+  _handleStoreChange(state) {
     return this.setState(state);
   }
 
-  _removeUser(index: number) {
+  _removeUser(index) {
     this.props.flux
       .getActions('users')
       .remove(index);
   }
 
-  _showProfile(seed: string) {
+  _showProfile(seed) {
     this.context.router
       .transitionTo(`/profile/${seed}`);
   }
@@ -82,6 +82,28 @@ class Users extends Component {
     });
   }
 
+  renderUser = ::this.renderUser
+  renderUser(user, index) {
+    return (
+      <tr className='user--row' key={index}>
+        <td>{user.user.email}</td>
+        <td className='text-center'>
+          <button
+            onClick={this._showProfile.bind(this, user.seed)}>
+            Profile
+          </button>
+        </td>
+        <td className='text-center'>
+          <button
+            className='user--remove'
+            onClick={this._removeUser.bind(this, index)}>
+            X
+          </button>
+        </td>
+      </tr>
+    );
+  }
+
   render() {
     return (
       <div>
@@ -100,7 +122,10 @@ class Users extends Component {
             </tr>
           </thead>
           <tbody>
-            {this._renderUsers()}
+            {
+              this.state.users
+                .map(this.renderUser)
+            }
           </tbody>
         </table>
         <p className='text-center'>

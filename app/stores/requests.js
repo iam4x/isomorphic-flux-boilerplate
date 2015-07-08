@@ -1,4 +1,5 @@
 class RequestsStore {
+
   constructor() {
     this.bindActions(this.alt.getActions('requests'));
     this.inProgress = false;
@@ -19,6 +20,7 @@ class RequestsStore {
   _setInProgress(inProgress: boolean) {
     return this.setState({inProgress});
   }
+
 }
 
 export default RequestsStore;
