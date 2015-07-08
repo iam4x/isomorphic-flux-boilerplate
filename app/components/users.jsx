@@ -8,7 +8,7 @@ if (process.env.BROWSER) {
 class Users extends Component {
 
   static contextTypes = {
-    router: PropTypes.func
+    router: PropTypes.object.isRequired
   }
 
   static propTypes = {
@@ -56,7 +56,7 @@ class Users extends Component {
 
   _showProfile(seed: string) {
     this.context.router
-      .transitionTo('profile', {seed});
+      .transitionTo(`/profile/${seed}`);
   }
 
   _renderUsers() {

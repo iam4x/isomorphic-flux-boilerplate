@@ -33,22 +33,22 @@ class Header extends Component {
         <LangPicker
           store={this.props.flux.getStore('locale')}
           actions={this.props.flux.getActions('locale')} />
-        <Link to='app' className='app--logo'>
+        <Link to='/' className='app--logo'>
           <img src={reactLogo} alt='react-logo' />
         </Link>
         <ul className='app--navbar un-select'>
           <li>
-            <Link to='app'>
+            <Link to='/'>
               {this._getIntlMessage('header.users')}
             </Link>
           </li>
           <li>
-            <Link to='guides'>
+            <Link to='/guides'>
               {this._getIntlMessage('header.guides')}
             </Link>
           </li>
           <li>
-            <Link to='protected'>
+            <Link to='/protected'>
               {this._getIntlMessage('header.protected')}
             </Link>
           </li>
