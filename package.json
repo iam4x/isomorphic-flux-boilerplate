@@ -4,9 +4,10 @@
   "description": "An ES7 isomorphic Flux/ReactJS boilerplate",
   "main": "server/index.js",
   "scripts": {
-    "build": "./node_modules/.bin/webpack --progress --stats --config ./webpack/prod.config.js",
+    "build": "webpack --progress --stats --config ./webpack/prod.config.js",
     "dev": "node --harmony ./webpack/dev-server.js",
-    "test": "./node_modules/.bin/karma start --single-run",
+    "test": "karma start --single-run",
+    "dev-test": "karma start",
     "postinstall": "npm run build"
   },
   "repository": {
