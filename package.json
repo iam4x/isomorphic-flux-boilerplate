@@ -70,7 +70,6 @@
     "json-loader": "^0.5.1",
     "karma": "^0.12.31",
     "karma-chai-plugins": "^0.6.0",
-    "karma-chrome-launcher": "^0.2.0",
     "karma-cli": "^0.1.0",
     "karma-coverage": "^0.4.2",
     "karma-coveralls": "^1.0.1",
