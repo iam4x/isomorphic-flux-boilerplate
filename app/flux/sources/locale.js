@@ -8,11 +8,11 @@ const LocaleSource = {
       return new Promise(async (resolve: Function) => {
         if (process.env.BROWSER) {
           const {messages} = await intlLoader(locale);
-          return resolve({locale, messages});
+          resolve({locale, messages});
         }
         else {
           const {messages} = require(`data/${locale}`);
-          return resolve({locale, messages});
+          resolve({locale, messages});
         }
       });
     },

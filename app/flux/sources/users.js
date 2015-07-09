@@ -33,7 +33,7 @@ const UsersSource = {
   },
 
   add: {
-    remote(seed: string) {
+    remote() {
       return new Promise((resolve: Function) => {
         // Take a random user in json data
         const user: Object = sample(data.users);

@@ -10,7 +10,7 @@ class UsersStore {
 
   static getBySeed(seed: string) {
     const user = this.getState().users
-      .find((user) => user.seed === seed) || null;
+      .find((u) => u.seed === seed) || null;
 
     return {user};
   }

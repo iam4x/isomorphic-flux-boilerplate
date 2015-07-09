@@ -18,7 +18,7 @@ class PageTitleStore {
     const nextTitle = `${this.baseTitle} ${this.delimiter} ${title}`;
 
     debug('dev')(`update page title to '${title}'`);
-    return this.setState({title});
+    return this.setState({title: nextTitle});
   }
 
 }
