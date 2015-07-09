@@ -8,32 +8,11 @@ if (process.env.BROWSER) {
 class Spinner extends Component {
 
   static propTypes = {
-    store: PropTypes.object.isRequired
-  }
-
-  constructor(props: ?Object = {}) {
-    super(props);
-
-    this.state = props.store.getState();
-  }
-
-  componentDidMount() {
-    this.props.store.listen(this._handleStoreChange);
-  }
-
-  componentWillUnmount() {
-    this.props.store.unlisten(this._handleStoreChange);
-  }
-
-  _handleStoreChange = this._handleStoreChange.bind(this)
-  _handleStoreChange(state: Object = {}) {
-    return this.setState(state);
+    active: PropTypes.bool
   }
 
   render() {
-    const klass: string = classNames('app--spinner', {active: this.state.inProgress});
-
-    return (<div className={klass} />);
+    return <div className={classNames('app--spinner', {active: this.props.active})} />;
   }
 }
 

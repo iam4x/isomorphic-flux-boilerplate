@@ -1,4 +1,3 @@
-import chai from 'chai';
 import imageResolver from 'utils/image-resolver';
 
 const should = chai.should();

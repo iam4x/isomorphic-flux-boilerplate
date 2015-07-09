@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import {IntlMixin} from 'react-intl';
-import {capitalize, assign} from 'lodash';
+import {capitalize} from 'lodash';
 
 if (process.env.BROWSER) {
   require('styles/profile.scss');
@@ -13,7 +13,7 @@ class Profile extends Component {
   }
 
   _getIntlMessage = IntlMixin.getIntlMessage
-  _formatMessage = IntlMixin.formatMessage.bind(assign({}, this, IntlMixin))
+  _formatMessage = IntlMixin.formatMessage.bind(Object.assign({}, this, IntlMixin))
 
   state = this.props.flux
     .getStore('users')
@@ -39,22 +39,22 @@ class Profile extends Component {
       .unlisten(this._handleStoreChange);
   }
 
-  _handleStoreChange = this._handleStoreChange.bind(this)
+  _handleStoreChange = ::this._handleStoreChange
   _handleStoreChange() {
-    const user: ?Object = this.props.flux
+    const user = this.props.flux
       .getStore('users')
       .getBySeed(this.props.params.seed);
 
-    return this.setState(user);
+    this.setState(user);
+    this._setPageTitle();
   }
 
-  _setPageTitle = this._setPageTitle.bind(this)
+  _setPageTitle = ::this._setPageTitle
   _setPageTitle() {
-    let title: string;
-
+    let title;
     if (this.state.user) {
-      const user: Object = this.state.user.user;
-      const fullName: string = this._getFullName(user.name);
+      const user = this.state.user.user;
+      const fullName = this._getFullName(user.name);
 
       title = this._getIntlMessage('profile.page-title');
       title = this._formatMessage(title, {fullName});
@@ -66,7 +66,7 @@ class Profile extends Component {
     // Set page title
     this.props.flux
       .getActions('page-title')
-      .set(title);
+      .set.defer(title);
   }
 
   _getFullName({first, last}) {
@@ -75,7 +75,7 @@ class Profile extends Component {
 
   render() {
     if (this.state.user) {
-      const user: Object = this.state.user.user;
+      const user = this.state.user.user;
       return (
         <div className='app--profile'>
           <h2>{this._getFullName(user.name)}</h2>

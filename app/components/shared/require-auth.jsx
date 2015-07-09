@@ -6,7 +6,8 @@ const requireAuth = (ChildComponent) => {
     static willTransitionTo(transition) {
       const nextPath = transition.path;
 
-      // assume user is not duthenticated
+      // assume user is never authenticated
+      // TODO: link with some API for better example
       const isAuthenticated = false;
       if (!isAuthenticated) {
         return transition.redirect('login-info', {}, {nextPath});

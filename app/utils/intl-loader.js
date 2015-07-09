@@ -6,7 +6,8 @@ import debug from 'debug';
 if (process.env.BROWSER) window.ReactIntl = require('react-intl');
 
 const loaders = {
-  en(callback: Function, force = false) {
+
+  en(callback, force = false) {
     if (!window.Intl || force) {
       require.ensure([
         'intl/Intl',
@@ -30,7 +31,8 @@ const loaders = {
       });
     }
   },
-  fr(callback: Function, force = false) {
+
+  fr(callback, force = false) {
     if (!window.Intl || force) {
       require.ensure([
         'intl/Intl',
@@ -54,10 +56,10 @@ const loaders = {
       });
     }
   }
+
 };
 
 export default (locale, force) => {
   debug('dev')(`loading lang ${locale}`);
-  const promise: Promise = new Promise((resolve) => loaders[locale](resolve, force));
-  return promise;
+  return new Promise((resolve) => loaders[locale](resolve, force));
 };

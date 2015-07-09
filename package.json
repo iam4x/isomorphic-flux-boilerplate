@@ -4,9 +4,10 @@
   "description": "An ES7 isomorphic Flux/ReactJS boilerplate",
   "main": "server/index.js",
   "scripts": {
-    "build": "./node_modules/.bin/webpack --progress --stats --config ./webpack/prod.config.js",
+    "build": "webpack --progress --stats --config ./webpack/prod.config.js",
     "dev": "node --harmony ./webpack/dev-server.js",
-    "test": "./node_modules/.bin/karma start --single-run",
+    "test": "karma start --single-run",
+    "dev-test": "karma start",
     "postinstall": "npm run build"
   },
   "repository": {
@@ -43,7 +44,7 @@
     "modularized-normalize-scss": "git://github.com/hail2u/normalize.scss.git",
     "react": "^0.13.1",
     "react-intl": "^1.2.0",
-    "react-router": "^0.13.2",
+    "react-router": "^1.0.0-beta3",
     "superagent": "^1.1.0"
   },
   "devDependencies": {
@@ -53,7 +54,6 @@
     "babel-eslint": "^3.1.9",
     "babel-loader": "^5.0.0",
     "browser-sync": "^2.7.11",
-    "chai": "^3.0.0",
     "css-loader": "^0.14.5",
     "del": "^1.1.1",
     "dev-ip": "^1.0.1",
@@ -69,7 +69,7 @@
     "isparta-loader": "^0.2.0",
     "json-loader": "^0.5.1",
     "karma": "^0.12.31",
-    "karma-chrome-launcher": "^0.2.0",
+    "karma-chai-plugins": "^0.6.0",
     "karma-cli": "^0.1.0",
     "karma-coverage": "^0.4.2",
     "karma-coveralls": "^1.0.1",

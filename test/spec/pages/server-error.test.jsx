@@ -1,4 +1,3 @@
-import chai from 'chai';
 import React from 'react/addons';
 
 import ServerError from 'pages/server-error';

@@ -1,6 +1,7 @@
 import debug from 'debug';
 
 class LocaleStore {
+
   constructor() {
     this.bindActions(this.alt.getActions('locale'));
     this.locales = [''];
@@ -11,7 +12,7 @@ class LocaleStore {
     return this.getState().locales[0];
   }
 
-  onSwitchLocaleSuccess(data: Object) {
+  onSwitchLocaleSuccess(data) {
     // Save locale into a cookie
     // that will be read from server on requests
     if (process.env.BROWSER) {
@@ -25,6 +26,7 @@ class LocaleStore {
       locales: [data.locale]
     });
   }
+
 }
 
 export default LocaleStore;

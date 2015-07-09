@@ -1,4 +1,3 @@
-import chai from 'chai';
 import React from 'react';
 import Flux from 'utils/flux';
 import AltResolver from 'utils/alt-resolver';

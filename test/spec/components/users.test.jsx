@@ -1,8 +1,8 @@
-import chai from 'chai';
 import React from 'react/addons';
 import Flux from 'utils/flux';
 import objectAssign from 'react/lib/Object.assign';
 
+import reactRouterStub from '../../utils/stub-router-context';
 import injectLang from '../../utils/inject-lang';
 
 import Users from 'components/users';
@@ -19,10 +19,10 @@ describe('Users', () => {
     flux = new Flux();
 
     const props = objectAssign({flux}, injectLang(flux));
-    const element = React.createElement(Users, props);
+    const Stubbed = reactRouterStub(Users, props);
 
     node = window.document.createElement('div');
-    instance = React.render(element, node);
+    instance = React.render(React.createElement(Stubbed), node);
   });
 
   afterEach(() => {
@@ -38,8 +38,6 @@ describe('Users', () => {
   });
 
   it('should render without users', () => {
-    // Check `state.users` is empty
-    instance.state.users.should.be.empty;
     // Check `<li></li>` don't exists
     const td = TestUtils.scryRenderedDOMComponentsWithClass(instance, 'user--row');
     td.should.be.empty;
@@ -76,7 +74,7 @@ describe('Users', () => {
 
       // add an user
       flux.getStore('users').listen(handleAddChange);
-      const addButton = instance.refs['add-button'];
+      const addButton = TestUtils.findRenderedDOMComponentWithClass(instance, 'add--button');
       should.exist(addButton);
 
       setTimeout(() => {
