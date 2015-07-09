@@ -1,4 +1,5 @@
 import React, {Component, PropTypes} from 'react';
+import {Link} from 'react-router';
 import {IntlMixin} from 'react-intl';
 import {replaceParams} from 'utils/localized-routes';
 
@@ -8,12 +9,8 @@ if (process.env.BROWSER) {
 
 class Users extends Component {
 
-  static contextTypes = {
-    router: PropTypes.object.isRequired
-  }
-
   static propTypes = {
-    flux: React.PropTypes.object.isRequired
+    flux: PropTypes.object.isRequired
   }
 
   _getIntlMessage = IntlMixin.getIntlMessage
@@ -55,31 +52,17 @@ class Users extends Component {
       .remove(index);
   }
 
-  _showProfile(seed) {
-    // We use `utils/localized-routes` to
-    // replace params in `/profile/:seed`
-    // which comes from `data/{lang}`
-    const route = replaceParams(
-      this._getIntlMessage('routes.profile'),
-      {seed}
-    );
-
-    // Transition to route with router coming
-    // from the context of component
-    this.context.router
-      .transitionTo(route);
-  }
-
   renderUser = ::this.renderUser
   renderUser(user, index) {
+    const profileRoute = replaceParams(
+      this._getIntlMessage('routes.profile'),
+      {seed: user.seed}
+    );
     return (
       <tr className='user--row' key={index}>
         <td>{user.user.email}</td>
         <td className='text-center'>
-          <button
-            onClick={this._showProfile.bind(this, user.seed)}>
-            Profile
-          </button>
+          <Link to={profileRoute}>Profile</Link>
         </td>
         <td className='text-center'>
           <button
@@ -118,7 +101,7 @@ class Users extends Component {
         </table>
         <p className='text-center'>
           <button
-            ref='add-button'
+            className='add--button'
             onClick={this.props.flux.getActions('users').add}>
             {this._getIntlMessage('users.add')}
           </button>
