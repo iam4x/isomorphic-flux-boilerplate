@@ -27,10 +27,8 @@ describe('App', () => {
     instance = React.render(element, node);
   });
 
-  afterEach(() => {
-    if (instance && instance.isMounted()) {
-      React.unmountComponentAtNode(node);
-    }
+  afterEach(function() {
+    if (instance) React.unmountComponentAtNode(node);
   });
 
   it('should render header correctly', () => {
@@ -41,5 +39,20 @@ describe('App', () => {
   it('should render logo correctly', () => {
     const logo = TestUtils.findRenderedDOMComponentWithClass(instance, 'app--logo');
     should.exist(logo);
+  });
+
+  it('should change page title', function() {
+    flux.getActions('page-title').set('foobar');
+    document.title.should.eql('ISO-ReactJS | foobar');
+  });
+
+  it('should handle locale change', function(done) {
+    const handleChange = function({locales}) {
+      locales[0].should.eql('fr');
+      flux.getStore('locale').unlisten(handleChange);
+      return done();
+    };
+    flux.getStore('locale').listen(handleChange);
+    flux.getActions('locale').switchLocale('fr');
   });
 });

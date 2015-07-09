@@ -1,6 +1,6 @@
 // Return an array of different routes paths for a same component
 // used to generate localized routes in `/app/routes.js`
-const generateRoute = function({paths = [], component}) {
+const generateRoute = function({paths, component}) {
   return paths.map(function(path) {
     return {path, component};
   });
@@ -14,7 +14,7 @@ const generateRoute = function({paths = [], component}) {
 //
 // Example:
 //  For route: `/route/:foo` params will be `{foo: 'bar'}`
-const replaceParams = function(route, params = {}) {
+const replaceParams = function(route, params) {
   let parsedRoute = route.trim();
   Object.keys(params).forEach(function(paramKey) {
     const param = ':' + paramKey;

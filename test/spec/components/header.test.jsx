@@ -26,9 +26,7 @@ describe('Header', () => {
   });
 
   afterEach(() => {
-    if (instance && instance.isMounted()) {
-      React.unmountComponentAtNode(node);
-    }
+    if (instance) React.unmountComponentAtNode(node);
   });
 
   it('should render links correctly', () => {
@@ -39,5 +37,11 @@ describe('Header', () => {
   it('should render lang picker correctly', () => {
     const langs = TestUtils.findRenderedDOMComponentWithClass(instance, 'lang--picker');
     langs.props.children.length.should.eql(2);
+  });
+
+  it('should show spinner on request', function() {
+    flux.getActions('requests').start();
+    const spinner = TestUtils.findRenderedDOMComponentWithClass(instance, 'app--spinner');
+    spinner.props.className.indexOf('active').should.not.eql(-1);
   });
 });
