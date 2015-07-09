@@ -39,9 +39,12 @@ describe('Header', () => {
     langs.props.children.length.should.eql(2);
   });
 
-  it('should show spinner on request', function() {
+  it('should handle requests change', function() {
     flux.getActions('requests').start();
     const spinner = TestUtils.findRenderedDOMComponentWithClass(instance, 'app--spinner');
     spinner.props.className.indexOf('active').should.not.eql(-1);
+
+    flux.getActions('requests').fail();
+    spinner.props.className.indexOf('active').should.eql(-1);
   });
 });

@@ -49,6 +49,7 @@ describe('App', () => {
   it('should handle locale change', function(done) {
     const handleChange = function({locales}) {
       locales[0].should.eql('fr');
+      flux.getStore('locale').getLocale().should.eql('fr');
       flux.getStore('locale').unlisten(handleChange);
       return done();
     };
