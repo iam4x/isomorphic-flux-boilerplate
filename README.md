@@ -73,6 +73,12 @@ In order to use `FormattedRelative` you have to pass `{...this.props}` to compon
   value={Date.now() - (1000 * 60 * 60 * 24)} />
 ```
 
+## Localized routes
+
+We have an utility to generate severals routes for the same component (see `app/utils/localized-routes.js`).
+
+Use the same logic as localized string, declare the localized routes into `app/routes.js` and into your `data/{lang}` file.
+
 ## Async data-fetching
 
 Alt-resolver is the magic thing about the boilerplate, it will be our tool for resolving promises (data-fetching) before server side rendering.
