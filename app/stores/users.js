@@ -1,4 +1,4 @@
-import {isEmpty} from 'lodash';
+import {findIndex, isEmpty} from 'lodash';
 
 class UsersStore {
 
@@ -51,11 +51,11 @@ class UsersStore {
 
   onFetchBySeedSuccess(user) {
     const users = this.users.slice();
-    let occurrence = users.find((u) => u.seed === user.seed);
-    if (occurrence) {
-      occurrence = user;
+    const index = findIndex(users, {seed: user.seed});
+    if (index > -1) {
+      users[index] = user;
     }
-    else if (user) {
+    else {
       users.push(user);
     }
 
