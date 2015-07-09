@@ -24,7 +24,7 @@
 
 ## TL;DR
 
-Use with `iojs^1.8.0` or `nodejs^0.12.0`, clone the repo, `npm install` and `npm run dev`.
+Use with `iojs^2.3.0` or `nodejs^0.12.0`, clone the repo, `npm install` and `npm run dev`.
 
 Learn React ([react-prime-draft](https://github.com/mikechau/react-primer-draft)), learn Flux and Alt ([alt guide](http://alt.js.org/guide/)).
 
@@ -187,7 +187,7 @@ Open your browser to `http://localhost:3002` and you will see the magic happens!
 ### Run tests
 
 * `$ npm test` will run the tests once
-* `$ ./node_modules/.bin/karma start` will watch for changes and run the tests on change
+* `$ npm run dev-test` will watch for changes and run the tests on change
 
 ### Build project:
 
