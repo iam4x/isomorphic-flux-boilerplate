@@ -3,8 +3,8 @@ import LocaleActions from 'flux/actions/locale';
 
 const LocaleSource = {
 
-  initialize: {
-    remote(state: Object, locale: string) {
+  switch: {
+    remote(state, locale) {
       return new Promise(async (resolve: Function) => {
         if (process.env.BROWSER) {
           const {messages} = await intlLoader(locale);

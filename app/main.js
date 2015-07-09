@@ -1,4 +1,3 @@
-import React from 'react';
 import Router from 'react-router';
 import AltIso from 'alt/utils/AltIso';
 import BrowserHistory from 'react-router/lib/BrowserHistory';
@@ -18,4 +17,4 @@ const routerProps = {
 };
 
 // Render `<Router />` in the same container as the SSR
-AltIso.render(alt, React.createElement(Router, {...routerProps}));
+AltIso.render(alt, Router, {...routerProps});

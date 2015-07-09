@@ -1,8 +1,13 @@
-import React, {Component, PropTypes} from 'react';
+import React, {Component} from 'react';
 import {Link} from 'react-router';
 import {IntlMixin} from 'react-intl';
 
 import imageResolver from 'utils/image-resolver';
+
+import Spinner from 'components/shared/spinner';
+import LangPicker from 'components/shared/lang-picker';
+import RequestsStore from 'flux/stores/requests';
+import LocaleStore from 'flux/stores/locale';
 
 // Load styles for the header
 // and load the `react-logo.png` image
@@ -18,19 +23,12 @@ else {
 
 class Header extends Component {
 
-  static propTypes: {
-    flux: PropTypes.object.isRequired
-  }
-
   _getIntlMessage = IntlMixin.getIntlMessage
 
-  state = {
-    spinner: false
-  }
+  state = {spinner: RequestsStore.getState().inProgress}
 
   componentDidMount() {
-    this.props.flux
-      .getStore('requests')
+    RequestsStore
       .listen(this._handleRequestStoreChange);
   }
 
@@ -48,7 +46,7 @@ class Header extends Component {
         {/* LangPicker on the right side */}
         <LangPicker
           activeLocale={this.props.locales[0]}
-          onChange={this.props.flux.getActions('locale').switchLocale} />
+          onChange={LocaleStore.switch} />
 
         {/* React Logo in header */}
         <Link to='/' className='app--logo'>

@@ -34,8 +34,16 @@ export default function *() {
     // Render 500 error page from server
     if (error) throw error;
 
-    const routerProps = Object.assign({}, initialState, {location});
-    const body = yield AltIso.render(alt, <Router {...routerProps} />, {locale});
+    const routerProps = Object.assign(
+      initialState,
+      {
+        location,
+        createElement: function(component, props) {
+          return React.createElement(component, {...props, locale});
+        }
+      }
+    );
+    const body = yield AltIso.render(alt, Router, {...routerProps});
     const {title} = PageTitleStore.getState();
 
     // Assets name are found into `webpack-stats`

@@ -11,18 +11,10 @@ if (process.env.BROWSER) {
   require('styles/main.scss');
 }
 
-@AltIso.define(({locale}) => LocaleStore.initialize(locale))
+@AltIso.define(({locale}) => LocaleStore.switch(locale))
 class App extends Component {
 
-  constructor(props, context) {
-    super(props, context);
-
-    this.state = {
-      i18n: props.flux
-        .getStore('locale')
-        .getState()
-    };
-  }
+  state = {i18n: LocaleStore.getState()}
 
   componentDidMount() {
     LocaleStore.listen(this._handleLocaleChange);
@@ -55,9 +47,7 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Header
-          {...this.state.i18n}
-          flux={this.props.flux} />
+        <Header {...this.state.i18n} />
         <hr />
         {
           React.Children
