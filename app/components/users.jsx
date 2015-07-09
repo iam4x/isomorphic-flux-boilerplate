@@ -20,7 +20,7 @@ class Users extends Component {
 
   state = this.props.flux
     .getStore('users')
-    .getState();
+    .getState()
 
   componentWillMount() {
     this.props.flux
@@ -68,29 +68,6 @@ class Users extends Component {
     // from the context of component
     this.context.router
       .transitionTo(route);
-  }
-
-  _renderUsers() {
-    return this.state.users.map((user, index) => {
-      return (
-        <tr className='user--row' key={index}>
-          <td>{user.user.email}</td>
-          <td className='text-center'>
-            <button
-              onClick={this._showProfile.bind(this, user.seed)}>
-              Profile
-            </button>
-          </td>
-          <td className='text-center'>
-            <button
-              className='user--remove'
-              onClick={this._removeUser.bind(this, index)}>
-              X
-            </button>
-          </td>
-        </tr>
-      );
-    });
   }
 
   renderUser = ::this.renderUser
