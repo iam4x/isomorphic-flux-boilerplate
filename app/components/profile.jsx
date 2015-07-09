@@ -45,7 +45,8 @@ class Profile extends Component {
       .getStore('users')
       .getBySeed(this.props.params.seed);
 
-    return this.setState(user);
+    this.setState(user);
+    this._setPageTitle();
   }
 
   _setPageTitle = ::this._setPageTitle
@@ -65,7 +66,7 @@ class Profile extends Component {
     // Set page title
     this.props.flux
       .getActions('page-title')
-      .set(title);
+      .set.defer(title);
   }
 
   _getFullName({first, last}) {
