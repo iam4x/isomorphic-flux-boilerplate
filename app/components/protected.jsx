@@ -1,18 +1,15 @@
-import React, {Component, PropTypes} from 'react';
+import React, {Component} from 'react';
 import {IntlMixin} from 'react-intl';
+
+import PageTitleActions from 'flux/actions/page-title';
 import requireAuth from 'components/shared/require-auth';
 
 const Protected = requireAuth(class Protected extends Component {
 
-  static propTypes = {
-    flux: PropTypes.object.isRequired
-  }
-
   _getIntlMessage = IntlMixin.getIntlMessage
 
   componentWillMount() {
-    this.props.flux
-      .getActions('page-title')
+    PageTitleActions
       .set(this._getIntlMessage('protected.page-title'));
   }
 

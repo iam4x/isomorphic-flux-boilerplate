@@ -1,48 +1,39 @@
-import React, {Component, PropTypes} from 'react';
+import React, {Component} from 'react';
 import {IntlMixin} from 'react-intl';
 import {capitalize} from 'lodash';
+
+import AltIso from 'alt/utils/AltIso';
+
+import PageTitleActions from 'flux/actions/page-title';
+import UsersStore from 'flux/stores/users';
 
 if (process.env.BROWSER) {
   require('styles/profile.scss');
 }
 
+@AltIso.define((props) => UsersStore.fetchBySeed(props.params.seed))
 class Profile extends Component {
-
-  static propTypes = {
-    flux: PropTypes.object.isRequired
-  }
 
   _getIntlMessage = IntlMixin.getIntlMessage
   _formatMessage = IntlMixin.formatMessage.bind(Object.assign({}, this, IntlMixin))
 
-  state = this.props.flux
-    .getStore('users')
-    .getBySeed(this.props.params.seed)
+  state = UsersStore.getBySeed(this.props.params.seed)
 
   componentWillMount() {
     this._setPageTitle();
-
-    this.props.flux
-      .getActions('users')
-      .fetchBySeed(this.props.params.seed);
   }
 
   componentDidMount() {
-    this.props.flux
-      .getStore('users')
-      .listen(this._handleStoreChange);
+    UsersStore.listen(this._handleStoreChange);
   }
 
   componentWillUnmount() {
-    this.props.flux
-      .getStore('users')
-      .unlisten(this._handleStoreChange);
+    UsersStore.unlisten(this._handleStoreChange);
   }
 
   _handleStoreChange = ::this._handleStoreChange
   _handleStoreChange() {
-    const user = this.props.flux
-      .getStore('users')
+    const user = UsersStore
       .getBySeed(this.props.params.seed);
 
     this.setState(user);
@@ -52,7 +43,7 @@ class Profile extends Component {
   _setPageTitle = ::this._setPageTitle
   _setPageTitle() {
     let title;
-    if (this.state.user) {
+    if (this.state.user && this.state.user.user) {
       const user = this.state.user.user;
       const fullName = this._getFullName(user.name);
 
@@ -64,9 +55,7 @@ class Profile extends Component {
     }
 
     // Set page title
-    this.props.flux
-      .getActions('page-title')
-      .set.defer(title);
+    return PageTitleActions.set(title);
   }
 
   _getFullName({first, last}) {
@@ -74,7 +63,7 @@ class Profile extends Component {
   }
 
   render() {
-    if (this.state.user) {
+    if (this.state.user && this.state.user.user) {
       const user = this.state.user.user;
       return (
         <div className='app--profile'>
