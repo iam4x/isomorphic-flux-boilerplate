@@ -41,8 +41,7 @@ class Users extends Component {
       .unlisten(this._handleStoreChange);
   }
 
-  _handleStoreChange = ::this._handleStoreChange
-  _handleStoreChange(state) {
+  _handleStoreChange = (state) => {
     return this.setState(state);
   }
 
@@ -52,8 +51,7 @@ class Users extends Component {
       .remove(index);
   }
 
-  renderUser = ::this.renderUser
-  renderUser(user, index) {
+  renderUser = (user, index) => {
     const profileRoute = replaceParams(
       this._getIntlMessage('routes.profile'),
       {seed: user.seed}
