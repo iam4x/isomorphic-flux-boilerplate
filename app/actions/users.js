@@ -1,4 +1,5 @@
-import {sample, take} from 'lodash';
+import sample from 'lodash/collection/sample';
+import take from 'lodash/array/take';
 
 import data from 'data/users.json';
 

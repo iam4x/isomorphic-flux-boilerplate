@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import {IntlMixin} from 'react-intl';
-import {capitalize} from 'lodash';
+import capitalize from 'lodash/string/capitalize';
 
 if (process.env.BROWSER) {
   require('styles/profile.scss');

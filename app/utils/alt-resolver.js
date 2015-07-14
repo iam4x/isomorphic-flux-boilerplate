@@ -1,5 +1,5 @@
 import debug from 'debug';
-import {noop} from 'lodash';
+import noop from 'lodash/utility/noop';
 
 import React from 'react';
 import Iso from 'iso';

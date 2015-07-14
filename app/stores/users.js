@@ -1,4 +1,5 @@
-import {findIndex, isEmpty} from 'lodash';
+import findIndex from 'lodash/array/findIndex';
+import isEmpty from 'lodash/array/findIndex';
 
 class UsersStore {
 
