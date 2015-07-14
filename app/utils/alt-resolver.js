@@ -1,4 +1,5 @@
 import debug from 'debug';
+import {noop} from 'lodash';
 
 import React from 'react';
 import Iso from 'iso';
@@ -6,12 +7,19 @@ import Iso from 'iso';
 import ErrorPage from 'pages/server-error';
 
 class AltResolver {
-  constructor() {
-    this._toResolve = [];
-  }
+
+  _toResolve = []
+  _firstClientSideRender = true
 
   resolve(promise: Function, later = false) {
     if (process.env.BROWSER && !later) {
+      // Prevent first app mount to re-resolve same
+      // promises that server already did
+      if (this._firstClientSideRender) {
+        this._firstClientSideRender = false;
+        return noop();
+      }
+
       return new Promise(promise);
     }
 
