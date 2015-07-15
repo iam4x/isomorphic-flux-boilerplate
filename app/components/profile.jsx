@@ -39,8 +39,7 @@ class Profile extends Component {
       .unlisten(this._handleStoreChange);
   }
 
-  _handleStoreChange = ::this._handleStoreChange
-  _handleStoreChange() {
+  _handleStoreChange = () => {
     const user = this.props.flux
       .getStore('users')
       .getBySeed(this.props.params.seed);
@@ -49,8 +48,7 @@ class Profile extends Component {
     this._setPageTitle();
   }
 
-  _setPageTitle = ::this._setPageTitle
-  _setPageTitle() {
+  _setPageTitle = () => {
     let title;
     if (this.state.user) {
       const user = this.state.user.user;

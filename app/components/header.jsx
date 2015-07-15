@@ -36,8 +36,7 @@ class Header extends Component {
       .listen(this._handleRequestStoreChange);
   }
 
-  _handleRequestStoreChange = ::this._handleRequestStoreChange
-  _handleRequestStoreChange({inProgress}) {
+  _handleRequestStoreChange = ({inProgress}) => {
     return this.setState({spinner: inProgress});
   }
 

@@ -43,8 +43,7 @@ class App extends Component {
       .unlisten(this._handlePageTitleChange);
   }
 
-  _handleLocaleChange = ::this._handleLocaleChange
-  _handleLocaleChange(i18n) {
+  _handleLocaleChange = (i18n) => {
     return this.setState({i18n});
   }
 
@@ -55,8 +54,7 @@ class App extends Component {
   // If we have children components sent by `react-router`
   // we need to clone them and add them the correct
   // locale and messages sent from the Locale Store
-  renderChild = ::this.renderChild
-  renderChild(child) {
+  renderChild = (child) => {
     return React.addons
       .cloneWithProps(child, {...this.state.i18n});
   }
