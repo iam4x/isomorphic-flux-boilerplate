@@ -51,8 +51,12 @@ const boostrap = () => {
   };
 
   // Render `<Router />` in the same container as the SSR
-  return React.render(
+  React.render(
     React.createElement(Router, {...routerProps}),
     boot.container
   );
+
+  // Tell `alt-resolver` we have done the first render
+  // next promises will be resolved
+  flux._resolver._firstClientSideRender = false;
 })();

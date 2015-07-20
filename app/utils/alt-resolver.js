@@ -16,7 +16,6 @@ class AltResolver {
       // Prevent first app mount to re-resolve same
       // promises that server already did
       if (this._firstClientSideRender) {
-        this._firstClientSideRender = false;
         return noop();
       }
 
