@@ -1,0 +1,27 @@
+.lang--picker {
+  bottom: -15px;
+  position: absolute;
+  right: 9px;
+}
+
+.lang--picker li {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.lang--picker li:last-child {
+  margin-right: 0;
+}
+
+.lang--picker a {
+  cursor: pointer;
+  opacity: .5;
+  padding: 0 5px;
+  text-transform: uppercase;
+}
+
+.lang--picker a.active {
+  background-color: var(--black);
+  color: var(--white);
+  opacity: 1;
+}

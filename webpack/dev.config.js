@@ -29,11 +29,13 @@ const config = Object.assign({}, baseConfig, {
 config.module.loaders = config.module.loaders.concat([
   {
     test: /\.(jpe?g|png|gif|svg|woff|eot|ttf)$/,
-    loader: 'file?name=[sha512:hash:base64:7].[ext]'
+    loader: 'file?name=[sha512:hash:base64:7].[ext]',
+    exclude: /node_modules/
   },
   {
-    test: /\.scss$/,
-    loader: 'style!css?sourceMap!autoprefixer?browsers=last 2 version!sass?outputStyle=expanded&sourceMap'
+    test: /\.css$/,
+    loader: 'style!css?sourceMap!cssnext',
+    exclude: /node_modules/
   }
 ]);
 

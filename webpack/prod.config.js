@@ -21,10 +21,12 @@ config.module.loaders = config.module.loaders.concat([
     loader: 'file?name=[sha512:hash:base64:7].[ext]!image?optimizationLevel=7&progressive&interlaced'
   },
   {
-    test: /\.scss$/,
-    loader: ExtractTextPlugin.extract('style', 'css?sourceMap!autoprefixer?browsers=last 2 version!sass')
+    test: /\.css$/,
+    loader: ExtractTextPlugin.extract('style', 'css?sourceMap!cssnext')
   }
 ]);
+
+config.cssnext = {browsers: 'last 2 versions'};
 
 config.plugins = [
   // extract css
