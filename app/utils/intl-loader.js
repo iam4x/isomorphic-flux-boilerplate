@@ -10,11 +10,11 @@ const loaders = {
   en(callback, force = false) {
     if (!window.Intl || force) {
       require.ensure([
-        'intl/Intl',
+        'intl',
         'intl/locale-data/jsonp/en.js',
         'data/en'
       ], (require) => {
-        require('intl/Intl');
+        require('intl');
         require('intl/locale-data/jsonp/en.js');
         const lang = require('data/en');
         return callback(lang);
@@ -35,11 +35,11 @@ const loaders = {
   fr(callback, force = false) {
     if (!window.Intl || force) {
       require.ensure([
-        'intl/Intl',
+        'intl',
         'intl/locale-data/jsonp/fr.js',
         'data/fr'
       ], (require) => {
-        require('intl/Intl');
+        require('intl');
         require('intl/locale-data/jsonp/fr.js');
         const lang = require('data/fr');
         return callback(lang);
