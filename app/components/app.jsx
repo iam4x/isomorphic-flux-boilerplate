@@ -10,7 +10,8 @@ if (process.env.BROWSER) {
 class App extends Component {
 
   static propTypes = {
-    flux: PropTypes.object.isRequired
+    flux: PropTypes.object.isRequired,
+    children: PropTypes.element
   }
 
   constructor(props, context) {

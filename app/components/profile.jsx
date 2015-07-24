@@ -9,7 +9,8 @@ if (process.env.BROWSER) {
 class Profile extends Component {
 
   static propTypes = {
-    flux: PropTypes.object.isRequired
+    flux: PropTypes.object.isRequired,
+    params: PropTypes.object.isRequired
   }
 
   _getIntlMessage = IntlMixin.getIntlMessage
