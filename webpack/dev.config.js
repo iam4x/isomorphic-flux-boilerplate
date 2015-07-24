@@ -29,7 +29,7 @@ const config = Object.assign({}, baseConfig, {
 config.module.loaders = config.module.loaders.concat([
   {
     test: /\.(jpe?g|png|gif|svg|woff|eot|ttf)$/,
-    loader: 'url?limit=10000&name=[sha512:hash:base64:7].[ext]'
+    loader: 'file?name=[sha512:hash:base64:7].[ext]'
   },
   {
     test: /\.scss$/,

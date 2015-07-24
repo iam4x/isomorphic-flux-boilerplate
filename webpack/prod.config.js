@@ -14,11 +14,11 @@ var config = Object.assign({}, baseConfig);
 config.module.loaders = config.module.loaders.concat([
   {
     test: /\.(woff|eot|ttf)$/,
-    loader: 'url?limit=10000&name=[sha512:hash:base64:7].[ext]'
+    loader: 'file?name=[sha512:hash:base64:7].[ext]'
   },
   {
     test: /\.(jpe?g|png|gif|svg)$/,
-    loader: 'url?limit=10000&name=[sha512:hash:base64:7].[ext]!image?optimizationLevel=7&progressive&interlaced'
+    loader: 'file?name=[sha512:hash:base64:7].[ext]!image?optimizationLevel=7&progressive&interlaced'
   },
   {
     test: /\.scss$/,
