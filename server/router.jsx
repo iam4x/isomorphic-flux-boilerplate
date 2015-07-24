@@ -13,7 +13,9 @@ import Flux from 'utils/flux';
 // the correct way `koajs` works
 const promisifiedRouter = (customRoutes, location) => {
   return new Promise((resolve) => {
-    Router.run(customRoutes, location, (error, initialState) => resolve({error, initialState}));
+    Router.run(customRoutes, location, (error, initialState, transition) =>
+      resolve({error, initialState, transition})
+    );
   });
 };
 
@@ -36,10 +38,14 @@ export default function *() {
     // Pass correct location of the request to `react-router`
     // it will return the matched components for the route into `initialState`
     const location = new Location(this.request.path, this.request.querystring);
-    const {error, initialState} = yield promisifiedRouter(routes, location);
+    const {error, initialState, transition} = yield promisifiedRouter(routes, location);
 
     // Render 500 error page from server
     if (error) throw error;
+
+    // Handle component `onEnter` transition
+    const {isCancelled, redirectInfo} = transition;
+    if (isCancelled) return this.redirect(redirectInfo.pathname);
 
     // Render application of correct location
     // We need to re-define `createElement` of `react-router`
@@ -75,13 +81,6 @@ export default function *() {
   }
   // Catch error from rendering procress
   catch (error) {
-    // If the error got a `redirect` key
-    // we should trigger a redirection from
-    // the server to keep things isomorphic
-    if (error.redirect) {
-      return this.redirect(error.redirect);
-    }
-
     // In other cases just return the error
     throw error;
   }
