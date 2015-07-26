@@ -45,8 +45,8 @@ module.exports = function (config) {
             exclude: /node_modules|test/
           },
           {
-            test: /\.scss$/,
-            loader: 'style!css!sass'
+            test: /\.css$/,
+            loader: 'style!css!cssnext'
           },
           {
             test: /\.(jpe?g|png|gif|svg|woff|eot|ttf)$/,
