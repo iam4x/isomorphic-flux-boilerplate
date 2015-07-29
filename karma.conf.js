@@ -42,7 +42,7 @@ module.exports = function (config) {
           {
             test: /\.js$|.jsx$/,
             loader: 'isparta?{babel: {stage: 0}}',
-            exclude: /node_modules|test/
+            exclude: /node_modules|test|utils/
           },
           {
             test: /\.css$/,

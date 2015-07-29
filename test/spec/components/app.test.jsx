@@ -56,4 +56,15 @@ describe('App', () => {
     flux.getStore('locale').listen(handleChange);
     flux.getActions('locale').switchLocale('fr');
   });
+
+  it('should render children component', function() {
+    React.unmountComponentAtNode(node);
+    const Stubbed = reactRouterStub(App, {flux});
+    const Element = <Stubbed><h1 className='foobar'>foobar</h1></Stubbed>;
+    node = window.document.createElement('div');
+    instance = React.render(Element, node);
+
+    const title = TestUtils.findRenderedDOMComponentWithClass(instance, 'foobar');
+    should.exist(title);
+  });
 });

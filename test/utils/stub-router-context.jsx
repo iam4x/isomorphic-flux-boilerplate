@@ -31,7 +31,8 @@ export default function stubRouterContext(Component, props, stubs) {
       };
     },
     render() {
-      return <Component {...props} />;
+      const customProps = Object.assign({}, this.props, props);
+      return <Component {...customProps} />;
     }
   });
 };
