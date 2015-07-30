@@ -5,6 +5,7 @@ var path = require('path');
 var webpack = require('webpack');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var baseConfig = require('./base.config');
+var cssnext = require('cssnext');
 
 // clean `.tmp` && `dist`
 require('./utils/clean-dist')();
@@ -22,11 +23,13 @@ config.module.loaders = config.module.loaders.concat([
   },
   {
     test: /\.css$/,
-    loader: ExtractTextPlugin.extract('style', 'css?sourceMap!cssnext')
+    loader: ExtractTextPlugin.extract('style', 'css?sourceMap!postcss')
   }
 ]);
 
-config.cssnext = {browsers: 'last 2 versions'};
+config.postcss = [
+  cssnext({browsers: 'last 2 versions'})
+];
 
 config.plugins = [
   // extract css
