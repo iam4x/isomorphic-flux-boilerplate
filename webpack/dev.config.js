@@ -1,5 +1,6 @@
 import webpack from 'webpack';
 import {isArray} from 'lodash';
+import cssnext  from 'cssnext';
 
 import baseConfig from './base.config';
 import startKoa from './utils/start-koa';
@@ -23,7 +24,10 @@ const config = Object.assign({}, baseConfig, {
   output: Object.assign(
     baseConfig.output,
     {publicPath: PUBLIC_PATH}
-  )
+  ),
+  postcss: [
+    cssnext()
+  ]
 });
 
 config.module.loaders = config.module.loaders.concat([
@@ -34,7 +38,7 @@ config.module.loaders = config.module.loaders.concat([
   },
   {
     test: /\.css$/,
-    loader: 'style!css?sourceMap!cssnext',
+    loader: 'style!css?sourceMap!postcss',
     exclude: /node_modules/
   }
 ]);
