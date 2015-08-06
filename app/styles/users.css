@@ -1,0 +1,12 @@
+.app--users {
+  margin: 0 auto;
+}
+
+.app--users td,
+.app--users th {
+  padding: 5px 10px;
+}
+
+.app--users thead {
+  border-bottom: 1px solid var(--black);
+}

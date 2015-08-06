@@ -3,10 +3,6 @@ import {Link} from 'react-router';
 import {IntlMixin} from 'react-intl';
 import {replaceParams} from 'utils/localized-routes';
 
-if (process.env.BROWSER) {
-  require('styles/users.scss');
-}
-
 class Users extends Component {
 
   static propTypes = {

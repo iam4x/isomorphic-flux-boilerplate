@@ -2,14 +2,11 @@ import React, {Component, PropTypes} from 'react';
 import {IntlMixin} from 'react-intl';
 import capitalize from 'lodash/string/capitalize';
 
-if (process.env.BROWSER) {
-  require('styles/profile.scss');
-}
-
 class Profile extends Component {
 
   static propTypes = {
-    flux: PropTypes.object.isRequired
+    flux: PropTypes.object.isRequired,
+    params: PropTypes.object.isRequired
   }
 
   _getIntlMessage = IntlMixin.getIntlMessage
@@ -75,7 +72,7 @@ class Profile extends Component {
     if (this.state.user) {
       const user = this.state.user.user;
       return (
-        <div className='app--profile'>
+        <div className='app--profile text-center'>
           <h2>{this._getFullName(user.name)}</h2>
           <img
             src={user.picture.medium}

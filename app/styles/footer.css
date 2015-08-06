@@ -1,0 +1,12 @@
+.app--footer {
+  margin-top: 50px;
+}
+
+.app--footer-content {
+  padding-top: 10px;
+  text-align: center;
+}
+
+.app--footer iframe:first-child {
+  margin-right: 25px;
+}

@@ -5,6 +5,7 @@ var path = require('path');
 var webpack = require('webpack');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var baseConfig = require('./base.config');
+var cssnext = require('cssnext');
 
 // clean `.tmp` && `dist`
 require('./utils/clean-dist')();
@@ -14,17 +15,21 @@ var config = Object.assign({}, baseConfig);
 config.module.loaders = config.module.loaders.concat([
   {
     test: /\.(woff|eot|ttf)$/,
-    loader: 'url?limit=10000&name=[sha512:hash:base64:7].[ext]'
+    loader: 'file?name=[sha512:hash:base64:7].[ext]'
   },
   {
     test: /\.(jpe?g|png|gif|svg)$/,
-    loader: 'url?limit=10000&name=[sha512:hash:base64:7].[ext]!image?optimizationLevel=7&progressive&interlaced'
+    loader: 'file?name=[sha512:hash:base64:7].[ext]!image?optimizationLevel=7&progressive&interlaced'
   },
   {
-    test: /\.scss$/,
-    loader: ExtractTextPlugin.extract('style', 'css?sourceMap!autoprefixer?browsers=last 2 version!sass')
+    test: /\.css$/,
+    loader: ExtractTextPlugin.extract('style', 'css?sourceMap!postcss')
   }
 ]);
+
+config.postcss = [
+  cssnext({browsers: 'last 2 versions'})
+];
 
 config.plugins = [
   // extract css

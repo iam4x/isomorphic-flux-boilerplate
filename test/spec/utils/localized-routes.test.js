@@ -6,7 +6,7 @@ describe('LocalizedRoutes utils', function() {
   it('should return an array of routes', function() {
     const routes = generateRoute({
       paths: ['a', 'b', 'c'],
-      component: {}
+      component: function() {}
     });
     routes.length.should.eql(3);
   });

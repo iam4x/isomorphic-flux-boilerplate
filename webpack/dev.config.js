@@ -1,5 +1,6 @@
 import webpack from 'webpack';
 import {isArray} from 'lodash';
+import cssnext  from 'cssnext';
 
 import baseConfig from './base.config';
 import startKoa from './utils/start-koa';
@@ -23,17 +24,22 @@ const config = Object.assign({}, baseConfig, {
   output: Object.assign(
     baseConfig.output,
     {publicPath: PUBLIC_PATH}
-  )
+  ),
+  postcss: [
+    cssnext()
+  ]
 });
 
 config.module.loaders = config.module.loaders.concat([
   {
     test: /\.(jpe?g|png|gif|svg|woff|eot|ttf)$/,
-    loader: 'url?limit=10000&name=[sha512:hash:base64:7].[ext]'
+    loader: 'file?name=[sha512:hash:base64:7].[ext]',
+    exclude: /node_modules/
   },
   {
-    test: /\.scss$/,
-    loader: 'style!css?sourceMap!autoprefixer?browsers=last 2 version!sass?outputStyle=expanded&sourceMap'
+    test: /\.css$/,
+    loader: 'style!css?sourceMap!postcss',
+    exclude: /node_modules/
   }
 ]);
 

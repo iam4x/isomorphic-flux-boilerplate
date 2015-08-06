@@ -11,7 +11,6 @@ import LangPicker from 'components/shared/lang-picker';
 // for the `<img src='' />` element
 let reactLogo;
 if (process.env.BROWSER) {
-  require('styles/header.scss');
   reactLogo = require('images/react-logo.png');
 }
 else {
@@ -20,8 +19,9 @@ else {
 
 class Header extends Component {
 
-  static propTypes: {
-    flux: PropTypes.object.isRequired
+  static propTypes = {
+    flux: PropTypes.object.isRequired,
+    locales: PropTypes.array.isRequired
   }
 
   _getIntlMessage = IntlMixin.getIntlMessage
@@ -41,6 +41,9 @@ class Header extends Component {
   }
 
   render() {
+    const {locales, flux} = this.props;
+    const [activeLocale] = locales;
+
     return (
       <header className='app--header'>
         {/* Spinner in the top right corner */}
@@ -48,8 +51,8 @@ class Header extends Component {
 
         {/* LangPicker on the right side */}
         <LangPicker
-          activeLocale={this.props.locales[0]}
-          onChange={this.props.flux.getActions('locale').switchLocale} />
+          activeLocale={activeLocale}
+          onChange={flux.getActions('locale').switchLocale} />
 
         {/* React Logo in header */}
         <Link to='/' className='app--logo'>
@@ -57,7 +60,7 @@ class Header extends Component {
         </Link>
 
         {/* Links in the navbar */}
-        <ul className='app--navbar un-select'>
+        <ul className='app--navbar text-center reset-list un-select'>
           <li>
             <Link to={this._getIntlMessage('routes.users')}>
               {this._getIntlMessage('header.users')}

@@ -1,10 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import classNames from 'classnames';
 
-if (process.env.BROWSER) {
-  require('styles/spinner.scss');
-}
-
 class Spinner extends Component {
 
   static propTypes = {

@@ -1,0 +1,23 @@
+.app--header {
+  position: relative;
+}
+
+.app--header .app--logo {
+  display: block;
+  height: 200px;
+  margin: 0 auto;
+  width: 200px;
+}
+
+.app--header .app--logo img {
+  width: 100%;
+}
+
+.app--header .app--navbar li {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.app--header .app--navbar li:last-child {
+  margin-right: 0;
+}

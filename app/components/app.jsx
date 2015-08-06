@@ -4,13 +4,14 @@ import Header from 'components/header';
 import Footer from 'components/footer';
 
 if (process.env.BROWSER) {
-  require('styles/main.scss');
+  require('styles/app.css');
 }
 
 class App extends Component {
 
   static propTypes = {
-    flux: PropTypes.object.isRequired
+    flux: PropTypes.object.isRequired,
+    children: PropTypes.element
   }
 
   constructor(props, context) {

@@ -1,6 +1,7 @@
 /* eslint-disable */
 
 var webpack = require('webpack');
+var cssnext = require('cssnext');
 
 var coverage;
 var reporters;
@@ -42,11 +43,11 @@ module.exports = function (config) {
           {
             test: /\.js$|.jsx$/,
             loader: 'isparta?{babel: {stage: 0}}',
-            exclude: /node_modules|test/
+            exclude: /node_modules|test|utils/
           },
           {
-            test: /\.scss$/,
-            loader: 'style!css!sass'
+            test: /\.css$/,
+            loader: 'style!css!postcss'
           },
           {
             test: /\.(jpe?g|png|gif|svg|woff|eot|ttf)$/,
@@ -64,6 +65,9 @@ module.exports = function (config) {
             NODE_ENV: JSON.stringify('test')
           }
         })
+      ],
+      postcss: [
+        cssnext()
       ],
       resolve: {
         extensions: ['', '.js', '.json', '.jsx'],

@@ -21,6 +21,7 @@
 * [koa](http://koajs.com/)
 * [webpack](http://webpack.github.io/)
 * [babeljs](https://babeljs.io/)
+* [cssnext](http://http://cssnext.io/)
 
 ## TL;DR
 
@@ -229,7 +230,3 @@ You can also use `processes.json` to run the application with [PM2 Monitor](http
 * [ReactJS Conf 2015 links](https://gist.github.com/yannickcr/148110d3ca658ad96c2b)
 * [Learn ES6](https://babeljs.io/docs/learn-es6/)
 * [ES6 Features](https://github.com/lukehoban/es6features#readme)
-
-### Common errors
-
-* SASS compilation hang when importing same file more than once (see [#62](https://github.com/iam4x/isomorphic-flux-boilerplate/issues/62))
