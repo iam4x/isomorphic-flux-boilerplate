@@ -21,7 +21,7 @@
 * [koa](http://koajs.com/)
 * [webpack](http://webpack.github.io/)
 * [babeljs](https://babeljs.io/)
-* [cssnext](http://http://cssnext.io/)
+* [cssnext](http://cssnext.io/)
 
 ## TL;DR
 
