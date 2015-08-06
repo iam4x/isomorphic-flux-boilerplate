@@ -9,6 +9,6 @@
   width: 44px;
 }
 
-.app--spinner .active {
+.app--spinner.active {
   display: block;
 }
