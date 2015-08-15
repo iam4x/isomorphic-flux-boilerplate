@@ -37,7 +37,7 @@ export default function *() {
   try {
     // Pass correct location of the request to `react-router`
     // it will return the matched components for the route into `initialState`
-    const location = new Location(this.request.path, this.request.querystring);
+    const location = new Location(this.request.path, this.request.query);
     const {error, initialState, transition} = yield promisifiedRouter(routes, location);
 
     // Render 500 error page from server
