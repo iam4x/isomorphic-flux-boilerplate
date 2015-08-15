@@ -24,6 +24,7 @@
     "quotes": [2, "single", "avoid-escape"],
     "comma-dangle": [2, "never"],
     "brace-style": [2, "stroustrup", {"allowSingleLine": true}],
+    "no-trailing-spaces": [2, { "skipBlankLines": true }],
     "no-underscore-dangle": 0,
     "space-in-brackets": 0,
     "func-names": 0,
