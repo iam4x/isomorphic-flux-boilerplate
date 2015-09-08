@@ -45,7 +45,7 @@
     "normalize.css": "^3.0.3",
     "react": "^0.13.3",
     "react-intl": "^1.2.0",
-    "react-router": "^1.0.0-beta3"
+    "react-router": "1.0.0-beta3"
   },
   "devDependencies": {
     "babel-core": "^5.8.3",
