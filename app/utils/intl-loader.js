@@ -14,14 +14,10 @@ const loaders = {
         return callback(lang);
       });
     } else {
-      require.ensure([
-        'react-intl/dist/locale-data/en.js',
-        'data/en'
-      ], (require) => {
-        require('react-intl/dist/locale-data/en.js');
-        const lang = require('data/en');
-        return callback(lang);
-      });
+      require.ensure(
+        ['data/en'],
+        (require) => callback(require('data/en'))
+      );
     }
   },
 
@@ -38,14 +34,10 @@ const loaders = {
         return callback(lang);
       });
     } else {
-      require.ensure([
-        'react-intl/dist/locale-data/fr.js',
-        'data/fr'
-      ], (require) => {
-        require('react-intl/dist/locale-data/fr.js');
-        const lang = require('data/fr');
-        return callback(lang);
-      });
+      require.ensure(
+        ['data/fr'],
+        (require) => callback(require('data/fr'))
+      );
     }
   }
 
