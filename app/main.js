@@ -1,7 +1,7 @@
 import Iso from 'iso';
 import React from 'react';
 import Router from 'react-router';
-import BrowserHistory from 'react-router/lib/BrowserHistory';
+import createBrowserHistory from 'history/lib/createBrowserHistory';
 
 // Paths are relative to `app` directory
 import Flux from 'utils/flux';
@@ -38,7 +38,7 @@ const boostrap = () => {
   // it should be defined before
   const routerProps = {
     routes: require('routes'),
-    history: new BrowserHistory(),
+    history: createBrowserHistory(),
     createElement: (component, props) => {
       // Take locale and messages from `locale` store
       // and pass them to every components rendered from `Router`
