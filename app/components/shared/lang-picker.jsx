@@ -19,8 +19,9 @@ class LangPicker extends Component {
           <li key={ index }>
             <a
               className={ cx({ active: locale === activeLocale }) }
-              onClick={ () => onChange(locale) } />
-            { locale }
+              onClick={ () => onChange(locale) }>
+              { locale }
+            </a>
           </li>
         ) }
       </ul>
