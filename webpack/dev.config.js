@@ -13,7 +13,7 @@ const PORT = (process.env.C9_HOSTNAME) ? '443' : parseInt(process.env.PORT, 10) 
 const PUBLIC_PATH = `${PROTOCOL}://${HOST}:${PORT}/assets/`;
 
 const config = Object.assign({}, baseConfig, {
-  devtool: 'eval-source-map',
+  devtool: 'cheap-modules-source-map',
   entry: {
     app: [
       `webpack-dev-server/client?http://localhost:${PORT}`,
