@@ -1,5 +1,5 @@
-import React, {Component, PropTypes} from 'react';
-import classNames from 'classnames';
+import React, { Component, PropTypes } from 'react';
+import cx from 'classnames';
 
 class Spinner extends Component {
 
@@ -8,7 +8,8 @@ class Spinner extends Component {
   }
 
   render() {
-    return <div className={classNames('app--spinner', {active: this.props.active})} />;
+    const { active } = this.props;
+    return <div className={ cx('app--spinner', { active }) } />;
   }
 }
 

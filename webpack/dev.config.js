@@ -1,6 +1,6 @@
 import webpack from 'webpack';
-import {isArray} from 'lodash';
 import cssnext  from 'cssnext';
+import { isArray } from 'lodash';
 
 import baseConfig from './base.config';
 import startKoa from './utils/start-koa';
@@ -21,10 +21,10 @@ const config = Object.assign({}, baseConfig, {
       './app/index.js'
     ]
   },
-  output: Object.assign(
-    baseConfig.output,
-    {publicPath: PUBLIC_PATH}
-  ),
+  ouput: {
+    ...baseConfig.output,
+    publicPath: PUBLIC_PATH
+  },
   postcss: [
     cssnext()
   ]

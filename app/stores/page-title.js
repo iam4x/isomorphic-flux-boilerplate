@@ -14,7 +14,7 @@ class PageTitleStore {
 
   onSet(title) {
     debug('dev')(`update page title to '${title}'`);
-    return this.setState({title: `${this.baseTitle} ${this.delimeter} ${title}`});
+    this.title = `${this.baseTitle} ${this.delimeter} ${title}`;
   }
 
 }

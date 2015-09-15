@@ -17,8 +17,8 @@ class RequestsStore {
     this._setInProgress(false);
   }
 
-  _setInProgress(inProgress: boolean) {
-    return this.setState({inProgress});
+  _setInProgress(inProgress) {
+    return this.setState({ inProgress });
   }
 
 }

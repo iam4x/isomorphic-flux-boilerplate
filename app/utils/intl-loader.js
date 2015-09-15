@@ -19,8 +19,7 @@ const loaders = {
         const lang = require('data/en');
         return callback(lang);
       });
-    }
-    else {
+    } else {
       require.ensure([
         'react-intl/dist/locale-data/en.js',
         'data/en'
@@ -44,8 +43,7 @@ const loaders = {
         const lang = require('data/fr');
         return callback(lang);
       });
-    }
-    else {
+    } else {
       require.ensure([
         'react-intl/dist/locale-data/fr.js',
         'data/fr'

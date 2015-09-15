@@ -1,15 +1,13 @@
 import debug from 'debug';
-import objectAssign from 'react/lib/Object.assign';
 
 import baseConfig from './all.json';
-const env = process.env.NODE_ENV || 'development';
+const { NODE_ENV = 'development' } = process.env;
 let config;
 
 try {
-  config = require(`./${env}`);
-}
-catch (error) {
-  debug('dev')(`No specific configuration for env ${env}`);
+  config = require(`./${NODE_ENV}`);
+} catch (error) {
+  debug('dev')(`No specific configuration for env ${NODE_ENV}`);
 }
 
-export default objectAssign(baseConfig, config);
+export default { ...baseConfig, ...config };

@@ -14,8 +14,7 @@ export default (locales) => {
         Intl.NumberFormat = IntlPolyfill.NumberFormat;
         Intl.DateTimeFormat = IntlPolyfill.DateTimeFormat;
       }
-    }
-    else {
+    } else {
       // No `Intl`: use and load polyfill
       global.Intl = require('intl');
       debug('koa')('Intl is not supported, so the polyfill has been loaded');

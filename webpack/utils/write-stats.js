@@ -39,7 +39,7 @@ export default function(stats) {
       };
     });
 
-  const content = {script, style, images};
+  const content = { script, style, images };
 
   fs.writeFileSync(filepath, JSON.stringify(content));
   debug('dev')('`webpack-stats.json` updated');

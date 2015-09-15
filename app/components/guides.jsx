@@ -1,5 +1,5 @@
-import React, {Component, PropTypes} from 'react';
-import {IntlMixin} from 'react-intl';
+import React, { Component, PropTypes } from 'react';
+import { IntlMixin } from 'react-intl';
 
 class Guides extends Component {
 

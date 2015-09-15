@@ -4,8 +4,7 @@ export default (imagePath) => {
   if (process.env.BROWSER) {
     debug('dev')('`image-resolver` should not be used in browser, something went wrong');
     throw new Error('image-resolver called on browser');
-  }
-  else {
+  } else {
     // Load images compiled from `webpack-stats`
     // don't cache the `webpack-stats.json` on dev
     // so we gonna read the file on each request
@@ -15,9 +14,8 @@ export default (imagePath) => {
       const path = require('path');
       images = fs.readFileSync(path.resolve(__dirname, '../../server/webpack-stats.json'));
       images = JSON.parse(images).images;
-    }
-    // on production, use simple `require` to cache the file
-    else {
+    } else {
+      // on production, use simple `require` to cache the file
       images = require('../../server/webpack-stats.json').images;
     }
 

@@ -10,28 +10,28 @@ class UsersStore {
 
   static getBySeed(seed) {
     const users = this.getState().users;
-    return {user: users.find((user) => user.seed === seed)};
+    return { user: users.find((user) => user.seed === seed) };
   }
 
   onRemove(index) {
     const users = this.users.slice();
     users.splice(index, 1);
 
-    return this.setState({users});
+    return this.setState({ users });
   }
 
   onAddSuccess(user) {
     const users = this.users.slice();
     users.push(user);
 
-    return this.setState({users});
+    return this.setState({ users });
   }
 
   onFetchSuccess(users) {
     if (isEmpty(this.users)) {
       // just apply the new users
       // this is called on every server rendering
-      return this.setState({users});
+      return this.setState({ users });
     }
 
     const merged = this.users.slice();
@@ -40,27 +40,25 @@ class UsersStore {
       let match = merged.find((u) => u.seed === user.seed) || null;
       if (match) {
         match = user;
-      }
-      // push the new user
-      else {
+      } else {
+        // push the new user
         merged.push(user);
       }
     });
 
-    return this.setState({users: merged});
+    return this.setState({ users: merged });
   }
 
   onFetchBySeedSuccess(user) {
     const users = this.users.slice();
-    const index = findIndex(users, {seed: user.seed});
+    const index = findIndex(users, { seed: user.seed });
     if (index > -1) {
       users[index] = user;
-    }
-    else {
+    } else {
       users.push(user);
     }
 
-    return this.setState({users});
+    return this.setState({ users });
   }
 
 }

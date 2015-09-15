@@ -1,5 +1,5 @@
-import React, {Component, PropTypes} from 'react';
-import {IntlMixin} from 'react-intl';
+import React, { Component, PropTypes } from 'react';
+import { IntlMixin } from 'react-intl';
 import capitalize from 'lodash/string/capitalize';
 
 class Profile extends Component {
@@ -52,9 +52,8 @@ class Profile extends Component {
       const fullName = this._getFullName(user.name);
 
       title = this._getIntlMessage('profile.page-title');
-      title = this._formatMessage(title, {fullName});
-    }
-    else {
+      title = this._formatMessage(title, { fullName });
+    } else {
       title = this._getIntlMessage('profile.not-found-page-title');
     }
 
@@ -64,7 +63,7 @@ class Profile extends Component {
       .set.defer(title);
   }
 
-  _getFullName({first, last}) {
+  _getFullName({ first, last }) {
     return `${capitalize(first)} ${capitalize(last)}`;
   }
 
@@ -73,9 +72,9 @@ class Profile extends Component {
       const user = this.state.user.user;
       return (
         <div className='app--profile text-center'>
-          <h2>{this._getFullName(user.name)}</h2>
+          <h2>{ this._getFullName(user.name) }</h2>
           <img
-            src={user.picture.medium}
+            src={ user.picture.medium }
             alt='profile picture' />
         </div>
       );

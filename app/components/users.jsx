@@ -1,7 +1,7 @@
-import React, {Component, PropTypes} from 'react';
-import {Link} from 'react-router';
-import {IntlMixin} from 'react-intl';
-import {replaceParams} from 'utils/localized-routes';
+import React, { Component, PropTypes } from 'react';
+import { Link } from 'react-router';
+import { IntlMixin } from 'react-intl';
+import { replaceParams } from 'utils/localized-routes';
 
 class Users extends Component {
 
@@ -50,18 +50,18 @@ class Users extends Component {
   renderUser = (user, index) => {
     const profileRoute = replaceParams(
       this._getIntlMessage('routes.profile'),
-      {seed: user.seed}
+      { seed: user.seed }
     );
     return (
-      <tr className='user--row' key={index}>
-        <td>{user.user.email}</td>
+      <tr className='user--row' key={ index }>
+        <td>{ user.user.email }</td>
         <td className='text-center'>
-          <Link to={profileRoute}>Profile</Link>
+          <Link to={ profileRoute }>Profile</Link>
         </td>
         <td className='text-center'>
           <button
             className='user--remove'
-            onClick={this._removeUser.bind(this, index)}>
+            onClick={ this._removeUser.bind(this, index) }>
             X
           </button>
         </td>
@@ -73,16 +73,16 @@ class Users extends Component {
     return (
       <div>
         <h1 className='text-center'>
-          {this._getIntlMessage('users.title')}
+          { this._getIntlMessage('users.title') }
         </h1>
         <table className='app--users'>
           <thead>
             <tr>
               <th>
-                {this._getIntlMessage('users.email')}
+                { this._getIntlMessage('users.email') }
               </th>
               <th colSpan='2'>
-                {this._getIntlMessage('users.actions')}
+                { this._getIntlMessage('users.actions') }
               </th>
             </tr>
           </thead>
@@ -96,8 +96,8 @@ class Users extends Component {
         <p className='text-center'>
           <button
             className='add--button'
-            onClick={this.props.flux.getActions('users').add}>
-            {this._getIntlMessage('users.add')}
+            onClick={ this.props.flux.getActions('users').add }>
+            { this._getIntlMessage('users.add') }
           </button>
         </p>
       </div>

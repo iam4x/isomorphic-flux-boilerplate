@@ -52,21 +52,20 @@ class AltResolver {
 
       const fluxSnapshot = flux.takeSnapshot();
       const app = React.renderToString(Handler);
-      const {title} = flux.getStore('page-title').getState();
+      const { title } = flux.getStore('page-title').getState();
 
       // Render the html with state in it
-      content = {body: Iso.render(app, fluxSnapshot), title};
-    }
-    catch (error) {
+      content = { body: Iso.render(app, fluxSnapshot), title };
+    } catch (error) {
       // catch script error, render 500 page
       debug('koa')('`rendering error`');
       debug('koa')(error);
 
       const fluxSnapshot = flux.takeSnapshot();
       const app = React.renderToString(React.createElement(ErrorPage));
-      const {title} = flux.getStore('page-title').getState();
+      const { title } = flux.getStore('page-title').getState();
 
-      content = {body: Iso.render(app, fluxSnapshot), title};
+      content = { body: Iso.render(app, fluxSnapshot), title };
     }
 
     // return the content

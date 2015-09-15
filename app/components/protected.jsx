@@ -1,5 +1,5 @@
-import React, {Component, PropTypes} from 'react';
-import {IntlMixin} from 'react-intl';
+import React, { Component, PropTypes } from 'react';
+import { IntlMixin } from 'react-intl';
 import requireAuth from 'components/shared/require-auth';
 
 const Protected = requireAuth(class Protected extends Component {

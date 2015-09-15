@@ -17,7 +17,7 @@ class LocaleStore {
     // that will be read from server on requests
     if (process.env.BROWSER) {
       const Cookies = require('cookies-js');
-      Cookies.set('_lang', data.locale, {expires: Infinity});
+      Cookies.set('_lang', data.locale, { expires: Infinity });
       debug('dev')(`updated _lang cookie to ${data.locale}`);
     }
 

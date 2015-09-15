@@ -7,8 +7,8 @@ class LocaleActions {
 
   async switchLocale(locale) {
     if (locale) {
-      const {messages} = await intlLoader(locale);
-      return this.actions.switchLocaleSuccess({locale, messages});
+      const { messages } = await intlLoader(locale);
+      return this.actions.switchLocaleSuccess({ locale, messages });
     }
   }
 }

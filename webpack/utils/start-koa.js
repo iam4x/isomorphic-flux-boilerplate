@@ -3,7 +3,7 @@ import path from 'path';
 import debug from 'debug';
 import browserSync from 'browser-sync';
 import watch from 'node-watch';
-import {assign, noop} from 'lodash';
+import { noop } from 'lodash';
 
 let server;
 let started;
@@ -20,9 +20,9 @@ const startServer = () => {
   };
 
   // merge env for the new process
-  const env = assign({}, {NODE_ENV: 'development'}, process.env);
+  const env = { NODE_ENV: 'development', ...process.env };
   // start the server procress
-  server = cp.fork(KOA_PATH, {env});
+  server = cp.fork(KOA_PATH, { env });
   // when server is `online`
   server.once('message', (message) => {
     if (message.match(/^online$/)) {

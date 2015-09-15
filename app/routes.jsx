@@ -1,29 +1,29 @@
 import React from 'react';
-import {Route} from 'react-router';
-import {generateRoute} from 'utils/localized-routes';
+import { Route } from 'react-router';
+import { generateRoute } from 'utils/localized-routes';
 
 export default (
-  <Route component={require('./components/app')}>
-    {generateRoute({
+  <Route component={ require('./components/app') }>
+    { generateRoute({
       paths: ['/', '/users', '/utilisateurs'],
       component: require('./components/users')
-    })}
-    {generateRoute({
+    }) }
+    { generateRoute({
       paths: ['/protected', '/protege'],
       component: require('./components/protected')
-    })}
-    {generateRoute({
+    }) }
+    { generateRoute({
       paths: ['/guides'],
       component: require('./components/guides')
-    })}
-    {generateRoute({
+    }) }
+    { generateRoute({
       paths: ['/profile/:seed', '/profil/:seed'],
       component: require('./components/profile')
-    })}
-    {generateRoute({
+    }) }
+    { generateRoute({
       paths: ['/login-info', '/info-client'],
       component: require('./pages/login-info')
-    })}
-    <Route path='*' component={require('./pages/not-found')} />
+    }) }
+    <Route path='*' component={ require('./pages/not-found') } />
   </Route>
 );

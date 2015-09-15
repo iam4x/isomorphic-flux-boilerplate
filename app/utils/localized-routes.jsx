@@ -1,11 +1,11 @@
 import React from 'react';
-import {Route} from 'react-router';
+import { Route } from 'react-router';
 
 // Return an array of different routes paths for a same component
 // used to generate localized routes in `/app/routes.js`
-export function generateRoute({paths, component}) {
+export function generateRoute({ paths, component }) {
   return paths.map(function(path) {
-    const props = {key: path, path, component};
+    const props = { key: path, path, component };
     // Static `onEnter` is defined on
     // component, we should pass it to route props
     if (component.onEnter) props.onEnter = component.onEnter;
