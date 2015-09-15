@@ -14,12 +14,14 @@
 
 * [react](https://facebook.github.io/react/)
 * [react-router](https://github.com/rackt/react-router)
-* [react-hot-loader](https://github.com/gaearon/react-hot-loader)
 * [react-intl](https://github.com/yahoo/react-intl)
+* [react-redbox](https://github.com/KeywordBrain/redbox-react)
 * [alt](https://github.com/goatslacker/alt)
 * [iso](https://github.com/goatslacker/iso)
 * [koa](http://koajs.com/)
 * [webpack](http://webpack.github.io/)
+* [webpack-hot-middleware](https://github.com/glenjamin/webpack-hot-middleware)
+* [webpack-dev-middleware](https://github.com/webpack/webpack-dev-middleware)
 * [babeljs](https://babeljs.io/)
 * [cssnext](http://cssnext.io/)
 

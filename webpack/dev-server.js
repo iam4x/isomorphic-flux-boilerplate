@@ -1,14 +1,17 @@
-require('babel/register');
+import koa from 'koa';
+import debug from 'debug';
+import webpack from 'webpack';
 
-const debug = require('debug');
-const webpack = require('webpack');
-const WebpackDevServer = require('webpack-dev-server');
+import config from './dev.config';
 
-const config = require('./dev.config');
-
+const app = koa();
 const compiler = webpack(config.webpack);
-const devServer = new WebpackDevServer(compiler, config.server.options);
 
-devServer.listen(config.server.port, '0.0.0.0', function() {
-  debug('dev')('webpack-dev-server listen on port %s', config.server.port);
+debug.enable('dev');
+
+app.use(require('koa-webpack-dev-middleware')(compiler, config.server.options));
+app.use(require('koa-webpack-hot-middleware')(compiler));
+
+app.listen(config.server.port, '0.0.0.0', function() {
+  debug('dev')('`webpack-dev-server` listening on port %s', config.server.port);
 });

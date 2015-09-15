@@ -7,17 +7,15 @@ import startKoa from './utils/start-koa';
 
 const LOCAL_IP = require('dev-ip')();
 
-const PROTOCOL = (process.env.C9_HOSTNAME) ? 'https' : 'http';
 const HOST = process.env.C9_HOSTNAME || isArray(LOCAL_IP) && LOCAL_IP[0] || LOCAL_IP || 'localhost';
 const PORT = (process.env.C9_HOSTNAME) ? '443' : parseInt(process.env.PORT, 10) + 1 || 3001;
-const PUBLIC_PATH = `${PROTOCOL}://${HOST}:${PORT}/assets/`;
+const PUBLIC_PATH = `//${HOST}:${PORT}/assets/`;
 
 const config = Object.assign({}, baseConfig, {
-  devtool: 'cheap-modules-source-map',
+  devtool: 'cheap-module-source-map',
   entry: {
     app: [
-      `webpack-dev-server/client?http://localhost:${PORT}`,
-      'webpack/hot/only-dev-server',
+      `webpack-hot-middleware/client?path=//${HOST}:${PORT}/__webpack_hmr`,
       './app/index.js'
     ]
   },
@@ -43,12 +41,9 @@ config.module.loaders = config.module.loaders.concat([
   }
 ]);
 
-// add `react-hot` on JS files
-delete config.module.loaders[1].loader;
-config.module.loaders[1].loaders = ['react-hot', 'babel'];
-
 config.plugins = [
   // hot reload
+  new webpack.optimize.OccurenceOrderPlugin(),
   new webpack.HotModuleReplacementPlugin(),
   new webpack.NoErrorsPlugin(),
 
@@ -59,8 +54,7 @@ config.plugins = [
     }
   }),
 
-  new webpack.optimize.DedupePlugin(),
-  new webpack.optimize.OccurenceOrderPlugin()
+  new webpack.optimize.DedupePlugin()
 ].concat(config.plugins).concat([
   function() {
     this.plugin('done', startKoa);
