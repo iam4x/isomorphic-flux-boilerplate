@@ -16,7 +16,7 @@
     "react/jsx-curly-spacing": [2, "always"],
     "react/jsx-no-duplicate-props": 2,
     "react/jsx-no-undef": 2,
-    "react/jsx-quotes": [2, "single", "avoid-espace"],
+    "react/jsx-quotes": 0,
     "react/jsx-uses-react": 2,
     "react/jsx-uses-vars": 2,
     "react/no-did-mount-set-state": 2,
@@ -31,6 +31,7 @@
     "react/sort-comp": 0,
 
     "quotes": [2, "single", "avoid-escape"],
+    "jsx-quotes": [2, "prefer-single"],
     "comma-dangle": [2, "never"],
     "indent": [2, 2, { "SwitchCase": 1 }],
     "object-curly-spacing": [2, "always"],
