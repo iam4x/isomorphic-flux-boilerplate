@@ -1,4 +1,6 @@
-import React from 'react/addons';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import TestUtils from 'react-addons-test-utils';
 import Flux from 'utils/flux';
 import objectAssign from 'react/lib/Object.assign';
 
@@ -13,7 +15,6 @@ describe('Header', () => {
   let node;
   let instance;
   let flux;
-  const TestUtils = React.addons.TestUtils;
 
   beforeEach(() => {
     flux = new Flux();
@@ -22,29 +23,29 @@ describe('Header', () => {
     const Stubbed = reactRouterStub(Header, props);
 
     node = window.document.createElement('div');
-    instance = React.render(React.createElement(Stubbed), node);
+    instance = ReactDOM.render(React.createElement(Stubbed), node);
   });
 
   afterEach(() => {
-    if (instance) React.unmountComponentAtNode(node);
+    if (instance) ReactDOM.unmountComponentAtNode(node);
   });
 
   it('should render links correctly', () => {
     const links = TestUtils.findRenderedDOMComponentWithClass(instance, 'app--navbar');
-    links.props.children.length.should.eql(3);
+    links.children.length.should.eql(3);
   });
 
   it('should render lang picker correctly', () => {
     const langs = TestUtils.findRenderedDOMComponentWithClass(instance, 'lang--picker');
-    langs.props.children.length.should.eql(2);
+    langs.children.length.should.eql(2);
   });
 
   it('should handle requests change', function() {
     flux.getActions('requests').start();
     const spinner = TestUtils.findRenderedDOMComponentWithClass(instance, 'app--spinner');
-    spinner.props.className.indexOf('active').should.not.eql(-1);
+    spinner.className.indexOf('active').should.not.eql(-1);
 
     flux.getActions('requests').fail();
-    spinner.props.className.indexOf('active').should.eql(-1);
+    spinner.className.indexOf('active').should.eql(-1);
   });
 });

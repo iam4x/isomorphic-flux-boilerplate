@@ -1,4 +1,6 @@
-import React from 'react/addons';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import TestUtils from 'react-addons-test-utils';
 import Flux from 'utils/flux';
 
 import injectLang from '../../utils/inject-lang';
@@ -12,7 +14,6 @@ describe('LangPicker', () => {
   let instance;
   let flux;
   let spy;
-  const TestUtils = React.addons.TestUtils;
 
   beforeEach(() => {
     flux = new Flux();
@@ -26,24 +27,24 @@ describe('LangPicker', () => {
     const element = React.createElement(LangPicker, props);
 
     node = window.document.createElement('div');
-    instance = React.render(element, node);
+    instance = ReactDOM.render(element, node);
   });
 
   afterEach(function() {
-    if (instance) React.unmountComponentAtNode(node);
+    if (instance) ReactDOM.unmountComponentAtNode(node);
   });
 
   it('should have en locale active', () => {
     const active = TestUtils.findRenderedDOMComponentWithClass(instance, 'active');
     should.exist(active);
-    active.props.children.should.eql('en');
+    active.innerHTML.should.eql('en');
   });
 
   it('should call `onChange` handler', function() {
     const locales = TestUtils.scryRenderedDOMComponentsWithTag(instance, 'a');
     locales.length.should.eql(2);
 
-    const inactive = locales.find(l => !l.props.className);
+    const inactive = locales.find(l => !l.className);
     TestUtils.Simulate.click(inactive);
 
     spy.should.have.been.calledOnce;
@@ -53,8 +54,8 @@ describe('LangPicker', () => {
   it('should do nothing on same locale click', () => {
     const active = TestUtils.findRenderedDOMComponentWithClass(instance, 'active');
     should.exist(active);
-    active.props.children.should.eql('en');
+    active.innerHTML.should.eql('en');
     TestUtils.Simulate.click(active);
-    active.props.className.should.eql('active');
+    active.className.should.eql('active');
   });
 });
