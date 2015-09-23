@@ -2,6 +2,7 @@ import debug from 'debug';
 import noop from 'lodash/utility/noop';
 
 import React from 'react';
+import ReactDOM from 'react-dom/server';
 import Iso from 'iso';
 
 import ErrorPage from 'pages/server-error';
@@ -39,7 +40,7 @@ class AltResolver {
     try {
       // Fire first render to collect XHR promises
       debug('dev')('first render');
-      React.renderToString(Handler);
+      ReactDOM.renderToString(Handler);
 
       // Get the promises collected from the first rendering
       const promises = this.mapPromises();
@@ -51,7 +52,7 @@ class AltResolver {
       // Get the new content with promises resolved
 
       const fluxSnapshot = flux.takeSnapshot();
-      const app = React.renderToString(Handler);
+      const app = ReactDOM.renderToString(Handler);
       const { title } = flux.getStore('page-title').getState();
 
       // Render the html with state in it
@@ -62,7 +63,7 @@ class AltResolver {
       debug('koa')(error);
 
       const fluxSnapshot = flux.takeSnapshot();
-      const app = React.renderToString(React.createElement(ErrorPage));
+      const app = ReactDOM.renderToString(React.createElement(ErrorPage));
       const { title } = flux.getStore('page-title').getState();
 
       content = { body: Iso.render(app, fluxSnapshot), title };

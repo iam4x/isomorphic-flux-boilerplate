@@ -1,4 +1,6 @@
-import React from 'react/addons';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import TestUtils from 'react-addons-test-utils';
 import Flux from 'utils/flux';
 import objectAssign from 'react/lib/Object.assign';
 
@@ -13,7 +15,6 @@ describe('Users', () => {
   let node;
   let instance;
   let flux;
-  const TestUtils = React.addons.TestUtils;
 
   beforeEach(() => {
     flux = new Flux();
@@ -22,19 +23,19 @@ describe('Users', () => {
     const Stubbed = reactRouterStub(Users, props);
 
     node = window.document.createElement('div');
-    instance = React.render(React.createElement(Stubbed), node);
+    instance = ReactDOM.render(React.createElement(Stubbed), node);
   });
 
   afterEach(() => {
     if (instance) {
-      React.unmountComponentAtNode(node);
+      ReactDOM.unmountComponentAtNode(node);
     }
   });
 
   it('should render correctly', () => {
     const {messages} = flux.getStore('locale').getState();
     const title = TestUtils.findRenderedDOMComponentWithTag(instance, 'h1');
-    title.getDOMNode().textContent.should.eql(messages.users.title);
+    title.textContent.should.eql(messages.users.title);
   });
 
   it('should render without users', () => {

@@ -1,5 +1,6 @@
 import Iso from 'iso';
 import React from 'react';
+import ReactDOM from 'react-dom';
 import Router from 'react-router';
 import createBrowserHistory from 'history/lib/createBrowserHistory';
 
@@ -48,7 +49,7 @@ const boostrap = () => {
   };
 
   // Render `<Router />` in the same container as the SSR
-  React.render(
+  ReactDOM.render(
     React.createElement(Router, { ...routerProps }),
     boot.container
   );

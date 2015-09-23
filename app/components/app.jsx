@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react/addons';
+import React, { Component, PropTypes } from 'react';
 
 import Header from 'components/header';
 import Footer from 'components/footer';
@@ -36,7 +36,7 @@ class App extends Component {
   // we need to clone them and add them the correct
   // locale and messages sent from the Locale Store
   renderChild = (child) =>
-    React.addons.cloneWithProps(child, { ...this.state.i18n });
+    React.cloneElement(child, { ...this.state.i18n });
 
   render() {
     return (

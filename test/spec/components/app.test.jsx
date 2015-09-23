@@ -1,4 +1,6 @@
-import React from 'react/addons';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import TestUtils from 'react-addons-test-utils';
 import Flux from 'utils/flux';
 
 import reactRouterStub from '../../utils/stub-router-context';
@@ -12,7 +14,6 @@ describe('App', () => {
   let node;
   let instance;
   let flux;
-  const TestUtils = React.addons.TestUtils;
 
   // Inject language
   beforeEach(() => {
@@ -24,11 +25,11 @@ describe('App', () => {
     const Stubbed = reactRouterStub(App, {flux});
     const element = React.createElement(Stubbed);
     node = window.document.createElement('div');
-    instance = React.render(element, node);
+    instance = ReactDOM.render(element, node);
   });
 
   afterEach(function() {
-    if (instance) React.unmountComponentAtNode(node);
+    if (instance) ReactDOM.unmountComponentAtNode(node);
   });
 
   it('should render header correctly', () => {
@@ -58,11 +59,11 @@ describe('App', () => {
   });
 
   it('should render children component', function() {
-    React.unmountComponentAtNode(node);
+    ReactDOM.unmountComponentAtNode(node);
     const Stubbed = reactRouterStub(App, {flux});
     const Element = <Stubbed><h1 className='foobar'>foobar</h1></Stubbed>;
     node = window.document.createElement('div');
-    instance = React.render(Element, node);
+    instance = ReactDOM.render(Element, node);
 
     const title = TestUtils.findRenderedDOMComponentWithClass(instance, 'foobar');
     should.exist(title);
