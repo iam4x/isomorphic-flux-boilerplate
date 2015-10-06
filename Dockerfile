@@ -26,7 +26,3 @@ ADD .babelrc /src/.babelrc
 
 # Add `node_modules/.bin` to $PATH
 ENV PATH /src/node_modules/.bin:$PATH
-
-# BUILD APP
-WORKDIR /src/app
-CMD [ 'npm', 'run', 'build' ]
