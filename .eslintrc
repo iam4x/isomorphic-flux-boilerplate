@@ -33,13 +33,14 @@
     "quotes": [2, "single", "avoid-escape"],
     "jsx-quotes": [2, "prefer-single"],
     "comma-dangle": [2, "never"],
-    "indent": [2, 2, { "SwitchCase": 1 }],
+    "indent": [2, 2],
     "object-curly-spacing": [2, "always"],
     "no-undef": 2,
     "no-underscore-dangle": 0,
     "func-names": 0,
     "no-else-return": 0,
     "no-console": 0,
-    "no-throw-literal": 0
+    "no-throw-literal": 0,
+    "id-length": 0
   }
 }
