@@ -1,0 +1,8 @@
+node_modules
+coverage
+.coveralls.yml
+.editorconfig
+.gitattributes
+.gitignore
+.git
+.travis.yml
