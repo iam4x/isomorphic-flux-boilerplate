@@ -27,7 +27,7 @@
 
 ## TL;DR
 
-Use with `iojs^2.3.0` or `nodejs^0.12.0`, clone the repo, `npm install` and `npm run dev`.
+Use with `nodejs^4.x`, clone the repo, `npm install` and `npm run dev`.
 
 Learn React ([react-prime-draft](https://github.com/mikechau/react-primer-draft)), learn Flux and Alt ([alt guide](http://alt.js.org/guide/)).
 
@@ -162,15 +162,11 @@ Voilà! You can `require()` images on server side too.
 
 ## Installation / How-to
 
-I recommend to use [io.js](https://iojs.org/) to take advantages of `ES6` without `--harmony` flag on `NodeJS`.
-
 It's super easy to do with [nvm](https://github.com/creationix/nvm):
 
-* `$ nvm install iojs`
-* `$ nvm use iojs`
-* `$ nvm alias default iojs` (to make `node` default to `iojs`)
-
-But it works well with `nodejs^0.12.0` as well :)
+* `$ nvm install stable`
+* `$ nvm use stable`
+* `$ nvm alias default stable`
 
 After that, you will just need to clone the repo and install dependancies:
 
@@ -217,12 +213,18 @@ Build the project first:
 
 Then start the koa server:
 
-* `$ NODE_ENV=production node server/index.js` (iojs)
-* `$ NODE_ENV=production node --harmony server/index.js` (nodejs 0.12.x)
+* `$ NODE_ENV=production node server/index.js`
 
 You can also use `processes.json` to run the application with [PM2 Monitor](https://github.com/Unitech/pm2) on your production server (customize it for your use):
 
 * `$ pm2 start processes.json`
+
+### (OSX) Run into docker for development
+
+You can build and dev with the boilerplate through docker container, it runs with dinghy.
+
+* Install [dinghy](https://github.com/codekitchen/dinghy) (it has support for NFS sharing which is required for changes detection and it's fast!)
+* `$ docker-compose up && open http://webapp.docker`
 
 ### Learn more
 
