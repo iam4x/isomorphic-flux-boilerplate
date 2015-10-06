@@ -16,9 +16,7 @@
   </head>
   <body>
     {{{body}}}
-    {{#each assets.script}}
-      <script src="{{this}}"></script>
-    {{/each}}
+    <script src="{{assets.script.[0]}}"></script>
     <script async defer id="github-bjs" src="https://buttons.github.io/buttons.js"></script>
   </body>
 </html>
