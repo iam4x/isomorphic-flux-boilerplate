@@ -30,7 +30,8 @@ export default {
       }
     }
   },
-  webpack: { ...baseConfig,
+  webpack: {
+    ...baseConfig,
     devtool: 'cheap-module-source-map',
     entry: {
       app: [
