@@ -1,5 +1,5 @@
 import webpack from 'webpack';
-import cssnext  from 'cssnext';
+import cssnext from 'cssnext';
 import { isArray } from 'lodash';
 
 import baseConfig from './base.config';
