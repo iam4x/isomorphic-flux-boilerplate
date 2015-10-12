@@ -44,10 +44,10 @@
     "koa-static-cache": "^3.1.2",
     "lodash": "^3.10.0",
     "normalize.css": "^3.0.3",
-    "react": "^0.14.0-rc1",
-    "react-dom": "^0.14.0-rc1",
+    "react": "^0.14.0",
+    "react-dom": "^0.14.0",
     "react-intl": "^1.2.0",
-    "react-router": "^1.0.0-rc1",
+    "react-router": "^1.0.0-rc3",
     "shortid": "^2.2.2"
   },
   "devDependencies": {
@@ -85,7 +85,7 @@
     "mocha": "^2.2.5",
     "node-watch": "^0.3.4",
     "postcss-loader": "^0.5.1",
-    "react-addons-test-utils": "^0.14.0-rc1",
+    "react-addons-test-utils": "^0.14.0",
     "react-hot-loader": "^1.2.8",
     "react-transform-catch-errors": "^1.0.0",
     "react-transform-hmr": "^1.0.0",
