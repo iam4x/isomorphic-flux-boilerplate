@@ -47,11 +47,13 @@ module.exports = function (config) {
           },
           {
             test: /\.css$/,
-            loader: 'style!css!postcss'
+            loader: 'style!css!postcss',
+            exclude: /node_modules/
           },
           {
-            test: /\.(jpe?g|png|gif|svg|woff|eot|ttf)$/,
-            loader: 'file?name=[sha512:hash:base64:7].[ext]'
+            test: /\.(jpe?g|png|gif|svg|woff|woff2|eot|ttf)(\?v=[0-9].[0-9].[0-9])?$/,
+            loader: 'file?name=[sha512:hash:base64:7].[ext]',
+            exclude: /node_modules\/(?!font-awesome)/
           },
           {
             test: /\.json$/, loader: 'json'
