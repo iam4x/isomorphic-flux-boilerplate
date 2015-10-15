@@ -46,9 +46,9 @@ export default {
       loaders: [
         ...baseConfig.module.loaders,
         {
-          test: /\.(jpe?g|png|gif|svg|woff|eot|ttf)$/,
+          test: /\.(jpe?g|png|gif|svg|woff|woff2|eot|ttf)(\?v=[0-9].[0-9].[0-9])?$/,
           loader: 'file?name=[sha512:hash:base64:7].[ext]',
-          exclude: /node_modules/
+          exclude: /node_modules\/(?!font-awesome)/
         },
         {
           test: /\.css$/,

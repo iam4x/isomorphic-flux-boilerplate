@@ -14,16 +14,19 @@ var config = Object.assign({}, baseConfig);
 
 config.module.loaders = config.module.loaders.concat([
   {
-    test: /\.(woff|eot|ttf)$/,
-    loader: 'file?name=[sha512:hash:base64:7].[ext]'
+    test: /\.(woff|woff2|eot|ttf|svg)(\?v=[0-9].[0-9].[0-9])?$/,
+    loader: 'file?name=[sha512:hash:base64:7].[ext]',
+    exclude: /node_modules\/(?!font-awesome)/
   },
   {
     test: /\.(jpe?g|png|gif|svg)$/,
-    loader: 'file?name=[sha512:hash:base64:7].[ext]!image?optimizationLevel=7&progressive&interlaced'
+    loader: 'file?name=[sha512:hash:base64:7].[ext]!image?optimizationLevel=7&progressive&interlaced',
+    exclude: /node_modules\/(?!font-awesome)/
   },
   {
     test: /\.css$/,
-    loader: ExtractTextPlugin.extract('style', 'css?sourceMap!postcss')
+    loader: ExtractTextPlugin.extract('style', 'css?sourceMap!postcss'),
+    exclude: /node_modules/
   }
 ]);
 
