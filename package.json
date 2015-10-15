@@ -5,7 +5,7 @@
   "main": "server/index.js",
   "scripts": {
     "build": "webpack --stats --config ./webpack/prod.config.js",
-    "dev": "BABEL_ENV=browser NODE_ENV=development babel-node ./webpack/dev-server.js",
+    "dev": "babel-node ./webpack/dev-server.js",
     "test": "karma start --single-run",
     "dev-test": "karma start",
     "lint": "eslint app server webpack --ext .jsx,.js"

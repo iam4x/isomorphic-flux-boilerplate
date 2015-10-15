@@ -1,3 +1,6 @@
+process.env.BABEL_ENV = 'browser';
+process.env.NODE_ENV = 'development';
+
 import koa from 'koa';
 import debug from 'debug';
 import webpack from 'webpack';
