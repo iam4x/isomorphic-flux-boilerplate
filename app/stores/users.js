@@ -1,6 +1,3 @@
-import findIndex from 'lodash/array/findIndex';
-import isEmpty from 'lodash/array/findIndex';
-
 class UsersStore {
 
   constructor() {
@@ -9,56 +6,42 @@ class UsersStore {
   }
 
   static getBySeed(seed) {
-    const users = this.getState().users;
+    const { users } = this.getState();
     return { user: users.find((user) => user.seed === seed) };
   }
 
   onRemove(index) {
-    const users = this.users.slice();
+    const users = [ ...this.users ];
     users.splice(index, 1);
 
-    return this.setState({ users });
+    this.users = users;
   }
 
   onAddSuccess(user) {
-    const users = this.users.slice();
-    users.push(user);
-
-    return this.setState({ users });
+    this.users = [ ...this.users, user ];
   }
 
   onFetchSuccess(users) {
-    if (isEmpty(this.users)) {
-      // just apply the new users
-      // this is called on every server rendering
-      return this.setState({ users });
-    }
-
-    const merged = this.users.slice();
-    users.forEach((user) => {
-      // update the most recent data into store
-      let match = merged.find((u) => u.seed === user.seed) || null;
-      if (match) {
-        match = user;
+    this.users = users.reduce((results, curr) => {
+      const index = results.findIndex(({ seed }) => seed === curr.seed);
+      if (index > -1) {
+        results[index] = curr;
+        return results;
       } else {
-        // push the new user
-        merged.push(user);
+        return [ curr, ...results ];
       }
-    });
-
-    return this.setState({ users: merged });
+    }, [ ...this.users ]);
   }
 
   onFetchBySeedSuccess(user) {
-    const users = this.users.slice();
-    const index = findIndex(users, { seed: user.seed });
+    const users = [ ...this.users ];
+    const index = users.findIndex(({ seed }) => seed === user.seed);
     if (index > -1) {
       users[index] = user;
+      this.users = users;
     } else {
-      users.push(user);
+      this.users = [ ...users, user ];
     }
-
-    return this.setState({ users });
   }
 
 }
