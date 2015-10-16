@@ -30,7 +30,7 @@ const boostrap = () => {
 
   // load the intl-polyfill if needed
   // load the correct data/{lang}.json into app
-  const locale = flux.getStore('locale').getLocale();
+  const { locales: [ locale ] } = flux.getStore('locale').getState();
   const { messages } = await intlLoader(locale);
   flux.getActions('locale').switchLocaleSuccess({ locale, messages });
 

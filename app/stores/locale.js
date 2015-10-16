@@ -4,27 +4,21 @@ class LocaleStore {
 
   constructor() {
     this.bindActions(this.alt.getActions('locale'));
-    this.locales = [''];
+    this.locales = [];
     this.messages = {};
   }
 
-  static getLocale() {
-    return this.getState().locales[0];
-  }
-
-  onSwitchLocaleSuccess(data) {
+  onSwitchLocaleSuccess({ messages, locale }) {
     // Save locale into a cookie
     // that will be read from server on requests
     if (process.env.BROWSER) {
       const Cookies = require('cookies-js');
-      Cookies.set('_lang', data.locale, { expires: Infinity });
-      debug('dev')(`updated _lang cookie to ${data.locale}`);
+      Cookies.set('_lang', locale, { expires: Infinity });
+      debug('dev')(`updated _lang cookie to ${locale}`);
     }
 
-    return this.setState({
-      messages: data.messages,
-      locales: [data.locale]
-    });
+    this.messages = messages;
+    this.locales = [ locale ];
   }
 
 }
