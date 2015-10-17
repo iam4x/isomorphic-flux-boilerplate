@@ -173,7 +173,7 @@ After that, you will just need to clone the repo and install dependancies:
 * `$ git clone -o upstream https://github.com/iam4x/isomorphic-flux-boilerplate.git app`
 * `$ cd app && npm install`
 
-(Don't forget to add your remote origin: `$ git remote origin git@github.com:xxx/xxx.git`)
+(Don't forget to add your remote origin: `$ git remote add origin git@github.com:xxx/xxx.git`)
 
 ### Run the project in development:
 
