@@ -17,6 +17,7 @@
 * [react-intl](https://github.com/yahoo/react-intl)
 * [react-redbox](https://github.com/KeywordBrain/redbox-react)
 * [alt](https://github.com/goatslacker/alt)
+* [alt-devtools](https://github.com/goatslacker/alt-devtool)
 * [iso](https://github.com/goatslacker/iso)
 * [koa](http://koajs.com/)
 * [webpack](http://webpack.github.io/)
@@ -54,6 +55,8 @@ On the client, Flux is initialized in `app/main.js` and sent to our first React 
 On the server, it's similar but Flux is initialized in `server/router.jsx`. The instance is sent to `alt-resolver` for rendering components with the correct props.
 
 Learn more about [alt instances](http://alt.js.org/docs/altInstances) in the alt documentation.
+
+There's also `alt-devtools` enabled in development, it's a Chrome Extension that you can find here: https://github.com/goatslacker/alt-devtool
 
 ## Internationalization (i18n)
 

@@ -8,9 +8,8 @@ import createBrowserHistory from 'history/lib/createBrowserHistory';
 import Flux from 'utils/flux';
 import intlLoader from 'utils/intl-loader';
 
-if (process.env.NODE_ENV === 'development') {
-  require('debug').enable('dev,koa');
-}
+const { NODE_ENV } = process.env;
+if (NODE_ENV === 'development') require('debug').enable('dev,koa');
 
 const boostrap = () => {
   return new Promise((resolve) => {
@@ -23,6 +22,9 @@ const boostrap = () => {
 (async () => {
   // Init alt instance
   const flux = new Flux();
+
+  // Init alt-devtools on dev
+  if (NODE_ENV === 'development') require('alt/utils/chromeDebug')(flux);
 
   // bootstrap application with data from server
   const boot = await boostrap();
