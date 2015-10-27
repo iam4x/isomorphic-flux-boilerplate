@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import Radium from 'radium';
 import { Link } from 'react-router';
 import { IntlMixin } from 'react-intl';
 
@@ -16,6 +17,32 @@ if (process.env.BROWSER) {
   reactLogo = imageResolver('images/react-logo.png');
 }
 
+const styles = {
+  base: {
+    background: 'linear-gradient(#fff, #000)',
+    transition: '200ms all linear',
+    WebkitUserSelect: 'none',
+    display: 'flex',
+
+    ':hover': {
+      background: 'linear-gradient(#000, #fff)'
+    },
+
+    '@media (maxWidth: 320px)': {
+      width: '50%'
+    }
+  }
+};
+
+import Prefixer from 'inline-style-prefixer';
+const customUserAgent = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.71 Safari/537.36';
+const prefixer = new Prefixer(customUserAgent);
+const prefixedStyles = styles;
+prefixer.prefix(styles);
+import debug from 'debug';
+debug('dev')(prefixedStyles);
+
+@Radium
 class Header extends Component {
 
   static propTypes = {
@@ -43,7 +70,7 @@ class Header extends Component {
     const [ activeLocale ] = locales;
 
     return (
-      <header className='app--header'>
+      <header className='app--header' style={ prefixedStyles.base }>
         {/* Spinner in the top right corner */}
         <Spinner active={ this.state.spinner } />
 
@@ -53,7 +80,7 @@ class Header extends Component {
           onChange={ flux.getActions('locale').switchLocale } />
 
         {/* React Logo in header */}
-        <Link to='/' className='app--logo'>
+        <Link to='/' className='app--logo' style={ prefixedStyles.base }>
           <img src={ reactLogo } alt='react-logo' />
         </Link>
 
