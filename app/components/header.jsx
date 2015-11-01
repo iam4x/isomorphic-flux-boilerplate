@@ -1,9 +1,9 @@
 import React, { Component, PropTypes } from 'react';
-import Radium from 'radium';
 import { Link } from 'react-router';
 import { IntlMixin } from 'react-intl';
 
 import imageResolver from 'utils/image-resolver';
+import Radium from 'utils/radium';
 import Spinner from 'components/shared/spinner';
 import LangPicker from 'components/shared/lang-picker';
 
@@ -34,14 +34,6 @@ const styles = {
   }
 };
 
-import Prefixer from 'inline-style-prefixer';
-const customUserAgent = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.71 Safari/537.36';
-const prefixer = new Prefixer(customUserAgent);
-const prefixedStyles = styles;
-prefixer.prefix(styles);
-import debug from 'debug';
-debug('dev')(prefixedStyles);
-
 @Radium
 class Header extends Component {
 
@@ -70,7 +62,7 @@ class Header extends Component {
     const [ activeLocale ] = locales;
 
     return (
-      <header className='app--header' style={ prefixedStyles.base }>
+      <header className='app--header' style={ styles.base }>
         {/* Spinner in the top right corner */}
         <Spinner active={ this.state.spinner } />
 
@@ -80,7 +72,7 @@ class Header extends Component {
           onChange={ flux.getActions('locale').switchLocale } />
 
         {/* React Logo in header */}
-        <Link to='/' className='app--logo' style={ prefixedStyles.base }>
+        <Link to='/' className='app--logo' style={ styles.base }>
           <img src={ reactLogo } alt='react-logo' />
         </Link>
 

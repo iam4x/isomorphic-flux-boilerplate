@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import InlineStylePrefixer from 'inline-style-prefixer';
 
 import Header from 'components/header';
 import Footer from 'components/footer';
@@ -12,9 +13,30 @@ class App extends Component {
     children: PropTypes.element
   }
 
+  static childContextTypes = {
+    prefixer: PropTypes.object
+  }
+
   constructor(props, context) {
     super(props, context);
     this.state = { i18n: props.flux.getStore('locale').getState() };
+    // temp!
+    this._userAgent = 'Android';
+  }
+
+  getChildContext() {
+    return {
+      prefixer: this._getPrefixer(this._userAgent)
+    };
+  }
+
+  _getPrefixer(userAgent) {
+    if (!this._userAgent !== userAgent) {
+      this._userAgent = userAgent;
+      this._prefixer = new InlineStylePrefixer(userAgent);
+    }
+
+    return this._prefixer;
   }
 
   componentDidMount() {

@@ -36,6 +36,7 @@ export default function *() {
     // it will return the matched components for the route into `initialState`
     const location = createLocation(this.request.path, this.request.query);
     const [ error, redirect, renderProps ] = yield promisifiedRouter(location);
+    const userAgent = 'Android';
 
     // Render 500 error page from server
     if (error) throw error;
@@ -50,7 +51,7 @@ export default function *() {
     // We need to re-define `createElement` of `react-router`
     // in order to include `flux` on children components props
     const routerProps = {
-      ...renderProps, location,
+      ...renderProps, location, userAgent,
       createElement: (component, props) => {
         // Take locale and messages from `locale` store
         // and pass them to every components rendered from `Router`
