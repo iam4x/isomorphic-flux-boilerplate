@@ -2,8 +2,7 @@ import radium from 'radium';
 import Prefixer from 'inline-style-prefixer';
 import matchMediaMock from 'match-media-mock';
 
-const matchMedia = matchMediaMock.create();
-matchMedia.setConfig({ type: 'screen', width: 1200, height: 800 });
+const _matchMedia = matchMediaMock.create();
 
 function autoPrefixPlugin({ style, getComponentField }) {
   let { prefixer } = getComponentField('context');
@@ -16,8 +15,7 @@ function autoPrefixPlugin({ style, getComponentField }) {
     prefixer = getComponentField('_reactInternalInstance')._context.prefixer;
 
     if (!prefixer) {
-      const customUserAgent = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.155 Safari/537.36';
-      prefixer = new Prefixer(customUserAgent);
+      prefixer = new Prefixer();
     }
   }
   return { style: prefixer.prefix(style) };
@@ -33,7 +31,15 @@ const plugins = [
 ];
 
 function ConfiguredRadium(component) {
+  const matchMedia = () => {
+    return !process.env.BROWSER ? _matchMedia : null;
+  }();
   return radium({ plugins, matchMedia })(component);
+}
+
+export function setClientResolution(width, height) {
+  if (!width || !height) return;
+  _matchMedia.setConfig({ type: 'screen', width, height });
 }
 
 export default ConfiguredRadium;

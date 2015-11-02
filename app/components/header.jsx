@@ -19,18 +19,38 @@ if (process.env.BROWSER) {
 
 const styles = {
   base: {
-    background: 'linear-gradient(#fff, #000)',
-    transition: '200ms all linear',
-    WebkitUserSelect: 'none',
-    display: 'flex',
+    fontSize: 16,
+    backgroundColor: '#0074d9',
+    color: '#fff',
+    border: 0,
+    borderRadius: '0.3em',
+    padding: '0.4em 1em',
+    cursor: 'pointer',
+    outline: 'none',
 
-    ':hover': {
-      background: 'linear-gradient(#000, #fff)'
+    '@media (min-width: 992px)': {
+      padding: '0.6em 1.2em'
     },
 
-    '@media (maxWidth: 320px)': {
-      width: '50%'
+    '@media (min-width: 1200px)': {
+      padding: '0.8em 1.5em'
+    },
+
+    ':hover': {
+      backgroundColor: '#0088FF'
+    },
+
+    ':focus': {
+      backgroundColor: '#0088FF'
+    },
+
+    ':active': {
+      backgroundColor: '#005299',
+      transform: 'translateY(2px)'
     }
+  },
+  logo: {
+    height: '200px'
   }
 };
 
@@ -62,7 +82,10 @@ class Header extends Component {
     const [ activeLocale ] = locales;
 
     return (
-      <header className='app--header' style={ styles.base }>
+      <header className='app--header'>
+
+        <button style={ styles.base } >Foo</button>
+
         {/* Spinner in the top right corner */}
         <Spinner active={ this.state.spinner } />
 
@@ -72,8 +95,8 @@ class Header extends Component {
           onChange={ flux.getActions('locale').switchLocale } />
 
         {/* React Logo in header */}
-        <Link to='/' className='app--logo' style={ styles.base }>
-          <img src={ reactLogo } alt='react-logo' />
+        <Link to='/' style={ { display: 'block', textAlign: 'center' } } >
+          <img src={ reactLogo } style={ styles.logo } alt='react-logo' />
         </Link>
 
         {/* Links in the navbar */}
