@@ -57,7 +57,7 @@
     "babel-plugin-react-transform": "^1.0.3",
     "babel-runtime": "^5.8.24",
     "browser-sync": "^2.8.0",
-    "css-loader": "^0.20.1",
+    "css-loader": "^0.21.0",
     "cssnext": "^1.8.4",
     "del": "^2.0.2",
     "dev-ip": "^1.0.1",
@@ -68,7 +68,6 @@
     "extract-text-webpack-plugin": "^0.8.2",
     "file-loader": "^0.8.4",
     "image-webpack-loader": "^1.6.1",
-    "imagemin": "^3.2.0",
     "isparta-loader": "^1.0.0",
     "json-loader": "^0.5.2",
     "karma": "^0.13.3",
@@ -90,7 +89,7 @@
     "react-transform-catch-errors": "^1.0.0",
     "react-transform-hmr": "^1.0.0",
     "redbox-react": "^1.0.4",
-    "style-loader": "^0.12.3",
+    "style-loader": "^0.13.0",
     "webpack": "^1.10.5",
     "webpack-hot-middleware": "^2.0.2"
   },
@@ -147,6 +146,6 @@
     "intl"
   ],
   "engines": {
-    "nodejs": "^4.0.0"
+    "nodejs": "^4.2.1"
   }
 }
