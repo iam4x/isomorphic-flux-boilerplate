@@ -8,7 +8,10 @@ import { IntlMixin } from 'react-intl';
 @connect(({ users }) => ({ ...users }))
 class Profile extends Component {
 
-  static contextTypes = { flux: PropTypes.object.isRequired }
+  static contextTypes = {
+    flux: PropTypes.object.isRequired,
+    messages: PropTypes.object.isRequired
+  }
 
   static propTypes = {
     params: PropTypes.object.isRequired,

@@ -2,10 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import TestUtils from 'react-addons-test-utils';
 import Flux from 'utils/flux';
-import objectAssign from 'react/lib/Object.assign';
 
-import reactRouterStub from '../../utils/stub-router-context';
-import injectLang from '../../utils/inject-lang';
+import stubApp from '../../utils/stub-app';
 
 import Header from 'components/header';
 
@@ -18,11 +16,9 @@ describe('Header', () => {
 
   beforeEach(() => {
     flux = new Flux();
-
-    const props = objectAssign({flux}, injectLang(flux));
-    const Stubbed = reactRouterStub(Header, props);
-
     node = window.document.createElement('div');
+
+    const Stubbed = stubApp(flux)(Header);
     instance = ReactDOM.render(React.createElement(Stubbed), node);
   });
 

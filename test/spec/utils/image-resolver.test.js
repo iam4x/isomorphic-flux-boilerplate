@@ -9,8 +9,7 @@ describe('ImageResolver', () => {
   it('should throw an error using on browser', () => {
     try {
       imageResolver();
-    }
-    catch (error) {
+    } catch (error) {
       should.exist(error);
     }
   });
