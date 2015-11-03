@@ -6,7 +6,7 @@
   "scripts": {
     "build": "babel-node ./node_modules/.bin/webpack --stats --config ./webpack/prod.config.js",
     "dev": "babel-node ./webpack/dev-server.js",
-    "test": "karma start --single-run",
+    "test": "babel-node ./node_modules/.bin/karma start --single-run",
     "dev-test": "karma start",
     "lint": "eslint app server webpack --ext .jsx,.js"
   },
