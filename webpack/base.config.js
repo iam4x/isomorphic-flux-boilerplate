@@ -1,10 +1,11 @@
-/* eslint-disable */
-var path = require('path');
-var writeStats = require('./utils/write-stats');
+import path from 'path';
+import cssnext from 'cssnext';
 
-var JS_REGEX = /\.js$|\.jsx$|\.es6$|\.babel$/;
+import writeStats from './utils/write-stats';
 
-module.exports = {
+const JS_REGEX = /\.js$|\.jsx$|\.es6$|\.babel$/;
+
+export default {
   devtool: 'source-map',
   entry: {
     app: './app/index.js'
@@ -24,9 +25,9 @@ module.exports = {
       }
     ],
     loaders: [
-      {test: /\.json$/, exclude: /node_modules/, loader: 'json'},
-      {test: JS_REGEX, exclude: /node_modules/, loader: 'babel'}
-    ],
+      { test: /\.json$/, exclude: /node_modules/, loader: 'json' },
+      { test: JS_REGEX, exclude: /node_modules/, loader: 'babel' }
+    ]
   },
   plugins: [
     // write webpack stats
@@ -37,5 +38,6 @@ module.exports = {
   resolve: {
     extensions: ['', '.js', '.json', '.jsx', '.es6', '.babel'],
     modulesDirectories: ['node_modules', 'app']
-  }
+  },
+  postcss: [ cssnext() ]
 };
