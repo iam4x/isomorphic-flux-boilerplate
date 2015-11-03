@@ -51,7 +51,7 @@ export default function *() {
     // in order to include `flux` on children components props
     const routerProps = {
       ...renderProps, location,
-      createElement: (component, props) => {
+      createElement: (component, props) => { /* eslint react/display-name: 0 */
         // Take locale and messages from `locale` store
         // and pass them to every components rendered from `Router`
         const i18n = flux.getStore('locale').getState();
