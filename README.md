@@ -12,11 +12,11 @@
 
 ## Libraries Included
 
-* [react](https://facebook.github.io/react/)
-* [react-router](https://github.com/rackt/react-router)
+* [react ^0.14](https://facebook.github.io/react/)
+* [react-router ^1.0.0-rc3](https://github.com/rackt/react-router)
 * [react-intl](https://github.com/yahoo/react-intl)
 * [react-redbox](https://github.com/KeywordBrain/redbox-react)
-* [alt](https://github.com/goatslacker/alt)
+* [alt ^0.17](https://github.com/goatslacker/alt)
 * [alt-devtools](https://github.com/goatslacker/alt-devtool)
 * [iso](https://github.com/goatslacker/iso)
 * [koa](http://koajs.com/)
@@ -24,7 +24,8 @@
 * [webpack-hot-middleware](https://github.com/glenjamin/webpack-hot-middleware)
 * [webpack-dev-middleware](https://github.com/webpack/webpack-dev-middleware)
 * [babeljs](https://babeljs.io/)
-* [cssnext](http://cssnext.io/)
+* [postcss ^0.7](https://github.com/postcss/postcss)
+* [precss](https://github.com/jonathantneal/precss)
 
 ## TL;DR
 

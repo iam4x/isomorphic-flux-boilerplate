@@ -8,5 +8,5 @@
 }
 
 .app--users thead {
-  border-bottom: 1px solid var(--black);
+  border-bottom: 1px solid $black;
 }
