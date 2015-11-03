@@ -25,21 +25,18 @@ class Profile extends Component {
   }
 
   componentDidMount() {
-    this.props.flux
-      .getStore('users')
-      .listen(this._handleStoreChange);
+    const { flux } = this.props;
+    flux.getStore('users').listen(this._handleStoreChange);
   }
 
   componentWillUnmount() {
-    this.props.flux
-      .getStore('users')
-      .unlisten(this._handleStoreChange);
+    const { flux } = this.props;
+    flux.getStore('users').unlisten(this._handleStoreChange);
   }
 
   _handleStoreChange = () => {
-    const user = this.props.flux
-      .getStore('users')
-      .getBySeed(this.props.params.seed);
+    const { flux, params: { seed } } = this.props;
+    const user = flux.getStore('users').getBySeed(seed);
 
     this.setState(user);
     this._setPageTitle();
