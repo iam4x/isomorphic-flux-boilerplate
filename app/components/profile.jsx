@@ -1,85 +1,75 @@
-import React, { Component, PropTypes } from 'react';
-import { IntlMixin } from 'react-intl';
 import capitalize from 'lodash/string/capitalize';
+import defer from 'lodash/function/defer';
 
+import React, { Component, PropTypes } from 'react';
+import connect from 'connect-alt';
+import { IntlMixin } from 'react-intl';
+
+@connect(({ users }) => ({ ...users }))
 class Profile extends Component {
 
+  static contextTypes = { flux: PropTypes.object.isRequired }
+
   static propTypes = {
-    flux: PropTypes.object.isRequired,
-    params: PropTypes.object.isRequired
+    params: PropTypes.object.isRequired,
+    users: PropTypes.array
   }
 
-  _getIntlMessage = IntlMixin.getIntlMessage
-  _formatMessage = IntlMixin.formatMessage.bind(Object.assign({}, this, IntlMixin))
-
-  state = this.props.flux
-    .getStore('users')
-    .getBySeed(this.props.params.seed)
+  i18n = IntlMixin.getIntlMessage
+  formatMessage = IntlMixin.formatMessage.bind({ ...this, ...IntlMixin })
 
   componentWillMount() {
-    this._setPageTitle();
+    const { flux } = this.context;
+    const { params: { seed } } = this.props;
 
-    this.props.flux
-      .getActions('users')
-      .fetchBySeed(this.props.params.seed);
+    this.updatePageTitle();
+    flux.getActions('users').fetchBySeed(seed);
   }
 
-  componentDidMount() {
-    const { flux } = this.props;
-    flux.getStore('users').listen(this._handleStoreChange);
+  componentWillReceiveProps({ users, params: { seed } }) {
+    if ((users.length !== this.props.users.length) ||
+        (seed !== this.props.params.seed)) {
+      defer(() => this.updatePageTitle());
+    }
   }
 
-  componentWillUnmount() {
-    const { flux } = this.props;
-    flux.getStore('users').unlisten(this._handleStoreChange);
-  }
+  updatePageTitle() {
+    const { users, params: { seed } } = this.props;
+    const { flux } = this.context;
+    const user = users.find(u => u.seed === seed);
 
-  _handleStoreChange = () => {
-    const { flux, params: { seed } } = this.props;
-    const user = flux.getStore('users').getBySeed(seed);
-
-    this.setState(user);
-    this._setPageTitle();
-  }
-
-  _setPageTitle = () => {
     let title;
-    if (this.state.user) {
-      const user = this.state.user.user;
-      const fullName = this._getFullName(user.name);
+    if (user) {
+      const { user: { name: { first, last } } } = user;
+      const fullName = `${capitalize(first)} ${capitalize(last)}`;
 
-      title = this._getIntlMessage('profile.page-title');
-      title = this._formatMessage(title, { fullName });
+      title = this.i18n('profile.page-title');
+      title = this.formatMessage(title, { fullName });
     } else {
-      title = this._getIntlMessage('profile.not-found-page-title');
+      title = this.i18n('profile.not-found-page-title');
     }
 
-    // Set page title
-    this.props.flux
-      .getActions('page-title')
-      .set.defer(title);
-  }
-
-  _getFullName({ first, last }) {
-    return `${capitalize(first)} ${capitalize(last)}`;
+    flux.getActions('page-title').set(title);
   }
 
   render() {
-    if (this.state.user) {
-      const user = this.state.user.user;
+    const { users, params: { seed } } = this.props;
+    const user = users.find((u) => u.seed === seed);
+
+    if (user) {
+      const { user: { name: { first, last }, picture } } = user;
+
       return (
         <div className='app--profile text-center'>
-          <h2>{ this._getFullName(user.name) }</h2>
+          <h2>{ capitalize(first) } { capitalize(last) }</h2>
           <img
-            src={ user.picture.medium }
+            src={ picture.medium }
             alt='profile picture' />
         </div>
       );
     }
 
-    return (
-      <h2>User not found</h2>
-    );
+    return (<h2>User not found</h2>);
   }
 
 }

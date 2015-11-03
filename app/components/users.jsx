@@ -1,57 +1,41 @@
 import React, { Component, PropTypes } from 'react';
+import connect from 'connect-alt';
 import { Link } from 'react-router';
 import { IntlMixin } from 'react-intl';
+
 import { replaceParams } from 'utils/localized-routes';
 
+@connect(({ users }) => ({ ...users }))
 class Users extends Component {
 
-  static propTypes = {
-    flux: PropTypes.object.isRequired
+  static propTypes = { users: PropTypes.array.isRequired }
+
+  static contextTypes = {
+    flux: PropTypes.object.isRequired,
+    messages: PropTypes.object.isRequired
   }
 
-  _getIntlMessage = IntlMixin.getIntlMessage
-
-  state = this.props.flux
-    .getStore('users')
-    .getState()
+  i18n = IntlMixin.getIntlMessage
 
   componentWillMount() {
-    this.props.flux
-      .getActions('page-title')
-      .set(this._getIntlMessage('users.page-title'));
+    const { flux } = this.context;
 
-    this.props.flux
-      .getActions('users')
-      .fetch();
+    flux.getActions('page-title').set(this.i18n('users.page-title'));
+    flux.getActions('users').fetch();
   }
 
-  componentDidMount() {
-    this.props.flux
-      .getStore('users')
-      .listen(this._handleStoreChange);
+  handleRemove(index) {
+    const { flux } = this.context;
+    flux.getActions('users').remove(index);
   }
 
-  componentWillUnmount() {
-    this.props.flux
-      .getStore('users')
-      .unlisten(this._handleStoreChange);
-  }
-
-  _handleStoreChange = (state) => {
-    return this.setState(state);
-  }
-
-  _removeUser(index) {
-    this.props.flux
-      .getActions('users')
-      .remove(index);
+  handleAdd() {
+    const { flux } = this.context;
+    flux.getActions('users').add();
   }
 
   renderUser = (user, index) => {
-    const profileRoute = replaceParams(
-      this._getIntlMessage('routes.profile'),
-      { seed: user.seed }
-    );
+    const profileRoute = replaceParams(this.i18n('routes.profile'), { seed: user.seed });
     return (
       <tr className='user--row' key={ index }>
         <td>{ user.user.email }</td>
@@ -61,7 +45,7 @@ class Users extends Component {
         <td className='text-center'>
           <button
             className='user--remove'
-            onClick={ this._removeUser.bind(this, index) }>
+            onClick={ () => this.handleRemove(index) }>
             X
           </button>
         </td>
@@ -70,34 +54,29 @@ class Users extends Component {
   }
 
   render() {
+    const { users } = this.props;
+
     return (
       <div>
         <h1 className='text-center'>
-          { this._getIntlMessage('users.title') }
+          { this.i18n('users.title') }
         </h1>
         <table className='app--users'>
           <thead>
             <tr>
-              <th>
-                { this._getIntlMessage('users.email') }
-              </th>
-              <th colSpan='2'>
-                { this._getIntlMessage('users.actions') }
-              </th>
+              <th> { this.i18n('users.email') } </th>
+              <th colSpan='2'> { this.i18n('users.actions') } </th>
             </tr>
           </thead>
           <tbody>
-            {
-              this.state.users
-                .map(this.renderUser)
-            }
+            { users.map(this.renderUser) }
           </tbody>
         </table>
         <p className='text-center'>
           <button
             className='add--button'
-            onClick={ this.props.flux.getActions('users').add }>
-            { this._getIntlMessage('users.add') }
+            onClick={ ::this.handleAdd }>
+            { this.i18n('users.add') }
           </button>
         </p>
       </div>

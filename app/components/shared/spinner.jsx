@@ -3,9 +3,7 @@ import cx from 'classnames';
 
 class Spinner extends Component {
 
-  static propTypes = {
-    active: PropTypes.bool
-  }
+  static propTypes = { active: PropTypes.bool }
 
   render() {
     const { active } = this.props;
