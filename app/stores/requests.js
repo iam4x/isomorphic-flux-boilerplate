@@ -6,19 +6,15 @@ class RequestsStore {
   }
 
   onStart() {
-    this._setInProgress(true);
+    this.inProgress = true;
   }
 
   onSuccess() {
-    this._setInProgress(false);
+    this.inProgress = false;
   }
 
   onFail() {
-    this._setInProgress(false);
-  }
-
-  _setInProgress(inProgress) {
-    return this.setState({ inProgress });
+    this.inProgress = false;
   }
 
 }

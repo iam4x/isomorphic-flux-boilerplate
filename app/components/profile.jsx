@@ -36,10 +36,14 @@ class Profile extends Component {
     }
   }
 
-  updatePageTitle() {
+  getUser() {
     const { users, params: { seed } } = this.props;
+    return users.find(u => u.seed === seed);
+  }
+
+  updatePageTitle() {
     const { flux } = this.context;
-    const user = users.find(u => u.seed === seed);
+    const user = this.getUser();
 
     let title;
     if (user) {
@@ -56,8 +60,7 @@ class Profile extends Component {
   }
 
   render() {
-    const { users, params: { seed } } = this.props;
-    const user = users.find((u) => u.seed === seed);
+    const user = this.getUser();
 
     if (user) {
       const { user: { name: { first, last }, picture } } = user;
