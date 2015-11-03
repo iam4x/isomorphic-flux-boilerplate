@@ -9,7 +9,8 @@
     "mocha": true
   },
   "globals": {
-    "chai": true
+    "chai": true,
+    "sinon": true
   },
   "rules": {
     "react/display-name": [2, { "acceptTranspilerName": true }],
@@ -41,6 +42,7 @@
     "no-else-return": 0,
     "no-console": 0,
     "no-throw-literal": 0,
-    "id-length": 0
+    "id-length": 0,
+    "no-unused-expressions": 0
   }
 }

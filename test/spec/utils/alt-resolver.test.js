@@ -1,8 +1,10 @@
+/* eslint react/no-multi-comp: 0 */
+
 import React from 'react';
 import Flux from 'utils/flux';
 import AltResolver from 'utils/alt-resolver';
 
-import injectLang from '../../utils/inject-lang';
+import stubApp from '../../utils/stub-app';
 
 const should = chai.should();
 
@@ -25,7 +27,6 @@ describe('Alt Resolver', () => {
   beforeEach(() => {
     flux = new Flux();
     altResolver = new AltResolver();
-    injectLang(flux);
   });
 
   it('should map promises on env server', () => {
@@ -36,7 +37,8 @@ describe('Alt Resolver', () => {
 
   it('should render async a dummy component', (done) => {
     (async function () {
-      const content = await altResolver.render(Dummy, flux, true);
+      const Stubbed = stubApp(flux)(Dummy);
+      const content = await altResolver.render(Stubbed, flux, true);
       should.exist(content);
       return done();
     })();
@@ -52,7 +54,8 @@ describe('Alt Resolver', () => {
 
   it('should render 500 on error', (done) => {
     (async function () {
-      const content = await altResolver.render(DummyError, flux, true);
+      const Stubbed = stubApp(flux)(DummyError);
+      const content = await altResolver.render(Stubbed, flux, true);
       should.exist(content);
       content.body.should.have.string('500');
       return done();

@@ -18,28 +18,27 @@ if (process.env.BROWSER) {
 
 class Header extends Component {
 
-  static propTypes = {
+  static contextTypes = {
     flux: PropTypes.object.isRequired,
-    locales: PropTypes.array.isRequired
+    locales: PropTypes.array.isRequired,
+    messages: PropTypes.object.isRequired
   }
 
-  _getIntlMessage = IntlMixin.getIntlMessage
+  i18n = IntlMixin.getIntlMessage
 
-  state = {
-    spinner: false
-  }
+  state = { spinner: false }
 
   componentDidMount() {
-    this.props.flux
-      .getStore('requests')
-      .listen(this._handleRequestStoreChange);
+    const { flux } = this.context;
+    flux.getStore('requests').listen(::this.handleRequest);
   }
 
-  _handleRequestStoreChange = ({ inProgress }) =>
-    this.setState({ spinner: inProgress })
+  handleRequest({ inProgress }) {
+    this.setState({ spinner: inProgress });
+  }
 
   render() {
-    const { locales, flux } = this.props;
+    const { locales, flux } = this.context;
     const [ activeLocale ] = locales;
 
     return (
@@ -60,18 +59,18 @@ class Header extends Component {
         {/* Links in the navbar */}
         <ul className='app--navbar text-center reset-list un-select'>
           <li>
-            <Link to={ this._getIntlMessage('routes.users') }>
-              { this._getIntlMessage('header.users') }
+            <Link to={ this.i18n('routes.users') }>
+              { this.i18n('header.users') }
             </Link>
           </li>
           <li>
-            <Link to={ this._getIntlMessage('routes.guides') }>
-              { this._getIntlMessage('header.guides') }
+            <Link to={ this.i18n('routes.guides') }>
+              { this.i18n('header.guides') }
             </Link>
           </li>
           <li>
-            <Link to={ this._getIntlMessage('routes.protected') }>
-              { this._getIntlMessage('header.protected') }
+            <Link to={ this.i18n('routes.protected') }>
+              { this.i18n('header.protected') }
             </Link>
           </li>
         </ul>

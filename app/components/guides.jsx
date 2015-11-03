@@ -3,16 +3,13 @@ import { IntlMixin } from 'react-intl';
 
 class Guides extends Component {
 
-  static propTypes = {
-    flux: PropTypes.object.isRequired
-  }
+  static contextTypes = { flux: PropTypes.object.isRequired }
 
-  _getIntlMessage = IntlMixin.getIntlMessage
+  i18n = IntlMixin.getIntlMessage
 
   componentWillMount() {
-    this.props.flux
-      .getActions('page-title')
-      .set(this._getIntlMessage('guides.page-title'));
+    const { flux } = this.context;
+    flux.getActions('page-title').set(this.i18n('guides.page-title'));
   }
 
   render() {
