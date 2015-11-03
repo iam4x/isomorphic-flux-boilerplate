@@ -42,7 +42,7 @@ const boostrap = () => {
   const routerProps = {
     routes: require('routes'),
     history: createBrowserHistory(),
-    createElement: (component, props) => {
+    createElement: (component, props) => { /* eslint react/display-name: 0 */
       // Take locale and messages from `locale` store
       // and pass them to every components rendered from `Router`
       const i18n = flux.getStore('locale').getState();
