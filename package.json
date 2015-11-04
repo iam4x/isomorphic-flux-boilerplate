@@ -20,6 +20,7 @@
   "license": "MIT",
   "dependencies": {
     "alt": "^0.17.1",
+    "alt-container": "^1.0.0",
     "babel": "^5.8.3",
     "blocked": "^1.1.0",
     "classnames": "^2.1.3",
