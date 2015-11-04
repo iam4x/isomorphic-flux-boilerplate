@@ -100,21 +100,23 @@ Use the same logic as localized string, declare the localized routes into `app/r
 
 Alt-resolver is the magic thing about the boilerplate, it will be our tool for resolving promises (data-fetching) before server side rendering.
 
+Alt-resolver expose also an ApiClient for doing the requests to the intern API. It handle for you the cookies on server and URI matching between server and browser.
+
 Wrap data-fetching requests from actions into promises and send them to `altResolver` like:
 
 ```javascript
 fetch() {
-  const promise = (resolve) => {
-    request
-      .get('http://example.com/api/users')
-      .end((response) => {
-        // fire new action to send data to store
-        this.actions.fetchSuccess(response.body);
-        return resolve();
-      });
-  };
-  // Send the `promise` to altResolver
-  this.alt.resolve(promise);
+  this.alt.resolve(async (done) => {
+    try {
+      this.alt.getActions('requests').start();
+      const response = await this.alt.request({ url: '/users' });
+      this.actions.indexSuccess(response);
+    } catch (error) {
+      this.actions.indexFail({ error });
+    }
+    this.alt.getActions('requests').stop();
+    return done();
+  });
 }
 ```
 
