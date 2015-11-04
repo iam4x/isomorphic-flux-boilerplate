@@ -5,7 +5,7 @@ import { capitalize, defer } from 'lodash';
 
 import stubApp from '../../utils/stub-app';
 
-import Flux from 'utils/flux';
+import createFlux from 'flux/createFlux';
 import Profile from 'components/profile';
 
 import { users } from 'data/users.json';
@@ -19,7 +19,7 @@ describe('Profile', () => {
   let instance;
 
   beforeEach(() => {
-    flux = new Flux();
+    flux = createFlux();
     node = window.document.createElement('div');
 
     const Stubbed = stubApp(flux)(Profile, { params: { seed } });

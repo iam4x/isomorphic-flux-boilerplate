@@ -1,4 +1,4 @@
-import Flux from 'utils/flux';
+import createFlux from 'flux/createFlux';
 
 chai.should();
 
@@ -8,7 +8,7 @@ describe('UsersStore', () => {
   let actions;
 
   beforeEach(() => {
-    flux = new Flux();
+    flux = createFlux();
     store = flux.getStore('users');
     actions = flux.getActions('users');
   });
