@@ -5,10 +5,10 @@ import { IntlMixin } from 'react-intl';
 
 import { replaceParams } from 'utils/localized-routes';
 
-@connect(({ users }) => ({ ...users }))
+@connect(({ users: { collection } }) => ({ collection }))
 class Users extends Component {
 
-  static propTypes = { users: PropTypes.array.isRequired }
+  static propTypes = { collection: PropTypes.array.isRequired }
 
   static contextTypes = {
     flux: PropTypes.object.isRequired,
@@ -21,7 +21,7 @@ class Users extends Component {
     const { flux } = this.context;
 
     flux.getActions('title').set(this.i18n('users.page-title'));
-    flux.getActions('users').fetch();
+    flux.getActions('users').index();
   }
 
   handleRemove(index) {
@@ -29,16 +29,15 @@ class Users extends Component {
     flux.getActions('users').remove(index);
   }
 
-  handleAdd() {
-    const { flux } = this.context;
-    flux.getActions('users').add();
-  }
-
   renderUser = (user, index) => {
-    const profileRoute = replaceParams(this.i18n('routes.profile'), { seed: user.seed });
+    const profileRoute = replaceParams(
+      this.i18n('routes.profile'),
+      { seed: user.seed }
+    );
+
     return (
       <tr className='user--row' key={ index }>
-        <td>{ user.user.email }</td>
+        <td>{ user.email }</td>
         <td className='text-center'>
           <Link to={ profileRoute }>Profile</Link>
         </td>
@@ -54,7 +53,7 @@ class Users extends Component {
   }
 
   render() {
-    const { users } = this.props;
+    const { collection } = this.props;
 
     return (
       <div>
@@ -69,16 +68,9 @@ class Users extends Component {
             </tr>
           </thead>
           <tbody>
-            { users.map(this.renderUser) }
+            { collection.map(this.renderUser) }
           </tbody>
         </table>
-        <p className='text-center'>
-          <button
-            className='add--button'
-            onClick={ ::this.handleAdd }>
-            { this.i18n('users.add') }
-          </button>
-        </p>
       </div>
     );
   }
