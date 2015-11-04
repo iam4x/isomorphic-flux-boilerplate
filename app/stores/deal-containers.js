@@ -5,10 +5,8 @@ import { datasource } from 'alt/utils/decorators';
 export default class DealContainersStore {
 
   constructor() {
-    this.bindActions(this.alt.getActions('deals-items'));
+    this.bindActions(this.alt.getActions('dealContainers'));
     this.dealContainers = [];
-    console.log(this);
-    this.getInstance().perform();
   }
 
   onFetchSuccess(dealContainers) {

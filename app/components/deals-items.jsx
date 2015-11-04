@@ -1,10 +1,16 @@
 import React, { Component, PropTypes } from 'react';
+import connect from 'connect-alt';
 import Radium from 'utils/radium';
 
+@connect(({ dealContainers }) => ({ ...dealContainers }))
 @Radium
 class DealsItems extends Component {
-  static propTypes = {
-    flux: PropTypes.object.isRequired
+
+  static propTypes = { dealContainers: PropTypes.array.isRequired }
+
+  static contextTypes = {
+    flux: PropTypes.object.isRequired,
+    dealContainers: PropTypes.object.isRequired
   }
 
   getStyles() {
@@ -17,30 +23,9 @@ class DealsItems extends Component {
     };
   }
 
-  state = this.props.flux
-    .getStore('deal-containers')
-    .getState()
-
   componentWillMount() {
-    this.props.flux
-      .getActions('deal-containers')
-      .fetch();
-  }
-
-  componentDidMount() {
-    this.props.flux
-      .getStore('deal-containers')
-      .listen(this._handleStoreChange);
-  }
-
-  componentWillUnmount() {
-    this.props.flux
-      .getStore('deal-containers')
-      .unlisten(this._handleStoreChange);
-  }
-
-  _handleStoreChange = (state) => {
-    return this.setState(state);
+    const { flux } = this.context;
+    flux.getActions('dealContainers').fetch();
   }
 
   render() {

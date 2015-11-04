@@ -15,7 +15,8 @@ function autoPrefixPlugin({ style, getComponentField }) {
     prefixer = getComponentField('_reactInternalInstance')._context.prefixer;
 
     if (!prefixer) {
-      prefixer = new Prefixer();
+      const customUserAgent = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.155 Safari/537.36';
+      prefixer = new Prefixer(customUserAgent);
     }
   }
   return { style: prefixer.prefix(style) };
