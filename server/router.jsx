@@ -1,11 +1,13 @@
 import debug from 'debug';
 import createFlux from 'flux/createFlux';
 
+import ApiClient from '../shared/api-client';
 import universalRender from '../shared/universal-render';
 
 export default function *() {
   // Init alt instance
-  const flux = createFlux();
+  const client = new ApiClient(this.get('cookie'));
+  const flux = createFlux(client);
 
   // Get request locale for rendering
   const locale = this.cookies.get('_lang') || this.acceptsLanguages(require('./config/init').locales) || 'en';

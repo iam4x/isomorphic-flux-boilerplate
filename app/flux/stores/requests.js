@@ -9,14 +9,9 @@ class RequestsStore {
     this.inProgress = true;
   }
 
-  onSuccess() {
+  onStop() {
     this.inProgress = false;
   }
-
-  onFail() {
-    this.inProgress = false;
-  }
-
 }
 
 export default RequestsStore;

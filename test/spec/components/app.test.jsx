@@ -4,6 +4,7 @@ import TestUtils from 'react-addons-test-utils';
 import createFlux from 'flux/createFlux';
 
 import stubApp from '../../utils/stub-app';
+import ApiClient from '../../../shared/api-client';
 
 import App from 'components/app';
 
@@ -15,7 +16,7 @@ describe('App', () => {
   let flux;
 
   beforeEach(() => {
-    flux = createFlux();
+    flux = createFlux(new ApiClient());
     const Stubbed = stubApp(flux)(App, { flux });
     const element = React.createElement(Stubbed);
     node = window.document.createElement('div');

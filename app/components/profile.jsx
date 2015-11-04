@@ -5,7 +5,7 @@ import React, { Component, PropTypes } from 'react';
 import connect from 'connect-alt';
 import { IntlMixin } from 'react-intl';
 
-@connect(({ users }) => ({ ...users }))
+@connect(({ users: { collection } }) => ({ collection }))
 class Profile extends Component {
 
   static contextTypes = {
@@ -15,7 +15,7 @@ class Profile extends Component {
 
   static propTypes = {
     params: PropTypes.object.isRequired,
-    users: PropTypes.array
+    collection: PropTypes.array
   }
 
   i18n = IntlMixin.getIntlMessage
@@ -26,19 +26,19 @@ class Profile extends Component {
     const { params: { seed } } = this.props;
 
     this.updatePageTitle();
-    flux.getActions('users').fetchBySeed(seed);
+    flux.getActions('users').show(seed);
   }
 
-  componentWillReceiveProps({ users, params: { seed } }) {
-    if ((users.length !== this.props.users.length) ||
+  componentWillReceiveProps({ collection, params: { seed } }) {
+    if ((collection.length !== this.props.collection.length) ||
         (seed !== this.props.params.seed)) {
       defer(() => this.updatePageTitle());
     }
   }
 
   getUser() {
-    const { users, params: { seed } } = this.props;
-    return users.find(u => u.seed === seed);
+    const { collection, params: { seed } } = this.props;
+    return collection.find(u => u.seed === seed);
   }
 
   updatePageTitle() {
@@ -47,7 +47,7 @@ class Profile extends Component {
 
     let title;
     if (user) {
-      const { user: { name: { first, last } } } = user;
+      const { name: { first, last } } = user;
       const fullName = `${capitalize(first)} ${capitalize(last)}`;
 
       title = this.i18n('profile.page-title');
@@ -63,7 +63,7 @@ class Profile extends Component {
     const user = this.getUser();
 
     if (user) {
-      const { user: { name: { first, last }, picture } } = user;
+      const { name: { first, last }, picture } = user;
 
       return (
         <div className='app--profile text-center'>
