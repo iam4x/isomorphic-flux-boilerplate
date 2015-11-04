@@ -3,8 +3,11 @@ import { defer } from 'lodash';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import TestUtils from 'react-addons-test-utils';
+import fauxJax from 'faux-jax';
+
 import createFlux from 'flux/createFlux';
 
+import ApiClient from '../../../shared/api-client';
 import stubApp from '../../utils/stub-app';
 
 import Users from 'components/users';
@@ -17,7 +20,18 @@ describe('Users', () => {
   let flux;
 
   beforeEach(() => {
-    flux = createFlux();
+    function respond(request) {
+      request.respond(
+        200,
+        { 'Content-Type': 'application/json' },
+        '[{"email":"clara.coleman83@example.com","name":{"title":"ms","first":"clara","last":"coleman"},"seed":"7729a1ef4ba6ef68","picture":{"large":"http://api.randomuser.me/portraits/women/72.jpg","medium":"http://api.randomuser.me/portraits/med/women/72.jpg","thumbnail":"http://api.randomuser.me/portraits/thumb/women/72.jpg"}}]'
+      );
+    }
+
+    fauxJax.install();
+    fauxJax.on('request', respond);
+
+    flux = createFlux(new ApiClient());
     const Stubbed = stubApp(flux)(Users);
 
     node = window.document.createElement('div');
@@ -25,6 +39,8 @@ describe('Users', () => {
   });
 
   afterEach(() => {
+    fauxJax.restore();
+
     if (instance) {
       ReactDOM.unmountComponentAtNode(node);
     }
@@ -42,12 +58,12 @@ describe('Users', () => {
     td.length.should.eql(0);
   });
 
-  it('should render 10 users after first fetch', (done) => {
+  it('should render users after first fetch', (done) => {
     function handleChange() {
       defer(() => {
         const td = TestUtils
           .scryRenderedDOMComponentsWithClass(instance, 'user--row');
-        td.length.should.eql(10);
+        td.length.should.eql(1);
 
         flux.getStore('users').unlisten(handleChange);
         return done();
@@ -57,46 +73,12 @@ describe('Users', () => {
     flux.getStore('users').listen(handleChange);
   });
 
-  it('should add an user after click on add button', (done) => {
-    function handleAddChange() {
-      defer(() => {
-        // 11 users after add
-        const td = TestUtils.scryRenderedDOMComponentsWithClass(instance, 'user--row');
-        td.length.should.eql(11);
-
-        // clean
-        flux.getStore('users').unlisten(handleAddChange);
-        return done();
-      });
-    }
-
-    function handleFetchChange() {
-      defer(() => {
-        // 10 users after fetch
-        const td = TestUtils.scryRenderedDOMComponentsWithClass(instance, 'user--row');
-        td.length.should.eql(10);
-
-        // clean
-        flux.getStore('users').unlisten(handleFetchChange);
-
-        // add an user
-        flux.getStore('users').listen(handleAddChange);
-        const addButton = TestUtils.findRenderedDOMComponentWithClass(instance, 'add--button');
-        should.exist(addButton);
-
-        defer(() => TestUtils.Simulate.click(addButton));
-      });
-    }
-
-    flux.getStore('users').listen(handleFetchChange);
-  });
-
   it('should remove an user', (done) => {
     function handleChange() {
       defer(() => {
         // 10 users after fetch
         let td = TestUtils.scryRenderedDOMComponentsWithClass(instance, 'user--row');
-        td.length.should.eql(10);
+        td.length.should.eql(1);
 
         // remove an user
         const removeButton = TestUtils.scryRenderedDOMComponentsWithClass(instance, 'user--remove')[0];
@@ -109,7 +91,7 @@ describe('Users', () => {
 
           // it should have 9 users
           td = TestUtils.scryRenderedDOMComponentsWithClass(instance, 'user--row');
-          td.length.should.eql(9);
+          td.length.should.eql(0);
 
           // clean
           flux.getStore('users').unlisten(handleChange);
