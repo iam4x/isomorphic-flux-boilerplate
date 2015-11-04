@@ -52,7 +52,7 @@ export default async function({ flux, history, location }) {
     const routes = require('routes');
     const [ error, redirect, renderProps ] = await runRouter(location, routes);
 
-    if (error || redirect) throw ({ error } || { redirect });
+    if (error || redirect) throw ({ error, redirect });
 
     const element = (
       <AltContainer flux={ flux }>
