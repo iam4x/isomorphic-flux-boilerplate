@@ -21,6 +21,7 @@
   "dependencies": {
     "alt": "^0.17.1",
     "alt-container": "^1.0.0",
+    "axios": "github:iam4x/axios#master",
     "babel": "^5.8.3",
     "blocked": "^1.1.0",
     "classnames": "^2.1.3",
@@ -44,6 +45,7 @@
     "koa-mount": "^1.3.0",
     "koa-proxy": "^0.4.0",
     "koa-response-time": "^1.0.2",
+    "koa-router": "^5.2.3",
     "koa-static-cache": "^3.1.2",
     "lodash": "^3.10.0",
     "match-media-mock": "^0.1.0",
@@ -71,6 +73,7 @@
     "eslint-loader": "^1.0.0",
     "eslint-plugin-react": "^3.0.0",
     "extract-text-webpack-plugin": "^0.9.0",
+    "faux-jax": "^4.1.0",
     "file-loader": "^0.8.4",
     "image-webpack-loader": "^1.6.1",
     "isparta-loader": "^1.0.0",

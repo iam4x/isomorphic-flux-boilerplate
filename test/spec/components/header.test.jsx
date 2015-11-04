@@ -4,6 +4,7 @@ import TestUtils from 'react-addons-test-utils';
 import createFlux from 'flux/createFlux';
 
 import stubApp from '../../utils/stub-app';
+import ApiClient from '../../../shared/api-client';
 
 import Header from 'components/header';
 
@@ -15,7 +16,7 @@ describe('Header', () => {
   let flux;
 
   beforeEach(() => {
-    flux = createFlux();
+    flux = createFlux(new ApiClient());
     node = window.document.createElement('div');
 
     const Stubbed = stubApp(flux)(Header);
@@ -41,7 +42,7 @@ describe('Header', () => {
     const spinner = TestUtils.findRenderedDOMComponentWithClass(instance, 'app--spinner');
     spinner.className.indexOf('active').should.not.eql(-1);
 
-    flux.getActions('requests').fail();
+    flux.getActions('requests').stop();
     spinner.className.indexOf('active').should.eql(-1);
   });
 });

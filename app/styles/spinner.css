@@ -7,8 +7,6 @@
   right: 10px;
   top: 10px;
   width: 44px;
-}
 
-.app--spinner.active {
-  display: block;
+  &.active { display: block; }
 }

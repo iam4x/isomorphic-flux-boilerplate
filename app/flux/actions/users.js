@@ -1,54 +1,39 @@
-import sample from 'lodash/collection/sample';
-import take from 'lodash/array/take';
-
-import data from 'data/users.json';
-
 class UsersActions {
 
   constructor() {
     this.generateActions(
-      'remove', 'fetchSuccess', 'addSuccess',
-      'fetchBySeedSuccess'
+      'indexSuccess', 'indexFail',
+      'showSuccess', 'showFail',
+      'remove'
     );
   }
 
-  add() {
-    const promise = (resolve) => {
-      // fake xhr
-      this.alt.getActions('requests').start();
-      setTimeout(() => {
-        this.actions.addSuccess(sample(data.users));
-        this.alt.getActions('requests').success();
-        return resolve();
-      }, 300);
-    };
-    this.alt.resolve(promise);
+  index() {
+    this.alt.resolve(async (done) => {
+      try {
+        this.alt.getActions('requests').start();
+        const response = await this.alt.request({ url: '/users' });
+        this.actions.indexSuccess(response);
+      } catch (error) {
+        this.actions.indexFail({ error });
+      }
+      this.alt.getActions('requests').stop();
+      return done();
+    });
   }
 
-  fetch() {
-    const promise = (resolve) => {
-      this.alt.getActions('requests').start();
-      setTimeout(() => {
-        this.actions.fetchSuccess(take(data.users, 10));
-        this.alt.getActions('requests').success();
-        return resolve();
-      }, 300);
-    };
-    this.alt.resolve(promise);
-  }
-
-  fetchBySeed(seed) {
-    const promise = (resolve) => {
-      this.alt.getActions('requests').start();
-      setTimeout(() => {
-        const user = data.users.find((u) => u.seed === seed);
-        this.actions.fetchBySeedSuccess(user);
-        this.alt.getActions('requests').success();
-        return resolve();
-      }, 300);
-    };
-
-    this.alt.resolve(promise);
+  show(seed) {
+    this.alt.resolve(async (done) => {
+      try {
+        this.alt.getActions('requests').start();
+        const response = await this.alt.request({ url: '/users/' + seed });
+        this.actions.showSuccess(response);
+      } catch (error) {
+        this.actions.showFail({ error });
+      }
+      this.alt.getActions('requests').stop();
+      return done();
+    });
   }
 
 }
