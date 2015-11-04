@@ -21,7 +21,7 @@
   "dependencies": {
     "alt": "^0.17.1",
     "alt-container": "^1.0.0",
-    "axios": "^0.7.0",
+    "axios": "github:iam4x/axios#master",
     "babel": "^5.8.3",
     "blocked": "^1.1.0",
     "classnames": "^2.1.3",
