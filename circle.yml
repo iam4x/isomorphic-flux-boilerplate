@@ -1,0 +1,6 @@
+machine:
+  node:
+    version: 4.2.1
+dependencies:
+  pre:
+    - npm i -g npm
