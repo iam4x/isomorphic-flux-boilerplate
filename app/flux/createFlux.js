@@ -10,10 +10,16 @@ import * as actions from './actions/index';
 
 class Flux extends Alt {
 
-  constructor(config = {}) {
+  constructor(client, config = {}) {
     super(config);
 
+    // Use `this.alt.resolve` for async actions
+    // needed for SSR
     this.resolver = new AltResolver();
+
+    // Bind the ApiClient to flux instance
+    // access to it in actions with `this.alt.request`
+    this.request = ::client.request;
 
     // Load actions into alt
     mapValues(actions, (action, name) => this.addActions(name, action));
