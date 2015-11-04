@@ -5,8 +5,8 @@ import { generateRoute } from 'utils/localized-routes';
 export default (
   <Route component={ require('./components/app') }>
     { generateRoute({
-      paths: ['/', '/users', '/utilisateurs'],
-      component: require('./components/users')
+      paths: ['/', '/deals'],
+      component: require('./components/deals-items')
     }) }
     { generateRoute({
       paths: ['/protected', '/protege'],

@@ -1,11 +1,11 @@
 import React, { Component, PropTypes } from 'react';
 import InlineStylePrefixer from 'inline-style-prefixer';
+import Radium from 'utils/radium';
 
 import Header from 'components/header';
 import Footer from 'components/footer';
 
-if (process.env.BROWSER) require('styles/app.css');
-
+@Radium
 class App extends Component {
 
   static propTypes = {

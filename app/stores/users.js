@@ -1,3 +1,7 @@
+import UsersSource from 'sources/users';
+import { datasource } from 'alt/utils/decorators';
+
+@datasource(UsersSource)
 class UsersStore {
 
   constructor() {
