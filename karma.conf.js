@@ -3,10 +3,10 @@ import baseConfig from './webpack/base.config';
 
 let coverage;
 let reporters;
-if (process.env.CONTINUOUS_INTEGRATION) {
+if (process.env.CIRCLECI) {
   coverage = {
     type: 'lcov',
-    dir: 'coverage/'
+    dir: process.env.CIRCLE_ARTIFACTS
   };
   reporters = ['coverage', 'coveralls'];
 } else {

@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/iam4x/isomorphic-flux-boilerplate.svg?branch=new-alt-resolver)](https://travis-ci.org/iam4x/isomorphic-flux-boilerplate)
+[![Circle CI](https://circleci.com/gh/iam4x/isomorphic-flux-boilerplate.svg?style=svg)](https://circleci.com/gh/iam4x/isomorphic-flux-boilerplate)
 [![Coverage Status](https://coveralls.io/repos/iam4x/isomorphic-flux-boilerplate/badge.svg?branch=master&service=github)](https://coveralls.io/github/iam4x/isomorphic-flux-boilerplate?branch=master)
 [![Dependency Status](https://david-dm.org/iam4x/isomorphic-flux-boilerplate.svg)](https://david-dm.org/iam4x/isomorphic-flux-boilerplate)
 [![devDependency Status](https://david-dm.org/iam4x/isomorphic-flux-boilerplate/dev-status.svg)](https://david-dm.org/iam4x/isomorphic-flux-boilerplate#info=devDependencies)
