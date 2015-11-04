@@ -10,7 +10,7 @@ class DealsItems extends Component {
 
   static contextTypes = {
     flux: PropTypes.object.isRequired,
-    dealContainers: PropTypes.object.isRequired
+    messages: PropTypes.object.isRequired
   }
 
   getStyles() {

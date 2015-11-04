@@ -15,8 +15,8 @@ const DealContainersSource = alt => {
         return state.users ? state.users : null;
       },
 
-      success: alt.getActions('deal-containers').fetchSuccess,
-      error: alt.getActions('deal-containers').fetchSuccess
+      success: alt.getActions('dealContainers').fetchSuccess,
+      error: alt.getActions('dealContainers').fetchSuccess
     }
   };
 };

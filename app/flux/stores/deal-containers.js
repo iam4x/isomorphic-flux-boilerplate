@@ -1,4 +1,4 @@
-import DealSontainersSource from 'sources/deal-containers';
+import DealSontainersSource from 'flux/sources/deal-containers';
 import { datasource } from 'alt/utils/decorators';
 
 @datasource(DealSontainersSource)
