@@ -1,7 +1,12 @@
+import mapValues from 'lodash/object/mapValues';
+
 import Alt from 'alt';
 import makeFinalStore from 'alt/utils/makeFinalStore';
 
 import AltResolver from './alt-resolver';
+
+import * as stores from '../stores/index';
+import * as actions from '../actions/index';
 
 class Flux extends Alt {
 
@@ -10,16 +15,12 @@ class Flux extends Alt {
 
     this._resolver = new AltResolver();
 
-    this.addActions('requests', require('actions/requests'));
-    this.addActions('locale', require('actions/locale'));
-    this.addActions('users', require('actions/users'));
-    this.addActions('page-title', require('actions/page-title'));
+    // Load actions into alt
+    mapValues(actions, (action, name) => this.addActions(name, action));
+    // Load stores into alt
+    mapValues(stores, (store, name) => this.addStore(name, store));
 
-    this.addStore('requests', require('stores/requests'));
-    this.addStore('locale', require('stores/locale'));
-    this.addStore('users', require('stores/users'));
-    this.addStore('page-title', require('stores/page-title'));
-
+    // Our `FinalStore` for using `connect-alt`
     this.FinalStore = makeFinalStore(this);
   }
 

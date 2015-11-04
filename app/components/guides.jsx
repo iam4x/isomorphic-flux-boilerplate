@@ -12,7 +12,7 @@ class Guides extends Component {
 
   componentWillMount() {
     const { flux } = this.context;
-    flux.getActions('page-title').set(this.i18n('guides.page-title'));
+    flux.getActions('title').set(this.i18n('guides.page-title'));
   }
 
   render() {

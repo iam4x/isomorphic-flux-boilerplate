@@ -53,7 +53,7 @@ class AltResolver {
 
       const fluxSnapshot = flux.takeSnapshot();
       const app = ReactDOM.renderToString(Handler);
-      const { title } = flux.getStore('page-title').getState();
+      const { title } = flux.getStore('title').getState();
 
       // Render the html with state in it
       content = { body: Iso.render(app, fluxSnapshot), title };
@@ -64,7 +64,7 @@ class AltResolver {
 
       const fluxSnapshot = flux.takeSnapshot();
       const app = ReactDOM.renderToString(React.createElement(ErrorPage));
-      const { title } = flux.getStore('page-title').getState();
+      const { title } = flux.getStore('title').getState();
 
       content = { body: Iso.render(app, fluxSnapshot), title };
     }

@@ -20,7 +20,7 @@ class Users extends Component {
   componentWillMount() {
     const { flux } = this.context;
 
-    flux.getActions('page-title').set(this.i18n('users.page-title'));
+    flux.getActions('title').set(this.i18n('users.page-title'));
     flux.getActions('users').fetch();
   }
 

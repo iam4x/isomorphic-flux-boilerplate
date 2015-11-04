@@ -37,7 +37,7 @@ describe('App', () => {
   });
 
   it('should change page title', function() {
-    flux.getActions('page-title').set('foobar');
+    flux.getActions('title').set('foobar');
     document.title.should.eql('ISO-ReactJS | foobar');
   });
 

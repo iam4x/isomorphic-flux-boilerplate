@@ -27,14 +27,14 @@ class App extends Component {
     const { flux } = this.context;
 
     flux.getStore('locale').listen(this.handleLocaleChange);
-    flux.getStore('page-title').listen(this.handleTitleChange);
+    flux.getStore('title').listen(this.handleTitleChange);
   }
 
   componentWillUnmount() {
     const { flux } = this.context;
 
     flux.getStore('locale').unlisten(this.handleLocaleChange);
-    flux.getStore('page-title').unlisten(this.handleTitleChange);
+    flux.getStore('title').unlisten(this.handleTitleChange);
   }
 
   handleLocaleChange = (i18n) => this.setState({ i18n })

@@ -56,7 +56,7 @@ class Profile extends Component {
       title = this.i18n('profile.not-found-page-title');
     }
 
-    flux.getActions('page-title').set(title);
+    flux.getActions('title').set(title);
   }
 
   render() {
