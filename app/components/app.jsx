@@ -7,35 +7,31 @@ if (process.env.BROWSER) require('styles/app.css');
 
 class App extends Component {
 
-  static propTypes = {
-    flux: PropTypes.object.isRequired,
-    children: PropTypes.element
-  }
+  static propTypes = { children: PropTypes.element }
+  static contextTypes = { flux: PropTypes.object.isRequired }
 
   static childContextTypes = {
-    flux: PropTypes.object.isRequired,
     messages: PropTypes.object.isRequired,
     locales: PropTypes.array.isRequired
   }
 
-  state = { i18n: this.props.flux.getStore('locale').getState() }
+  state = { i18n: this.context
+      .flux.getStore('locale').getState() }
 
   getChildContext() {
-    const { flux } = this.props;
     const { i18n: { messages, locales } } = this.state;
-
-    return { flux, messages, locales };
+    return { messages, locales };
   }
 
   componentDidMount() {
-    const { flux } = this.props;
+    const { flux } = this.context;
 
     flux.getStore('locale').listen(this.handleLocaleChange);
     flux.getStore('page-title').listen(this.handleTitleChange);
   }
 
   componentWillUnmount() {
-    const { flux } = this.props;
+    const { flux } = this.context;
 
     flux.getStore('locale').unlisten(this.handleLocaleChange);
     flux.getStore('page-title').unlisten(this.handleTitleChange);
