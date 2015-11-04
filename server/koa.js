@@ -9,6 +9,7 @@ import logger from 'koa-logger';
 import favicon from 'koa-favicon';
 import staticCache from 'koa-static-cache';
 import responseTime from 'koa-response-time';
+import Router from 'koa-router';
 
 import router from './router';
 import config from './config/init';
@@ -62,7 +63,14 @@ if (env === 'development') {
   app.use(mount('/assets', staticCache(path.join(__dirname, '../dist'), cacheOpts)));
 }
 
+// mount `/api` router
+const apiRouter = new Router({ prefix: '/api' });
+require('./api/routes')(apiRouter);
+app.use(apiRouter.routes());
+
+// mount react-router
 app.use(router);
+
 app.listen(config.port);
 
 // Tell parent process koa-server is started
