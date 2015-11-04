@@ -22,8 +22,7 @@ class LangPicker extends Component {
               onClick={ () => onChange(locale) }>
               { locale }
             </a>
-          </li>
-        ) }
+          </li>) }
       </ul>
     );
   }

@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import TestUtils from 'react-addons-test-utils';
 import Flux from 'utils/flux';
 
-import injectLang from '../../utils/inject-lang';
+import stubApp from '../../utils/stub-app';
 
 import LangPicker from 'components/shared/lang-picker';
 
@@ -19,12 +19,8 @@ describe('LangPicker', () => {
     flux = new Flux();
     spy = sinon.spy();
 
-    const props = Object.assign(
-      {activeLocale: 'en', onChange: spy},
-      injectLang(flux)
-    );
-
-    const element = React.createElement(LangPicker, props);
+    const Stubbed = stubApp(flux)(LangPicker, { activeLocale: 'en', onChange: spy });
+    const element = React.createElement(Stubbed);
 
     node = window.document.createElement('div');
     instance = ReactDOM.render(element, node);

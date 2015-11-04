@@ -11,9 +11,8 @@ const Protected = requireAuth(class Protected extends Component {
   _getIntlMessage = IntlMixin.getIntlMessage
 
   componentWillMount() {
-    this.props.flux
-      .getActions('page-title')
-      .set(this._getIntlMessage('protected.page-title'));
+    const { flux } = this.props;
+    flux.getActions('page-title').set(this._getIntlMessage('protected.page-title'));
   }
 
   render() {

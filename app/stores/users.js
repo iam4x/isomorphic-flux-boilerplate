@@ -9,16 +9,8 @@ class UsersStore {
     this.users = [];
   }
 
-  static getBySeed(seed) {
-    const { users } = this.getState();
-    return { user: users.find((user) => user.seed === seed) };
-  }
-
   onRemove(index) {
-    const users = [ ...this.users ];
-    users.splice(index, 1);
-
-    this.users = users;
+    this.users = this.users.filter((user, idx) => idx !== index);
   }
 
   onAddSuccess(user) {

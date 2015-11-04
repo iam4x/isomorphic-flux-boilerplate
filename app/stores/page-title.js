@@ -3,7 +3,7 @@ import debug from 'debug';
 class PageTitleStore {
 
   constructor() {
-    this.bindActions(this.alt.getActions('page-title'));
+    this.bindActions(this.alt.getActions('title'));
 
     this.baseTitle = 'ISO-ReactJS';
     this.delimeter = '|';

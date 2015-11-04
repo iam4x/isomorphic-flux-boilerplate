@@ -3,8 +3,7 @@ import ReactDOM from 'react-dom';
 import TestUtils from 'react-addons-test-utils';
 import Flux from 'utils/flux';
 
-import reactRouterStub from '../../utils/stub-router-context';
-import injectLang from '../../utils/inject-lang';
+import stubApp from '../../utils/stub-app';
 
 import App from 'components/app';
 
@@ -15,14 +14,9 @@ describe('App', () => {
   let instance;
   let flux;
 
-  // Inject language
   beforeEach(() => {
     flux = new Flux();
-    injectLang(flux);
-  });
-
-  beforeEach(() => {
-    const Stubbed = reactRouterStub(App, {flux});
+    const Stubbed = stubApp(flux)(App, { flux });
     const element = React.createElement(Stubbed);
     node = window.document.createElement('div');
     instance = ReactDOM.render(element, node);
@@ -43,12 +37,12 @@ describe('App', () => {
   });
 
   it('should change page title', function() {
-    flux.getActions('page-title').set('foobar');
+    flux.getActions('title').set('foobar');
     document.title.should.eql('ISO-ReactJS | foobar');
   });
 
   it('should handle locale change', function(done) {
-    const handleChange = function({locales}) {
+    const handleChange = function({ locales }) {
       locales[0].should.eql('fr');
       const { locales: [ locale ] } = flux.getStore('locale').getState();
       locale.should.eql('fr');
@@ -61,7 +55,7 @@ describe('App', () => {
 
   it('should render children component', function() {
     ReactDOM.unmountComponentAtNode(node);
-    const Stubbed = reactRouterStub(App, {flux});
+    const Stubbed = stubApp(flux)(App, { flux });
     const Element = <Stubbed><h1 className='foobar'>foobar</h1></Stubbed>;
     node = window.document.createElement('div');
     instance = ReactDOM.render(Element, node);

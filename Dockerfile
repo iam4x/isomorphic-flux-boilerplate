@@ -1,4 +1,4 @@
-FROM mhart/alpine-node
+FROM mhart/alpine-node:4.2.1
 EXPOSE 3000
 EXPOSE 3001
 EXPOSE 3002
@@ -19,6 +19,7 @@ RUN apk add --update \
 
 # Install and cache node_modules
 ADD package.json /src/package.json
+RUN npm install -g npm
 RUN npm install
 
 # We need to add `.babelrc` as same level as `node_modules`

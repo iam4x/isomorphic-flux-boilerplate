@@ -8,11 +8,15 @@ import Footer from 'components/footer';
 @Radium
 class App extends Component {
 
-  static propTypes = {
-    flux: PropTypes.object.isRequired,
-    children: PropTypes.element
+  static propTypes = { children: PropTypes.element }
+  static contextTypes = { flux: PropTypes.object.isRequired }
+
+  static childContextTypes = {
+    messages: PropTypes.object.isRequired,
+    locales: PropTypes.array.isRequired
   }
 
+<<<<<<< HEAD
   static childContextTypes = {
     prefixer: PropTypes.object
   }
@@ -40,35 +44,30 @@ class App extends Component {
   }
 
   componentDidMount() {
-    const { flux } = this.props;
-    flux.getStore('locale').listen(this._handleLocaleChange);
-    flux.getStore('page-title').listen(this._handlePageTitleChange);
+    const { flux } = this.context;
+
+    flux.getStore('locale').listen(this.handleLocaleChange);
+    flux.getStore('title').listen(this.handleTitleChange);
   }
 
   componentWillUnmount() {
-    const { flux } = this.props;
-    flux.getStore('locale').unlisten(this._handleLocaleChange);
-    flux.getStore('page-title').unlisten(this._handlePageTitleChange);
+    const { flux } = this.context;
+
+    flux.getStore('locale').unlisten(this.handleLocaleChange);
+    flux.getStore('title').unlisten(this.handleTitleChange);
   }
 
-  _handleLocaleChange = (i18n) => this.setState({ i18n })
-  _handlePageTitleChange = ({ title }) => document.title = title
-
-  // If we have children components sent by `react-router`
-  // we need to clone them and add them the correct
-  // locale and messages sent from the Locale Store
-  renderChild = (child) =>
-    React.cloneElement(child, { ...this.state.i18n });
+  handleLocaleChange = (i18n) => this.setState({ i18n })
+  handleTitleChange = ({ title }) => document.title = title
 
   render() {
+    const { children } = this.props;
+
     return (
       <div>
-        <Header
-          {...this.state.i18n}
-          flux={ this.props.flux } />
+        <Header />
         <hr />
-        { React.Children
-            .map(this.props.children, this.renderChild) }
+        { children }
         <hr />
         <Footer />
       </div>

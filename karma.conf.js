@@ -1,18 +1,15 @@
-/* eslint-disable */
+import webpack from 'webpack';
+import baseConfig from './webpack/base.config';
 
-var webpack = require('webpack');
-var cssnext = require('cssnext');
-
-var coverage;
-var reporters;
+let coverage;
+let reporters;
 if (process.env.CONTINUOUS_INTEGRATION) {
   coverage = {
     type: 'lcov',
     dir: 'coverage/'
   };
   reporters = ['coverage', 'coveralls'];
-}
-else {
+} else {
   coverage = {
     type: 'html',
     dir: 'coverage/'
@@ -20,26 +17,22 @@ else {
   reporters = ['progress', 'coverage'];
 }
 
-module.exports = function (config) {
+export default function(config) {
   config.set({
     browsers: ['Firefox'],
     browserNoActivityTimeout: 30000,
     frameworks: ['mocha', 'chai', 'sinon-chai'],
     files: ['tests.webpack.js'],
-    preprocessors: {'tests.webpack.js': ['webpack', 'sourcemap']},
+    preprocessors: { 'tests.webpack.js': ['webpack', 'sourcemap'] },
     reporters: reporters,
     coverageReporter: coverage,
     webpack: {
+      ...baseConfig,
       devtool: 'inline-source-map',
       module: {
+        ...baseConfig.module,
         loaders: [
-          // TODO: fix sourcemaps
-          // see: https://github.com/deepsweet/isparta-loader/issues/1
-          {
-            test: /\.js$|.jsx$/,
-            loader: 'babel',
-            exclude: /node_modules/
-          },
+          ...baseConfig.module.loaders,
           {
             test: /\.js$|.jsx$/,
             loader: 'isparta?{babel: {stage: 0}}',
@@ -47,16 +40,12 @@ module.exports = function (config) {
           },
           {
             test: /\.css$/,
-            loader: 'style!css!postcss',
-            exclude: /node_modules/
+            loader: 'style!css!postcss'
           },
           {
             test: /\.(jpe?g|png|gif|svg|woff|woff2|eot|ttf)(\?v=[0-9].[0-9].[0-9])?$/,
             loader: 'file?name=[sha512:hash:base64:7].[ext]',
             exclude: /node_modules\/(?!font-awesome)/
-          },
-          {
-            test: /\.json$/, loader: 'json'
           }
         ]
       },
@@ -67,17 +56,8 @@ module.exports = function (config) {
             NODE_ENV: JSON.stringify('test')
           }
         })
-      ],
-      postcss: [
-        cssnext()
-      ],
-      resolve: {
-        extensions: ['', '.js', '.json', '.jsx'],
-        modulesDirectories: ['node_modules', 'app']
-      }
+      ]
     },
-    webpackServer: {
-      noInfo: true
-    }
+    webpackServer: { noInfo: true }
   });
-};
+}

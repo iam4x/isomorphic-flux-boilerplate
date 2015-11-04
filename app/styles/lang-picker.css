@@ -21,7 +21,7 @@
 }
 
 .lang--picker a.active {
-  background-color: var(--black);
-  color: var(--white);
+  background-color: $black;
+  color: $white;
   opacity: 1;
 }

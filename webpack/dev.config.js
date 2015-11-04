@@ -1,5 +1,4 @@
 import webpack from 'webpack';
-import cssnext from 'cssnext';
 import { isArray } from 'lodash';
 
 import baseConfig from './base.config';
@@ -40,7 +39,6 @@ export default {
       ]
     },
     ouput: { ...baseConfig.output, publicPath: PUBLIC_PATH },
-    postcss: [ cssnext() ],
     module: {
       ...baseConfig.module,
       loaders: [

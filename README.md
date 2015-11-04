@@ -4,31 +4,33 @@
 [![devDependency Status](https://david-dm.org/iam4x/isomorphic-flux-boilerplate/dev-status.svg)](https://david-dm.org/iam4x/isomorphic-flux-boilerplate#info=devDependencies)
 [![NPM Version](http://img.shields.io/npm/v/isomorphic-flux-boilerplate.svg?style=flat)](https://www.npmjs.com/package/isomorphic-flux-boilerplate)
 
-# ES6 Isomorphic Flux/ReactJS Boilerplate
+# A complete ES7 <s>Isomorphic</s> [Universal](https://medium.com/@mjackson/universal-javascript-4761051b7ae9) ReactJS boilerplate with [alt](https://github.com/goatslacker/alt) as Flux library.
 
-> A wonderfull boilerplate for **Flux/ReactJS** [isomorphic](http://nerds.airbnb.com/isomorphic-javascript-future-web-apps/) applications, running on **Koa**.
+> A wonderfull boilerplate for **Flux/ReactJS** [universal](http://nerds.airbnb.com/isomorphic-javascript-future-web-apps/) applications, running on **Koa**.
 
 **Demo:** http://isomorphic.iam4x.fr
 
 ## Libraries Included
 
-* [react](https://facebook.github.io/react/)
-* [react-router](https://github.com/rackt/react-router)
+* [react ^0.14](https://facebook.github.io/react/)
+* [react-router ^1.0.0-rc3](https://github.com/rackt/react-router)
 * [react-intl](https://github.com/yahoo/react-intl)
 * [react-redbox](https://github.com/KeywordBrain/redbox-react)
-* [alt](https://github.com/goatslacker/alt)
+* [alt ^0.17](https://github.com/goatslacker/alt)
 * [alt-devtools](https://github.com/goatslacker/alt-devtool)
+* [connect-alt](http://github.com/iam4x/connect-alt)
 * [iso](https://github.com/goatslacker/iso)
 * [koa](http://koajs.com/)
 * [webpack](http://webpack.github.io/)
 * [webpack-hot-middleware](https://github.com/glenjamin/webpack-hot-middleware)
 * [webpack-dev-middleware](https://github.com/webpack/webpack-dev-middleware)
 * [babeljs](https://babeljs.io/)
-* [cssnext](http://cssnext.io/)
+* [postcss ^0.7](https://github.com/postcss/postcss)
+* [precss](https://github.com/jonathantneal/precss)
 
 ## TL;DR
 
-Use with `nodejs^4.x`, clone the repo, `npm install` and `npm run dev`.
+Use with `nodejs@4.2.1`, clone the repo, `npm install` and `npm run dev`.
 
 Learn React ([react-prime-draft](https://github.com/mikechau/react-primer-draft)), learn Flux and Alt ([alt guide](http://alt.js.org/guide/)).
 
@@ -50,7 +52,7 @@ We use [alt](http://alt.js.org) instance as [Flux](http://facebook.github.io/rea
 
 We need to use instances for isomorphic applications, to have a unique store/actions per requests on the server.
 
-On the client, Flux is initialized in `app/main.js` and sent to our first React Component via props (`this.props.flux`). Everytime you want to uses stores or actions in a component you need to give it access through props.
+On the client, Flux is initialized in `app/main.js` and sent to our first React Component via context (`this.context.flux`). Every time you want to uses stores or actions in a component you need to give it access through context.
 
 On the server, it's similar but Flux is initialized in `server/router.jsx`. The instance is sent to `alt-resolver` for rendering components with the correct props.
 
@@ -71,12 +73,21 @@ If user changes locale, it is saved into a cookie `_lang` and used by the server
 
 Thank's to [gpbl/react-locale-hot-switch](https://github.com/gpbl/react-locale-hot-switch) for the implementation example!
 
-In order to use `FormattedRelative` you have to pass `{...this.props}` to component:
+In order to use `FormattedRelative` you have to require `messages` && `locales` from context and pass them as props:
 
-```
-<FormattedRelative
-  {...this.props}
-  value={Date.now() - (1000 * 60 * 60 * 24)} />
+```javascript
+static contextTypes = {
+  messages: PropTypes.object.isRequired,
+  locales: PropTypes.array.isRequired
+}
+
+render() {
+  return (
+    <FormattedRelative
+      { ...this.context }
+      value={Date.now() - (1000 * 60 * 60 * 24)} />
+  );
+}
 ```
 
 ## Localized routes
@@ -91,7 +102,7 @@ Alt-resolver is the magic thing about the boilerplate, it will be our tool for r
 
 Wrap data-fetching requests from actions into promises and send them to `altResolver` like:
 
-```
+```javascript
 fetch() {
   const promise = (resolve) => {
     request
@@ -109,14 +120,32 @@ fetch() {
 
 Call the fetch action from component in the `componentWillMount` method:
 
-```
-static propTypes: {
-  flux: React.PropTypes.object.isRequired
-}
+```javascript
+import React, { Component, PropTypes } from 'react';
+import connect from 'connect-alt';
 
-componentWillMount() {
-  const usersActions = this.props.flux.getActions('users');
-  return usersActions.fetch();
+// connect-alt is an util to connect store state to component props
+// you can read more about it here: http://github.com/iam4x/connect-alt
+// it handle store changes for you :)
+//
+// users -> store name
+// collection -> `this.collection` into users store
+//
+@connect(({ users: { collection } }) => ({ users: collection }))
+class Users extends Component {
+
+  static contextTypes: { flux: PropTypes.object.isRequired }
+  static propTypes: { users: PropTypes.array.isRequired }
+
+  componentWillMount() {
+    const { flux } = this.context
+    return flux.getActions('users').fetch();
+  }
+
+  render() {
+    const { users } = this.props;
+    return (<pre>{ JSON.stringify(users, null, 4) }</pre>)
+  }
 }
 ```
 
@@ -130,7 +159,7 @@ Open `app/actions/users.js`, `app/utils/alt-resolver.js`, `app/stores/users.js` 
 
 On client with webpack, you can directly `require()` images for your images DOM element like:
 
-```
+```javascript
 <img src={require('images/logo.png')} />
 ```
 
@@ -138,7 +167,7 @@ Webpack will load them through the `url-loader` and if it's too big it will sent
 
 But on node, `require()` an image will just throw an exception. There's an util for loading image on server side to achieve this:
 
-```
+```javascript
 import imageResolver from 'utils/image-resolver'
 
 let image;
