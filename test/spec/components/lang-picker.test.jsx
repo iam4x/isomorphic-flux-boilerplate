@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import TestUtils from 'react-addons-test-utils';
-import Flux from 'utils/flux';
+import createFlux from 'flux/createFlux';
 
 import stubApp from '../../utils/stub-app';
 
@@ -16,7 +16,7 @@ describe('LangPicker', () => {
   let spy;
 
   beforeEach(() => {
-    flux = new Flux();
+    flux = createFlux();
     spy = sinon.spy();
 
     const Stubbed = stubApp(flux)(LangPicker, { activeLocale: 'en', onChange: spy });

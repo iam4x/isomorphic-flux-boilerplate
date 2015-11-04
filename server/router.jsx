@@ -1,11 +1,11 @@
 import debug from 'debug';
-import Flux from 'utils/flux';
+import createFlux from 'flux/createFlux';
 
 import universalRender from '../shared/universal-render';
 
 export default function *() {
   // Init alt instance
-  const flux = new Flux();
+  const flux = createFlux();
 
   // Get request locale for rendering
   const locale = this.cookies.get('_lang') || this.acceptsLanguages(require('./config/init').locales) || 'en';

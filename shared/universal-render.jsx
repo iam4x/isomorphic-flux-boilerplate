@@ -2,11 +2,14 @@
 
 import Iso from 'iso';
 import React from 'react';
-import ReactDOM from 'react-dom';
+import debug from 'debug';
+import { render } from 'react-dom';
+import { renderToString } from 'react-dom/server';
 import Router, { RoutingContext, match } from 'react-router';
 import AltContainer from 'alt-container';
 
 import intlLoader from 'utils/intl-loader';
+import ErrorPage from 'pages/server-error';
 
 const { BROWSER, NODE_ENV } = process.env;
 
@@ -43,11 +46,11 @@ export default async function({ flux, history, location }) {
     );
 
     // Render element in the same container as the SSR
-    ReactDOM.render(element, container);
+    render(element, container);
 
     // Tell `alt-resolver` we have done the first render
     // next promises will be resolved
-    flux._resolver._firstClientSideRender = false;
+    flux.resolver.firstRender = false;
   } else {
     const routes = require('routes');
     const [ error, redirect, renderProps ] = await runRouter(location, routes);
@@ -60,7 +63,30 @@ export default async function({ flux, history, location }) {
       </AltContainer>
     );
 
-    const { body, title } = await flux.render(element);
-    return { body, title };
+    let app;
+    let fluxSnapshot;
+    try {
+      // Collect promises with a first render
+      debug('dev')('first server render');
+      renderToString(element);
+
+      // Resolve them
+      await flux.resolver.dispatchPendingActions();
+
+      debug('dev')('second server render');
+
+      fluxSnapshot = flux.takeSnapshot();
+      app = renderToString(element);
+    } catch (renderErr) {
+      // Catch rendering error, render a 500 page
+      debug('koa')('rendering error');
+      debug('koa')(renderErr);
+
+      fluxSnapshot = flux.takeSnapshot();
+      app = renderToString(<ErrorPage />);
+    }
+
+    const { title } = flux.getStore('title').getState();
+    return { body: Iso.render(app, fluxSnapshot), title };
   }
 }

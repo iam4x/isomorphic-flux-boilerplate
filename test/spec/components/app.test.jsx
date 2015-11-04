@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import TestUtils from 'react-addons-test-utils';
-import Flux from 'utils/flux';
+import createFlux from 'flux/createFlux';
 
 import stubApp from '../../utils/stub-app';
 
@@ -15,7 +15,7 @@ describe('App', () => {
   let flux;
 
   beforeEach(() => {
-    flux = new Flux();
+    flux = createFlux();
     const Stubbed = stubApp(flux)(App, { flux });
     const element = React.createElement(Stubbed);
     node = window.document.createElement('div');

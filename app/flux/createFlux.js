@@ -3,17 +3,17 @@ import mapValues from 'lodash/object/mapValues';
 import Alt from 'alt';
 import makeFinalStore from 'alt/utils/makeFinalStore';
 
-import AltResolver from './alt-resolver';
+import AltResolver from '../../shared/alt-resolver';
 
-import * as stores from '../stores/index';
-import * as actions from '../actions/index';
+import * as stores from './stores/index';
+import * as actions from './actions/index';
 
 class Flux extends Alt {
 
   constructor(config = {}) {
     super(config);
 
-    this._resolver = new AltResolver();
+    this.resolver = new AltResolver();
 
     // Load actions into alt
     mapValues(actions, (action, name) => this.addActions(name, action));
@@ -24,13 +24,10 @@ class Flux extends Alt {
     this.FinalStore = makeFinalStore(this);
   }
 
-  resolve(result) {
-    this._resolver.resolve(result);
+  resolve(action) {
+    this.resolver.resolve(action);
   }
 
-  render(handler) {
-    return this._resolver.render(handler, this);
-  }
 }
 
-export default Flux;
+export default function(config) { return new Flux(config); }
