@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import connect from 'connect-alt';
 import { Link } from 'react-router';
 import { IntlMixin } from 'react-intl';
 
@@ -16,35 +17,28 @@ if (process.env.BROWSER) {
   reactLogo = imageResolver('images/react-logo.png');
 }
 
+@connect(({ requests: { inProgress } }) => ({ inProgress }))
 class Header extends Component {
 
+  static propTypes = { inProgress: PropTypes.bool }
+
   static contextTypes = {
-    flux: PropTypes.object.isRequired,
     locales: PropTypes.array.isRequired,
-    messages: PropTypes.object.isRequired
+    messages: PropTypes.object.isRequired,
+    flux: PropTypes.object.isRequired
   }
 
   i18n = IntlMixin.getIntlMessage
 
-  state = { spinner: false }
-
-  componentDidMount() {
-    const { flux } = this.context;
-    flux.getStore('requests').listen(::this.handleRequest);
-  }
-
-  handleRequest({ inProgress }) {
-    this.setState({ spinner: inProgress });
-  }
-
   render() {
+    const { inProgress } = this.props;
     const { locales, flux } = this.context;
     const [ activeLocale ] = locales;
 
     return (
       <header className='app--header'>
         {/* Spinner in the top right corner */}
-        <Spinner active={ this.state.spinner } />
+        <Spinner active={ inProgress } />
 
         {/* LangPicker on the right side */}
         <LangPicker
