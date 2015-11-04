@@ -3,7 +3,10 @@ import { IntlMixin } from 'react-intl';
 
 class Guides extends Component {
 
-  static contextTypes = { flux: PropTypes.object.isRequired }
+  static contextTypes = {
+    flux: PropTypes.object.isRequired,
+    messages: PropTypes.object.isRequired
+  }
 
   i18n = IntlMixin.getIntlMessage
 
