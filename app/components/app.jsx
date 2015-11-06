@@ -1,8 +1,9 @@
 import React, { Component, PropTypes } from 'react';
-import Radium from 'utils/radium';
+import Radium, { Style, getPrefixedStyle } from 'utils/radium';
 
 import Header from 'components/header';
 import Footer from 'components/footer';
+import normalize from 'styles/normalize';
 
 @Radium
 class App extends Component {
@@ -44,6 +45,9 @@ class App extends Component {
 
     return (
       <div>
+        <Style
+          rules={ normalize }
+          prefix={ getPrefixedStyle } />
         <Header />
         <hr />
         { children }

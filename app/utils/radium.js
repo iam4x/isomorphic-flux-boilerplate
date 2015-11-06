@@ -1,8 +1,15 @@
-import radium from 'radium';
+import radium, { Style } from 'radium';
 import Prefixer from 'inline-style-prefixer';
 import matchMediaMock from 'match-media-mock';
 
 const _matchMedia = matchMediaMock.create();
+
+function getPrefixer() {
+  const userAgent = process.env.BROWSER ?
+    navigator.userAgent :
+    'Mozilla/5.0 (iPad; CPU OS 7_0 like Mac OS X) AppleWebKit/537.51.1 (KHTML, like Gecko) Version/7.0 Mobile/11A465 Safari/9537.53';
+  return new Prefixer(userAgent);
+}
 
 function autoPrefixPlugin({ style, getComponentField }) {
   let { prefixer } = getComponentField('context');
@@ -43,4 +50,10 @@ export function setClientResolution(width, height) {
   _matchMedia.setConfig({ type: 'screen', width, height });
 }
 
+export function getPrefixedStyle(style) {
+  const prefixer = getPrefixer();
+  return prefixer.prefix(style);
+}
+
+export { Style };
 export default ConfiguredRadium;
