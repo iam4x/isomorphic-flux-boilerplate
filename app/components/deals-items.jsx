@@ -4,11 +4,11 @@ import Radium from 'utils/radium';
 
 import DealItem from 'components/deal-item';
 
-@connect(({ dealContainers }) => ({ ...dealContainers }))
+@connect(({ dealContainers: { collection } }) => ({ collection }))
 @Radium
 class DealsItems extends Component {
 
-  static propTypes = { dealContainers: PropTypes.array.isRequired }
+  static propTypes = { collection: PropTypes.array.isRequired }
 
   static contextTypes = {
     flux: PropTypes.object.isRequired,
@@ -17,7 +17,7 @@ class DealsItems extends Component {
 
   componentWillMount() {
     const { flux } = this.context;
-    flux.getActions('dealContainers').fetch();
+    flux.getActions('dealContainers').index();
   }
 
   clickHandle(dealContainer) {
@@ -35,10 +35,10 @@ class DealsItems extends Component {
   }
 
   render() {
-    const { dealContainers } = this.props;
+    const { collection } = this.props;
     return (
       <div style={ this.getStyles().root }>
-        { dealContainers.map(this.renderItem) }
+        { collection.map(this.renderItem) }
       </div>
     );
   }

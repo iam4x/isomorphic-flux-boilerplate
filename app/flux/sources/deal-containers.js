@@ -1,4 +1,4 @@
-import data from 'data/users.json';
+const data = [];
 
 const DealContainersSource = alt => {
   return {

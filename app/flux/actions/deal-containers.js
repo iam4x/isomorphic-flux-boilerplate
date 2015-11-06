@@ -1,21 +1,24 @@
-import data from 'data/users.json';
-
 class DealsItemsActions {
 
   constructor() {
-    this.generateActions('fetchSuccess');
+    this.generateActions(
+      'indexSuccess', 'indexFail',
+      'remove'
+    );
   }
 
-  fetch() {
-    const promise = (resolve) => {
-      this.alt.getActions('requests').start();
-      setTimeout(() => {
-        this.actions.fetchSuccess(data.users);
-        this.alt.getActions('requests').success();
-        return resolve();
-      }, 300);
-    };
-    this.alt.resolve(promise);
+  index() {
+    this.alt.resolve(async (done) => {
+      try {
+        this.alt.getActions('requests').start();
+        const response = await this.alt.request({ url: '/users' });
+        this.actions.indexSuccess(response);
+      } catch (error) {
+        this.actions.indexFail({ error });
+      }
+      this.alt.getActions('requests').stop();
+      return done();
+    });
   }
 
 }

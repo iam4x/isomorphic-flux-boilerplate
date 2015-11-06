@@ -6,19 +6,36 @@ export default class DealContainersStore {
 
   constructor() {
     this.bindActions(this.alt.getActions('dealContainers'));
-    this.dealContainers = [];
+
+    this.collection = [];
+    this.error = null;
   }
 
-  onFetchSuccess(dealContainers) {
-    this.dealContainers = dealContainers.reduce((results, curr) => {
-      const index = results.findIndex(({ seed }) => seed === curr.seed);
-      if (index > -1) {
-        results[index] = curr;
-        return results;
-      } else {
-        return [ curr, ...results ];
-      }
-    }, [ ...this.dealContainers ]);
+  onIndexSuccess(dealContainers) {
+    this.collection = dealContainers;
+    this.error = null;
+  }
+
+  onIndexFail({ error }) {
+    this.error = error;
+  }
+
+  onShowSuccess(user) {
+    const index = this.collection
+      .findIndex(({ seed }) => seed === user.seed);
+
+    if (index > -1) {
+      this.collection = this.collection
+        .map((u, idx) => idx === index ? user : u);
+    } else {
+      this.collection = [ ...this.collection, user ];
+    }
+
+    this.error = null;
+  }
+
+  onShowFail({ error }) {
+    this.error = error;
   }
 
 }

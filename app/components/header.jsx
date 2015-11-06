@@ -38,7 +38,7 @@ class Header extends Component {
     const [ activeLocale ] = locales;
 
     return (
-      <header className='app--header'>
+      <header>
 
         {/* Spinner in the top right corner */}
         <Spinner active={ inProgress } />
@@ -50,7 +50,7 @@ class Header extends Component {
 
         {/* React Logo in header */}
         <Link to='/' style={ { display: 'block', textAlign: 'center' } } >
-          <img src={ reactLogo } alt='react-logo' />
+          <img src={ reactLogo } alt='react-logo' style={ { width: 200, height: 200 } } />
         </Link>
 
         {/* Links in the navbar */}
