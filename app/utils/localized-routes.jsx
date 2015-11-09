@@ -5,11 +5,11 @@ import { Route } from 'react-router';
 // used to generate localized routes in `/app/routes.js`
 export function generateRoute({ paths, component }) {
   return paths.map(function(path) { /* eslint react/display-name: 0 */
-    const props = { key: path, path, component };
+    const customProps = { key: path, path, component };
     // Static `onEnter` is defined on
     // component, we should pass it to route props
-    if (component.onEnter) props.onEnter = component.onEnter;
-    return <Route {...props} />;
+    if (component.onEnter) customProps.onEnter = component.onEnter;
+    return <Route { ...customProps } />;
   });
 }
 

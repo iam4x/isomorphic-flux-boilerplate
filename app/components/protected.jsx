@@ -1,8 +1,10 @@
 import React, { Component, PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
+
 import requireAuth from 'components/shared/require-auth';
 
-const Protected = requireAuth(class Protected extends Component {
+@requireAuth
+class Protected extends Component {
 
   static propTypes = {
     flux: PropTypes.object.isRequired
@@ -24,6 +26,6 @@ const Protected = requireAuth(class Protected extends Component {
     );
   }
 
-});
+}
 
 export default Protected;
