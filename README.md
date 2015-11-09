@@ -13,7 +13,7 @@
 ## Libraries Included
 
 * [react ^0.14](https://facebook.github.io/react/)
-* [react-router ^1.0.0-rc3](https://github.com/rackt/react-router)
+* [react-router ^1.0.0](https://github.com/rackt/react-router)
 * [react-intl](https://github.com/yahoo/react-intl)
 * [react-redbox](https://github.com/KeywordBrain/redbox-react)
 * [alt ^0.17](https://github.com/goatslacker/alt)
