@@ -14,8 +14,8 @@ class Flux extends Alt {
     // Bind AltResolve to flux instance
     //   - access to it in actions with `this.alt.resolve`
     //     for resolving async actions before server render
-    const resolver = new AltResolver();
-    this.resolve = ::resolver.resolve;
+    this.resolver = new AltResolver();
+    this.resolve = ::this.resolver.resolve;
 
     // Bind the ApiClient aswell
     //   - access to it in actions with `this.alt.request`
