@@ -1,3 +1,4 @@
+/* eslint react/display-name: 0 */
 import React, { Component, PropTypes } from 'react';
 
 export default function stubApp(flux, stubs) {
