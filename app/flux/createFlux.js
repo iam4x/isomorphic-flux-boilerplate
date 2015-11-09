@@ -1,5 +1,3 @@
-import mapValues from 'lodash/object/mapValues';
-
 import Alt from 'alt';
 import makeFinalStore from 'alt/utils/makeFinalStore';
 
@@ -13,25 +11,23 @@ class Flux extends Alt {
   constructor(client, config = {}) {
     super(config);
 
-    // Use `this.alt.resolve` for async actions
-    // needed for SSR
-    this.resolver = new AltResolver();
+    // Bind AltResolve to flux instance
+    //   - access to it in actions with `this.alt.resolve`
+    //     for resolving async actions before server render
+    const resolver = new AltResolver();
+    this.resolve = ::resolver.resolve;
 
-    // Bind the ApiClient to flux instance
-    // access to it in actions with `this.alt.request`
+    // Bind the ApiClient aswell
+    //   - access to it in actions with `this.alt.request`
     this.request = ::client.request;
 
     // Load actions into alt
-    mapValues(actions, (action, name) => this.addActions(name, action));
+    Object.keys(actions).forEach(key => this.addActions(key, actions[key]));
     // Load stores into alt
-    mapValues(stores, (store, name) => this.addStore(name, store));
+    Object.keys(stores).forEach(key => this.addStore(key, stores[key]));
 
     // Our `FinalStore` for using `connect-alt`
     this.FinalStore = makeFinalStore(this);
-  }
-
-  resolve(action) {
-    this.resolver.resolve(action);
   }
 
 }
