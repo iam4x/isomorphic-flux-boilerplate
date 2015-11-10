@@ -49,9 +49,7 @@ class App extends Component {
           rules={ normalize }
           prefix={ getPrefixedStyle } />
         <Header />
-        <hr />
         { children }
-        <hr />
         <Footer />
       </div>
     );

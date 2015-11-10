@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import Radium from 'utils/radium';
+import DealItemExpanded from 'components/deal-item-expanded';
 
 @Radium
 class DealItem extends Component {
@@ -17,8 +18,7 @@ class DealItem extends Component {
   defaultState = {
     expandStart: false,
     expandPositioned: false,
-    expandClose: false,
-    expandRemoved: false
+    expandClose: false
   }
 
   state = this.defaultState
@@ -29,16 +29,11 @@ class DealItem extends Component {
 
   expand() {
     this.setState({ expandStart: true });
-    process.env.BROWSER &&
-      window.requestAnimationFrame(() => {
-        this.setState({ expandPositioned: true });
-      });
+    setTimeout(() => this.setState({ expandPositioned: true }), 0);
   }
 
   close() {
-    this.setState({ expandClose: true });
-    const el = this.refs.expandedEl;
-    el ? el.addEventListener('transitionend', ::this.resetState, true) : null;
+    this.setSTate({ expandClose: true });
   }
 
   render() {
@@ -48,47 +43,25 @@ class DealItem extends Component {
       <div
         style={ styles.root }
         onClick={ ::this.expand } >
-        <main style={ styles.wrap } >
-          <section
-            rel='miniature'
+
+        <section style={ styles.wrap } >
+          <div
             style={ [
               styles.miniature,
-              this.state.expandPositioned && styles.miniature.expanded
+              this.state.expandPositioned || !this.state.expandClose && styles.miniature.expanded
             ] } >
             <div style={ styles.miniature.title } >{ model.email }</div>
             <div style={ styles.miniature.text } >Some fish text is very impartant for this work now. Please, try it again and again.</div>
             <button style={ styles.btn }>Buy</button>
-          </section>
-        </main>
+          </div>
+        </section>
 
-        { this.state.expandStart &&
-          <section
-            ref='expandedEl'
-            onClick={ ::this.close }
-            style={ [
-              styles.full,
-              this.state.expandPositioned && styles.full.expanded,
-              this.state.expandClose && styles.full.closed,
-              this.state.expandRemoved && { display: 'none' }
-            ] } >
-            <div style={ styles.full.flexContainer }>
-
-              <div style={ [ styles.full.pic, styles.full.flexItem ] } >
-                <div style={ styles.full.title } >{ model.email }</div>
-                <div style={ styles.full.subtitle } >Some fish text is very impartant for this work now. Please, try it again and again.</div>
-              </div>
-
-              <div style={ [ styles.full.field, styles.full.flexItem ] } >
-                <div style={ [
-                  styles.full.additionText,
-                  this.state.expandPositioned && styles.full.additionText.hidden
-                ] } >
-                  Some fish text is very impartant for this work now. Please, try it again and again.
-                </div>
-                <button style={ styles.btn }>Buy</button>
-              </div>
-            </div>
-          </section>
+        { this.state.expandPositioned &&
+          <DealItemExpanded
+            model={ model }
+            onClose={ ::this.close }
+            miniatureWidth= '25%'
+            miniatureHeight='160' />
         }
       </div>
     );
@@ -96,7 +69,6 @@ class DealItem extends Component {
 
   getStyles() {
     const { innerHeight = 480 } = process.env.BROWSER ? window : {};
-    const { expandedEl } = this.refs;
     const height = 160;
     const picBackgroundUrl = 'url(http://lorempixel.com/400/400/cats)';
 
@@ -165,68 +137,6 @@ class DealItem extends Component {
             padding: '2%',
             margin: '5% auto'
           }
-        }
-      },
-
-      full: {
-        position: 'absolute',
-        overflow: 'hidden',
-        width: '25%',
-        minHeight: height,
-        zIndex: 2,
-        transform: `translateY(-${innerHeight}px)`,
-        transition: [
-          'height .4s ease .4s',
-          'all .4s ease'
-        ],
-        expanded: {
-          width: '100%',
-          maxHeight: innerHeight,
-          height: expandedEl ? expandedEl.innerHeight : innerHeight,
-          marginLeft: expandedEl ? -expandedEl.offsetLeft : null
-        },
-        closed: {
-          maxHeight: 0,
-          width: '25%'
-        },
-
-        flexContainer: {
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'stretch'
-        },
-        flexItem: {
-          flex: '0 0 100%'
-        },
-
-        pic: {
-          backgroundImage: picBackgroundUrl,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center center',
-          overflow: 'hidden'
-        },
-        title: {
-          // copy-paste
-          background: 'rgba(0, 0, 100, .5)',
-          padding: 10,
-          fontSize: 18,
-          textAlign: 'center',
-          color: 'white'
-        },
-        subtitle: {
-          background: 'rgba(255, 255, 255, .5)',
-          width: '70%',
-          margin: '60px auto',
-          fontSize: 32,
-          padding: 16
-        },
-        field: {
-          background: 'white',
-          width: '100%',
-          minHeight: innerHeight - height
-        },
-        additionText: {
-          fontSize: 20
         }
       }
     };

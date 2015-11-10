@@ -1,5 +1,4 @@
 import debug from 'debug';
-import ExtractTextPlugin from 'extract-text-webpack-plugin';
 import createFlux from 'flux/createFlux';
 
 import ApiClient from '../shared/api-client';
@@ -27,17 +26,13 @@ export default function *() {
     // Assets name are found into `webpack-stats`
     const assets = require('./webpack-stats.json');
 
-    // Refresh page at a first time after set screen resolution for server
-    const extractor = new ExtractTextPlugin('./views/media-query-refresh.js');
-    const mediaQueryRefreshScript = extractor.extract();
-
     // Don't cache assets name on dev
     if (process.env.NODE_ENV === 'development') {
       delete require.cache[require.resolve('./webpack-stats.json')];
     }
 
     debug('dev')('return html content');
-    yield this.render('main', { body, assets, locale, title, mediaQueryRefreshScript });
+    yield this.render('main', { body, assets, locale, title });
   } catch (err) {
     // Render 500 error page from server
     const { error, redirect } = err;

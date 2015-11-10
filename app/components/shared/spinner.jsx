@@ -1,13 +1,30 @@
 import React, { Component, PropTypes } from 'react';
-import cx from 'classnames';
+import Radium from 'utils/radium';
 
+@Radium
 class Spinner extends Component {
 
   static propTypes = { active: PropTypes.bool }
 
   render() {
     const { active } = this.props;
-    return <div className={ cx('app--spinner', { active }) } />;
+    const { _normal, _active } = this.styles;
+    return <div style={ [_normal, active && _active] }></div>;
+  }
+
+  styles = {
+    _normal: {
+      position: 'absolute',
+      top: 5,
+      left: 5,
+      width: 50,
+      height: 50,
+      background: 'rgba(0, 0, 0, .3)',
+      display: 'none'
+    },
+    _active: {
+      display: 'relative'
+    }
   }
 }
 
