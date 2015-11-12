@@ -1,13 +1,12 @@
 import React, { Component, PropTypes } from 'react';
 import Radium from 'utils/radium';
-import DealItemExpanded from 'components/deal-item-expanded';
+import DealShow from 'components/deals/deal-show';
 
 @Radium
-class DealItem extends Component {
+class DealsListChild extends Component {
 
   static propTypes = {
-    model: PropTypes.object.isRequired,
-    onChange: PropTypes.func.isRequired
+    model: PropTypes.object.isRequired
   }
 
   static contextTypes = {
@@ -28,12 +27,14 @@ class DealItem extends Component {
   }
 
   expand() {
+    console.log('expand');
     this.setState({ expandStart: true });
     setTimeout(() => this.setState({ expandPositioned: true }), 0);
   }
 
   close() {
-    this.setSTate({ expandClose: true });
+    this.setState({ expandClose: true });
+    console.log('clise');
   }
 
   render() {
@@ -48,7 +49,7 @@ class DealItem extends Component {
           <div
             style={ [
               styles.miniature,
-              this.state.expandPositioned || !this.state.expandClose && styles.miniature.expanded
+              this.state.expandPositioned || this.state.expandClose && styles.miniature.expanded
             ] } >
             <div style={ styles.miniature.title } >{ model.email }</div>
             <div style={ styles.miniature.text } >Some fish text is very impartant for this work now. Please, try it again and again.</div>
@@ -57,7 +58,7 @@ class DealItem extends Component {
         </section>
 
         { this.state.expandPositioned &&
-          <DealItemExpanded
+          <DealShow
             model={ model }
             onClose={ ::this.close }
             miniatureWidth= '25%'
@@ -143,4 +144,4 @@ class DealItem extends Component {
   }
 }
 
-export default DealItem;
+export default DealsListChild;

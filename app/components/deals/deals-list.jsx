@@ -1,12 +1,11 @@
 import React, { Component, PropTypes } from 'react';
 import connect from 'connect-alt';
 import Radium from 'utils/radium';
+import DealsListChild from 'components/deals/deals-list-child';
 
-import DealItem from 'components/deal-item';
-
-@connect(({ dealContainers: { collection } }) => ({ collection }))
 @Radium
-class DealsItems extends Component {
+@connect(({ dealContainers: { collection } }) => ({ collection }))
+class DealsList extends Component {
 
   static propTypes = { collection: PropTypes.array.isRequired }
 
@@ -20,16 +19,10 @@ class DealsItems extends Component {
     flux.getActions('dealContainers').index();
   }
 
-  clickHandle(dealContainer) {
-    console.log(dealContainer);
-    this.setState({ expanded: true });
-  }
-
   renderItem = (item, index) => {
     return (
-       <DealItem
+       <DealsListChild
          key={ index }
-         onChange={ ::this.clickHandle }
          model={ item } />
     );
   }
@@ -53,7 +46,7 @@ class DealsItems extends Component {
         background: '#bdbdbd',
         padding: '1px',
         position: 'relative',
-        '@media all and (max-width: 320px)': {
+        '@media all and (maxWidth: 320px)': {
           flexDirection: 'column'
         }
       }
@@ -61,4 +54,4 @@ class DealsItems extends Component {
   }
 }
 
-export default DealsItems;
+export default DealsList;

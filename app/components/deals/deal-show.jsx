@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import Radium from 'utils/radium';
 
 @Radium
-class DealItemExpanded extends Component {
+class DealShow extends Component {
 
   static propTypes = {
     model: PropTypes.object.isRequired,
@@ -30,6 +30,7 @@ class DealItemExpanded extends Component {
 
   close() {
     this.setState({ expandClose: true });
+    console.log('fuuuuuuuu');
     this.props.onClose();
     const el = this.refs.root;
     el ? el.addEventListener('transitionend', ::this.resetState) : null;
@@ -37,7 +38,6 @@ class DealItemExpanded extends Component {
 
   componentDidMount() {
     setTimeout(() => this.setState({ expandReady: true }), 0);
-    this.flux.getActions('requests').start();
   }
 
   render() {
@@ -159,4 +159,4 @@ class DealItemExpanded extends Component {
   }
 }
 
-export default DealItemExpanded;
+export default DealShow;

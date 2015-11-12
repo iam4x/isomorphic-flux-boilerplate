@@ -6,7 +6,7 @@ export default (
   <Route component={ require('./components/app') }>
     { generateRoute({
       paths: ['/', '/deals'],
-      component: require('./components/deals-items')
+      component: require('./components/deals/deals-list')
     }) }
     { generateRoute({
       paths: ['/protected', '/protege'],

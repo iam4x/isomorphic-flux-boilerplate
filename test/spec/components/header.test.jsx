@@ -36,13 +36,4 @@ describe('Header', () => {
     const langs = TestUtils.findRenderedDOMComponentWithClass(instance, 'lang--picker');
     langs.children.length.should.eql(2);
   });
-
-  it('should handle requests change', function() {
-    flux.getActions('requests').start();
-    const spinner = TestUtils.findRenderedDOMComponentWithClass(instance, 'app--spinner');
-    spinner.className.indexOf('active').should.not.eql(-1);
-
-    flux.getActions('requests').stop();
-    spinner.className.indexOf('active').should.eql(-1);
-  });
 });
