@@ -15,9 +15,9 @@ class DealsListChild extends Component {
   }
 
   defaultState = {
-    expandStart: false,
-    expandPositioned: false,
-    expandClose: false
+    started: false,
+    expanded: false,
+    closed: false
   }
 
   state = this.defaultState
@@ -26,43 +26,39 @@ class DealsListChild extends Component {
     this.setState(this.defaultState);
   }
 
-  expand() {
-    console.log('expand');
-    this.setState({ expandStart: true });
-    setTimeout(() => this.setState({ expandPositioned: true }), 0);
-  }
-
-  close() {
-    this.setState({ expandClose: true });
-    console.log('clise');
+  handleExpand() {
+    this.setState({ started: true });
+    setTimeout(() => this.setState({ expanded: true }), 0);
   }
 
   render() {
     const { model } = this.props;
     const styles = this.getStyles();
     return (
-      <div
-        style={ styles.root }
-        onClick={ ::this.expand } >
-
+      <div>
         <section style={ styles.wrap } >
-          <div
+          <section
             style={ [
-              styles.miniature,
-              this.state.expandPositioned || this.state.expandClose && styles.miniature.expanded
+              styles.base,
+              this.state.started && styles.base.expanded,
+              this.state.closed && styles.base.closed
             ] } >
-            <div style={ styles.miniature.title } >{ model.email }</div>
-            <div style={ styles.miniature.text } >Some fish text is very impartant for this work now. Please, try it again and again.</div>
-            <button style={ styles.btn }>Buy</button>
-          </div>
+            <div style={ styles.title } >{ model.email }</div>
+            <div style={ styles.text } >Some fish text is very impartant for this work now. Please, try it again and again.</div>
+            <button
+              style={ styles.btn }
+              onClick={ ::this.handleExpand } >
+              More
+            </button>
+          </section>
         </section>
 
-        { this.state.expandPositioned &&
+        { this.state.expanded &&
           <DealShow
             model={ model }
-            onClose={ ::this.close }
-            miniatureWidth= '25%'
-            miniatureHeight='160' />
+            onClose={ ::this.resetState }
+            initWidth= '20%'
+            initHeight='160' />
         }
       </div>
     );
@@ -74,34 +70,10 @@ class DealsListChild extends Component {
     const picBackgroundUrl = 'url(http://lorempixel.com/400/400/cats)';
 
     return {
-      root: {
-        flex: '1 1 33%',
-        margin: '0 auto',
-        '@media all and (min-width: 410px)': {
-          maxWidth: '50%'
-        },
-        '@media all and (min-width: 620px)': {
-          maxWidth: '33%'
-        },
-        '@media all and (min-width: 830px)': {
-          maxWidth: '25%'
-        }
-      },
       wrap: {
         position: 'relative'
       },
-      btn: {
-        background: 'rgb(13, 113, 198)',
-        padding: '4% 5%',
-        border: 0,
-        color: 'rgb(255, 255, 255)',
-        fontSize: 24,
-        position: 'absolute',
-        right: 12,
-        bottom: 4
-      },
-
-      miniature: {
+      base: {
         height: height,
         boxSizing: 'border-box',
         border: '1px solid #fff',
@@ -113,32 +85,48 @@ class DealsListChild extends Component {
           'opacity .2s ease-out',
           'margin-bottom .4s ease-out'
         ],
+        opacity: 1,
+        marginBottom: 0,
         expanded: {
           opacity: 0,
-          marginBottom: innerHeight - height,
-          backgroundImage: 'none'
+          marginBottom: innerHeight - height
         },
-
-        title: {
-          background: 'rgba(0, 0, 100, .5)',
-          padding: 10,
-          fontSize: 18,
-          textAlign: 'center',
-          color: 'white'
-        },
-        text: {
-          fontSize: 16,
-          margin: 12,
-          padding: 6,
-          textAlign: 'center',
-          background: 'rgba(255, 255, 255, .5)',
-          expanded: {
-            fontSize: 48,
-            width: '70%',
-            padding: '2%',
-            margin: '5% auto'
-          }
+        closed: {
+          opacity: 1,
+          marginBottom: 0
         }
+      },
+
+      title: {
+        background: 'rgba(0, 0, 100, .5)',
+        padding: 10,
+        fontSize: 18,
+        textAlign: 'center',
+        color: 'white'
+      },
+      text: {
+        fontSize: 16,
+        margin: 12,
+        padding: 6,
+        textAlign: 'center',
+        background: 'rgba(255, 255, 255, .5)',
+        expanded: {
+          fontSize: 48,
+          width: '70%',
+          padding: '2%',
+          margin: '5% auto'
+        }
+      },
+
+      btn: {
+        background: 'rgb(13, 113, 198)',
+        padding: '4% 5%',
+        border: 0,
+        color: 'rgb(255, 255, 255)',
+        fontSize: 24,
+        position: 'absolute',
+        right: 12,
+        bottom: 4
       }
     };
   }

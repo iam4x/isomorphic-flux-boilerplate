@@ -7,14 +7,12 @@ import fauxJax from 'faux-jax';
 
 import createFlux from 'flux/createFlux';
 
-import ApiClient from '../../../shared/api-client';
-import stubApp from '../../utils/stub-app';
+import ApiClient from '../../../../shared/api-client';
+import stubApp from '../../../utils/stub-app';
 
-import Users from 'components/users';
+import DealsList from 'components/deals/deals-list';
 
-const should = chai.should();
-
-describe('Users', () => {
+describe('DealsList', () => {
   let node;
   let instance;
   let flux;
@@ -32,7 +30,7 @@ describe('Users', () => {
     fauxJax.on('request', respond);
 
     flux = createFlux(new ApiClient());
-    const Stubbed = stubApp(flux)(Users);
+    const Stubbed = stubApp(flux)(DealsList);
 
     node = window.document.createElement('div');
     instance = ReactDOM.render(React.createElement(Stubbed), node);
@@ -46,9 +44,23 @@ describe('Users', () => {
     }
   });
 
-  it('shoud render without models', (done) => {
-    TestUtils.findAllInRenderedTree(instance, () => {
-      console.log(arguments);
-      done();
-    })
+  it('shoud render without models', () => {
+    const rootEl = TestUtils.findRenderedDOMComponentWithTag(instance, 'div');
+    rootEl.style.display.should.eql('flex');
+    rootEl.children.length.should.eql(0);
   });
+
+  it('should render deals after first fetch', (done) => {
+    function handleChange() {
+      defer(() => {
+        const children = TestUtils.scryRenderedDOMComponentsWithClass(instance, 'deals-list-child');
+        children.length.should.eql(1);
+
+        flux.getStore('dealContainers').unlisten(handleChange);
+        return done();
+      });
+    }
+
+    flux.getStore('dealContainers').listen(handleChange);
+  });
+});

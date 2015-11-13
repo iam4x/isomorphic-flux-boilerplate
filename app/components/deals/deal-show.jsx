@@ -6,9 +6,9 @@ class DealShow extends Component {
 
   static propTypes = {
     model: PropTypes.object.isRequired,
-    miniatureWidth: PropTypes.string.isRequired,
-    miniatureHeight: PropTypes.string.isRequired,
-    onClose: PropTypes.func.isRequired
+    onClose: PropTypes.func.isRequired,
+    initWidth: PropTypes.string.isRequired,
+    initHeight: PropTypes.string.isRequired
   }
 
   static contextTypes = {
@@ -17,27 +17,27 @@ class DealShow extends Component {
   }
 
   defaultState = {
-    expandReady: false,
-    expandRemoved: false,
-    expandClose: false
+    start: false,
+    closed: false,
+    removed: false
   }
 
   state = this.defaultState
 
   resetState() {
     this.setState(this.defaultState);
+    // this.setState({ removed: true });
   }
 
-  close() {
-    this.setState({ expandClose: true });
-    console.log('fuuuuuuuu');
+  closeHandle() {
+    this.setState({ closed: true });
     this.props.onClose();
     const el = this.refs.root;
     el ? el.addEventListener('transitionend', ::this.resetState) : null;
   }
 
   componentDidMount() {
-    setTimeout(() => this.setState({ expandReady: true }), 0);
+    setTimeout(() => this.setState({ start: true }), 0);
   }
 
   render() {
@@ -47,12 +47,12 @@ class DealShow extends Component {
     return (
       <section
         ref='root'
-        onClick={ ::this.close }
+        onClick={ ::this.closeHandle }
         style={ [
           styles.root,
-          this.state.expandReady && styles.root.expanded,
-          this.state.expandClose && styles.root.closed,
-          this.state.expandRemoved && { display: 'none' }
+          this.state.start && styles.root.expanded,
+          this.state.closed && styles.root.closed,
+          this.state.removed && { display: 'none' }
         ] } >
         <div style={ styles.root.flexContainer }>
 
@@ -79,30 +79,31 @@ class DealShow extends Component {
     const { innerHeight = 480 } = process.env.BROWSER ? window : {};
     const picBackgroundUrl = 'url(http://lorempixel.com/400/400/cats)';
     const rootEl = this.refs.root;
-    const { miniatureWidth, miniatureHeight } = this.props;
+    const { initWidth, initHeight } = this.props;
 
     return {
       root: {
         position: 'absolute',
         overflow: 'hidden',
-        width: miniatureWidth,
-        minHeight: miniatureHeight,
+        width: initWidth,
+        minHeight: innerHeight,
         zIndex: 2,
-        transform: `translateY(-${innerHeight}px) scale(0)`,
+        transform: `translateY(-${innerHeight}px)`,
         transition: [
-          'height .4s ease .4s',
+          'min-height .4s ease .4s',
           'all .4s ease'
         ],
         expanded: {
           width: '100%',
           maxHeight: innerHeight,
-          height: rootEl ? rootEl.innerHeight : innerHeight,
-          marginLeft: rootEl ? -rootEl.offsetLeft : null,
-          transform: `translateY(-${innerHeight}px) scale(1)`
+          minHeight: rootEl ? rootEl.initHeight : initHeight,
+          marginLeft: rootEl ? -rootEl.offsetLeft : null
         },
         closed: {
-          maxHeight: 0,
-          width: '25%'
+          maxWidth: initWidth,
+          maxHeight: initHeight,
+          minHeight: initHeight,
+          transform: `translateY(-${initHeight}px)`
         }
       },
 
@@ -150,7 +151,7 @@ class DealShow extends Component {
       field: {
         background: 'white',
         width: '100%',
-        minHeight: innerHeight - miniatureHeight
+        minHeight: innerHeight - initHeight
       },
       additionText: {
         fontSize: 20
