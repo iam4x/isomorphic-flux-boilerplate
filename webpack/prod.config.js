@@ -1,5 +1,7 @@
 import webpack from 'webpack';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
+import PurifyCSSPlugin from 'bird3-purifycss-webpack-plugin';
+
 import baseConfig from './base.config';
 
 // clean `.tmp` && `dist`
@@ -38,6 +40,21 @@ export default {
         BROWSER: JSON.stringify(true),
         NODE_ENV: JSON.stringify('production')
       }
+    }),
+
+    new PurifyCSSPlugin({
+      purifyOptions: { info: true },
+      paths: [
+        'app/**/*.jsx',
+        'app/**/*.js',
+        'server/views/**/*.hbs',
+        'shared/universal-render.jsx',
+
+        // VENDORS WHICH CREATE HTML WITH ID OR CLASSES
+        'node_modules/iso/src/iso.js',
+        'node_modules/react-router/lib/*.js',
+        'node_modules/react-intl/lib/components/*.js'
+      ]
     }),
 
     // optimizations

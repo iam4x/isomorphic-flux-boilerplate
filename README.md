@@ -27,6 +27,7 @@
 * [babeljs](https://babeljs.io/)
 * [postcss ^0.7](https://github.com/postcss/postcss)
 * [precss](https://github.com/jonathantneal/precss)
+* [purifyCSS](https://github.com/purifycss/purifycss)
 
 ## TL;DR
 
