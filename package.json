@@ -64,6 +64,7 @@
     "babel-loader": "^5.3.2",
     "babel-plugin-react-transform": "^1.0.3",
     "babel-runtime": "^5.8.24",
+    "bird3-purifycss-webpack-plugin": "github:iam4x/bird3-purifycss-webpack-plugin#master",
     "browser-sync": "^2.8.0",
     "css-loader": "^0.22.0",
     "del": "^2.0.2",

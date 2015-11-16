@@ -27,6 +27,7 @@
 * [babeljs](https://babeljs.io/)
 * [postcss ^0.7](https://github.com/postcss/postcss)
 * [precss](https://github.com/jonathantneal/precss)
+* [purifyCSS](https://github.com/purifycss/purifycss)
 
 ## TL;DR
 
@@ -258,7 +259,11 @@ You can also use `processes.json` to run the application with [PM2 Monitor](http
 You can build and dev with the boilerplate through docker container, it runs with dinghy.
 
 * Install [dinghy](https://github.com/codekitchen/dinghy) (it has support for NFS sharing which is required for changes detection and it's fast!)
-* `$ docker-compose up && open http://webapp.docker`
+* `$ dinghy up`
+* `$ docker-compose build` (don't kill your terminal it take time to install node_modules for dev)
+* `$ docker-compose up`
+
+Then open http://webapp.docker into your browser. (You can change this URL into `docker-compose.yml`)
 
 ### Learn more
 
