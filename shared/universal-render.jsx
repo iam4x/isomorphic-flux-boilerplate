@@ -22,6 +22,8 @@ const bootstrap = () =>
     Iso.bootstrap((initialState, __, container) =>
       resolve({ initialState, __, container })));
 
+/* eslint space-before-function-paren:0 */
+// https://github.com/eslint/eslint/issues/4442
 export default async function({ flux, history, location }) {
   if (BROWSER) {
     if (NODE_ENV === 'development') require('alt/utils/chromeDebug')(flux);

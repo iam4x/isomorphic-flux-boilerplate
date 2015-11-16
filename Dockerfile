@@ -15,6 +15,7 @@ RUN apk add --update \
   libpng-dev \
   python \
   bash \
+  git \
   && rm -rf /var/cache/apk/*
 
 # Install and cache node_modules
