@@ -44,6 +44,6 @@ export default function *() {
       return this.redirect(pathname + search);
     }
 
-    throw error;
+    throw err;
   }
 }
