@@ -85,7 +85,6 @@
     "karma-webpack": "^1.7.0",
     "koa-webpack-dev-middleware": "^1.0.1",
     "koa-webpack-hot-middleware": "^1.0.1",
-    "mocha": "^2.2.5",
     "node-watch": "^0.3.4",
     "postcss-import": "^7.1.0",
     "postcss-loader": "^0.8.0",
