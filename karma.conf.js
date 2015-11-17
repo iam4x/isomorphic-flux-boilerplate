@@ -23,12 +23,12 @@ export default function(config) {
     browserNoActivityTimeout: 30000,
     frameworks: ['mocha', 'chai', 'sinon-chai'],
     files: ['tests.webpack.js'],
-    preprocessors: { 'tests.webpack.js': ['webpack', 'sourcemap'] },
+    preprocessors: { 'tests.webpack.js': ['webpack'] },
     reporters: reporters,
     coverageReporter: coverage,
     webpack: {
       ...baseConfig,
-      devtool: 'inline-source-map',
+      devtool: 'inline',
       module: {
         ...baseConfig.module,
         loaders: [
