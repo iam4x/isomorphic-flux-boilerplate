@@ -32,7 +32,6 @@
     "intl": "^1.0.0",
     "iso": "^4.1.0",
     "koa": "^1.0.0",
-    "koa-cash": "^1.0.1",
     "koa-compressor": "^1.0.3",
     "koa-conditional-get": "^1.0.3",
     "koa-etag": "^2.0.0",
