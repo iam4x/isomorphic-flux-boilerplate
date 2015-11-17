@@ -1,6 +1,11 @@
 import debug from 'debug';
+
+import React from 'react';
+import { renderToString } from 'react-dom/server';
+
 import createFlux from 'flux/createFlux';
 
+import ServerHTML from './server-html';
 import ApiClient from '../shared/api-client';
 import universalRender from '../shared/universal-render';
 
@@ -32,7 +37,8 @@ export default function *() {
     }
 
     debug('dev')('return html content');
-    yield this.render('main', { body, assets, locale, title });
+    const props = { body, assets, locale, title };
+    this.body = renderToString(<ServerHTML { ...props } />);
   } catch (err) {
     // Render 500 error page from server
     const { error, redirect } = err;
