@@ -7,7 +7,6 @@ import baseConfig from './base.config';
 export default {
   ...baseConfig,
   module: {
-    ...baseConfig.module,
     loaders: [
       ...baseConfig.module.loaders,
       {
