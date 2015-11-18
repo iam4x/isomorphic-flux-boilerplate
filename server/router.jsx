@@ -38,7 +38,7 @@ export default function *() {
 
     debug('dev')('return html content');
     const props = { body, assets, locale, title };
-    this.body = renderToString(<ServerHTML { ...props } />);
+    this.body = '<!DOCTYPE html>' + renderToString(<ServerHTML { ...props } />);
   } catch (err) {
     // Render 500 error page from server
     const { error, redirect } = err;
