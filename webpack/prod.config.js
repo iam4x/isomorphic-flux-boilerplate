@@ -4,13 +4,9 @@ import PurifyCSSPlugin from 'bird3-purifycss-webpack-plugin';
 
 import baseConfig from './base.config';
 
-// clean `.tmp` && `dist`
-require('./utils/clean-dist')();
-
 export default {
   ...baseConfig,
   module: {
-    ...baseConfig.module,
     loaders: [
       ...baseConfig.module.loaders,
       {
