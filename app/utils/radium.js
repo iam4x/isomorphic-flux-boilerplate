@@ -2,7 +2,12 @@ import radium, { Style } from 'radium';
 import Prefixer from 'inline-style-prefixer';
 import matchMediaMock from 'match-media-mock';
 
-const _matchMedia = matchMediaMock.create();
+const matchMedia = matchMediaMock.create();
+
+process.env.BROWSER ? null :
+  global.navigator = {
+    userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.80 Safari/537.36'
+  };
 
 function getPrefixer() {
   const userAgent = process.env.BROWSER ?
@@ -39,15 +44,14 @@ const plugins = [
 ];
 
 function ConfiguredRadium(component) {
-  const matchMedia = () => {
-    return !process.env.BROWSER ? _matchMedia : null;
-  }();
-  return radium({ plugins, matchMedia })(component);
+  return process.env.BROWSER ?
+    radium({ plugins })(component) :
+    radium({ plugins, matchMedia })(component);
 }
 
 export function setClientResolution(width, height) {
   if (!width || !height) return;
-  _matchMedia.setConfig({ type: 'screen', width, height });
+  matchMedia.setConfig({ type: 'screen', width, height });
 }
 
 export function getPrefixedStyle(style) {
