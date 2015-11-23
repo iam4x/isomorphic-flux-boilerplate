@@ -40,11 +40,16 @@ class DealsListChild extends Component {
           <section
             style={ [
               styles.base,
-              this.state.started && styles.base.expanded,
-              this.state.closed && styles.base.closed
+              this.state.started && styles.base_expanded,
+              this.state.closed && styles.base_closed
             ] } >
             <div style={ styles.title } >{ model.email }</div>
-            <div style={ styles.text } >Some fish text is very impartant for this work now. Please, try it again and again.</div>
+            <div style={ [
+              styles.text,
+              this.state.expanded && styles.text_expanded
+            ] } >
+              Some fish text is very impartant for this work now. Please, try it again and again.
+            </div>
             <button
               style={ styles.btn }
               onClick={ ::this.handleExpand } >
@@ -86,15 +91,17 @@ class DealsListChild extends Component {
           'margin-bottom .4s ease-out'
         ],
         opacity: 1,
-        marginBottom: 0,
-        expanded: {
-          opacity: 0,
-          marginBottom: innerHeight - height
-        },
-        closed: {
-          opacity: 1,
-          marginBottom: 0
-        }
+        marginBottom: 0
+      },
+
+      base_expanded: {
+        opacity: 0,
+        marginBottom: innerHeight - height
+      },
+
+      base_closed: {
+        opacity: 1,
+        marginBottom: 0
       },
 
       title: {
@@ -104,18 +111,20 @@ class DealsListChild extends Component {
         textAlign: 'center',
         color: 'white'
       },
+
       text: {
         fontSize: 16,
         margin: 12,
         padding: 6,
         textAlign: 'center',
-        background: 'rgba(255, 255, 255, .5)',
-        expanded: {
-          fontSize: 48,
-          width: '70%',
-          padding: '2%',
-          margin: '5% auto'
-        }
+        background: 'rgba(255, 255, 255, .5)'
+      },
+
+      text_expanded: {
+        fontSize: 48,
+        width: '70%',
+        padding: '2%',
+        margin: '5% auto'
       },
 
       btn: {
