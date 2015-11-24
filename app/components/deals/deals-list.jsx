@@ -48,23 +48,22 @@ class DealsList extends Component {
       background: '#bdbdbd',
       padding: '1px',
       position: 'relative',
-      '@media all and (maxWidth: 320px)': {
+      '@media (max-width: 410px)': {
         flexDirection: 'column'
       }
     },
     child: {
-      flex: '1 1 33%',
       margin: '0 auto',
-      maxWidth: '20%',
+      flex: '1 0 100%',
 
-      '@media (minWidth: 410px)': {
-        maxWidth: '50%'
+      '@media (min-width: 410px)': {
+        flex: '1 50%'
       },
-      '@media (minWidth: 620px)': {
-        maxWidth: '33%'
+      '@media (min-width: 620px)': {
+        flex: '1 33%'
       },
-      '@media (minWidth: 830px)': {
-        maxWidth: '25%'
+      '@media (min-width: 830px)': {
+        flex: '1 25%'
       }
     }
   }
