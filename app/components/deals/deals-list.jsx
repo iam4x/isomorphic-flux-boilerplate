@@ -3,8 +3,8 @@ import connect from 'connect-alt';
 import Radium from 'utils/radium';
 import DealsListChild from 'components/deals/deals-list-child';
 
-@Radium
 @connect(({ dealContainers: { collection } }) => ({ collection }))
+@Radium
 class DealsList extends Component {
 
   static propTypes = { collection: PropTypes.array.isRequired }

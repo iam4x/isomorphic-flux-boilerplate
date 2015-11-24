@@ -12,11 +12,12 @@ export default function ServerHTML({ body, assets, locale, title }) {
   return (
     <html lang={ locale }>
       <head>
+        <meta charSet='utf-8' />
         <script dangerouslySetInnerHTML={ { __html: screenSizeDetector } } />
+        <meta name='viewport' content='width=device-width, initial-scale=1' />
         <meta
           name='react-conditional-hack'
           dangerouslySetInnerHTML={ { __html: conditional } } />
-        <meta charSet='utf-8' />
         <link rel='icon' type='image/ico' href='/favicon.ico' />
         { assets.style.map( (href, idx) =>
           <link key={ idx } rel='stylesheet' href={ href } /> ) }
