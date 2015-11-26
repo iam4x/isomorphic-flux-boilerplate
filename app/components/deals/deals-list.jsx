@@ -47,10 +47,7 @@ class DealsList extends Component {
       justifyContent: 'flex-start',
       background: '#bdbdbd',
       padding: '1px',
-      position: 'relative',
-      '@media (max-width: 410px)': {
-        flexDirection: 'column'
-      }
+      position: 'relative'
     },
     child: {
       margin: '0 auto',

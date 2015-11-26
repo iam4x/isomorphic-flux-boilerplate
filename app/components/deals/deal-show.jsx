@@ -19,14 +19,15 @@ class DealShow extends Component {
   defaultState = {
     start: false,
     closed: false,
-    removed: false
+    removed: false,
+    inCart: false
   }
 
   state = this.defaultState
 
   resetState() {
     this.setState(this.defaultState);
-    // this.setState({ removed: true });
+    this.setState({ removed: true });
   }
 
   closeHandle() {
@@ -36,40 +37,66 @@ class DealShow extends Component {
     el ? el.addEventListener('transitionend', ::this.resetState) : null;
   }
 
+  addToCart() {
+    this.setState({ inCart: true });
+  }
+
   componentDidMount() {
     setTimeout(() => this.setState({ start: true }), 0);
   }
+
 
   render() {
     const { model } = this.props;
     const styles = this.getStyles();
 
     return (
-      <section
-        ref='root'
-        onClick={ ::this.closeHandle }
-        style={ [
-          styles.root,
-          this.state.start && styles.root.expanded,
-          this.state.closed && styles.root.closed,
-          this.state.removed && { display: 'none' }
-        ] } >
-        <div style={ styles.root.flexContainer }>
+      <section>
+        <div
+          ref='root'
+          style={ [
+            styles.root,
+            this.state.start && styles.root.expanded,
+            this.state.closed && styles.root.closed,
+            this.state.removed && { display: 'none' }
+          ] } >
+          <div style={ styles.flexContainer }>
 
-          <div style={ [ styles.pic, styles.flexItem ] } >
-            <div style={ styles.title } >{ model.email }</div>
-            <div style={ styles.subtitle } >Some fish text is very impartant for this work now. Please, try it again and again.</div>
-          </div>
-
-          <div style={ [ styles.field, styles.flexItem ] } >
-            <div style={ [
-              styles.additionText,
-              styles.additionText.hidden
-            ] } >
-              Some fish text is very impartant for this work now. Please, try it again and again.
+            <div style={ [ styles.pic, styles.flexItem ] } onClick={ ::this.closeHandle } >
+              <div style={ styles.title } >{ model.email }</div>
+              <div style={ styles.subtitle } >Some fish text is very impartant for this work now. Please, try it again and again.</div>
             </div>
-            <button style={ styles.btn }>Buy</button>
+
+            <div style={ [ styles.field, styles.flexItem ] } >
+              <div style={ [
+                styles.additionText,
+                styles.additionText.hidden
+              ] } >
+                Some fish text is very impartant for this work now. Please, try it again and again.
+              </div>
+              <button
+                onClick={ ::this.addToCart }
+                style={ [
+                  styles.btn,
+                  this.state.inCart && styles.btn_expanded
+                ] } >
+                Buy
+              </button>
+            </div>
           </div>
+
+          <section styles={ this.state.inCart && styles.toCartPopupWrap_active } >
+            <div
+              ref='toCartMsg'
+              style={ [
+                styles.toCartPopupMsg,
+                this.state.inCart && styles.toCartPopupMsg_active
+              ] } >
+              <p>Are you sure?</p>
+              <button>Ya!</button>
+            </div>
+          </section>
+
         </div>
       </section>
     );
@@ -78,8 +105,11 @@ class DealShow extends Component {
   getStyles() {
     const { innerHeight = 480 } = process.env.BROWSER ? window : {};
     const picBackgroundUrl = 'url(http://lorempixel.com/400/400/cats)';
-    const rootEl = this.refs.root;
     const { initWidth, initHeight } = this.props;
+    const rootEl = this.refs.root;
+    const toCartMsgEl = this.refs.toCartMsg;
+
+    window.toCartMsgEl = toCartMsgEl;
 
     return {
       root: {
@@ -89,42 +119,48 @@ class DealShow extends Component {
         minHeight: innerHeight,
         zIndex: 2,
         transform: `translateY(-${innerHeight}px)`,
-        transition: [
-          'min-height .4s ease .4s',
-          'all .4s ease'
-        ],
+        transition: 'all .4s ease',
         expanded: {
           width: '100%',
-          maxHeight: innerHeight,
           minHeight: rootEl ? rootEl.initHeight : initHeight,
-          marginLeft: rootEl ? -rootEl.offsetLeft : null
+          maxHeight: innerHeight,
+          marginLeft: !rootEl ? 0 : undefined,
+          transform: rootEl ? `translateX(-${rootEl.offsetLeft}px) translateY(-${innerHeight}px)` : 0
         },
         closed: {
           maxWidth: initWidth,
           maxHeight: initHeight,
-          minHeight: initHeight,
           transform: `translateY(-${initHeight}px)`
         }
       },
 
       btn: {
         background: 'rgb(13, 113, 198)',
-        padding: '4% 5%',
+        padding: '2% 5%',
         border: 0,
         color: 'rgb(255, 255, 255)',
         fontSize: 24,
         position: 'absolute',
-        right: 12,
-        bottom: 4
+        right: '2em',
+        bottom: '2em',
+        transition: 'all .4s'
+      },
+      btn_expanded: {
+        transform: toCartMsgEl ? `translateX(-100%) translateY(-100%)` : 0,
+        opacity: 0,
+        minWidth: '30em',
+        minHeight: '8em'
       },
 
       flexContainer: {
         display: 'flex',
         flexDirection: 'column',
-        alignItems: 'stretch'
+        alignItems: 'stretch',
+        minHeight: innerHeight
       },
       flexItem: {
-        flex: '0 0 100%'
+        flex: '0 0 100%',
+        position: 'relative'
       },
 
       pic: {
@@ -151,10 +187,33 @@ class DealShow extends Component {
       field: {
         background: 'white',
         width: '100%',
-        minHeight: innerHeight - initHeight
+        height: innerHeight - initHeight
       },
       additionText: {
         fontSize: 20
+      },
+
+      toCartPopupWrap_active: {
+        position: 'fixed',
+        width: '100%',
+        height: '100%',
+        top: 0
+      },
+      toCartPopupMsg: {
+        position: 'fixed',
+        minWidth: '30em',
+        minHeight: '10em',
+        right: '2em',
+        bottom: '2em',
+        background: 'green',
+        color: '#fff',
+        transition: 'all .3s',
+        display: 'none',
+        opacity: 0
+      },
+      toCartPopupMsg_active: {
+        display: 'block',
+        opacity: 1
       }
     };
   }

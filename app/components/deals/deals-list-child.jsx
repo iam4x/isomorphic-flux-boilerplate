@@ -24,6 +24,7 @@ class DealsListChild extends Component {
 
   resetState() {
     this.setState(this.defaultState);
+    this.setState({ closed: true });
   }
 
   handleExpand() {
@@ -58,7 +59,7 @@ class DealsListChild extends Component {
           </section>
         </section>
 
-        { this.state.expanded &&
+        { (this.state.expanded || this.state.closed) &&
           <DealShow
             model={ model }
             onClose={ ::this.resetState }
