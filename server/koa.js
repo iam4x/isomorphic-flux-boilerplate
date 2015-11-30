@@ -2,7 +2,6 @@ import path from 'path';
 import debug from 'debug';
 
 import koa from 'koa';
-import hbs from 'koa-hbs';
 import mount from 'koa-mount';
 import helmet from 'koa-helmet';
 import logger from 'koa-logger';
@@ -43,11 +42,6 @@ if (env === 'development') {
 }
 
 app.use(favicon(path.join(__dirname, '../app/images/favicon.ico')));
-app.use(hbs.middleware({
-  defaultLayout: 'index',
-  layoutsPath: path.join(__dirname, '/views/layouts'),
-  viewPath: path.join(__dirname, '/views')
-}));
 
 const cacheOpts = { maxAge: 86400000, gzip: true };
 
