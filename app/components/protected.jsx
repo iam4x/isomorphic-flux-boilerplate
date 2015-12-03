@@ -10,11 +10,12 @@ class Protected extends Component {
     flux: PropTypes.object.isRequired
   }
 
-  _getIntlMessage = IntlMixin.getIntlMessage
+  i18n = IntlMixin.getIntlMessage
 
   componentWillMount() {
     const { flux } = this.props;
-    flux.getActions('page-title').set(this._getIntlMessage('protected.page-title'));
+    flux.getActions('helmet')
+      .update({ title: this.i18n('protected.page-title') });
   }
 
   render() {
