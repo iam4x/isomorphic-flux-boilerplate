@@ -88,7 +88,13 @@ export default async function({ flux, history, location }) {
       app = renderToString(<ErrorPage />);
     }
 
-    const { title } = flux.getStore('title').getState();
-    return { body: Iso.render(app, fluxSnapshot), title };
+    // Get status code, page title and page description for rendering
+    const { titleBase, title, ...helmet } = flux.getStore('helmet').getState();
+
+    return {
+      ...helmet,
+      body: Iso.render(app, fluxSnapshot),
+      title: `${titleBase} ${title}`
+    };
   }
 }
