@@ -26,7 +26,8 @@ export default function *() {
   debug('dev')(`locale of request: ${locale}`);
 
   try {
-    const { body, title } = yield universalRender({ flux, location: this.request.url });
+    const { body, title, statusCode, description } =
+      yield universalRender({ flux, location: this.request.url });
 
     // Assets name are found into `webpack-stats`
     const assets = require('./webpack-stats.json');
@@ -37,7 +38,8 @@ export default function *() {
     }
 
     debug('dev')('return html content');
-    const props = { body, assets, locale, title };
+    const props = { body, assets, locale, title, description };
+    this.status = statusCode;
     this.body = '<!DOCTYPE html>' + renderToString(<ServerHTML { ...props } />);
   } catch (err) {
     // Render 500 error page from server

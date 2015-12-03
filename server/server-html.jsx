@@ -7,10 +7,13 @@ const conditional = `<!--[if IE 8]>
   <script src='//cdn.uriit.ru/console-polyfill/index.js'></script>
 <![endif]-->`;
 
-export default function ServerHTML({ body, assets, locale, title }) {
+export default function ServerHTML({ body, assets, locale, title, description }) {
   return (
     <html lang={ locale }>
       <head>
+        <meta
+          name='description'
+          content={ description } />
         <meta
           name='react-conditional-hack'
           dangerouslySetInnerHTML={ { __html: conditional } } />
