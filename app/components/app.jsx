@@ -37,12 +37,12 @@ class App extends Component {
     flux.getStore('helmet').unlisten(this.handleTitleChange);
   }
 
-  handleLocaleChange(i18n) {
+  handleLocaleChange = (i18n) => {
     this.setState({ i18n });
   }
 
   handleTitleChange({ titleBase, title }) {
-    document.title = `${titleBase} ${title}`;
+    document.title = titleBase + title;
   }
 
   render() {

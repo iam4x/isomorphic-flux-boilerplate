@@ -11,7 +11,7 @@ class HelmetStore {
 
   onUpdate(props) {
     Object.keys(props)
-      .forEach((key) => this[key] = props[key] || this[key]);
+      .forEach((key) => this[key] = props[key]);
   }
 
 }

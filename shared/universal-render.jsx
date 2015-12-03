@@ -94,7 +94,7 @@ export default async function({ flux, history, location }) {
     return {
       ...helmet,
       body: Iso.render(app, fluxSnapshot),
-      title: `${titleBase} ${title}`
+      title: titleBase + title
     };
   }
 }
