@@ -3,7 +3,9 @@ export default {
     header: {
       users: 'Utilisateurs',
       guides: 'Guides',
-      protected: 'Privé'
+      account: 'Mon compte',
+      logout: 'Se déconnecter',
+      login: 'Se connecter'
     },
     guides: {
       'page-title': 'Guides'
@@ -23,12 +25,23 @@ export default {
       add: 'Ajouter un utilisateur',
       profile: 'Profil'
     },
+    login: {
+      help: 'N\'importe quels informations fonctionneront. C\'est un exemple qui créér une fausse session.',
+      username: {
+        label: 'Utilisateur',
+        placeholder: 'exemple@app.fr'
+      },
+      password: {
+        label: 'Mot de passe'
+      },
+      submit: 'Se connecter'
+    },
     routes: {
       users: '/utilisateurs',
       guides: '/guides',
-      protected: '/protege',
+      login: '/connexion',
       profile: '/profil/:seed',
-      'login-info': '/info-client'
+      account: '/mon-compte'
     }
   }
 };
