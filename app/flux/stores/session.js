@@ -1,4 +1,4 @@
-import history from 'utils/router-history';
+const { BROWSER } = process.env;
 
 class SessionStore {
 
@@ -10,12 +10,12 @@ class SessionStore {
   onLogin({ username }) {
     this.session = { username };
     // transition app to `/account`
-    return history.replaceState(null, '/account');
+    if (BROWSER) require('utils/router-history').replaceState(null, '/account');
   }
 
   onLogout() {
     this.session = null;
-    return history.replaceState(null, '/login');
+    if (BROWSER) require('utils/router-history').replaceState(null, '/login');
   }
 
 }
