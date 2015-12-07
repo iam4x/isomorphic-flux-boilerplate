@@ -54,7 +54,7 @@ class Header extends Component {
         </Link>
 
         {/* Links in the navbar */}
-        <ul className='app--navbar text-center reset-list un-select'>
+        <ul style={ this.styles.ul } >
           <li>
             <Link to={ this.i18n('routes.users') }>
               { this.i18n('header.users') }
@@ -73,6 +73,13 @@ class Header extends Component {
         </ul>
       </header>
     );
+  }
+
+  styles = {
+    ul: {
+      margin: 0,
+      padding: 0
+    }
   }
 }
 

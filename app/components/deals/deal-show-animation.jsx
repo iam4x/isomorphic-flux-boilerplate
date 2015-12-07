@@ -10,8 +10,6 @@ class DealShowAnimation extends Component {
   }
 
   componentWillMount() {
-    const childs = this.props.children;
-    console.log(childs);
   }
 
   render() {

@@ -62,9 +62,7 @@ class DealsListChild extends Component {
         { (this.state.expanded || this.state.closed) &&
           <DealShow
             model={ model }
-            onClose={ ::this.resetState }
-            initWidth= '20%'
-            initHeight='160' />
+            onClose={ ::this.resetState } />
         }
       </div>
     );

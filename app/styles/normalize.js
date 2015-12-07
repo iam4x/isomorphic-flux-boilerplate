@@ -1,7 +1,6 @@
 export default {
   'html': {
     fontFamily: 'sans-serif'
-    // textSizeAdjust: '100%'
   },
   'body': {
     margin: 0

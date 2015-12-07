@@ -49,9 +49,9 @@ class App extends Component {
     const { children } = this.props;
 
     return (
-      <div>
+      <div style={ this.styles.root }>
         <Style
-          rules={ [ normalize, this.styles ] }
+          rules={ normalize }
           prefix={ getPrefixedStyle } />
         <Header />
         { children }
@@ -61,7 +61,20 @@ class App extends Component {
   }
 
   styles = {
-    background: '#6fa229'
+    root: {
+      background: '#6fa229'
+    },
+    mediaQueries: {
+      '(min-width: 550px)': {
+        html: {
+          fontSize: '120%',
+          minWidth: '100%'
+        },
+        body: {
+          minWidth: '100%'
+        }
+      }
+    }
   }
 
 }

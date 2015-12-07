@@ -26,7 +26,9 @@ class DealsList extends Component {
         key={ index }
         style={ this.styles.child }
         className='deals-list-child' >
-        <DealShowAnimation>
+        <DealShowAnimation
+          initWidth='20%'
+          initHeight='160' >
           <DealsListChild model={ item } />
         </DealShowAnimation>
      </div>
@@ -48,13 +50,12 @@ class DealsList extends Component {
       display: 'flex',
       flexFlow: 'row wrap',
       justifyContent: 'flex-start',
-      padding: '1px',
-      position: 'relative',
-      width: '100%'
+      position: 'relative'
     },
     child: {
       flex: '1 0 100%',
       margin: '0 auto',
+      whiteSpace: 'nowrap',
 
       '@media (min-width: 410px)': {
         flex: '1 50%'
