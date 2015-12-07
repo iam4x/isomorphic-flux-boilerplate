@@ -27,18 +27,23 @@ class App extends Component {
     const { flux } = this.context;
 
     flux.getStore('locale').listen(this.handleLocaleChange);
-    flux.getStore('title').listen(this.handleTitleChange);
+    flux.getStore('helmet').listen(this.handleTitleChange);
   }
 
   componentWillUnmount() {
     const { flux } = this.context;
 
     flux.getStore('locale').unlisten(this.handleLocaleChange);
-    flux.getStore('title').unlisten(this.handleTitleChange);
+    flux.getStore('helmet').unlisten(this.handleTitleChange);
   }
 
-  handleLocaleChange = (i18n) => this.setState({ i18n })
-  handleTitleChange = ({ title }) => document.title = title
+  handleLocaleChange = (i18n) => {
+    this.setState({ i18n });
+  }
+
+  handleTitleChange({ titleBase, title }) {
+    document.title = titleBase + title;
+  }
 
   render() {
     const { children } = this.props;

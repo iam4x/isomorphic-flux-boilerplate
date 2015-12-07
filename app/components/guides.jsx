@@ -12,7 +12,8 @@ class Guides extends Component {
 
   componentWillMount() {
     const { flux } = this.context;
-    flux.getActions('title').set(this.i18n('guides.page-title'));
+    flux.getActions('helmet')
+      .update({ title: this.i18n('guides.page-title') });
   }
 
   render() {

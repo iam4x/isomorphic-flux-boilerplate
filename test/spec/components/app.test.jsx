@@ -33,18 +33,19 @@ describe('App', () => {
   });
 
   it('should change page title', function() {
-    flux.getActions('title').set('foobar');
-    document.title.should.eql('ISO-ReactJS | foobar');
+    flux.getActions('helmet').update({ title: 'foobar', titleBase: '' });
+    document.title.should.eql('foobar');
   });
 
   it('should handle locale change', function(done) {
-    const handleChange = function({ locales }) {
+    function handleChange({ locales }) {
       locales[0].should.eql('fr');
       const { locales: [ locale ] } = flux.getStore('locale').getState();
       locale.should.eql('fr');
       flux.getStore('locale').unlisten(handleChange);
       return done();
-    };
+    }
+
     flux.getStore('locale').listen(handleChange);
     flux.getActions('locale').switchLocale('fr');
   });
