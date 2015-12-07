@@ -1,3 +1,5 @@
+import debug from 'debug';
+
 const { BROWSER } = process.env;
 
 class SessionStore {
@@ -9,8 +11,17 @@ class SessionStore {
 
   onLogin({ username }) {
     this.session = { username };
+
     // transition app to `/account`
-    if (BROWSER) require('utils/router-history').replaceState(null, '/account');
+    // or to the original asked page
+    if (BROWSER) {
+      const history = require('utils/router-history');
+      const [, nextPath = '/account' ] = window
+        .location.search.match(/\?redirect=(.+)$/) || [];
+
+      debug('dev')('redirect after login to %s', nextPath);
+      return history.replaceState(null, nextPath);
+    }
   }
 
   onLogout() {
