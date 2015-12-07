@@ -46,13 +46,17 @@ class App extends Component {
     return (
       <div>
         <Style
-          rules={ normalize }
+          rules={ [ normalize, this.styles ] }
           prefix={ getPrefixedStyle } />
         <Header />
         { children }
         <Footer />
       </div>
     );
+  }
+
+  styles = {
+    background: '#6fa229'
   }
 
 }

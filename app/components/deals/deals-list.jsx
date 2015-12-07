@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import connect from 'connect-alt';
 import Radium from 'utils/radium';
 import DealsListChild from 'components/deals/deals-list-child';
+import DealShowAnimation from 'components/deals/deal-show-animation';
 
 @connect(({ dealContainers: { collection } }) => ({ collection }))
 @Radium
@@ -25,7 +26,9 @@ class DealsList extends Component {
         key={ index }
         style={ this.styles.child }
         className='deals-list-child' >
-       <DealsListChild model={ item } />
+        <DealShowAnimation>
+          <DealsListChild model={ item } />
+        </DealShowAnimation>
      </div>
     );
   }
@@ -41,17 +44,17 @@ class DealsList extends Component {
 
   styles = {
     base: {
-      width: '100%',
+      background: '#fff',
       display: 'flex',
       flexFlow: 'row wrap',
       justifyContent: 'flex-start',
-      background: '#bdbdbd',
       padding: '1px',
-      position: 'relative'
+      position: 'relative',
+      width: '100%'
     },
     child: {
-      margin: '0 auto',
       flex: '1 0 100%',
+      margin: '0 auto',
 
       '@media (min-width: 410px)': {
         flex: '1 50%'
