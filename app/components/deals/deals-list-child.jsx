@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react';
 import Radium from 'utils/radium';
-import DealShow from 'components/deals/deal-show';
 
 @Radium
 class DealsListChild extends Component {
@@ -58,12 +57,6 @@ class DealsListChild extends Component {
             </button>
           </section>
         </section>
-
-        { (this.state.expanded || this.state.closed) &&
-          <DealShow
-            model={ model }
-            onClose={ ::this.resetState } />
-        }
       </div>
     );
   }

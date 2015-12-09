@@ -36,9 +36,10 @@ class Header extends Component {
     const { inProgress } = this.props;
     const { locales, flux } = this.context;
     const [ activeLocale ] = locales;
+    const { header, ul } = this.getStyles();
 
     return (
-      <header>
+      <header style={ header } >
 
         {/* Spinner in the top right corner */}
         <Spinner active={ inProgress } />
@@ -54,7 +55,7 @@ class Header extends Component {
         </Link>
 
         {/* Links in the navbar */}
-        <ul style={ this.styles.ul } >
+        <ul style={ ul } >
           <li>
             <Link to={ this.i18n('routes.users') }>
               { this.i18n('header.users') }
@@ -75,11 +76,18 @@ class Header extends Component {
     );
   }
 
-  styles = {
-    ul: {
-      margin: 0,
-      padding: 0
-    }
+  getStyles() {
+    return {
+      header: {
+        background: '#505050',
+        maxHeight: '3em',
+        overflow: 'hidden'
+      },
+      ul: {
+        margin: 0,
+        padding: 0
+      }
+    };
   }
 }
 

@@ -6,9 +6,7 @@ class DealShow extends Component {
 
   static propTypes = {
     model: PropTypes.object.isRequired,
-    onClose: PropTypes.func.isRequired,
-    initWidth: PropTypes.string.isRequired,
-    initHeight: PropTypes.string.isRequired
+    onClose: PropTypes.func.isRequired
   }
 
   static contextTypes = {
@@ -51,53 +49,44 @@ class DealShow extends Component {
     const styles = this.getStyles();
 
     return (
-      <section>
-        <div
-          ref='root'
-          style={ [
-            styles.root,
-            this.state.start && styles.root.expanded,
-            this.state.closed && styles.root.closed,
-            this.state.removed && { display: 'none' }
-          ] } >
-          <div style={ styles.flexContainer }>
+      <section style={ styles.root } >
+        <div style={ styles.flexContainer }>
 
-            <div style={ [ styles.pic, styles.flexItem ] } onClick={ ::this.closeHandle } >
-              <div style={ styles.title } >{ model.email }</div>
-              <div style={ styles.subtitle } >Some fish text is very impartant for this work now. Please, try it again and again.</div>
-            </div>
-
-            <div style={ [ styles.field, styles.flexItem ] } >
-              <div style={ [
-                styles.additionText,
-                styles.additionText.hidden
-              ] } >
-                Some fish text is very impartant for this work now. Please, try it again and again.
-              </div>
-              <button
-                onClick={ ::this.addToCart }
-                style={ [
-                  styles.btn,
-                  this.state.inCart && styles.btn_expanded
-                ] } >
-                Buy
-              </button>
-            </div>
+          <div style={ [ styles.pic, styles.flexItem ] } onClick={ ::this.closeHandle } >
+            <div style={ styles.title } >{ model.email }</div>
+            <div style={ styles.subtitle } >Some fish text is very impartant for this work now. Please, try it again and again.</div>
           </div>
 
-          <section styles={ this.state.inCart && styles.toCartPopupWrap_active } >
-            <div
-              ref='toCartMsg'
-              style={ [
-                styles.toCartPopupMsg,
-                this.state.inCart && styles.toCartPopupMsg_active
-              ] } >
-              <p>Are you sure?</p>
-              <button>Ya!</button>
+          <div style={ [ styles.field, styles.flexItem ] } >
+            <div style={ [
+              styles.additionText,
+              styles.additionText.hidden
+            ] } >
+              Some fish text is very impartant for this work now. Please, try it again and again.
             </div>
-          </section>
-
+            <button
+              onClick={ ::this.addToCart }
+              style={ [
+                styles.btn,
+                this.state.inCart && styles.btn_expanded
+              ] } >
+              Buy
+            </button>
+          </div>
         </div>
+
+        <section styles={ this.state.inCart && styles.toCartPopupWrap_active } >
+          <div
+            ref='toCartMsg'
+            style={ [
+              styles.toCartPopupMsg,
+              this.state.inCart && styles.toCartPopupMsg_active
+            ] } >
+            <p>Are you sure?</p>
+            <button>Ya!</button>
+          </div>
+        </section>
+
       </section>
     );
   }
@@ -105,7 +94,7 @@ class DealShow extends Component {
   getStyles() {
     const { innerHeight = 480 } = process.env.BROWSER ? window : {};
     const picBackgroundUrl = 'url(http://lorempixel.com/400/400/cats)';
-    const { initWidth, initHeight } = this.props;
+    // const { initWidth, initHeight } = this.props;
     const rootEl = this.refs.root;
     const toCartMsgEl = this.refs.toCartMsg;
 
@@ -113,24 +102,18 @@ class DealShow extends Component {
 
     return {
       root: {
-        position: 'absolute',
-        overflow: 'hidden',
-        width: initWidth,
-        minHeight: innerHeight,
         zIndex: 2,
-        transform: `translateY(-${innerHeight}px)`,
-        transition: 'all .4s ease',
         expanded: {
           width: '100%',
-          minHeight: rootEl ? rootEl.initHeight : initHeight,
-          maxHeight: innerHeight,
+          // minHeight: rootEl ? rootEl.initHeight : initHeight,
+          // maxHeight: innerHeight,
           marginLeft: !rootEl ? 0 : undefined,
           transform: rootEl ? `translateX(-${rootEl.offsetLeft}px) translateY(-${innerHeight}px)` : 0
         },
         closed: {
-          maxWidth: initWidth,
-          maxHeight: initHeight,
-          transform: `translateY(-${initHeight}px)`
+          // maxWidth: initWidth,
+          // maxHeight: initHeight,
+          // transform: `translateY(-${initHeight}px)`
         }
       },
 
@@ -186,8 +169,8 @@ class DealShow extends Component {
       },
       field: {
         background: 'white',
-        width: '100%',
-        height: innerHeight - initHeight
+        width: '100%'
+        // height: innerHeight - initHeight
       },
       additionText: {
         fontSize: 20
