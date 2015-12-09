@@ -21,11 +21,11 @@ class DealShowAnimation extends Component {
   }
 
   render() {
-    const { root, rootExpanded, listChild, pageShow } = this.getStyles();
+    const { list, listExpanded, listChild, pageShow } = this.getStyles();
     return (
       <div
         ref='root'
-        style={ [ root, this.state.expanded && rootExpanded ] } >
+        style={ [ list, this.state.expanded && listExpanded ] } >
 
         <DealsListChild
           ref='listChild'
@@ -48,14 +48,14 @@ class DealShowAnimation extends Component {
     const { innerHeight = 480 } = process.env.BROWSER ? window : {};
 
     return {
-      root: {
+      list: {
         width: initWidth,
         minHeight: initHeight,
         zIndex: 2,
         transform: `translateY(-${innerHeight}px)`,
         transition: 'all .4s ease'
       },
-      rootExpanded: {
+      listExpanded: {
         width: '100%',
         minHeight: innerHeight
       },

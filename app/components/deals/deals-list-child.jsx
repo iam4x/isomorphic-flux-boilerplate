@@ -35,7 +35,7 @@ class DealsListChild extends Component {
     const { model } = this.props;
     const styles = this.getStyles();
     return (
-      <div>
+      <div className='deals-list-child'>
         <section style={ styles.wrap } >
           <section
             style={ [
