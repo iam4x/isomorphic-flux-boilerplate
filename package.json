@@ -1,6 +1,6 @@
 {
   "name": "isomorphic-flux-boilerplate",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "An ES7 isomorphic Flux/ReactJS boilerplate",
   "main": "server/index.js",
   "scripts": {
@@ -65,8 +65,9 @@
     "radium": "^0.15.3",
     "react": "^0.14.0",
     "react-dom": "^0.14.0",
-    "react-intl": "^1.2.0",
+    "react-intl": "1.2.0",
     "react-router": "^1.0.0",
+    "scroll-behavior": "^0.3.0",
     "style-loader": "^0.13.0",
     "webpack": "^1.12.6"
   },

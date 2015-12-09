@@ -19,10 +19,14 @@ if (process.env.BROWSER) {
 }
 
 @Radium
-@connect(({ requests: { inProgress } }) => ({ inProgress }))
+@connect(({ requests: { inProgress }, session: { session } }) =>
+  ({ inProgress, session }))
 class Header extends Component {
 
-  static propTypes = { inProgress: PropTypes.bool }
+  static propTypes = {
+    inProgress: PropTypes.bool,
+    session: PropTypes.object
+  }
 
   static contextTypes = {
     locales: PropTypes.array.isRequired,
@@ -33,9 +37,8 @@ class Header extends Component {
   i18n = IntlMixin.getIntlMessage
 
   render() {
-    const { inProgress } = this.props;
-    const { locales, flux } = this.context;
-    const [ activeLocale ] = locales;
+    const { inProgress, session } = this.props;
+    const { locales: [ activeLocale ], flux } = this.context;
     const { header, ul } = this.getStyles();
 
     return (
@@ -66,11 +69,25 @@ class Header extends Component {
               { this.i18n('header.guides') }
             </Link>
           </li>
-          <li>
-            <Link to={ this.i18n('routes.protected') }>
-              { this.i18n('header.protected') }
-            </Link>
-          </li>
+          { session ?
+            [
+              <li key={ 0 }>
+                <Link to={ this.i18n('routes.account') }>
+                  { this.i18n('header.account') }
+                </Link>
+              </li>,
+              <li key={ 1 }>
+                <a href='#' onClick={ () => flux.getActions('session').logout() }>
+                  { this.i18n('header.logout') }
+                </a>
+              </li>
+            ] :
+            <li>
+              <Link to={ this.i18n('routes.login') }>
+                { this.i18n('header.login') }
+              </Link>
+            </li>
+          }
         </ul>
       </header>
     );

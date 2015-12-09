@@ -3,7 +3,9 @@ export default {
     header: {
       users: 'Users List',
       guides: 'Guides',
-      protected: 'Protected'
+      account: 'Account',
+      logout: 'Logout',
+      login: 'Login'
     },
     guides: {
       'page-title': 'Guides'
@@ -23,12 +25,23 @@ export default {
       add: 'Add random user',
       profile: 'Profile'
     },
+    login: {
+      help: 'Any credentials will work, it creates a fake session for example.',
+      username: {
+        label: 'Login',
+        placeholder: 'example@app.com'
+      },
+      password: {
+        label: 'Password'
+      },
+      submit: 'Submit'
+    },
     routes: {
       users: '/users',
       guides: '/guides',
-      protected: '/protected',
+      login: '/login',
       profile: '/profile/:seed',
-      'login-info': '/login-info'
+      account: '/account'
     }
   }
 };
