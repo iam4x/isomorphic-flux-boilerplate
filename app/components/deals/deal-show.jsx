@@ -94,27 +94,12 @@ class DealShow extends Component {
   getStyles() {
     const { innerHeight = 480 } = process.env.BROWSER ? window : {};
     const picBackgroundUrl = 'url(http://lorempixel.com/400/400/cats)';
-    // const { initWidth, initHeight } = this.props;
-    const rootEl = this.refs.root;
     const toCartMsgEl = this.refs.toCartMsg;
-
     window.toCartMsgEl = toCartMsgEl;
 
     return {
       root: {
-        zIndex: 2,
-        expanded: {
-          width: '100%',
-          // minHeight: rootEl ? rootEl.initHeight : initHeight,
-          // maxHeight: innerHeight,
-          marginLeft: !rootEl ? 0 : undefined,
-          transform: rootEl ? `translateX(-${rootEl.offsetLeft}px) translateY(-${innerHeight}px)` : 0
-        },
-        closed: {
-          // maxWidth: initWidth,
-          // maxHeight: initHeight,
-          // transform: `translateY(-${initHeight}px)`
-        }
+        width: '100%'
       },
 
       btn: {

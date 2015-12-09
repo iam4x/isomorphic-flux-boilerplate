@@ -10,7 +10,9 @@ import createFlux from 'flux/createFlux';
 import ApiClient from '../../../../shared/api-client';
 import stubApp from '../../../utils/stub-app';
 
-import DealsList from 'components/deals/deals-list';
+import Users from 'components/deals/deals-list';
+
+const should = chai.should();
 
 describe('DealsList', () => {
   let node;
@@ -30,7 +32,7 @@ describe('DealsList', () => {
     fauxJax.on('request', respond);
 
     flux = createFlux(new ApiClient());
-    const Stubbed = stubApp(flux)(DealsList);
+    const Stubbed = stubApp(flux)(Users);
 
     node = window.document.createElement('div');
     instance = ReactDOM.render(React.createElement(Stubbed), node);
@@ -44,23 +46,60 @@ describe('DealsList', () => {
     }
   });
 
-  it('shoud render without models', () => {
-    const rootEl = TestUtils.findRenderedDOMComponentWithTag(instance, 'div');
-    rootEl.style.display.should.eql('flex');
-    rootEl.children.length.should.eql(0);
+  it('should render correctly', () => {
+    const { messages } = flux.getStore('locale').getState();
+    const title = TestUtils.findRenderedDOMComponentWithTag(instance, 'h1');
+    title.textContent.should.eql(messages.users.title);
   });
 
-  it('should render deals after first fetch', (done) => {
+  it('should render without users', () => {
+    // Check `<li></li>` don't exists
+    const td = TestUtils.scryRenderedDOMComponentsWithClass(instance, 'user--row');
+    td.length.should.eql(0);
+  });
+
+  it('should render users after first fetch', (done) => {
     function handleChange() {
       defer(() => {
-        const children = TestUtils.scryRenderedDOMComponentsWithClass(instance, 'deals-list-child');
-        children.length.should.eql(1);
+        const td = TestUtils
+          .scryRenderedDOMComponentsWithClass(instance, 'user--row');
+        td.length.should.eql(1);
 
-        flux.getStore('dealContainers').unlisten(handleChange);
+        flux.getStore('users').unlisten(handleChange);
         return done();
       });
     }
 
-    flux.getStore('dealContainers').listen(handleChange);
+    flux.getStore('users').listen(handleChange);
+  });
+
+  it('should remove an user', (done) => {
+    function handleChange() {
+      defer(() => {
+        // 10 users after fetch
+        let td = TestUtils.scryRenderedDOMComponentsWithClass(instance, 'user--row');
+        td.length.should.eql(1);
+
+        // remove an user
+        const removeButton = TestUtils.scryRenderedDOMComponentsWithClass(instance, 'user--remove')[0];
+        should.exist(removeButton);
+
+        // wait for dispatch to be done before
+        // calling another action
+        defer(() => {
+          TestUtils.Simulate.click(removeButton);
+
+          // it should have 9 users
+          td = TestUtils.scryRenderedDOMComponentsWithClass(instance, 'user--row');
+          td.length.should.eql(0);
+
+          // clean
+          flux.getStore('users').unlisten(handleChange);
+          return done();
+        });
+      });
+    }
+
+    z.getStore('users').listen(handleChange);
   });
 });

@@ -5,7 +5,9 @@ import Radium from 'utils/radium';
 class DealsListChild extends Component {
 
   static propTypes = {
-    model: PropTypes.object.isRequired
+    model: PropTypes.object.isRequired,
+    active: PropTypes.bool.isRequired,
+    onSelect: PropTypes.func.isRequired
   }
 
   static contextTypes = {
@@ -13,56 +15,34 @@ class DealsListChild extends Component {
     messages: PropTypes.object.isRequired
   }
 
-  defaultState = {
-    started: false,
-    expanded: false,
-    closed: false
+  state = {
+    active: this.props.active
   }
 
-  state = this.defaultState
-
-  resetState() {
-    this.setState(this.defaultState);
-    this.setState({ closed: true });
-  }
-
-  handleExpand() {
-    this.setState({ started: true });
-    setTimeout(() => this.setState({ expanded: true }), 0);
+  openHandle() {
+    this.setState({ active: true });
+    this.props.onSelect();
   }
 
   render() {
     const { model } = this.props;
     const styles = this.getStyles();
     return (
-      <div className='deals-list-child'>
-        <section style={ styles.wrap } >
-          <section
-            style={ [
-              styles.base,
-              this.state.started && styles.base_expanded,
-              this.state.closed && styles.base_closed
-            ] } >
-            <div style={ styles.title } >{ model.email }</div>
-            <div style={ [
-              styles.text,
-              this.state.expanded && styles.text_expanded
-            ] } >
-              Some fish text is very impartant for this work now. Please, try it again and again.
-            </div>
-            <button
-              style={ styles.btn }
-              onClick={ ::this.handleExpand } >
-              More
-            </button>
-          </section>
-        </section>
-      </div>
+      <section
+        onClick={ ::this.openHandle }
+        style={ [
+          styles.base
+        ] } >
+        <div style={ styles.title } >{ model.email }</div>
+        <div style={ styles.text } >
+          Some fish text is very impartant for this work now. Please, try it again and again.
+        </div>
+        <button style={ styles.btn } >More</button>
+      </section>
     );
   }
 
   getStyles() {
-    const { innerHeight = 480 } = process.env.BROWSER ? window : {};
     const height = 160;
     const picBackgroundUrl = 'url(http://lorempixel.com/400/400/cats)';
 
@@ -70,6 +50,7 @@ class DealsListChild extends Component {
       wrap: {
         position: 'relative'
       },
+
       base: {
         height: height,
         boxSizing: 'border-box',
@@ -82,18 +63,7 @@ class DealsListChild extends Component {
           'opacity .2s ease-out',
           'margin-bottom .4s ease-out'
         ],
-        opacity: 1,
-        marginBottom: 0
-      },
-
-      base_expanded: {
-        opacity: 0,
-        marginBottom: innerHeight - height
-      },
-
-      base_closed: {
-        opacity: 1,
-        marginBottom: 0
+        opacity: 1
       },
 
       title: {
@@ -110,13 +80,6 @@ class DealsListChild extends Component {
         padding: 6,
         textAlign: 'center',
         background: 'rgba(255, 255, 255, .5)'
-      },
-
-      text_expanded: {
-        fontSize: 48,
-        width: '70%',
-        padding: '2%',
-        margin: '5% auto'
       },
 
       btn: {

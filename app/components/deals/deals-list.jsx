@@ -19,31 +19,20 @@ class DealsList extends Component {
     flux.getActions('dealContainers').index();
   }
 
-  resetState() {
-    console.log('reset');
-  }
-
-  renderItem = (item, index) => {
-    const { child } = this.getStyles();
-    return (
-      <div
-        key={ index }
-        style={ child }
-        className='deals-list-child' >
-        <DealShowAnimation
-          initWidth='20%'
-          initHeight='160'
-          model={ item } />
-     </div>
-    );
-  }
-
   render() {
     const { collection } = this.props;
-    const { root } = this.getStyles();
+    const { root, child } = this.getStyles();
     return (
-      <div style={ root }>
-        { collection.map(this.renderItem) }
+      <div style={ root } ref='elContainer' >
+        { collection.map( (model, index) => {
+          return (
+            <div key={ index } style={ child } >
+              <DealShowAnimation
+                model={ model }
+                elContainer={ this.refs.elContainer } />
+            </div>
+          );
+        } ) }
       </div>
     );
   }
@@ -57,14 +46,12 @@ class DealsList extends Component {
         justifyContent: 'flex-start',
         position: 'relative',
         boxSizing: 'border-box',
-        padding: '.2em',
-        margin: '0 .5em'
+        padding: 6,
+        margin: '0 4px'
       },
       child: {
         flex: '1 0 100%',
-        margin: '.3em',
-        whiteSpace: 'nowrap',
-        overflow: 'hidden',
+        margin: 4,
 
         '@media (min-width: 410px)': {
           flex: '1 50%'

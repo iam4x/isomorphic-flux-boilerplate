@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import TestUtils from 'react-addons-test-utils';
 import createFlux from 'flux/createFlux';
 
 import stubApp from '../../utils/stub-app';
@@ -25,15 +24,5 @@ describe('Header', () => {
 
   afterEach(() => {
     if (instance) ReactDOM.unmountComponentAtNode(node);
-  });
-
-  it('should render links correctly', () => {
-    const links = TestUtils.findRenderedDOMComponentWithClass(instance, 'app--navbar');
-    links.children.length.should.eql(3);
-  });
-
-  it('should render lang picker correctly', () => {
-    const langs = TestUtils.findRenderedDOMComponentWithClass(instance, 'lang--picker');
-    langs.children.length.should.eql(2);
   });
 });
