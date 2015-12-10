@@ -49,9 +49,9 @@ class DealShow extends Component {
     const styles = this.getStyles();
 
     return (
-      <section style={ styles.root } >
-        <div style={ styles.flexContainer }>
+      <div style={ styles.root } >
 
+        <div style={ styles.mainContainer }>
           <div style={ [ styles.pic, styles.flexItem ] } onClick={ ::this.closeHandle } >
             <div style={ styles.title } >{ model.email }</div>
             <div style={ styles.subtitle } >Some fish text is very impartant for this work now. Please, try it again and again.</div>
@@ -87,12 +87,11 @@ class DealShow extends Component {
           </div>
         </section>
 
-      </section>
+      </div>
     );
   }
 
   getStyles() {
-    const { innerHeight = 480 } = process.env.BROWSER ? window : {};
     const picBackgroundUrl = 'url(http://lorempixel.com/400/400/cats)';
     const toCartMsgEl = this.refs.toCartMsg;
     window.toCartMsgEl = toCartMsgEl;
@@ -120,11 +119,10 @@ class DealShow extends Component {
         minHeight: '8em'
       },
 
-      flexContainer: {
+      mainContainer: {
         display: 'flex',
         flexDirection: 'column',
-        alignItems: 'stretch',
-        minHeight: innerHeight
+        alignItems: 'stretch'
       },
       flexItem: {
         flex: '0 0 100%',

@@ -30,9 +30,7 @@ class DealsListChild extends Component {
     return (
       <section
         onClick={ ::this.openHandle }
-        style={ [
-          styles.base
-        ] } >
+        style={ styles.base } >
         <div style={ styles.title } >{ model.email }</div>
         <div style={ styles.text } >
           Some fish text is very impartant for this work now. Please, try it again and again.
@@ -47,11 +45,8 @@ class DealsListChild extends Component {
     const picBackgroundUrl = 'url(http://lorempixel.com/400/400/cats)';
 
     return {
-      wrap: {
-        position: 'relative'
-      },
-
       base: {
+        position: 'relative',
         height: height,
         boxSizing: 'border-box',
         border: '1px solid #fff',

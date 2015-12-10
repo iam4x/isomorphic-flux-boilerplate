@@ -23,13 +23,12 @@ class DealsList extends Component {
     const { collection } = this.props;
     const { root, child } = this.getStyles();
     return (
-      <div style={ root } ref='elContainer' >
+      <div style={ root } >
         { collection.map( (model, index) => {
           return (
             <div key={ index } style={ child } >
               <DealShowAnimation
-                model={ model }
-                elContainer={ this.refs.elContainer } />
+                model={ model } />
             </div>
           );
         } ) }
@@ -46,8 +45,8 @@ class DealsList extends Component {
         justifyContent: 'flex-start',
         position: 'relative',
         boxSizing: 'border-box',
-        padding: 6,
-        margin: '0 4px'
+        padding: 4,
+        margin: '0 8px'
       },
       child: {
         flex: '1 0 100%',

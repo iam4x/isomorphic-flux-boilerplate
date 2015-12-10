@@ -8,8 +8,7 @@ import DealShow from 'components/deals/deal-show';
 class DealShowAnimation extends Component {
 
   static propTypes = {
-    model: PropTypes.object.isRequired,
-    elContainer: PropTypes.element.isRequired
+    model: PropTypes.object.isRequired
   }
 
   state = {
@@ -47,22 +46,16 @@ class DealShowAnimation extends Component {
   }
 
   getStyles() {
-    const { elContainer } = this.props;
     const { elRoot } = this.refs;
-    const elRootRect = elRoot ? elRoot.getClientRects()[0] : null;
-    const elContainerWidth = elContainer ? elContainer.getClientRects()[0].width : null;
-    // const elListChildRect = elListChild ? elRoot.getClientRects()[0] : void 0;
     return {
       root: {
-        position: 'relative'
       },
       showPagePlacer: {
         position: 'absolute',
         transition: 'all .5s',
         zIndex: 3,
-        top: 0,
-        minWidth: elContainerWidth - 22,
-        left: elRoot ? -elRootRect.left + 16 : null
+        top: elRoot ? elRoot.offsetTop : 0,
+        left: 0
       },
       expander: {
         minHeight: this.state.active ? 600 : 0
