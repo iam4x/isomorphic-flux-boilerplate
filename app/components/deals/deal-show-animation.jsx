@@ -12,35 +12,38 @@ class DealShowAnimation extends Component {
   }
 
   state = {
-    active: false
+    active: false,
+    started: false
   }
 
   showPage() {
     this.setState({ active: true });
+    setTimeout( () => this.setState({ started: true }) );
   }
 
   closePage() {
-    this.setState({ active: false });
+    this.setState({ active: false, started: false });
   }
 
   render() {
-    const { root, showPagePlacer, expander } = this.getStyles();
+    const { active, started } = this.state;
+    const { page, expander } = this.getStyles();
 
     return (
-      <div ref='elRoot' style={ root } >
+      <div ref='elRoot' >
         <DealsListChild
           model={ this.props.model }
-          active={ this.state.active }
+          active={ active }
           onSelect={ ::this.showPage } />
 
-        { this.state.active &&
-          <div style={ showPagePlacer } >
+        <div style={ [ expander, started && expander['&:active'] ] } >
+        { active &&
+          <div style={ [ page, started && page['&:started'] ] } >
             <DealShow
               model={ this.props.model }
               onClose={ ::this.closePage } />
           </div> }
-
-        <div ref='dummyExpander' style={ expander } ></div>
+        </div>
       </div>
     );
   }
@@ -48,17 +51,27 @@ class DealShowAnimation extends Component {
   getStyles() {
     const { elRoot } = this.refs;
     return {
-      root: {
-      },
-      showPagePlacer: {
+      page: {
         position: 'absolute',
         transition: 'all .5s',
         zIndex: 3,
-        top: elRoot ? elRoot.offsetTop : 0,
-        left: 0
+        minWidth: 0,
+        maxWidth: 0,
+        '&:started': {
+          minWidth: '100%',
+          maxWidth: '100%',
+          transform: elRoot ?
+            `translateX(-${elRoot.offsetLeft}px)
+            translateY(-${elRoot.clientHeight}px)` : 0
+        }
       },
+
       expander: {
-        minHeight: this.state.active ? 600 : 0
+        minHeight: 0,
+        transition: 'all .5s ease-in-out',
+        '&:active': {
+          minHeight: this.state.active ? 600 : 0
+        }
       }
     };
   }
