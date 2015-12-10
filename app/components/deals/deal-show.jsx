@@ -23,7 +23,7 @@ class DealShow extends Component {
   }
 
   goToCart() {
-    alert('go to cart');
+    console.log('go to cart');
   }
 
   render() {
@@ -54,8 +54,6 @@ class DealShow extends Component {
   }
 
   getStyles() {
-    // const picBackgroundUrl = 'url(http://lorempixel.com/400/400/cats)';
-
     return {
       root: {
         minHeight: 600,

@@ -18,7 +18,7 @@ class ModalQuestion extends Component {
   }
 
   state = {
-    started: false
+    started: false,
     closed: false
   }
 
@@ -38,10 +38,10 @@ class ModalQuestion extends Component {
           <div style={ [ msg, this.state.started && msg['&:active'] ] }>
             <div>{ this.props.children }</div>
             <button onClick={ this.props.btnOkCallback } >
-              { this.props.btnOkLabel && this.close() }
+              { this.close && this.props.btnOkLabel }
             </button>
             <button onClick={ this.props.btnCancelCallback } >
-              { this.props.btnCancelLabel && this.close() }
+              { this.close && this.props.btnCancelLabel }
             </button>
           </div>
         </div>
@@ -53,9 +53,9 @@ class ModalQuestion extends Component {
     return {
       overlay: {
         position: 'fixed',
-        display: 'table',
         width: this.state.closed ? '100vw' : 0,
-        height: this.state.closed ? '100vh' : 0
+        height: this.state.closed ? '100vh' : 0,
+        display: this.state.closed ? 'none' : 'table'
       },
       box: {
         display: 'table-cell',
