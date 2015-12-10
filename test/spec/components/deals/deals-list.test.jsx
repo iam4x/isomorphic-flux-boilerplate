@@ -10,7 +10,7 @@ import createFlux from 'flux/createFlux';
 import ApiClient from '../../../../shared/api-client';
 import stubApp from '../../../utils/stub-app';
 
-import Users from 'components/deals/deals-list';
+import DealsList from 'components/deals/deals-list';
 
 const should = chai.should();
 
@@ -32,7 +32,7 @@ describe('DealsList', () => {
     fauxJax.on('request', respond);
 
     flux = createFlux(new ApiClient());
-    const Stubbed = stubApp(flux)(Users);
+    const Stubbed = stubApp(flux)(DealsList);
 
     node = window.document.createElement('div');
     instance = ReactDOM.render(React.createElement(Stubbed), node);
@@ -44,12 +44,6 @@ describe('DealsList', () => {
     if (instance) {
       ReactDOM.unmountComponentAtNode(node);
     }
-  });
-
-  it('should render correctly', () => {
-    const { messages } = flux.getStore('locale').getState();
-    const title = TestUtils.findRenderedDOMComponentWithTag(instance, 'h1');
-    title.textContent.should.eql(messages.users.title);
   });
 
   it('should render without users', () => {

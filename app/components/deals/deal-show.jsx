@@ -1,6 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import Radium from 'utils/radium';
 
+import ModalQuestion from 'components/shared/modal-question';
+
 @Radium
 class DealShow extends Component {
 
@@ -14,91 +16,50 @@ class DealShow extends Component {
     messages: PropTypes.object.isRequired
   }
 
-  defaultState = {
-    start: false,
-    closed: false,
-    removed: false,
-    inCart: false
-  }
-
-  state = this.defaultState
-
-  resetState() {
-    this.setState(this.defaultState);
-    this.setState({ removed: true });
-  }
-
-  closeHandle() {
-    this.setState({ closed: true });
-    this.props.onClose();
-    const el = this.refs.root;
-    el ? el.addEventListener('transitionend', ::this.resetState) : null;
-  }
+  state = { buyClicked: false, inCart: false }
 
   addToCart() {
-    this.setState({ inCart: true });
+    this.setState({ buyClicked: true });
   }
 
-  componentDidMount() {
-    setTimeout(() => this.setState({ start: true }), 0);
+  goToCart() {
+    alert('go to cart');
   }
-
 
   render() {
     const { model } = this.props;
-    const styles = this.getStyles();
+    const { root, title, btn } = this.getStyles();
 
     return (
-      <div style={ styles.root } >
+      <div style={ root } >
+        <div style={ title } onClick={ ::this.props.onClose } >{ model.email }</div>
+        <button
+          onClick={ ::this.addToCart }
+          style={ [ btn,
+            this.state.buyClicked && btn['&:activated']
+          ] } >
+          Buy
+        </button>
 
-        <div style={ styles.mainContainer }>
-          <div style={ [ styles.pic, styles.flexItem ] } onClick={ ::this.closeHandle } >
-            <div style={ styles.title } >{ model.email }</div>
-            <div style={ styles.subtitle } >Some fish text is very impartant for this work now. Please, try it again and again.</div>
-          </div>
-
-          <div style={ [ styles.field, styles.flexItem ] } >
-            <div style={ [
-              styles.additionText,
-              styles.additionText.hidden
-            ] } >
-              Some fish text is very impartant for this work now. Please, try it again and again.
-            </div>
-            <button
-              onClick={ ::this.addToCart }
-              style={ [
-                styles.btn,
-                this.state.inCart && styles.btn_expanded
-              ] } >
-              Buy
-            </button>
-          </div>
-        </div>
-
-        <section styles={ this.state.inCart && styles.toCartPopupWrap_active } >
-          <div
-            ref='toCartMsg'
-            style={ [
-              styles.toCartPopupMsg,
-              this.state.inCart && styles.toCartPopupMsg_active
-            ] } >
-            <p>Are you sure?</p>
-            <button>Ya!</button>
-          </div>
-        </section>
-
+        { this.state.buyClicked &&
+          <ModalQuestion
+            btnOkLabel='Перейти в корзину'
+            btnCancelLabel='Продолжить покупки'
+            btnOkCallback={ ::this.goToCart }
+            btnCancelCallback={ ::this.props.onClose } >
+            A u sure?
+          </ModalQuestion> }
       </div>
     );
   }
 
   getStyles() {
-    const picBackgroundUrl = 'url(http://lorempixel.com/400/400/cats)';
-    const toCartMsgEl = this.refs.toCartMsg;
-    window.toCartMsgEl = toCartMsgEl;
+    // const picBackgroundUrl = 'url(http://lorempixel.com/400/400/cats)';
 
     return {
       root: {
-        width: '100%'
+        minHeight: 600,
+        background: '#fff'
       },
 
       btn: {
@@ -110,76 +71,18 @@ class DealShow extends Component {
         position: 'absolute',
         right: '2em',
         bottom: '2em',
-        transition: 'all .4s'
-      },
-      btn_expanded: {
-        transform: toCartMsgEl ? `translateX(-100%) translateY(-100%)` : 0,
-        opacity: 0,
-        minWidth: '30em',
-        minHeight: '8em'
+        transition: 'all .3s',
+        '&:activated': {
+          opacity: 0,
+          transform: 'translateX(-20vw) translateY(-20vh) scale(2)'
+        }
       },
 
-      mainContainer: {
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'stretch'
-      },
-      flexItem: {
-        flex: '0 0 100%',
-        position: 'relative'
-      },
-
-      pic: {
-        backgroundImage: picBackgroundUrl,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center center',
-        overflow: 'hidden'
-      },
       title: {
-        // copy-paste
-        background: 'rgba(0, 0, 100, .5)',
         padding: 10,
         fontSize: 18,
         textAlign: 'center',
         color: 'white'
-      },
-      subtitle: {
-        background: 'rgba(255, 255, 255, .5)',
-        width: '70%',
-        margin: '60px auto',
-        fontSize: 32,
-        padding: 16
-      },
-      field: {
-        background: 'white',
-        width: '100%'
-        // height: innerHeight - initHeight
-      },
-      additionText: {
-        fontSize: 20
-      },
-
-      toCartPopupWrap_active: {
-        position: 'fixed',
-        width: '100%',
-        height: '100%',
-        top: 0
-      },
-      toCartPopupMsg: {
-        position: 'fixed',
-        minWidth: '30em',
-        minHeight: '10em',
-        right: '2em',
-        bottom: '2em',
-        background: 'green',
-        color: '#fff',
-        transition: 'all .3s',
-        display: 'none',
-        opacity: 0
-      },
-      toCartPopupMsg_active: {
-        display: 'block',
-        opacity: 1
       }
     };
   }
