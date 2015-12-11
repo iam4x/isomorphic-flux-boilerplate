@@ -6,8 +6,8 @@ class DealsListChild extends Component {
 
   static propTypes = {
     model: PropTypes.object.isRequired,
-    active: PropTypes.bool.isRequired,
-    onSelect: PropTypes.func.isRequired
+    active: PropTypes.bool,
+    onSelect: PropTypes.func
   }
 
   static contextTypes = {

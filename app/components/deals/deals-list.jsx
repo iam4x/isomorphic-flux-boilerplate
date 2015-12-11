@@ -1,6 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import connect from 'connect-alt';
 import Radium from 'utils/radium';
+import { IntlMixin } from 'react-intl';
+
 import DealShowAnimation from 'components/deals/deal-show-animation';
 
 @connect(({ dealContainers: { collection } }) => ({ collection }))
@@ -14,8 +16,12 @@ class DealsList extends Component {
     messages: PropTypes.object.isRequired
   }
 
+  i18n = IntlMixin.getIntlMessage
+
   componentWillMount() {
     const { flux } = this.context;
+
+    flux.getActions('helmet').update({ title: this.i18n('users.page-title') });
     flux.getActions('dealContainers').index();
   }
 
@@ -26,7 +32,7 @@ class DealsList extends Component {
       <div style={ root } >
         { collection.map( (model, index) => {
           return (
-            <div key={ index } style={ child } >
+            <div key={ index } style={ child } className='child' >
               <DealShowAnimation
                 model={ model } />
             </div>

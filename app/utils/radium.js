@@ -5,7 +5,8 @@ import matchMediaMock from 'match-media-mock';
 const matchMedia = matchMediaMock.create();
 const customUserAgent = 'Mozilla/5.0 (iPad; CPU OS 7_0 like Mac OS X) AppleWebKit/537.51.1 (KHTML, like Gecko) Version/7.0 Mobile/11A465 Safari/9537.53';
 
-global.navigator = { userAgent: customUserAgent };
+!process.env.BROWSER ?
+  global.navigator = { userAgent: customUserAgent } : null;
 
 const ConfiguredRadium = component => {
   function autoPrefixPlugin({ style, getComponentField }) {

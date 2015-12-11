@@ -12,7 +12,7 @@ import stubApp from '../../../utils/stub-app';
 
 import DealsList from 'components/deals/deals-list';
 
-const should = chai.should();
+chai.should();
 
 describe('DealsList', () => {
   let node;
@@ -46,54 +46,23 @@ describe('DealsList', () => {
     }
   });
 
-  it('should render without users', () => {
-    // Check `<li></li>` don't exists
-    const td = TestUtils.scryRenderedDOMComponentsWithClass(instance, 'user--row');
-    td.length.should.eql(0);
+  it('should render correctly', () => {
+    const el = TestUtils.findRenderedDOMComponentWithTag(instance, 'div');
+    el.should.be.exist;
   });
 
-  it('should render users after first fetch', (done) => {
+  it('should render deals after first fetch', (done) => {
     function handleChange() {
       defer(() => {
-        const td = TestUtils
-          .scryRenderedDOMComponentsWithClass(instance, 'user--row');
-        td.length.should.eql(1);
+        const childs = TestUtils
+          .scryRenderedDOMComponentsWithClass(instance, 'child');
+        childs.length.should.eql(1);
 
-        flux.getStore('users').unlisten(handleChange);
+        flux.getStore('dealContainers').unlisten(handleChange);
         return done();
       });
     }
 
-    flux.getStore('users').listen(handleChange);
-  });
-
-  it('should remove an user', (done) => {
-    function handleChange() {
-      defer(() => {
-        // 10 users after fetch
-        let td = TestUtils.scryRenderedDOMComponentsWithClass(instance, 'user--row');
-        td.length.should.eql(1);
-
-        // remove an user
-        const removeButton = TestUtils.scryRenderedDOMComponentsWithClass(instance, 'user--remove')[0];
-        should.exist(removeButton);
-
-        // wait for dispatch to be done before
-        // calling another action
-        defer(() => {
-          TestUtils.Simulate.click(removeButton);
-
-          // it should have 9 users
-          td = TestUtils.scryRenderedDOMComponentsWithClass(instance, 'user--row');
-          td.length.should.eql(0);
-
-          // clean
-          flux.getStore('users').unlisten(handleChange);
-          return done();
-        });
-      });
-    }
-
-    z.getStore('users').listen(handleChange);
+    flux.getStore('dealContainers').listen(handleChange);
   });
 });
