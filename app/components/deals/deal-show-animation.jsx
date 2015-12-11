@@ -63,11 +63,10 @@ class DealShowAnimation extends Component {
     return {
       page: {
         position: 'absolute',
-        transition: 'all .6s, min-width .3s, opacity .3s',
         zIndex: 3,
-        minWidth: this.getRootParam('clientWidth'),
-        maxWidth: this.getRootParam('clientWidth'),
         opacity: 0,
+        maxWidth: this.getRootParam('clientWidth'),
+        transition: 'all .6s, min-width .3s, opacity .3s',
         '&:started': {
           minWidth: '100%',
           maxWidth: '100%',

@@ -30,18 +30,34 @@ class ModalQuestion extends Component {
     this.setState({ closed: true });
   }
 
+  onOkClick() {
+    this.props.btnOkCallback();
+    this.close();
+  }
+
+  onCancelClick() {
+    this.props.btnCancelCallback();
+    this.close();
+  }
+
   render() {
-    const { overlay, box, msg } = this.getStyles();
+    const { overlay, box, msg, btn } = this.getStyles();
     return (
       <div style={ overlay } >
-        <div style={ [ box ] } >
+        <div style={ box } >
           <div style={ [ msg, this.state.started && msg['&:active'] ] }>
             <div>{ this.props.children }</div>
-            <button onClick={ this.props.btnOkCallback } >
-              { this.close && this.props.btnOkLabel }
+            <button
+              key='btnOk'
+              style={ btn }
+              onClick={ ::this.onOkClick } >
+              { this.props.btnOkLabel }
             </button>
-            <button onClick={ this.props.btnCancelCallback } >
-              { this.close && this.props.btnCancelLabel }
+            <button
+              key='btnCancel'
+              style={ btn }
+              onClick={ ::this.onCancelClick } >
+              { this.props.btnCancelLabel }
             </button>
           </div>
         </div>
@@ -53,8 +69,8 @@ class ModalQuestion extends Component {
     return {
       overlay: {
         position: 'fixed',
-        width: this.state.closed ? '100vw' : 0,
-        height: this.state.closed ? '100vh' : 0,
+        width: this.state.closed ? 0 : '100vw',
+        height: this.state.closed ? 0 : '100vh',
         display: this.state.closed ? 'none' : 'table'
       },
       box: {
@@ -64,18 +80,28 @@ class ModalQuestion extends Component {
       },
       msg: {
         display: 'inline-block',
+        minWidth: '30vw',
+        maxWidth: '98vw',
+        color: '#fff',
+        background: 'rgb(13, 113, 198)',
+        padding: '2em',
         boxShadow: '2px 6px 26px 0 #999',
         transition: 'all .25s',
         transform: 'translateX(10vw) translateY(20vh) scale(0)',
-        transformOrigin: 'left top',
+        transformOrigin: 'right bottom',
         '&:active': {
           transform: 'translateX(0) translateY(0) scale(1)'
-        },
-        minWidth: '30vw',
-        maxWidth: '98vw',
-        color: 'blue',
-        background: 'white',
-        padding: '5em'
+        }
+      },
+      btn: {
+        margin: '1em',
+        padding: '.6em',
+        background: '#6fa229',
+        color: '#fff',
+        border: 0,
+        ':hover': {
+          background: '#6f0229'
+        }
       }
     };
   }

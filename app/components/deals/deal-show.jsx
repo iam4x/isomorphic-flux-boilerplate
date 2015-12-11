@@ -16,7 +16,11 @@ class DealShow extends Component {
     messages: PropTypes.object.isRequired
   }
 
-  state = { buyClicked: false, inCart: false }
+  state = {
+    buyClicked: false,
+    inCart: false,
+    msgClosed: false
+  }
 
   addToCart() {
     this.setState({ buyClicked: true });
@@ -26,13 +30,18 @@ class DealShow extends Component {
     console.log('go to cart');
   }
 
+  close() {
+    this.props.onClose();
+    this.setState({ msgClosed: true });
+  }
+
   render() {
     const { model } = this.props;
     const { root, title, btn } = this.getStyles();
 
     return (
       <div style={ root } >
-        <div style={ title } onClick={ ::this.props.onClose } >{ model.email }</div>
+        <div style={ title } onClick={ ::this.close } >{ model.email }</div>
         <button
           onClick={ ::this.addToCart }
           style={ [ btn,
@@ -41,12 +50,13 @@ class DealShow extends Component {
           Buy
         </button>
 
-        { this.state.buyClicked &&
+        { this.state.buyClicked && !this.state.msgClosed &&
           <ModalQuestion
+            show={ this.state.msgClosed }
             btnOkLabel='Перейти в корзину'
             btnCancelLabel='Продолжить покупки'
             btnOkCallback={ ::this.goToCart }
-            btnCancelCallback={ ::this.props.onClose } >
+            btnCancelCallback={ ::this.close } >
             A u sure?
           </ModalQuestion> }
       </div>
@@ -57,14 +67,15 @@ class DealShow extends Component {
     return {
       root: {
         minHeight: 600,
-        background: '#fff'
+        background: '#fff',
+        boxShadow: '0 1em 2em #999'
       },
 
       btn: {
         background: 'rgb(13, 113, 198)',
         padding: '2% 5%',
         border: 0,
-        color: 'rgb(255, 255, 255)',
+        color: 'white',
         fontSize: 24,
         position: 'absolute',
         right: '2em',
@@ -72,15 +83,14 @@ class DealShow extends Component {
         transition: 'all .3s',
         '&:activated': {
           opacity: 0,
-          transform: 'translateX(-20vw) translateY(-20vh) scale(2)'
+          transform: 'translateX(-20vw) translateY(-15vh) scale(2.6)'
         }
       },
 
       title: {
         padding: 10,
-        fontSize: 18,
-        textAlign: 'center',
-        color: 'white'
+        fontSize: '4em',
+        textAlign: 'center'
       }
     };
   }
