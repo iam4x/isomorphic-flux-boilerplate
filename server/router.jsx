@@ -18,10 +18,20 @@ export default function *() {
   const locale = this.cookies.get('_lang') || this.acceptsLanguages(require('./config/init').locales) || 'en';
   const { messages } = require(`data/${locale}`);
 
+  // Get auth-token from cookie
+  const username = this.cookies.get('_auth');
+
   // Populate store with locale
   flux
     .getActions('locale')
     .switchLocaleSuccess({ locale, messages });
+
+  // Populate store with auth
+  if (username) {
+      flux
+        .getActions('session')
+        .update({ username });
+  }
 
   debug('dev')(`locale of request: ${locale}`);
 
