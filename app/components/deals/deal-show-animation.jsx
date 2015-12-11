@@ -42,9 +42,11 @@ class DealShowAnimation extends Component {
 
         <div style={ [ expander,
             started && !closed && expander['&:active'] ] } >
-          <div style={ [ page,
-              started && page['&:started'],
-              closed && page['&:closed'] ] } >
+          <div
+              ref='page'
+              style={ [ page,
+                started && page['&:started'],
+                closed && page['&:closed'] ] } >
             <DealShow
               model={ this.props.model }
               onClose={ ::this.closePage } />
@@ -90,8 +92,10 @@ class DealShowAnimation extends Component {
         overflow: 'hidden',
         transition: 'min-height .6s ease-in-out',
         '&:active': {
-          minHeight: this.state.active ? 600 : 0,
-          maxHeight: this.state.active ? 600 : 0
+          minHeight: this.state.active ?
+            this.refs.page.clientHeight : 0,
+          maxHeight: this.state.active ?
+            this.refs.page.clientHeight : 0
         }
       },
 

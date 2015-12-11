@@ -1,9 +1,8 @@
 import React, { Component, PropTypes } from 'react';
-import Radium, { Style, getPrefixedStyle } from 'utils/radium';
+import Radium from 'utils/radium';
 
 import Header from 'components/header';
 import Footer from 'components/footer';
-import normalize from 'styles/normalize';
 
 @Radium
 class App extends Component {
@@ -49,32 +48,12 @@ class App extends Component {
     const { children } = this.props;
 
     return (
-      <div style={ this.styles.root }>
-        <Style
-          rules={ normalize }
-          prefix={ getPrefixedStyle } />
+      <div>
         <Header />
         { children }
         <Footer />
       </div>
     );
-  }
-
-  styles = {
-    root: {
-      background: '#6fa229'
-    },
-    mediaQueries: {
-      '(min-width: 550px)': {
-        html: {
-          fontSize: '120%',
-          minWidth: '100%'
-        },
-        body: {
-          minWidth: '100%'
-        }
-      }
-    }
   }
 
 }
