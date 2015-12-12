@@ -57,7 +57,6 @@ describe('DealsList', () => {
         const childs = TestUtils
           .scryRenderedDOMComponentsWithClass(instance, 'child');
         childs.length.should.eql(1);
-
         flux.getStore('dealContainers').unlisten(handleChange);
         return done();
       });

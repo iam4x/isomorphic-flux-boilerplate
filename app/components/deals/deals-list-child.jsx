@@ -31,7 +31,8 @@ class DealsListChild extends Component {
       <section
         onClick={ ::this.openHandle }
         style={ styles.base } >
-        <div style={ styles.title } >{ model.email }</div>
+        <div style={ styles.title } className='title' >
+          { model.email }</div>
         <div style={ styles.text } >
           Some fish text is very impartant for this work now. Please, try it again and again.
         </div>

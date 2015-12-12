@@ -45,7 +45,7 @@ export default function ServerHTML({ body, assets, locale, title, description })
           <link key={ idx } rel='stylesheet' href={ href } /> ) }
         <title>{ title }</title>
         <Style
-          rules={ normalize }
+          rules={ [ normalize, styles ] }
           prefix={ getPrefixedStyle } />
       </head>
       <body>

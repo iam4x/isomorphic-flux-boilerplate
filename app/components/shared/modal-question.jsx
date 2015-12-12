@@ -22,8 +22,10 @@ class ModalQuestion extends Component {
     closed: false
   }
 
-  componentWillMount() {
-    setTimeout( () => this.setState({ started: true }) );
+  componentDidMount() {
+    window.requestAnimationFrame( () => {
+      this.setState({ started: true });
+    });
   }
 
   close() {

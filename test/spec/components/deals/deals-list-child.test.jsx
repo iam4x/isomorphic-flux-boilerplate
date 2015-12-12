@@ -31,4 +31,9 @@ describe('DealsListChild', () => {
     const el = TestUtils.findRenderedDOMComponentWithTag(instance, 'section');
     el.should.be.exist;
   });
+
+  it('should correct title text', function() {
+    const el = TestUtils.findRenderedDOMComponentWithClass(instance, 'title');
+    el.textContent.should.eql('foobar@org.com');
+  });
 });

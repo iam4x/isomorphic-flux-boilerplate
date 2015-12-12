@@ -19,7 +19,7 @@ class DealShowAnimation extends Component {
 
   showPage() {
     this.setState({ active: true, closed: false });
-    setTimeout( () => this.setState({ started: true }) );
+    this.setState({ started: true });
   }
 
   closePage() {
@@ -32,7 +32,9 @@ class DealShowAnimation extends Component {
 
     return (
       <div ref='elRoot' >
-        <div style={ [ hider,
+        <div
+            className='listChild'
+            style={ [ hider,
             started && !closed && hider['&:active'] ] } >
           <DealsListChild
             model={ this.props.model }
@@ -41,9 +43,11 @@ class DealShowAnimation extends Component {
         </div>
 
         <div style={ [ expander,
-            started && !closed && expander['&:active'] ] } >
+            started && expander['&:active'],
+            closed && expander['&:disabled'] ] } >
           <div
               ref='page'
+              className='pageContainer'
               style={ [ page,
                 started && page['&:started'],
                 closed && page['&:closed'] ] } >
@@ -62,6 +66,9 @@ class DealShowAnimation extends Component {
   }
 
   getStyles() {
+    const { page } = this.refs;
+    const { active } = this.state;
+
     return {
       page: {
         position: 'absolute',
@@ -92,10 +99,12 @@ class DealShowAnimation extends Component {
         overflow: 'hidden',
         transition: 'min-height .6s ease-in-out',
         '&:active': {
-          minHeight: this.state.active ?
-            this.refs.page.clientHeight : 0,
-          maxHeight: this.state.active ?
-            this.refs.page.clientHeight : 0
+          minHeight: active ? page.clientHeight : 0,
+          maxHeight: active ? page.clientHeight : 0
+        },
+        '&:disabled': {
+          minHeight: 0,
+          maxHeight: 0
         }
       },
 

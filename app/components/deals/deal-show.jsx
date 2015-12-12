@@ -41,7 +41,7 @@ class DealShow extends Component {
 
     return (
       <div style={ root } >
-        <div style={ title } onClick={ ::this.close } >{ model.email }</div>
+        <span style={ title } onClick={ ::this.close } >{ model.email }</span>
         <button
           onClick={ ::this.addToCart }
           style={ [ btn,
@@ -83,7 +83,7 @@ class DealShow extends Component {
         transition: 'all .3s',
         '&:activated': {
           opacity: 0,
-          transform: 'translateX(-20vw) translateY(-15vh) scale(2.6)'
+          transform: 'translateX(-35vw) translateY(-12vh) scale(2.6, 2)'
         }
       },
 
