@@ -6,7 +6,7 @@
     "subway": "Арбатская",
     "discount": 50,
     "cost": 200,
-    "pic": "http://skidki.vmet.ro/system/deals/thumb_for_mains/101939/original/2563470.jpg"
+    "pic": "http://skidki.vmet.ro/system/deals/thumb_for_mains/100349/original/2547780.jpg"
   },
   {
     "id": 2,
@@ -15,7 +15,7 @@
     "subway": "Библиотека им. Ленина",
     "discount": 50,
     "cost": 300,
-    "pic": "http://skidki.vmet.ro/system/deals/thumb_for_mains/100349/original/2563470.jpg"
+    "pic": "http://skidki.vmet.ro/system/deals/thumb_for_mains/100349/original/2547780.jpg"
   },
   {
     "id": 3,
@@ -33,7 +33,7 @@
     "subway": "Библиотека им. Ленина",
     "discount": 50,
     "cost": 100,
-    "pic": "http://skidki.vmet.ro/system/deals/thumb_for_mains/101939/original/2563470.jpg"
+    "pic": "http://skidki.vmet.ro/system/deals/thumb_for_mains/100349/original/2547780.jpg"
   },
   {
     "id": 5,
@@ -42,7 +42,7 @@
     "subway": "Арбатская",
     "discount": 50,
     "cost": 200,
-    "pic": "http://skidki.vmet.ro/system/deals/thumb_for_mains/100349/original/2547780.jpg"
+    "pic": "http://skidki.vmet.ro/system/deals/thumb_for_mains/101001/original/f29838110.jpg"
   },
   {
     "id": 6,
@@ -51,7 +51,7 @@
     "subway": "Библиотека им. Ленина",
     "discount": 50,
     "cost":400,
-    "pic": "http://skidki.vmet.ro/system/deals/thumb_for_mains/101939/original/2563470.jpg"
+    "pic": "http://skidki.vmet.ro/system/deals/thumb_for_mains/100349/original/2547780.jpg"
   },
   {
     "id": 7,
@@ -70,6 +70,6 @@
     "subway": "Библиотека им. Ленина",
     "discount": 50,
     "cost": 150,
-    "pic": "http://skidki.vmet.ro/system/deals/thumb_for_mains/101939/original/2563470.jpg"
+    "pic": "http://skidki.vmet.ro/system/deals/thumb_for_mains/101001/original/f29838110.jpg"
   }
 ]}

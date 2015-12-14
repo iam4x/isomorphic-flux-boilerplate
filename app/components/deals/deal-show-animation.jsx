@@ -35,7 +35,7 @@ class DealShowAnimation extends Component {
         <div
             ref='listChild'
             style={ [ hider,
-            started && !closed && hider['&:active'] ] } >
+            started && hider['&:active'] ] } >
           <DealsListChild
             model={ this.props.model }
             active={ active }
@@ -43,7 +43,7 @@ class DealShowAnimation extends Component {
         </div>
 
         <div style={ [ expander,
-            started && expander['&:active'],
+            active && expander['&:active'],
             closed && expander['&:disabled'] ] } >
           <div
               ref='page'
@@ -84,7 +84,7 @@ class DealShowAnimation extends Component {
           opacity: 1,
           transform: `
             translateX(-${this.getRootParam('offsetLeft')}px)
-            translateY(-${this.getRootParam('clientHeight')}px)`
+            translateY(-${listChild && listChild.clientHeight}px)`
         },
         '&:closed': {
           minWidth: 0,
@@ -102,8 +102,8 @@ class DealShowAnimation extends Component {
         overflow: 'hidden',
         transition: 'min-height .6s ease-in-out',
         '&:active': {
-          minHeight: active ? (page.clientHeight / 2) - listChild.clientHeight + 16 : 0,
-          maxHeight: active ? (page.clientHeight / 2) - listChild.clientHeight + 16 : 0
+          minHeight: active ? (page.clientHeight / 2) - listChild.clientHeight + 32 : 0,
+          maxHeight: active ? (page.clientHeight / 2) - listChild.clientHeight + 32 : 0
         },
         '&:disabled': {
           minHeight: 0,
@@ -113,9 +113,10 @@ class DealShowAnimation extends Component {
 
       hider: {
         opacity: 1,
-        transition: 'all .3s',
+        transition: 'all .4s',
         '&:active': {
-          opacity: 0
+          opacity: 0,
+          transform: 'scale(1.1)'
         }
       }
     };

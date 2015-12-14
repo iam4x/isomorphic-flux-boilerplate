@@ -19,6 +19,7 @@ class DealShow extends Component {
   }
 
   state = {
+    closed: false,
     buyClicked: false,
     inCart: false,
     msgClosed: false
@@ -29,12 +30,12 @@ class DealShow extends Component {
   }
 
   goToCart() {
-    console.log('go to cart');
+    this.context.history.pushState(null, 'cart');
   }
 
   close() {
     this.props.onClose();
-    this.setState({ msgClosed: true });
+    this.setState({ msgClosed: true, closed: true });
   }
 
   render() {
