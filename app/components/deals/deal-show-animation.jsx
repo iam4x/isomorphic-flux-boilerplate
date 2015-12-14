@@ -37,7 +37,7 @@ class DealShowAnimation extends Component {
 
   closePage() {
     this.setState({ active: false, started: false, closed: true });
-    setTimeout( () => this.setState({ removed: true }) );
+    setTimeout( () => { this.setState({ removed: true }); }, 150 );
   }
 
   render() {
