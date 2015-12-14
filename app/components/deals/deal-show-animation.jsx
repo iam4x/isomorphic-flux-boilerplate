@@ -11,23 +11,37 @@ class DealShowAnimation extends Component {
     model: PropTypes.object.isRequired
   }
 
-  state = {
+  defaultStates = {
     active: false,
     started: false,
-    closed: false
+    closed: false,
+    removed: true
+  }
+
+  state = this.defaultStates
+
+  transitionEndEventOnce(handler) {
+    const page = this.refs.page;
+    const completeHandler = () => {
+      handler();
+      page.removeEventListener('transitionend', completeHandler);
+    };
+    page ? page.addEventListener('transitionend', completeHandler) :
+      handler();
   }
 
   showPage() {
-    this.setState({ active: true, closed: false });
+    this.setState({ active: true, closed: false, removed: false });
     setTimeout( () => this.setState({ started: true }) );
   }
 
   closePage() {
     this.setState({ active: false, started: false, closed: true });
+    setTimeout( () => this.setState({ removed: true }) );
   }
 
   render() {
-    const { active, started, closed } = this.state;
+    const { active, started, closed, removed } = this.state;
     const { page, expander, hider } = this.getStyles();
 
     return (
@@ -50,7 +64,8 @@ class DealShowAnimation extends Component {
               className='pageContainer'
               style={ [ page,
                 started && page['&:started'],
-                closed && page['&:closed'] ] } >
+                closed && page['&:closed'],
+                removed && page['&:removed'] ] } >
             <DealShow
               model={ this.props.model }
               onClose={ ::this.closePage } />
@@ -66,11 +81,12 @@ class DealShowAnimation extends Component {
   }
 
   getStyles() {
-    const { page, listChild } = this.refs;
+    const { listChild } = this.refs;
     const { active } = this.state;
 
     return {
       page: {
+        display: 'block',
         position: 'absolute',
         zIndex: 3,
         opacity: 0,
@@ -93,6 +109,9 @@ class DealShowAnimation extends Component {
           opacity: 0,
           transition: 'all .3s, min-width .6s, opacity .2s',
           transform: 'translateX(0px)'
+        },
+        '&:removed': {
+          display: 'none'
         }
       },
 
@@ -102,12 +121,8 @@ class DealShowAnimation extends Component {
         overflow: 'hidden',
         transition: 'min-height .6s ease-in-out',
         '&:active': {
-          minHeight:
-            active && page ? '65vh' : 0,
-            //  page.clientHeight - listChild.clientHeight + 32 : 0,
-          maxHeight:
-            active && page ? '65vh' : 0
-            //  page.clientHeight - listChild.clientHeight + 32 : 0
+          minHeight: active ? '65vh' : 0,
+          maxHeight: active ? '65vh' : 0
         },
         '&:disabled': {
           minHeight: 0,

@@ -15,6 +15,12 @@ describe('DealShowAnimation', () => {
   // let flux;
   // let instance;
   let vdom;
+  let spy;
+  let listChildDiv;
+  let dealsListChild;
+  let expanderDiv;
+  let pageContainerDiv;
+  let dealShow;
 
   beforeEach(() => {
     // flux = createFlux(new ApiClient());
@@ -25,31 +31,44 @@ describe('DealShowAnimation', () => {
 
     // instance = tree.getMountedInstance();
     vdom = tree.getRenderOutput();
+
+    listChildDiv = vdom.props.children[0];
+    dealsListChild = listChildDiv.props.children;
+    expanderDiv = vdom.props.children[1];
+    pageContainerDiv = expanderDiv.props.children;
+    dealShow = pageContainerDiv.props.children;
   });
 
   it('should render correctly', function() {
-    const listChildDiv = vdom.props.children[0];
     listChildDiv.should.have.property('type', 'div');
     listChildDiv.props.style.should.have.property('opacity', 1);
 
-    const dealsListChild = listChildDiv.props.children;
     dealsListChild.should.have.property('type', DealsListChild);
 
-    const expanderDiv = vdom.props.children[1];
     expanderDiv.should.have.property('type', 'div');
     expanderDiv.props.style.should.have.property('minHeight', 0);
 
-    const pageContainerDiv = expanderDiv.props.children;
     pageContainerDiv.should.have.property('type', 'div');
     pageContainerDiv.props.style.should.have.property('opacity', 0);
 
-    const dealShow = pageContainerDiv.props.children;
     dealShow.should.have.property('type', DealShow);
   });
 
   it('should be opened on DealsListChild click', function() {
-    const listChildDiv = vdom.props.children[0];
-    const dealsListChild = listChildDiv.props.children;
+    spy = sinon.spy(dealsListChild.props.onSelect);
     dealsListChild.props.onSelect();
+    spy.calledOnce;
+    listChildDiv.props.style.should.have.property('opacity', 1);
+  });
+
+  it('shoud show listChild and remove pageContainer after close', function(done) {
+    spy = sinon.spy(dealShow.props.onClose);
+    dealShow.props.onClose();
+    spy.calledOnce;
+    setTimeout( () => {
+      pageContainerDiv.props.style.should.have.property('display', 'none');
+      listChildDiv.props.style.should.have.property('opacity', 1);
+      done();
+    }, 100);
   });
 });
