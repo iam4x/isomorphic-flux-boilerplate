@@ -23,13 +23,13 @@ class DealsListChild extends Component {
   openHandle() {
     this.setState({ active: true });
     this.props.onSelect();
-    this.context.history
-      .replaceState(null, 'deals', { id: this.props.model.id });
+    // this.context.history
+      // .replaceState(null, 'deals', { id: this.props.model.id });
       // .transitionTo('deals', { id: this.props.model.id });
-    this.refs.root ? this.refs.root.scrollIntoView({
-      behavior: 'smooth',
-      block: 'end'
-    }) : void 0;
+    // this.refs.root ? this.refs.root.scrollIntoView({
+    //   behavior: 'smooth',
+    //   block: 'end'
+    // }) : void 0;
     return false;
   }
 
@@ -49,16 +49,19 @@ class DealsListChild extends Component {
         <div style={ styles.discount } >
           до { model.discount }%
         </div>
-        <div style={ styles.title } >
-          { model.title }
+        <div style={ styles.content } >
+          <div style={ styles.title } >
+            { model.title }
+          </div>
+          <div style={ styles.contentBox }>
+            <div style={ styles.cost } >
+              от <strong style={ styles.costValue }>{ model.cost }</strong> руб.
+            </div>
+            <button style={ styles.btn } >
+              Подробнее
+            </button>
+          </div>
         </div>
-        <div style={ styles.cost } >
-          от { model.cost } руб.
-        </div>
-        <button style={ styles.btn } >
-          Подробнее
-        </button>
-
       </section>
     );
   }
@@ -72,17 +75,18 @@ class DealsListChild extends Component {
         position: 'relative',
         height: height,
         boxSizing: 'border-box',
+        boxShadow: '0 .15em .2em #e7e7e7',
         border: '1px solid #fff',
         backgroundImage: picBackgroundUrl,
         backgroundSize: 'cover',
         backgroundPosition: 'center center',
         zIndex: 1,
-        // overflow: 'hidden',
+        opacity: 1,
+        overflow: 'hidden',
         transition: [
           'opacity .2s ease-out',
           'margin-bottom .4s ease-out'
-        ],
-        opacity: 1
+        ]
       },
 
       pic: {
@@ -90,34 +94,57 @@ class DealsListChild extends Component {
       },
 
       discount: {
-        fontSize: 16,
-        margin: 12,
-        padding: 6,
+        position: 'absolute',
+        top: 0,
+        right: 0,
+        fontSize: '.9em',
+        margin: '.5em',
+        padding: '.4em .6em',
         textAlign: 'center',
-        background: 'rgba(255, 255, 255, .5)'
+        background: 'rgba(0, 0, 0, .5)',
+        color: 'white'
+      },
+
+      content: {
+        position: 'absolute',
+        width: '100%',
+        bottom: 0
+      },
+
+      contentBox: {
+        background: '#f7f7f7',
+        display: 'flex',
+        flexFlow: 'row nowrap',
+        lineHeight: '2.5em',
+        textAlign: 'center',
+        alignItems: 'center'
       },
 
       title: {
-        background: 'rgba(0, 0, 100, .5)',
-        padding: 10,
-        fontSize: 18,
+        background: 'rgba(0, 0, 0, .6)',
+        padding: '.6em .4em',
+        fontSize: '.8em',
         textAlign: 'center',
         color: 'white'
       },
 
       cost: {
+        flex: '1 50%',
+        color: '#595959',
+        fontSize: '.8em'
+      },
 
+      costValue: {
+        fontSize: '1.6em',
+        fontWeight: 'normal'
       },
 
       btn: {
-        background: 'rgb(13, 113, 198)',
-        padding: '4% 5%',
+        background: '#6ea129',
         border: 0,
         color: 'rgb(255, 255, 255)',
-        fontSize: 24,
-        position: 'absolute',
-        right: 12,
-        bottom: 4
+        fontSize: '1em',
+        flex: '1 50%'
       }
     };
   }

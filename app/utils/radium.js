@@ -3,7 +3,7 @@ import Prefixer from 'inline-style-prefixer';
 import matchMediaMock from 'match-media-mock';
 
 const matchMedia = matchMediaMock.create();
-const customUserAgent = 'Mozilla/5.0 (iPad; CPU OS 7_0 like Mac OS X) AppleWebKit/537.51.1 (KHTML, like Gecko) Version/7.0 Mobile/11A465 Safari/9537.53';
+const customUserAgent = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.80 Safari/537.36';
 
 !process.env.BROWSER ?
   global.navigator = { userAgent: customUserAgent } : null;
@@ -19,11 +19,31 @@ const ConfiguredRadium = component => {
     return { style: prefixer.prefix(style) };
   }
 
+  function resolveStatesStyles({ style }) {
+    if (style.length <= 0) return style;
+
+    const isStateStyleField = name => {
+      const states = [ '&:active', '&:started', '&:disabled', '&:closed', '&:activated' ];
+      return states.indexOf(name) > -1;
+    };
+
+    const output = Object.keys(style).reduce(
+      (styleWithoutStates, name) => {
+        if (!isStateStyleField(name)) {
+          styleWithoutStates[name] = style[name];
+        }
+        return styleWithoutStates;
+      }, {} );
+
+    return { style: output };
+  }
+
   const plugins = [
     radium.Plugins.mergeStyleArray,
     radium.Plugins.checkProps,
     radium.Plugins.resolveMediaQueries,
     radium.Plugins.resolveInteractionStyles,
+    resolveStatesStyles,
     autoPrefixPlugin,
     radium.Plugins.checkProps
   ];
@@ -38,11 +58,11 @@ const setClientResolution = (width = 640, height = 480) => {
 };
 
 const getPrefixedStyle = style => {
-  const prefixer = (() => {
+  const prefixer = void () => {
     const userAgent = process.env.BROWSER ?
       navigator.userAgent : customUserAgent;
     return new Prefixer(userAgent);
-  })();
+  };
 
   return prefixer.prefix(style);
 };

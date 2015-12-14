@@ -19,7 +19,7 @@ class DealShowAnimation extends Component {
 
   showPage() {
     this.setState({ active: true, closed: false });
-    this.setState({ started: true });
+    setTimeout( () => this.setState({ started: true }) );
   }
 
   closePage() {
@@ -89,6 +89,7 @@ class DealShowAnimation extends Component {
         '&:closed': {
           minWidth: 0,
           maxWidth: 0,
+          height: 0,
           opacity: 0,
           transition: 'all .3s, min-width .6s, opacity .2s',
           transform: 'translateX(0px)'
@@ -101,8 +102,8 @@ class DealShowAnimation extends Component {
         overflow: 'hidden',
         transition: 'min-height .6s ease-in-out',
         '&:active': {
-          minHeight: active ? page.clientHeight - listChild.clientHeight : 0,
-          maxHeight: active ? page.clientHeight - listChild.clientHeight : 0
+          minHeight: active ? (page.clientHeight / 2) - listChild.clientHeight + 16 : 0,
+          maxHeight: active ? (page.clientHeight / 2) - listChild.clientHeight + 16 : 0
         },
         '&:disabled': {
           minHeight: 0,

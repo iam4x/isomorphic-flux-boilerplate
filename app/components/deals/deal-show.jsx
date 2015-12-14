@@ -118,9 +118,8 @@ class DealShow extends Component {
       title: {
         display: 'inline-block',
         fontWeight: 'normal',
-        padding: '0 1em',
         fontSize: '1.6em',
-        margin: '-1.6em 0 0 0',
+        margin: '-1.6em 1em 0 1em',
         color: 'white',
         flex: '2 100%'
       },

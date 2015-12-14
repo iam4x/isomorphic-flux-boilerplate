@@ -33,7 +33,7 @@
     "subway": "Библиотека им. Ленина",
     "discount": 50,
     "cost": 100,
-    "pic": "http://skidki.vmet.ro/system/deals/thumb_for_mains/101939/original/2563470.jpghttp://127.0.0.1:3002/pics/yk.jpg"
+    "pic": "http://skidki.vmet.ro/system/deals/thumb_for_mains/101939/original/2563470.jpg"
   },
   {
     "id": 5,
@@ -70,6 +70,6 @@
     "subway": "Библиотека им. Ленина",
     "discount": 50,
     "cost": 150,
-    "pic": "http://127.0.0.1:3002/pics/yk.jpg"
+    "pic": "http://skidki.vmet.ro/system/deals/thumb_for_mains/101939/original/2563470.jpg"
   }
 ]}
