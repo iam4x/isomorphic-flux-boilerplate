@@ -22,8 +22,8 @@ class ModalQuestion extends Component {
     closed: false
   }
 
-  componentDidMount() {
-    window.requestAnimationFrame( () => {
+  componentWillMount() {
+    setTimeout( () => {
       this.setState({ started: true });
     });
   }
@@ -33,13 +33,13 @@ class ModalQuestion extends Component {
   }
 
   onOkClick() {
-    this.props.btnOkCallback();
     this.close();
+    this.props.btnOkCallback();
   }
 
   onCancelClick() {
-    this.props.btnCancelCallback();
     this.close();
+    this.props.btnCancelCallback();
   }
 
   render() {
@@ -71,9 +71,11 @@ class ModalQuestion extends Component {
     return {
       overlay: {
         position: 'fixed',
+        top: 0,
         width: this.state.closed ? 0 : '100vw',
         height: this.state.closed ? 0 : '100vh',
-        display: this.state.closed ? 'none' : 'table'
+        display: this.state.closed ? 'none' : 'table',
+        zIndex: 9
       },
       box: {
         display: 'table-cell',
@@ -85,24 +87,24 @@ class ModalQuestion extends Component {
         minWidth: '30vw',
         maxWidth: '98vw',
         color: '#fff',
-        background: 'rgb(13, 113, 198)',
-        padding: '2em',
+        background: '#6ea129',
+        padding: '1em 3.0em',
         boxShadow: '2px 6px 26px 0 #999',
         transition: 'all .25s',
-        transform: 'translateX(10vw) translateY(20vh) scale(0)',
-        transformOrigin: 'right bottom',
+        transform: 'translateX(10vw) translateY(10vh) scale(0)',
+        transformOrigin: 'right',
         '&:active': {
           transform: 'translateX(0) translateY(0) scale(1)'
         }
       },
       btn: {
         margin: '1em',
-        padding: '.6em',
-        background: '#6fa229',
-        color: '#fff',
+        padding: '.5em 1em',
+        background: '#f7f7f7',
+        color: '#404040',
         border: 0,
         ':hover': {
-          background: '#6f0229'
+          background: '#d2e981'
         }
       }
     };

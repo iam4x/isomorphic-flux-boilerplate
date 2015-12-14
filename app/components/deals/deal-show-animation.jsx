@@ -33,7 +33,7 @@ class DealShowAnimation extends Component {
     return (
       <div ref='elRoot' >
         <div
-            className='listChild'
+            ref='listChild'
             style={ [ hider,
             started && !closed && hider['&:active'] ] } >
           <DealsListChild
@@ -66,7 +66,7 @@ class DealShowAnimation extends Component {
   }
 
   getStyles() {
-    const { page } = this.refs;
+    const { page, listChild } = this.refs;
     const { active } = this.state;
 
     return {
@@ -76,6 +76,8 @@ class DealShowAnimation extends Component {
         opacity: 0,
         maxWidth: this.getRootParam('clientWidth'),
         transition: 'all .6s, min-width .3s, opacity .3s',
+        boxShadow: '0 .5em .5em #f7f7f7',
+        background: '#fff',
         '&:started': {
           minWidth: '100%',
           maxWidth: '100%',
@@ -99,8 +101,8 @@ class DealShowAnimation extends Component {
         overflow: 'hidden',
         transition: 'min-height .6s ease-in-out',
         '&:active': {
-          minHeight: active ? page.clientHeight : 0,
-          maxHeight: active ? page.clientHeight : 0
+          minHeight: active ? page.clientHeight - listChild.clientHeight : 0,
+          maxHeight: active ? page.clientHeight - listChild.clientHeight : 0
         },
         '&:disabled': {
           minHeight: 0,

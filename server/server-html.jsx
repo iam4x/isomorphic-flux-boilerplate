@@ -11,7 +11,7 @@ const conditional = `<!--[if IE 8]>
 <![endif]-->`;
 
 const styles = {
-  root: {
+  body: {
     background: '#6fa229'
   },
   mediaQueries: {
@@ -45,7 +45,10 @@ export default function ServerHTML({ body, assets, locale, title, description })
           <link key={ idx } rel='stylesheet' href={ href } /> ) }
         <title>{ title }</title>
         <Style
-          rules={ [ normalize, styles ] }
+          rules={ normalize }
+          prefix={ getPrefixedStyle } />
+        <Style
+          rules={ styles }
           prefix={ getPrefixedStyle } />
       </head>
       <body>

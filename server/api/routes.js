@@ -1,4 +1,5 @@
 import { users } from './data.json';
+import { dealContainers } from './deal-containers.json';
 
 const simplifyUsers = (collection) => collection
   .map(({ user, seed }) => ({ ...user, seed }))
@@ -18,5 +19,9 @@ export default function(router) {
     } else {
       this.body = result;
     }
+  });
+
+  router.get('/deal_containers', function *() {
+    this.body = dealContainers;
   });
 }

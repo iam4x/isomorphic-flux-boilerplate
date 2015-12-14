@@ -12,7 +12,8 @@ class DealsListChild extends Component {
 
   static contextTypes = {
     flux: PropTypes.object.isRequired,
-    messages: PropTypes.object.isRequired
+    messages: PropTypes.object.isRequired,
+    history: PropTypes.object
   }
 
   state = {
@@ -22,6 +23,14 @@ class DealsListChild extends Component {
   openHandle() {
     this.setState({ active: true });
     this.props.onSelect();
+    this.context.history
+      .replaceState(null, 'deals', { id: this.props.model.id });
+      // .transitionTo('deals', { id: this.props.model.id });
+    this.refs.root ? this.refs.root.scrollIntoView({
+      behavior: 'smooth',
+      block: 'end'
+    }) : void 0;
+    return false;
   }
 
   render() {
@@ -29,20 +38,33 @@ class DealsListChild extends Component {
     const styles = this.getStyles();
     return (
       <section
+        ref='root'
         onClick={ ::this.openHandle }
         style={ styles.base } >
-        <div style={ styles.title } className='title' >
-          { model.email }</div>
-        <div style={ styles.text } >
-          Some fish text is very impartant for this work now. Please, try it again and again.
+
+        <img
+          src={ model.pic }
+          alt='deal picture'
+          style={ styles.pic } />
+        <div style={ styles.discount } >
+          до { model.discount }%
         </div>
-        <button style={ styles.btn } >More</button>
+        <div style={ styles.title } >
+          { model.title }
+        </div>
+        <div style={ styles.cost } >
+          от { model.cost } руб.
+        </div>
+        <button style={ styles.btn } >
+          Подробнее
+        </button>
+
       </section>
     );
   }
 
   getStyles() {
-    const height = 160;
+    const height = 320;
     const picBackgroundUrl = 'url(http://lorempixel.com/400/400/cats)';
 
     return {
@@ -55,11 +77,24 @@ class DealsListChild extends Component {
         backgroundSize: 'cover',
         backgroundPosition: 'center center',
         zIndex: 1,
+        // overflow: 'hidden',
         transition: [
           'opacity .2s ease-out',
           'margin-bottom .4s ease-out'
         ],
         opacity: 1
+      },
+
+      pic: {
+        minWidth: '100%'
+      },
+
+      discount: {
+        fontSize: 16,
+        margin: 12,
+        padding: 6,
+        textAlign: 'center',
+        background: 'rgba(255, 255, 255, .5)'
       },
 
       title: {
@@ -70,12 +105,8 @@ class DealsListChild extends Component {
         color: 'white'
       },
 
-      text: {
-        fontSize: 16,
-        margin: 12,
-        padding: 6,
-        textAlign: 'center',
-        background: 'rgba(255, 255, 255, .5)'
+      cost: {
+
       },
 
       btn: {

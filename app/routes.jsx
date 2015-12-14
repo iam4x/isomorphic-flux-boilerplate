@@ -9,7 +9,12 @@ export default function(flux) { /* eslint react/display-name: 0 */
     <Route component={ require('./components/app') }>
       { generateRoute({
         paths: ['/', '/deals'],
-        component: require('./components/deals/deals-list')
+        component: require('./components/deals/deals-list'),
+        onEnter: require('./components/deals/deals-list').willTransitionTo
+      }) }
+      { generateRoute({
+        paths: ['/deals/:id'],
+        component: require('./components/deals/deal-show')
       }) }
       { generateRoute({
         paths: ['/account', '/mon-compte'],

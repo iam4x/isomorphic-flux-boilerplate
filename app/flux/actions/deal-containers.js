@@ -11,7 +11,7 @@ class DealsItemsActions {
     this.alt.resolve(async (done) => {
       try {
         this.alt.getActions('requests').start();
-        const response = await this.alt.request({ url: '/users' });
+        const response = await this.alt.request({ url: '/deal_containers' });
         this.actions.indexSuccess(response);
       } catch (error) {
         this.actions.indexFail({ error });

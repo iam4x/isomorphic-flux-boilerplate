@@ -3,6 +3,8 @@ import connect from 'connect-alt';
 import Radium from 'utils/radium';
 import { IntlMixin } from 'react-intl';
 
+let isFirstRender = true;
+
 import DealShowAnimation from 'components/deals/deal-show-animation';
 
 @connect(({ dealContainers: { collection } }) => ({ collection }))
@@ -13,10 +15,17 @@ class DealsList extends Component {
 
   static contextTypes = {
     flux: PropTypes.object.isRequired,
-    messages: PropTypes.object.isRequired
+    messages: PropTypes.object.isRequired,
+    history: PropTypes.object
   }
 
   i18n = IntlMixin.getIntlMessage
+
+  static willTransitionTo(nextState, replaceState) {
+    const id = nextState.location.query && nextState.location.query.id;
+    if (isFirstRender && id) replaceState(null, `deals/${id}`);
+    isFirstRender = false;
+  }
 
   componentWillMount() {
     const { flux } = this.context;
