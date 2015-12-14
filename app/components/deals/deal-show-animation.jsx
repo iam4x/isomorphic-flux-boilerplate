@@ -102,8 +102,12 @@ class DealShowAnimation extends Component {
         overflow: 'hidden',
         transition: 'min-height .6s ease-in-out',
         '&:active': {
-          minHeight: active ? (page.clientHeight / 2) - listChild.clientHeight + 32 : 0,
-          maxHeight: active ? (page.clientHeight / 2) - listChild.clientHeight + 32 : 0
+          minHeight:
+            active && page ? '65vh' : 0,
+            //  page.clientHeight - listChild.clientHeight + 32 : 0,
+          maxHeight:
+            active && page ? '65vh' : 0
+            //  page.clientHeight - listChild.clientHeight + 32 : 0
         },
         '&:disabled': {
           minHeight: 0,

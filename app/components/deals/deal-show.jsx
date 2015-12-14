@@ -94,7 +94,7 @@ class DealShow extends Component {
   getStyles() {
     return {
       root: {
-        minHeight: 600,
+        minHeight: '100vh',
         background: '#fff',
         color: '#404040'
       },
