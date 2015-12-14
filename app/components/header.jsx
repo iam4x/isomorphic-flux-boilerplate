@@ -11,11 +11,11 @@ import LangPicker from 'components/shared/lang-picker';
 // Load styles for the header
 // and load the `react-logo.png` image
 // for the `<img src='' />` element
-let reactLogo;
+let logo;
 if (process.env.BROWSER) {
-  reactLogo = require('images/react-logo.png');
+  logo = require('images/header-logo.png');
 } else {
-  reactLogo = imageResolver('images/react-logo.png');
+  logo = imageResolver('images/header-logo.png');
 }
 
 @Radium
@@ -39,7 +39,7 @@ class Header extends Component {
   render() {
     const { inProgress, session } = this.props;
     const { locales: [ activeLocale ], flux } = this.context;
-    const { header, ul } = this.getStyles();
+    const { header, ul, link } = this.getStyles();
 
     return (
       <header style={ header } >
@@ -53,8 +53,8 @@ class Header extends Component {
           onChange={ flux.getActions('locale').switchLocale } />
 
         {/* React Logo in header */}
-        <Link to='/' style={ { display: 'block', textAlign: 'center' } } >
-          <img src={ reactLogo } alt='react-logo' style={ { width: 200, height: 200 } } />
+        <Link to='/' style={ link } >
+          <img src={ logo } alt='Kupikupon' style={ { width: 41, height: 43 } } />
         </Link>
 
         {/* Links in the navbar */}
@@ -98,11 +98,18 @@ class Header extends Component {
       header: {
         background: '#505050',
         maxHeight: '3em',
-        overflow: 'hidden'
+        overflow: 'hidden',
+        padding: '.2em 0'
       },
       ul: {
+        height: 0,
         margin: 0,
         padding: 0
+      },
+      link: {
+        display: 'block',
+        textAlign: 'center',
+        marginTop: '-2em'
       }
     };
   }

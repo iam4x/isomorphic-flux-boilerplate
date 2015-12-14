@@ -22,8 +22,8 @@ export default function(flux) { /* eslint react/display-name: 0 */
         onEnter: isConnected(flux)
       }) }
       { generateRoute({
-        paths: ['/guides'],
-        component: require('./components/guides')
+        paths: ['/cart'],
+        component: require('./components/cart')
       }) }
       { generateRoute({
         paths: ['/profile/:seed', '/profil/:seed'],
