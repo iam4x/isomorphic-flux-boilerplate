@@ -99,6 +99,7 @@
     "react-transform-catch-errors": "^1.0.0",
     "react-transform-hmr": "^1.0.0",
     "redbox-react": "^1.0.4",
+    "skin-deep": "^0.13.0",
     "webpack-hot-middleware": "^2.0.2"
   },
   "tags": [
