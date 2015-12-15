@@ -153,6 +153,6 @@
     "intl"
   ],
   "engines": {
-    "nodejs": "^4.2.1"
+    "nodejs": "^4.2.3"
   }
 }
