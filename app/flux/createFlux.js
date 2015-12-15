@@ -1,5 +1,5 @@
 import Alt from 'alt';
-import makeFinalStore from 'alt/utils/makeFinalStore';
+import makeFinalStore from 'alt-utils/lib/makeFinalStore';
 
 import AltResolver from '../../shared/alt-resolver';
 

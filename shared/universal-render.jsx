@@ -26,7 +26,7 @@ const bootstrap = () =>
 // https://github.com/eslint/eslint/issues/4442
 export default async function({ flux, history, location }) {
   if (BROWSER) {
-    if (NODE_ENV === 'development') require('alt/utils/chromeDebug')(flux);
+    if (NODE_ENV === 'development') require('alt-utils/lib/chromeDebug')(flux);
 
     const { container, initialState } = await bootstrap();
     flux.bootstrap(initialState);
