@@ -6,7 +6,7 @@ export default function stubApp(flux, stubs) {
 
   flux
     .getActions('locale')
-    .switchLocaleSuccess({ locale: 'en', messages });
+    .switchLocale({ locale: 'en', messages });
 
   const i18n = flux.getStore('locale').getState();
 

@@ -52,7 +52,7 @@ describe('App', () => {
     }
 
     flux.getStore('locale').listen(handleChange);
-    flux.getActions('locale').switchLocale('fr');
+    flux.getActions('locale').switchLocale({ locale: 'fr' });
   });
 
   it('should render children component', function() {

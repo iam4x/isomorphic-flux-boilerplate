@@ -34,9 +34,19 @@ class Header extends Component {
 
   i18n = IntlMixin.getIntlMessage
 
+  handleLocaleChange(locale) {
+    const { flux } = this.context;
+    flux.getActions('locale').switchLocale({ locale });
+  }
+
+  handleLogout() {
+    const { flux } = this.context;
+    flux.getActions('session').logout();
+  }
+
   render() {
     const { inProgress, session } = this.props;
-    const { locales: [ activeLocale ], flux } = this.context;
+    const { locales: [ activeLocale ] } = this.context;
 
     return (
       <header className='app--header'>
@@ -46,7 +56,7 @@ class Header extends Component {
         {/* LangPicker on the right side */}
         <LangPicker
           activeLocale={ activeLocale }
-          onChange={ flux.getActions('locale').switchLocale } />
+          onChange={ ::this.handleLocaleChange } />
 
         {/* React Logo in header */}
         <Link to='/' className='app--logo'>
@@ -73,7 +83,7 @@ class Header extends Component {
                 </Link>
               </li>,
               <li key={ 1 }>
-                <a href='#' onClick={ () => flux.getActions('session').logout() }>
+                <a href='#' onClick={ ::this.handleLogout }>
                   { this.i18n('header.logout') }
                 </a>
               </li>

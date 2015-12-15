@@ -35,7 +35,7 @@ export default async function({ flux, history, location }) {
     // load the correct data/{lang}.json into app
     const { locales: [ locale ] } = flux.getStore('locale').getState();
     const { messages } = await intlLoader(locale);
-    flux.getActions('locale').switchLocaleSuccess({ locale, messages });
+    flux.getActions('locale').switchLocale({ locale, messages });
 
     const routes = require('routes');
 
