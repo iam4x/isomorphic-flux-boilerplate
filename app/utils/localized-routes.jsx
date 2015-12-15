@@ -23,7 +23,7 @@ export function generateRoute({ paths, component, onEnter }) {
 //  For route: `/route/:foo` params will be `{foo: 'bar'}`
 export function replaceParams(route, params) {
   let parsedRoute = route.trim();
-  Object.keys(params).forEach(function(paramKey) {
+  Object.keys(params).forEach(function (paramKey) {
     const param = ':' + paramKey;
     const paramValue = params[paramKey];
     if (parsedRoute && parsedRoute.match(param)) {

@@ -20,7 +20,7 @@ export default function ServerHTML({ body, assets, locale, title, description })
         <meta charSet='utf-8' />
         <link rel='icon' type='image/ico' href='/favicon.ico' />
         { assets.style.map((href, idx) =>
-          <link key={ idx } rel='stylesheet' href={ href } /> ) }
+          <link key={ idx } rel='stylesheet' href={ href } />) }
         <title>{ title }</title>
       </head>
       <body>

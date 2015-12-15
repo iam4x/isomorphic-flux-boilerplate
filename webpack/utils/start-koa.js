@@ -42,7 +42,7 @@ const startServer = () => {
         // Listen for `rs` in stdin to restart server
         debug('dev')('type `rs` in console for restarting koa application');
         process.stdin.setEncoding('utf8');
-        process.stdin.on('data', function(data) {
+        process.stdin.on('data', function (data) {
           const parsedData = (data + '').trim().toLowerCase();
           if (parsedData === 'rs') return restartServer();
         });
