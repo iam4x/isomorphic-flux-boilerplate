@@ -8,7 +8,7 @@
     "dev": "babel-node ./webpack/dev-server.js",
     "test": "babel-node ./node_modules/.bin/karma start --single-run",
     "dev-test": "babel-node ./node_modules/.bin/karma start",
-    "lint": "eslint app server webpack shared --ext .jsx,.js"
+    "lint": "eslint app server webpack shared test --ext .jsx,.js"
   },
   "repository": {
     "type": "git",

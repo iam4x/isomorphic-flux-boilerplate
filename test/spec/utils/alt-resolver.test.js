@@ -11,7 +11,7 @@ describe('Alt Resolver', () => {
 
   it('should map promises on env server', () => {
     altResolver.pendingActions.should.be.empty;
-    altResolver.resolve(function() {}, false);
+    altResolver.resolve(function () {}, false);
     altResolver.pendingActions.should.not.be.empty;
   });
 });
