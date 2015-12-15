@@ -19,8 +19,8 @@ const runRouter = (location, routes) =>
 
 const bootstrap = () =>
   new Promise((resolve) =>
-    Iso.bootstrap((initialState, __, container) =>
-      resolve({ initialState, __, container })));
+    Iso.bootstrap((initialState, container) =>
+      resolve({ initialState, container })));
 
 /* eslint space-before-function-paren:0 */
 // https://github.com/eslint/eslint/issues/4442
