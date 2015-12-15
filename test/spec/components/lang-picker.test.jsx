@@ -27,7 +27,7 @@ describe('LangPicker', () => {
     instance = ReactDOM.render(element, node);
   });
 
-  afterEach(function() {
+  afterEach(function () {
     if (instance) ReactDOM.unmountComponentAtNode(node);
   });
 
@@ -37,7 +37,7 @@ describe('LangPicker', () => {
     active.innerHTML.should.eql('en');
   });
 
-  it('should call `onChange` handler', function() {
+  it('should call `onChange` handler', function () {
     const locales = TestUtils.scryRenderedDOMComponentsWithTag(instance, 'a');
     locales.length.should.eql(2);
 

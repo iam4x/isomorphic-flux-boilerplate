@@ -27,7 +27,7 @@ export default function stubApp(flux, stubs) {
     ...stubs
   };
 
-  return function(DecoratedComponent, props) {
+  return function (DecoratedComponent, props) {
     return class Wrapper extends Component {
 
       static childContextTypes = {
