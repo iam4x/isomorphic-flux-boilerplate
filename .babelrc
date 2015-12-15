@@ -3,6 +3,7 @@
   "env": {
     "browser": {
       "plugins": [
+        "transform-decorators-legacy",
         ["react-transform", {
           "transforms": [
             {
