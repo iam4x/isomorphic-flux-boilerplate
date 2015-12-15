@@ -24,7 +24,7 @@ export default function *() {
   // Populate store with locale
   flux
     .getActions('locale')
-    .switchLocale({ locale, messages }, true);
+    .switchLocale({ locale, messages });
 
   // Populate store with auth
   if (username) {
