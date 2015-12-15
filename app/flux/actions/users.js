@@ -9,29 +9,29 @@ class UsersActions {
   }
 
   index() {
-    this.alt.resolve(async (done) => {
+    this._flux.resolve(async (done) => {
       try {
-        this.alt.getActions('requests').start();
-        const response = await this.alt.request({ url: '/users' });
-        this.actions.indexSuccess(response);
+        this._flux.getActions('requests').start();
+        const response = await this._flux.request({ url: '/users' });
+        this.indexSuccess(response);
       } catch (error) {
-        this.actions.indexFail({ error });
+        this.indexFail({ error });
       }
-      this.alt.getActions('requests').stop();
+      this._flux.getActions('requests').stop();
       return done();
     });
   }
 
   show(seed) {
-    this.alt.resolve(async (done) => {
+    this._flux.resolve(async (done) => {
       try {
-        this.alt.getActions('requests').start();
-        const response = await this.alt.request({ url: '/users/' + seed });
-        this.actions.showSuccess(response);
+        this._flux.getActions('requests').start();
+        const response = await this._flux.request({ url: '/users/' + seed });
+        this.showSuccess(response);
       } catch (error) {
-        this.actions.showFail({ error });
+        this.showFail({ error });
       }
-      this.alt.getActions('requests').stop();
+      this._flux.getActions('requests').stop();
       return done();
     });
   }
