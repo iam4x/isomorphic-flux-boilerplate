@@ -30,6 +30,11 @@ class Flux extends Alt {
     this.FinalStore = makeFinalStore(this);
   }
 
+  addActions(name, handler) {
+    super.addActions(name, handler);
+    this.actions[name]._flux = this;
+  }
+
 }
 
 export default function(config) { return new Flux(config); }
