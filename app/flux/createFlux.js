@@ -12,13 +12,13 @@ class Flux extends Alt {
     super(config);
 
     // Bind AltResolve to flux instance
-    //   - access to it in actions with `this.alt.resolve`
+    //   - access to it in actions with `alt.resolve`
     //     for resolving async actions before server render
     this.resolver = new AltResolver();
     this.resolve = ::this.resolver.resolve;
 
     // Bind the ApiClient aswell
-    //   - access to it in actions with `this.alt.request`
+    //   - access to it in actions with `alt.request`
     this.request = ::client.request;
 
     // Load actions into alt
@@ -28,11 +28,6 @@ class Flux extends Alt {
 
     // Our `FinalStore` for using `connect-alt`
     this.FinalStore = makeFinalStore(this);
-  }
-
-  addActions(name, handler) {
-    super.addActions(name, handler);
-    this.actions[name]._flux = this;
   }
 
 }
