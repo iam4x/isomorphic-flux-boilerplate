@@ -6,15 +6,13 @@ class AltResolver {
   pendingActions = []
 
   resolve(action, setImmediate = (NODE_ENV === 'test')) {
-    if ((BROWSER && !this.firstRender) || setImmediate) {
-      return new Promise(action);
-    }
+    if ((BROWSER && !this.firstRender) || setImmediate) return action();
 
     this.pendingActions = [ ...this.pendingActions, action ];
   }
 
   async dispatchPendingActions() {
-    await* this.pendingActions.map(action => new Promise(action));
+    for (const action of this.pendingActions) await action();
   }
 
 }
