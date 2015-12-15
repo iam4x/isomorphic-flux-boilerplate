@@ -32,4 +32,4 @@ class Flux extends Alt {
 
 }
 
-export default function(config) { return new Flux(config); }
+export default function (config) { return new Flux(config); }

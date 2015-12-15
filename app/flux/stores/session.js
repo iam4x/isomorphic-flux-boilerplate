@@ -20,7 +20,7 @@ class SessionStore {
     // or to the original asked page
     if (BROWSER) {
       const history = require('utils/router-history');
-      const [, nextPath = '/account' ] = window
+      const [ , nextPath = '/account' ] = window
         .location.search.match(/\?redirect=(.+)$/) || [];
 
       const Cookies = require('cookies-js');
