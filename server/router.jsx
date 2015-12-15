@@ -24,13 +24,13 @@ export default function *() {
   // Populate store with locale
   flux
     .getActions('locale')
-    .switchLocaleSuccess({ locale, messages });
+    .switchLocale({ locale, messages });
 
   // Populate store with auth
   if (username) {
-      flux
-        .getActions('session')
-        .update({ username });
+    flux
+      .getActions('session')
+      .update({ username });
   }
 
   debug('dev')(`locale of request: ${locale}`);

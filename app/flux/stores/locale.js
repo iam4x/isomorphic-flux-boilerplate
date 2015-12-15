@@ -8,7 +8,7 @@ class LocaleStore {
     this.messages = {};
   }
 
-  onSwitchLocaleSuccess({ messages, locale }) {
+  onSwitchLocale({ messages, locale }) {
     // Save locale into a cookie
     // that will be read from server on requests
     if (process.env.BROWSER) {
