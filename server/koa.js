@@ -13,7 +13,7 @@ import convert from 'koa-convert';
 
 import router from './router';
 import config from './config/init';
-import { setClientResolution } from 'utils/radium';
+import getClientResolution from 'utils/client-resolution';
 
 const app = new Koa();
 const env = process.env.NODE_ENV || 'development';
@@ -25,26 +25,7 @@ app.use(convert(logger()));
 // various security headers
 app.use(helmet());
 
-app.use(function* (next) {
-
-  const cookies = this.request.header.cookie || '';
-  const width = getCookie(cookies, 'width');
-  const height = getCookie(cookies, 'height');
-  setClientResolution(width, height);
-
-  function getCookie(cookie, cname) {
-      var name = cname + "=";
-      var ca = cookie.split(';');
-      for(var i=0; i<ca.length; i++) {
-          var c = ca[i];
-          while (c.charAt(0)==' ') c = c.substring(1);
-          if (c.indexOf(name) == 0) return c.substring(name.length,c.length);
-      }
-      return '';
-  }
-
-  yield next;
-});
+app.use(convert(getClientResolution()));
 
 if (env === 'production') {
   // set debug env to `koa` only

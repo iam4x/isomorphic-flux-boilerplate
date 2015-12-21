@@ -21,7 +21,7 @@ export default function (router) {
     }
   });
 
-  router.get('/deal_containers', function *() {
-    this.body = dealContainers;
+  router.get('/deal_containers', async function (ctx) {
+    ctx.body = dealContainers;
   });
 }

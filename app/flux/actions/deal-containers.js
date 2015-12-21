@@ -8,14 +8,16 @@ class DealsItemsActions {
   }
 
   index() {
-    return (dispatch, { resolve, request }) =>
-      resolve(async () => {
+    return (dispatch, alt) =>
+      alt.resolve(async () => {
         try {
-          const response = await request({ url: '/deal_containers' });
-          this.actions.indexSuccess(response);
+          alt.getActions('requests').start();
+          const response = await alt.request({ url: '/deal_containers' });
+          this.indexSuccess(response);
         } catch (error) {
-          this.actions.indexFail({ error });
+          this.indexFail({ error });
         }
+        alt.getActions('requests').stop();
       });
   }
 
