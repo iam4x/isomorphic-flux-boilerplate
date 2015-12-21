@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import Radium from 'utils/radium';
+import theme from 'utils/theme';
 
 import ModalQuestion from 'components/shared/modal-question';
 
@@ -49,10 +50,11 @@ class DealShow extends Component {
           <div
             style={ styles.pic }
             onClick={ ::this.close } />
+          <div style={ styles.close } >×</div>
 
           <h1 style={ styles.title } >{ model.title }</h1>
 
-          <div style={ styles.stats }>
+          <div style={ styles.stats } >
             Купили: 232
             <br/>
             До конца продаж осталось: 08:15:42
@@ -113,23 +115,44 @@ class DealShow extends Component {
         backgroundImage: `url(${this.props.model.pic})`,
         backgroundRepeat: 'no-repeat',
         backgroundSize: 'cover',
-        flex: '2 0'
+        backgroundPosition: 'top center',
+        flex: '2 0',
+        [theme.media.small]: {
+          minWidth: 'auto',
+          minHeight: '50vh'
+        }
+      },
+
+      close: {
+        position: 'absolute',
+        top: 0,
+        right: '.1em',
+        lineHeight: '.5em',
+        fontSize: '2em',
+        opacity: '.6'
       },
 
       title: {
         display: 'inline-block',
         fontWeight: 'normal',
-        fontSize: '1.6em',
+        fontSize: '1.5em',
         margin: '-1.6em 1em 0 1em',
         color: 'white',
-        flex: '2 100%'
+        flex: '2 100%',
+        [theme.media.small]: {
+          fontSize: '1.2em',
+          margin: '-3em .5em 0 .5em'
+        }
       },
 
       stats: {
         flex: '1 50%',
         padding: '.5em 1em',
         boxSizing: 'border-box',
-        lineHeight: '2em'
+        lineHeight: '2em',
+        [theme.media.small]: {
+          display: 'none'
+        }
       },
 
       params: {
@@ -143,7 +166,10 @@ class DealShow extends Component {
       },
 
       cost: {
-        flex: '1 50%'
+        flex: '1 50%',
+        [theme.media.small]: {
+          fontSize: '.8em'
+        }
       },
 
       costNum: {
@@ -168,7 +194,10 @@ class DealShow extends Component {
         zIndex: 8,
         '&:activated': {
           opacity: 0,
-          transform: 'translateX(-40vw) translateY(0) scale(3, 2)'
+          transform: 'translateX(-35vw) translateY(10vh) scale(2.8, 2.5)'
+        },
+        [theme.media.small]: {
+          padding: '.8em 1em'
         }
       }
     };

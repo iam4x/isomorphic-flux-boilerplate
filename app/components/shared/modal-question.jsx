@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import Radium from 'utils/radium';
+import theme from 'utils/theme';
 
 @Radium
 class ModalQuestion extends Component {
@@ -72,6 +73,7 @@ class ModalQuestion extends Component {
       overlay: {
         position: 'fixed',
         top: 0,
+        left: '-0.5em',
         width: this.state.closed ? 0 : '100vw',
         height: this.state.closed ? 0 : '100vh',
         display: this.state.closed ? 'none' : 'table',
@@ -93,18 +95,27 @@ class ModalQuestion extends Component {
         transition: 'all .25s',
         transform: 'translateX(10vw) translateY(10vh) scale(0)',
         transformOrigin: 'right',
+        boxSizing: 'content-box',
         '&:active': {
           transform: 'translateX(0) translateY(0) scale(1)'
+        },
+        [theme.media.small]: {
+          padding: '0'
         }
       },
       btn: {
         margin: '1em',
-        padding: '.5em 1em',
+        padding: '1em',
         background: '#f7f7f7',
         color: '#404040',
         border: 0,
         ':hover': {
           background: '#d2e981'
+        },
+        [theme.media.small]: {
+          width: '100%',
+          margin: 0,
+          borderBottom: '1px solid #ccc'
         }
       }
     };
