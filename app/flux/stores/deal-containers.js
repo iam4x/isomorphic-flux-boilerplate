@@ -1,8 +1,4 @@
-import DealSontainersSource from 'flux/sources/deal-containers';
-import { datasource } from 'alt/utils/decorators';
-
-@datasource(DealSontainersSource)
-export default class DealContainersStore {
+class DealContainersStore {
 
   constructor() {
     this.bindActions(this.alt.getActions('dealContainers'));
@@ -39,3 +35,5 @@ export default class DealContainersStore {
   }
 
 }
+
+export default DealContainersStore;

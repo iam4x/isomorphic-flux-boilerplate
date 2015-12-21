@@ -39,14 +39,14 @@ class DealsList extends Component {
     const { root, child } = this.getStyles();
     return (
       <div style={ root } >
-        { collection.map( (model, index) => {
+        { collection.map((model, index) => {
           return (
             <div key={ index } style={ child } className='child' >
               <DealShowAnimation
                 model={ model } />
             </div>
           );
-        } ) }
+        }) }
       </div>
     );
   }

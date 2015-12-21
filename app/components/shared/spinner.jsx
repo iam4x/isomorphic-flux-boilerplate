@@ -8,22 +8,22 @@ class Spinner extends Component {
 
   render() {
     const { active } = this.props;
-    const { _normal, _active } = this.styles;
-    return <div style={ [_normal, active && _active] }></div>;
+    const { spinner } = this.styles;
+    return <div style={ [ spinner, active && spinner['&:active'] ] }></div>;
   }
 
   styles = {
-    _normal: {
+    spinner: {
       position: 'absolute',
       top: 5,
       left: 5,
       width: 50,
       height: 50,
       background: 'rgba(0, 0, 0, .3)',
-      display: 'none'
-    },
-    _active: {
-      display: 'relative'
+      display: 'none',
+      '&:active': {
+        display: 'relative'
+      }
     }
   }
 }

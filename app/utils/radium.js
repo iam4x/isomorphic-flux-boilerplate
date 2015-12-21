@@ -33,7 +33,7 @@ const ConfiguredRadium = component => {
           styleWithoutStates[name] = style[name];
         }
         return styleWithoutStates;
-      }, {} );
+      }, {});
 
     return { style: output };
   }

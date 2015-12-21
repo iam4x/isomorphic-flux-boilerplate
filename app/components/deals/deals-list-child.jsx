@@ -72,8 +72,8 @@ class DealsListChild extends Component {
 
     return {
       base: {
+        height,
         position: 'relative',
-        height: height,
         boxSizing: 'border-box',
         boxShadow: '0 .15em .2em #e7e7e7',
         border: '1px solid #fff',

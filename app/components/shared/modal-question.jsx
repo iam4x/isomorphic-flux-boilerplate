@@ -23,7 +23,7 @@ class ModalQuestion extends Component {
   }
 
   componentWillMount() {
-    setTimeout( () => {
+    setTimeout(() => {
       this.setState({ started: true });
     });
   }

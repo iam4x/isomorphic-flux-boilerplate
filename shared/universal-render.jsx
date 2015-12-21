@@ -13,9 +13,11 @@ import ErrorPage from 'pages/server-error';
 
 const { BROWSER, NODE_ENV } = process.env;
 
-const runRouter = (location, routes) =>
-  new Promise((resolve) =>
+const runRouter = (location, routes) => {
+  debug('dev')(routes);
+  return new Promise((resolve) =>
     match({ routes, location }, (...args) => resolve(args)));
+};
 
 const bootstrap = () =>
   new Promise((resolve) =>

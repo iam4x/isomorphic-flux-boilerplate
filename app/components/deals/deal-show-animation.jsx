@@ -32,12 +32,12 @@ class DealShowAnimation extends Component {
 
   showPage() {
     this.setState({ active: true, closed: false, removed: false });
-    setTimeout( () => this.setState({ started: true }) );
+    setTimeout(() => this.setState({ started: true }));
   }
 
   closePage() {
     this.setState({ active: false, started: false, closed: true });
-    setTimeout( () => { this.setState({ removed: true }); }, 150 );
+    setTimeout(() => { this.setState({ removed: true }); }, 150);
   }
 
   render() {
@@ -47,9 +47,9 @@ class DealShowAnimation extends Component {
     return (
       <div ref='elRoot' >
         <div
-            ref='listChild'
-            style={ [ hider,
-            started && hider['&:active'] ] } >
+          ref='listChild'
+          style={ [ hider,
+          started && hider['&:active'] ] } >
           <DealsListChild
             model={ this.props.model }
             active={ active }
@@ -57,15 +57,15 @@ class DealShowAnimation extends Component {
         </div>
 
         <div style={ [ expander,
-            active && expander['&:active'],
-            closed && expander['&:disabled'] ] } >
+          active && expander['&:active'],
+          closed && expander['&:disabled'] ] } >
           <div
-              ref='page'
-              className='pageContainer'
-              style={ [ page,
-                started && page['&:started'],
-                closed && page['&:closed'],
-                removed && page['&:removed'] ] } >
+            ref='page'
+            className='pageContainer'
+            style={ [ page,
+              started && page['&:started'],
+              closed && page['&:closed'],
+              removed && page['&:removed'] ] } >
             <DealShow
               model={ this.props.model }
               onClose={ ::this.closePage } />
