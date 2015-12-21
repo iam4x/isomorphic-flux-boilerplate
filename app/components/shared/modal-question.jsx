@@ -112,6 +112,9 @@ class ModalQuestion extends Component {
         ':hover': {
           background: '#d2e981'
         },
+        ':active': {
+          background: 'orange'
+        },
         [theme.media.small]: {
           width: '100%',
           margin: 0,
