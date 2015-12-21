@@ -16,10 +16,10 @@
 * [react-router ^1.0.0](https://github.com/rackt/react-router)
 * [react-intl](https://github.com/yahoo/react-intl)
 * [react-redbox](https://github.com/KeywordBrain/redbox-react)
-* [alt ^0.17](https://github.com/goatslacker/alt)
+* [alt ^0.18](https://github.com/goatslacker/alt)
 * [alt-devtools](https://github.com/goatslacker/alt-devtool)
 * [connect-alt](http://github.com/iam4x/connect-alt)
-* [iso](https://github.com/goatslacker/iso)
+* [iso ^5.0.0](https://github.com/goatslacker/iso)
 * [koa](http://koajs.com/)
 * [webpack](http://webpack.github.io/)
 * [webpack-hot-middleware](https://github.com/glenjamin/webpack-hot-middleware)
@@ -106,18 +106,22 @@ Alt-resolver expose also an ApiClient for doing the requests to the intern API. 
 Wrap data-fetching requests from actions into promises and send them to `altResolver` like:
 
 ```javascript
-fetch() {
-  this.alt.resolve(async (done) => {
-    try {
-      this.alt.getActions('requests').start();
-      const response = await this.alt.request({ url: '/users' });
-      this.actions.indexSuccess(response);
-    } catch (error) {
-      this.actions.indexFail({ error });
-    }
-    this.alt.getActions('requests').stop();
-    return done();
-  });
+show(id) {
+  // You need to return a fn in actions
+  // to get alt instance as second parameter to access
+  // `alt-resolver` and the ApiClient
+  return (dispatch, { resolve, request  }) =>
+  // We use `alt-resolver` from the boilerplate
+  // to indicate the server we need to resolve
+  // this data before server side rendering
+    resolve(async () => {
+      try {
+        const response = await request({ url: '/users' });
+        this.actions.indexSuccess(response);
+      } catch (error) {
+        this.actions.indexFail({ error });
+      }
+    });
 }
 ```
 

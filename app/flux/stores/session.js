@@ -9,6 +9,10 @@ class SessionStore {
     this.session = null;
   }
 
+  onUpdate({ username }) {
+    this.session = { username };
+  }
+
   onLogin({ username }) {
     this.session = { username };
 
@@ -16,8 +20,11 @@ class SessionStore {
     // or to the original asked page
     if (BROWSER) {
       const history = require('utils/router-history');
-      const [, nextPath = '/account' ] = window
+      const [ , nextPath = '/account' ] = window
         .location.search.match(/\?redirect=(.+)$/) || [];
+
+      const Cookies = require('cookies-js');
+      Cookies.set('_auth', username);
 
       debug('dev')('redirect after login to %s', nextPath);
       return history.replaceState(null, nextPath);
@@ -26,7 +33,11 @@ class SessionStore {
 
   onLogout() {
     this.session = null;
-    if (BROWSER) require('utils/router-history').replaceState(null, '/login');
+    if (BROWSER) {
+      const Cookies = require('cookies-js');
+      Cookies.expire('_auth');
+      require('utils/router-history').replaceState(null, '/login');
+    }
   }
 
 }

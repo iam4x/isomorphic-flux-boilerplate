@@ -72,7 +72,7 @@ export default {
 
       ...baseConfig.plugins,
 
-      function() { this.plugin('done', startKoa); }
+      function () { this.plugin('done', startKoa); }
     ]
   }
 };

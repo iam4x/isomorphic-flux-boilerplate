@@ -19,14 +19,14 @@ const runRouter = (location, routes) =>
 
 const bootstrap = () =>
   new Promise((resolve) =>
-    Iso.bootstrap((initialState, __, container) =>
-      resolve({ initialState, __, container })));
+    Iso.bootstrap((initialState, container) =>
+      resolve({ initialState, container })));
 
 /* eslint space-before-function-paren:0 */
 // https://github.com/eslint/eslint/issues/4442
 export default async function({ flux, history, location }) {
   if (BROWSER) {
-    if (NODE_ENV === 'development') require('alt/utils/chromeDebug')(flux);
+    if (NODE_ENV === 'development') require('alt-utils/lib/chromeDebug')(flux);
 
     const { container, initialState } = await bootstrap();
     flux.bootstrap(initialState);
@@ -35,7 +35,7 @@ export default async function({ flux, history, location }) {
     // load the correct data/{lang}.json into app
     const { locales: [ locale ] } = flux.getStore('locale').getState();
     const { messages } = await intlLoader(locale);
-    flux.getActions('locale').switchLocaleSuccess({ locale, messages });
+    flux.getActions('locale').switchLocale({ locale, messages });
 
     const routes = require('routes');
 

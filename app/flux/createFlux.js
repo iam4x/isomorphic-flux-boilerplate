@@ -1,5 +1,5 @@
 import Alt from 'alt';
-import makeFinalStore from 'alt/utils/makeFinalStore';
+import makeFinalStore from 'alt-utils/lib/makeFinalStore';
 
 import AltResolver from '../../shared/alt-resolver';
 
@@ -12,13 +12,13 @@ class Flux extends Alt {
     super(config);
 
     // Bind AltResolve to flux instance
-    //   - access to it in actions with `this.alt.resolve`
+    //   - access to it in actions with `alt.resolve`
     //     for resolving async actions before server render
     this.resolver = new AltResolver();
     this.resolve = ::this.resolver.resolve;
 
     // Bind the ApiClient aswell
-    //   - access to it in actions with `this.alt.request`
+    //   - access to it in actions with `alt.request`
     this.request = ::client.request;
 
     // Load actions into alt
@@ -32,4 +32,4 @@ class Flux extends Alt {
 
 }
 
-export default function(config) { return new Flux(config); }
+export default function (config) { return new Flux(config); }

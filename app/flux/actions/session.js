@@ -1,7 +1,7 @@
 class SessionActions {
 
   constructor() {
-    this.generateActions('login', 'logout');
+    this.generateActions('login', 'logout', 'update');
   }
 
 }

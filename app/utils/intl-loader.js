@@ -15,7 +15,7 @@ const loaders = {
       });
     } else {
       require.ensure(
-        ['data/en'],
+        [ 'data/en' ],
         (require) => callback(require('data/en'))
       );
     }
@@ -35,7 +35,7 @@ const loaders = {
       });
     } else {
       require.ensure(
-        ['data/fr'],
+        [ 'data/fr' ],
         (require) => callback(require('data/fr'))
       );
     }
