@@ -1,3 +1,4 @@
+
 import { users } from './data.json';
 
 const simplifyUsers = (collection) => collection
@@ -10,8 +11,8 @@ export default function (router) {
   });
 
   router.get('/users/:seed', function *() {
-    const { seed } = this.params;
-    const [ result ] = simplifyUsers(users.filter(user => user.seed === seed));
+    let { seed } = this.params;
+    let [ result ] = simplifyUsers(users.filter(user => user.seed === seed));
 
     if (!result) {
       this.body = { error: { message: 'User not found' } };
