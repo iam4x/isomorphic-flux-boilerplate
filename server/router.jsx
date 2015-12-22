@@ -15,8 +15,8 @@ export default function *() {
   const flux = createFlux(client);
 
   // Get request locale for rendering
-  const locale = this.cookies.get('_lang') || this.acceptsLanguages(require('./config/init').locales) || 'en';
-  const { messages } = require(`data/${locale}`);
+  const locale = this.cookies.get('_lang') || this.acceptsLanguages(require('./config/init').default.locales) || 'en';
+  const { messages } = require(`data/${locale}`).default;
 
   // Get auth-token from cookie
   const username = this.cookies.get('_auth');
