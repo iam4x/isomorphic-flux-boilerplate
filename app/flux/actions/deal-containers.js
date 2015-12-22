@@ -3,7 +3,7 @@ class DealsItemsActions {
   constructor() {
     this.generateActions(
       'indexSuccess', 'indexFail',
-      'remove'
+      'showSuccess', 'showFail'
     );
   }
 
@@ -18,6 +18,20 @@ class DealsItemsActions {
           this.indexFail({ error });
         }
         alt.getActions('requests').stop();
+      });
+  }
+
+  show(id) {
+    return (dispatch, alt) =>
+      alt.resolve(async () => {
+        try {
+          const response = await alt.request({ url: `/deal_containers/${id}` });
+          !response.error ?
+            this.showSuccess(response) :
+            this.indexFail(response);
+        } catch (error) {
+          this.indexFail({ error });
+        }
       });
   }
 

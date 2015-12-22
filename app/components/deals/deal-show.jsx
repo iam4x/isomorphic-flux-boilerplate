@@ -1,16 +1,19 @@
 import React, { Component, PropTypes } from 'react';
 import Radium from 'utils/radium';
+import connect from 'connect-alt';
 import theme from 'utils/theme';
 
 import ModalQuestion from 'components/shared/modal-question';
 
+@connect(({ dealContainers: { current } }) => ({ current }))
 @Radium
 class DealShow extends Component {
 
   static propTypes = {
-    model: PropTypes.object.isRequired,
-    onClose: PropTypes.func.isRequired,
-    id: PropTypes.bool
+    params: PropTypes.object,
+    model: PropTypes.object,
+    current: PropTypes.object,
+    onClose: PropTypes.func
   }
 
   static contextTypes = {
@@ -24,6 +27,18 @@ class DealShow extends Component {
     buyClicked: false,
     inCart: false,
     msgClosed: false
+  }
+
+  componentWillMount() {
+    const { flux } = this.context;
+    const id = this.props.params && this.props.params.id ||
+      this.props.current && this.props.current.id;
+
+    flux.getActions('dealContainers').show(id);
+  }
+
+  getModel() {
+    return this.props.model || this.props.current || {};
   }
 
   addToCart() {
@@ -40,60 +55,69 @@ class DealShow extends Component {
   }
 
   render() {
-    const { model } = this.props;
+    const model = this.getModel();
     const styles = this.getStyles();
 
-    return (
-      <article style={ styles.root } >
+    if (model) {
+      const { title, cost } = model;
 
-        <header style={ styles.header } >
-          <div
-            style={ styles.pic }
-            onClick={ ::this.close } />
-          <div style={ styles.close } >×</div>
+      return (
+        <article style={ styles.root } >
 
-          <h1 style={ styles.title } >{ model.title }</h1>
+          <header style={ styles.header } >
+            <div
+              style={ styles.pic }
+              onClick={ ::this.close } />
+            <div style={ styles.close } >×</div>
 
-          <div style={ styles.stats } >
-            Купили: 232
-            <br/>
-            До конца продаж осталось: 08:15:42
-          </div>
+            <h1 style={ styles.title } >{ title }</h1>
 
-          <div style={ styles.params } >
-            <div style={ styles.cost } >
-              от <strong style={ styles.costNum }>{ model.cost }</strong> руб
+            <div style={ styles.stats } >
+              Купили: 232
+              <br/>
+              До конца продаж осталось: 08:15:42
             </div>
-            <button
-              onClick={ ::this.addToCart }
-              style={ [ styles.btn,
-                this.state.buyClicked && styles.btn['&:activated']
-              ] } >
-              Купить
-            </button>
+
+            <div style={ styles.params } >
+              <div style={ styles.cost } >
+                от <strong style={ styles.costNum }>{ cost }</strong> руб
+              </div>
+              <button
+                onClick={ ::this.addToCart }
+                style={ [ styles.btn,
+                  this.state.buyClicked && styles.btn['&:activated']
+                ] } >
+                Купить
+              </button>
+            </div>
+
+          </header>
+
+          <div style={ styles.body }>
+            <p>{ title }</p>
           </div>
 
-        </header>
+          { this.state.buyClicked && !this.state.msgClosed &&
+            <ModalQuestion
+              show={ this.state.msgClosed }
+              btnOkLabel='Перейти в корзину'
+              btnCancelLabel='Продолжить покупки'
+              btnOkCallback={ ::this.goToCart }
+              btnCancelCallback={ ::this.close } >
+              <p><small>Покупка уже в вашей корзине!</small></p>
+              <p>Что делаем дальше?</p>
+            </ModalQuestion> }
+        </article>
+      );
+    }
 
-        <div style={ styles.body }>
-          <p>{ model.title }</p>
-        </div>
-
-        { this.state.buyClicked && !this.state.msgClosed &&
-          <ModalQuestion
-            show={ this.state.msgClosed }
-            btnOkLabel='Перейти в корзину'
-            btnCancelLabel='Продолжить покупки'
-            btnOkCallback={ ::this.goToCart }
-            btnCancelCallback={ ::this.close } >
-            <p><small>Покупка уже в вашей корзине!</small></p>
-            <p>Что делаем дальше?</p>
-          </ModalQuestion> }
-      </article>
-    );
+    return (<h2>DealContainer not found</h2>);
   }
 
   getStyles() {
+    const model = this.getModel();
+    if (!model) return {};
+
     return {
       root: {
         minHeight: '100vh',
@@ -112,7 +136,7 @@ class DealShow extends Component {
         minHeight: '33vh',
         maxHeight: '33vh',
         boxShadow: '0 -4em 3em #000 inset',
-        backgroundImage: `url(${this.props.model.pic})`,
+        backgroundImage: `url(${model.pic})`,
         backgroundRepeat: 'no-repeat',
         backgroundSize: 'cover',
         backgroundPosition: 'top center',

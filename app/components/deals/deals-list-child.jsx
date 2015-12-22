@@ -23,13 +23,13 @@ class DealsListChild extends Component {
   openHandle() {
     this.setState({ active: true });
     this.props.onSelect();
-    // this.context.history
-      // .replaceState(null, 'deals', { id: this.props.model.id });
-      // .transitionTo('deals', { id: this.props.model.id });
-    // this.refs.root ? this.refs.root.scrollIntoView({
-    //   behavior: 'smooth',
-    //   block: 'end'
-    // }) : void 0;
+
+    this.context.history
+      .replaceState(null, 'deals', { id: this.props.model.id });
+    this.refs.root ? this.refs.root.scrollIntoView({
+      behavior: 'smooth',
+      block: 'end'
+    }) : void 0;
     return false;
   }
 

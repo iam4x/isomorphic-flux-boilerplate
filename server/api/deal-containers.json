@@ -1,4 +1,4 @@
-{ "dealContainers": [
+[
   {
     "id": 1,
     "route": "burger_king",
@@ -72,4 +72,4 @@
     "cost": 150,
     "pic": "http://skidki.vmet.ro/system/deals/thumb_for_mains/101001/original/f29838110.jpg"
   }
-]}
+]

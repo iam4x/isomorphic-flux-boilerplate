@@ -4,11 +4,12 @@ class DealContainersStore {
     this.bindActions(this.alt.getActions('dealContainers'));
 
     this.collection = [];
+    this.current = {};
     this.error = null;
   }
 
-  onIndexSuccess(dealContainers) {
-    this.collection = dealContainers;
+  onIndexSuccess(resp) {
+    this.collection = resp;
     this.error = null;
   }
 
@@ -16,17 +17,8 @@ class DealContainersStore {
     this.error = error;
   }
 
-  onShowSuccess(user) {
-    const index = this.collection
-      .findIndex(({ seed }) => seed === user.seed);
-
-    if (index > -1) {
-      this.collection = this.collection
-        .map((u, idx) => idx === index ? user : u);
-    } else {
-      this.collection = [ ...this.collection, user ];
-    }
-
+  onShowSuccess(resp) {
+    this.current = resp;
     this.error = null;
   }
 

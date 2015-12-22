@@ -2,7 +2,7 @@ import React from 'react';
 import { Route } from 'react-router';
 
 import { generateRoute } from 'utils/localized-routes';
-import { isConnected } from 'utils/routes-hooks';
+import { isConnected, dealsUrlRedirect } from 'utils/routes-hooks';
 
 export default function (flux) { /* eslint react/display-name: 0 */
   return (
@@ -10,7 +10,7 @@ export default function (flux) { /* eslint react/display-name: 0 */
       { generateRoute({
         paths: [ '/', '/deals' ],
         component: require('./components/deals/deals-list'),
-        onEnter: require('./components/deals/deals-list').willTransitionTo
+        onEnter: dealsUrlRedirect(flux)
       }) }
       { generateRoute({
         paths: [ '/deals/:id' ],

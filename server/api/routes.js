@@ -1,5 +1,5 @@
 import { users } from './data.json';
-import { dealContainers } from './deal-containers.json';
+import dealContainers from './deal-containers.json';
 
 const simplifyUsers = (collection) => collection
   .map(({ user, seed }) => ({ ...user, seed }))
@@ -23,5 +23,16 @@ export default function (router) {
 
   router.get('/deal_containers', async function (ctx) {
     ctx.body = dealContainers;
+  });
+
+  router.get('/deal_containers/:id', async function (ctx) {
+    const { id } = ctx.params;
+    const [ result ] = dealContainers.filter(dc => dc.id === parseInt(id));
+
+    if (!result) {
+      ctx.body = { error: { message: 'DealContainer not found' } };
+    } else {
+      ctx.body = result;
+    }
   });
 }
