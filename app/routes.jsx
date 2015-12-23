@@ -6,7 +6,7 @@ import { isConnected, dealsUrlRedirect } from 'utils/routes-hooks';
 
 export default function (flux) { /* eslint react/display-name: 0 */
   return (
-    <Route component={ require('./components/app') }>
+    <Route component={ require('./components/app') } ignoreScrollBehavior >
       { generateRoute({
         paths: [ '/', '/deals' ],
         component: require('./components/deals/deals-list'),

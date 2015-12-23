@@ -12,7 +12,8 @@ const conditional = `<!--[if IE 8]>
 
 const styles = {
   body: {
-    background: '#6fa229'
+    background: '#6fa229',
+    scrollBehavior: 'smooth'
   },
   mediaQueries: {
     '(min-width: 550px)': {

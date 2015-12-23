@@ -1,6 +1,6 @@
 {
-  "name": "isomorphic-flux-boilerplate",
-  "version": "0.4.0",
+  "name": "kupikupon-mobile-version-v2",
+  "version": "2.0.0",
   "description": "An ES7 isomorphic Flux/ReactJS boilerplate",
   "main": "server/index.js",
   "scripts": {
@@ -12,12 +12,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/iam4x/isomorphic-flux-boilerplate.git"
+    "url": "https://github.com/kupikupon-moscow/kupikupon-mobile-version-v2"
   },
-  "homepage": "https://github.com/iam4x/isomorphic-flux-boilerplate",
-  "bugs": "https://github.com/iam4x/isomorphic-flux-boilerplate/issues",
-  "author": "iam4x",
-  "license": "MIT",
+  "homepage": "https://github.com/kupikupon-moscow/kupikupon-mobile-version-v2",
+  "bugs": "https://github.com/kupikupon-moscow/kupikupon-mobile-version-v2/issues",
+  "author": "iam4x & MaxSvargal",
+  "license": "GPLv3",
   "dependencies": {
     "alt": "^0.18.1",
     "alt-container": "^1.0.0",
@@ -68,7 +68,7 @@
     "react": "^0.14.0",
     "react-dom": "^0.14.0",
     "react-intl": "1.2.0",
-    "react-router": "^1.0.0",
+    "react-router": "^1.0.2",
     "scroll-behavior": "^0.3.0",
     "style-loader": "^0.13.0",
     "webpack": "^1.12.6"
@@ -159,6 +159,6 @@
     "intl"
   ],
   "engines": {
-    "nodejs": "^4.2.3"
+    "nodejs": "^5.2.0"
   }
 }

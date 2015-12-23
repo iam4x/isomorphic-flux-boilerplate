@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import Radium from 'utils/radium';
+const { BROWSER } = process.env;
 
 @Radium
 class DealsListChild extends Component {
@@ -20,25 +21,27 @@ class DealsListChild extends Component {
     active: this.props.active
   }
 
-  openHandle() {
+  openHandle(event) {
+    event.preventDefault();
     this.setState({ active: true });
     this.props.onSelect();
 
-    this.context.history
-      .replaceState(null, 'deals', { id: this.props.model.id });
-    this.refs.root ? this.refs.root.scrollIntoView({
-      behavior: 'smooth',
-      block: 'end'
-    }) : void 0;
-    return false;
+    if (BROWSER) {
+      const id = this.props.model.id;
+      const { root } = this.refs;
+
+      this.context.history.replaceState(null, 'deals', { id });
+      root && root.scrollIntoView({ behavior: 'smooth', block: 'end' });
+    }
   }
 
   render() {
     const { model } = this.props;
     const styles = this.getStyles();
     return (
-      <section
+      <a
         ref='root'
+        href={ `/deals/${model.id}` }
         onClick={ ::this.openHandle }
         style={ styles.base } >
 
@@ -62,7 +65,7 @@ class DealsListChild extends Component {
             </button>
           </div>
         </div>
-      </section>
+      </a>
     );
   }
 
