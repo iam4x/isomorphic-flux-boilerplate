@@ -71,7 +71,7 @@
   },
   "devDependencies": {
     "babel-eslint": "^4.0.5",
-    "babel-plugin-react-transform": "^1.0.3",
+    "babel-plugin-react-transform": "^2.0.0",
     "blocked": "^1.1.0",
     "browser-sync": "^2.8.0",
     "dev-ip": "^1.0.1",
