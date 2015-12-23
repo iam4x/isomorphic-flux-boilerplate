@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
-import cx from 'classnames';
+import Radium from 'radium';
 
+@Radium
 class LangPicker extends Component {
 
   static propTypes = {
@@ -10,21 +11,42 @@ class LangPicker extends Component {
 
   locales = [ 'fr', 'en' ]
 
-  render() {
+  renderItem = (locale, index) => {
     const { onChange, activeLocale } = this.props;
 
     return (
-      <ul className='lang--picker un-select'>
-        { this.locales.map((locale, index) =>
-          <li key={ index }>
-            <a
-              className={ cx({ active: locale === activeLocale }) }
-              onClick={ () => onChange(locale) }>
-              { locale }
-            </a>
-          </li>) }
+      <li key={ index }>
+        <a
+          style={ [
+            this.styles.link,
+            activeLocale && this.styles.link_active ] }
+          onClick={ () => onChange(locale) } >
+          { locale }
+        </a>
+      </li>
+    );
+  }
+
+  render() {
+    return (
+      <ul style={ this.styles.ul }>
+        { this.locales.map(this.renderItem) }
       </ul>
     );
+  }
+
+  styles = {
+    ul: {
+      listStyle: 'none',
+      padding: 0,
+      margin: 0
+    },
+    link: {
+      display: 'inline-block'
+    },
+    link_active: {
+      color: 'black'
+    }
   }
 }
 

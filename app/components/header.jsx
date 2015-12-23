@@ -4,19 +4,21 @@ import { Link } from 'react-router';
 import { IntlMixin } from 'react-intl';
 
 import imageResolver from 'utils/image-resolver';
+import Radium from 'utils/radium';
 import Spinner from 'components/shared/spinner';
 import LangPicker from 'components/shared/lang-picker';
 
 // Load styles for the header
 // and load the `react-logo.png` image
 // for the `<img src='' />` element
-let reactLogo;
+let logo;
 if (process.env.BROWSER) {
-  reactLogo = require('images/react-logo.png');
+  logo = require('images/header-logo.png');
 } else {
-  reactLogo = imageResolver('images/react-logo.png');
+  logo = imageResolver('images/header-logo.png');
 }
 
+@Radium
 @connect(({ requests: { inProgress }, session: { session } }) =>
   ({ inProgress, session }))
 class Header extends Component {
@@ -47,9 +49,11 @@ class Header extends Component {
   render() {
     const { inProgress, session } = this.props;
     const { locales: [ activeLocale ] } = this.context;
+    const { header, ul, link } = this.getStyles();
 
     return (
-      <header className='app--header'>
+      <header style={ header } >
+
         {/* Spinner in the top right corner */}
         <Spinner active={ inProgress } />
 
@@ -59,12 +63,12 @@ class Header extends Component {
           onChange={ ::this.handleLocaleChange } />
 
         {/* React Logo in header */}
-        <Link to='/' className='app--logo'>
-          <img src={ reactLogo } alt='react-logo' />
+        <Link to='/' style={ link } >
+          <img src={ logo } alt='Kupikupon' style={ { width: 41, height: 43 } } />
         </Link>
 
         {/* Links in the navbar */}
-        <ul className='app--navbar text-center reset-list un-select'>
+        <ul style={ ul } >
           <li>
             <Link to={ this.i18n('routes.users') }>
               { this.i18n('header.users') }
@@ -97,6 +101,27 @@ class Header extends Component {
         </ul>
       </header>
     );
+  }
+
+  getStyles() {
+    return {
+      header: {
+        background: '#505050',
+        maxHeight: '3em',
+        overflow: 'hidden',
+        padding: '.2em 0'
+      },
+      ul: {
+        height: 0,
+        margin: 0,
+        padding: 0
+      },
+      link: {
+        display: 'block',
+        textAlign: 'center',
+        marginTop: '-2em'
+      }
+    };
   }
 }
 

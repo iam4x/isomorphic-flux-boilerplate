@@ -55,7 +55,8 @@ export default function(config) {
             BROWSER: JSON.stringify(true),
             NODE_ENV: JSON.stringify('test')
           }
-        })
+        }),
+        new webpack.IgnorePlugin(/ReactContext/)
       ]
     },
     webpackServer: { noInfo: true }

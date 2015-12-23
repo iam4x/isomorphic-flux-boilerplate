@@ -32,11 +32,6 @@ describe('App', () => {
     header.length.should.eql(1);
   });
 
-  it('should render logo correctly', () => {
-    const logo = TestUtils.findRenderedDOMComponentWithClass(instance, 'app--logo');
-    should.exist(logo);
-  });
-
   it('should change page title', function () {
     flux.getActions('helmet').update({ title: 'foobar', titleBase: '' });
     document.title.should.eql('foobar');

@@ -1,10 +1,10 @@
 import React, { Component, PropTypes } from 'react';
+import Radium from 'utils/radium';
 
 import Header from 'components/header';
 import Footer from 'components/footer';
 
-if (process.env.BROWSER) require('styles/app.css');
-
+@Radium
 class App extends Component {
 
   static propTypes = { children: PropTypes.element }
@@ -15,8 +15,7 @@ class App extends Component {
     locales: PropTypes.array.isRequired
   }
 
-  state = { i18n: this.context
-      .flux.getStore('locale').getState() }
+  state = { i18n: this.context.flux.getStore('locale').getState() }
 
   getChildContext() {
     const { i18n: { messages, locales } } = this.state;
@@ -51,9 +50,7 @@ class App extends Component {
     return (
       <div>
         <Header />
-        <hr />
         { children }
-        <hr />
         <Footer />
       </div>
     );

@@ -1,4 +1,4 @@
-FROM mhart/alpine-node:4.2.1
+FROM mhart/alpine-node:5.3.0
 EXPOSE 3000
 EXPOSE 3001
 EXPOSE 3002

@@ -13,6 +13,7 @@ import convert from 'koa-convert';
 
 import router from './router';
 import config from './config/init';
+import getClientResolution from 'utils/client-resolution';
 
 const app = new Koa();
 const env = process.env.NODE_ENV || 'development';
@@ -23,6 +24,8 @@ app.use(convert(logger()));
 
 // various security headers
 app.use(helmet());
+
+app.use(convert(getClientResolution()));
 
 if (env === 'production') {
   // set debug env to `koa` only

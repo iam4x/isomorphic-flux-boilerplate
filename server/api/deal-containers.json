@@ -1,0 +1,75 @@
+[
+  {
+    "id": 1,
+    "route": "burger_king",
+    "title": "Скидка на один из наборов в сети ресторанов Burger King",
+    "subway": "Арбатская",
+    "discount": 50,
+    "cost": 200,
+    "pic": "http://skidki.vmet.ro/system/deals/thumb_for_mains/100349/original/2547780.jpg"
+  },
+  {
+    "id": 2,
+    "route": "yakitoriya",
+    "title": "Меню кухни в сети ресторанов Якитория",
+    "subway": "Библиотека им. Ленина",
+    "discount": 50,
+    "cost": 300,
+    "pic": "http://skidki.vmet.ro/system/deals/thumb_for_mains/100349/original/2547780.jpg"
+  },
+  {
+    "id": 3,
+    "route": "burger_king",
+    "title": "Скидка на один из наборов в сети ресторанов Burger King",
+    "subway": "Арбатская",
+    "discount": 50,
+    "cost": 200,
+    "pic": "http://skidki.vmet.ro/system/deals/thumb_for_mains/100349/original/2547780.jpg"
+  },
+  {
+    "id": 4,
+    "route": "yakitoriya",
+    "title": "Меню кухни в сети ресторанов Якитория",
+    "subway": "Библиотека им. Ленина",
+    "discount": 50,
+    "cost": 100,
+    "pic": "http://skidki.vmet.ro/system/deals/thumb_for_mains/100349/original/2547780.jpg"
+  },
+  {
+    "id": 5,
+    "route": "burger_king",
+    "title": "Скидка на один из наборов в сети ресторанов Burger King",
+    "subway": "Арбатская",
+    "discount": 50,
+    "cost": 200,
+    "pic": "http://skidki.vmet.ro/system/deals/thumb_for_mains/101001/original/f29838110.jpg"
+  },
+  {
+    "id": 6,
+    "route": "yakitoriya",
+    "title": "Меню кухни в сети ресторанов Якитория",
+    "subway": "Библиотека им. Ленина",
+    "discount": 50,
+    "cost":400,
+    "pic": "http://skidki.vmet.ro/system/deals/thumb_for_mains/100349/original/2547780.jpg"
+  },
+  {
+    "id": 7,
+    "route": "yakitoriya",
+    "route": "burger_king",
+    "title": "Скидка на один из наборов в сети ресторанов Burger King",
+    "subway": "Арбатская",
+    "discount": 50,
+    "cost": 200,
+    "pic": "http://skidki.vmet.ro/system/deals/thumb_for_mains/100349/original/2547780.jpg"
+  },
+  {
+    "id": 8,
+    "route": "yakitoriya",
+    "title": "Меню кухни в сети ресторанов Якитория",
+    "subway": "Библиотека им. Ленина",
+    "discount": 50,
+    "cost": 150,
+    "pic": "http://skidki.vmet.ro/system/deals/thumb_for_mains/101001/original/f29838110.jpg"
+  }
+]
