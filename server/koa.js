@@ -22,7 +22,7 @@ app.use(convert(responseTime()));
 app.use(convert(logger()));
 
 // various security headers
-app.use(helmet());
+app.use(convert(helmet()));
 
 if (env === 'production') {
   // set debug env to `koa` only
