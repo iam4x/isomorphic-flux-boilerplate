@@ -34,7 +34,7 @@
     "cookies-js": "^1.2.1",
     "css-loader": "^0.23.0",
     "debug": "^2.2.0",
-    "extract-text-webpack-plugin": "^0.9.1",
+    "extract-text-webpack-plugin": "^1.0.0",
     "file-loader": "^0.8.4",
     "font-awesome": "^4.4.0",
     "history": "~1.13.x",
