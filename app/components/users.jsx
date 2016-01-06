@@ -39,7 +39,7 @@ class Users extends Component {
       <tr className='user--row' key={ index }>
         <td>{ user.email }</td>
         <td className='text-center'>
-          <Link to={ profileRoute }>Profile</Link>
+          <Link to={ profileRoute }>{ this.i18n('users.profile') }</Link>
         </td>
         <td className='text-center'>
           <button
