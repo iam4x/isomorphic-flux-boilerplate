@@ -38,7 +38,7 @@ export default {
         './app/index.js'
       ]
     },
-    ouput: { ...baseConfig.output, publicPath: PUBLIC_PATH },
+    output: { ...baseConfig.output, publicPath: PUBLIC_PATH },
     module: {
       ...baseConfig.module,
       loaders: [
