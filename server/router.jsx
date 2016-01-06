@@ -15,7 +15,10 @@ export default async function (ctx) {
   const flux = createFlux(client);
 
   // Get request locale for rendering
-  const locale = ctx.cookies.get('_lang') || ctx.acceptsLanguages(require('./config/init').locales) || 'en';
+  const locale = ctx.cookies.get('_lang') ||
+    ctx.acceptsLanguages(require('./config/init').locales) ||
+    'en';
+
   const { messages } = require(`data/${locale}`);
 
   // Get auth-token from cookie

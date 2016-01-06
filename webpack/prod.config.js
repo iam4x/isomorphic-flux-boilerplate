@@ -1,3 +1,5 @@
+/* eslint max-len: 0 */
+
 import webpack from 'webpack';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
 import PurifyCSSPlugin from 'bird3-purifycss-webpack-plugin';
