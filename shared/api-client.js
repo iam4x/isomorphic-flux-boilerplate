@@ -13,7 +13,7 @@ class ApiClient {
       this.baseURL = `http://localhost:${port}/api`;
     }
   }
-
+  /* eslint no-param-reassign: 0 */
   getConfig(config) {
     config.method = config.method || 'get';
 

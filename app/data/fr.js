@@ -26,7 +26,8 @@ export default {
       profile: 'Profil'
     },
     login: {
-      help: 'N\'importe quels informations fonctionneront. C\'est un exemple qui créér une fausse session.',
+      help: 'N\'importe quels informations fonctionneront. ' +
+            'C\'est un exemple qui créér une fausse session.',
       username: {
         label: 'Utilisateur',
         placeholder: 'exemple@app.fr'

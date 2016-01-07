@@ -5,6 +5,7 @@ import { IntlMixin } from 'react-intl';
 
 import { replaceParams } from 'utils/localized-routes';
 
+/* eslint react/jsx-no-bind: 0 */
 @connect(({ users: { collection } }) => ({ collection }))
 class Users extends Component {
 

@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import cx from 'classnames';
 
+/* eslint react/jsx-no-bind: 0 */
 class LangPicker extends Component {
 
   static propTypes = {
