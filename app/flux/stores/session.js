@@ -27,7 +27,7 @@ class SessionStore {
       Cookies.set('_auth', username);
 
       debug('dev')('redirect after login to %s', nextPath);
-      return history.replaceState(null, nextPath);
+      return history.replace(null, nextPath);
     }
   }
 
@@ -36,7 +36,7 @@ class SessionStore {
     if (BROWSER) {
       const Cookies = require('cookies-js');
       Cookies.expire('_auth');
-      require('utils/router-history').replaceState(null, '/login');
+      require('utils/router-history').replace(null, '/login');
     }
   }
 
