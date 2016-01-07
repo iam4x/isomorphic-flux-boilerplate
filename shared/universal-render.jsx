@@ -22,7 +22,7 @@ const bootstrap = () =>
     Iso.bootstrap((initialState, container) =>
       resolve({ initialState, container })));
 
-/* eslint space-before-function-paren:0 */
+/* eslint space-before-function-paren: 0, no-param-reassign: 0*/
 // https://github.com/eslint/eslint/issues/4442
 export default async function({ flux, history, location }) {
   if (BROWSER) {
