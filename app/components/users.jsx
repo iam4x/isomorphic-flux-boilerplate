@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import connect from 'connect-alt';
 import { Link } from 'react-router';
-import { IntlMixin } from 'react-intl';
 
 import { replaceParams } from 'utils/localized-routes';
 
@@ -12,15 +11,13 @@ class Users extends Component {
 
   static contextTypes = {
     flux: PropTypes.object.isRequired,
-    messages: PropTypes.object.isRequired
+    i18n: PropTypes.func.isRequired
   }
 
-  i18n = IntlMixin.getIntlMessage
-
   componentWillMount() {
-    const { flux } = this.context;
+    const { flux, i18n } = this.context;
 
-    flux.getActions('helmet').update({ title: this.i18n('users.page-title') });
+    flux.getActions('helmet').update({ title: i18n('users.page-title') });
     flux.getActions('users').index();
   }
 
@@ -30,8 +27,9 @@ class Users extends Component {
   }
 
   renderUser = (user, index) => {
+    const { i18n } = this.context;
     const profileRoute = replaceParams(
-      this.i18n('routes.profile'),
+      i18n('routes.profile'),
       { seed: user.seed }
     );
 
@@ -39,7 +37,7 @@ class Users extends Component {
       <tr className='user--row' key={ index }>
         <td>{ user.email }</td>
         <td className='text-center'>
-          <Link to={ profileRoute }>{ this.i18n('users.profile') }</Link>
+          <Link to={ profileRoute }>{ i18n('users.profile') }</Link>
         </td>
         <td className='text-center'>
           <button
@@ -54,17 +52,18 @@ class Users extends Component {
 
   render() {
     const { collection } = this.props;
+    const { i18n } = this.context;
 
     return (
       <div>
         <h1 className='text-center'>
-          { this.i18n('users.title') }
+          { i18n('users.title') }
         </h1>
         <table className='app--users'>
           <thead>
             <tr>
-              <th> { this.i18n('users.email') } </th>
-              <th colSpan='2'> { this.i18n('users.actions') } </th>
+              <th> { i18n('users.email') } </th>
+              <th colSpan='2'> { i18n('users.actions') } </th>
             </tr>
           </thead>
           <tbody>
