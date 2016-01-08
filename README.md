@@ -63,6 +63,26 @@ There's also `alt-devtools` enabled in development, it's a Chrome Extension that
 
 ## Internationalization (i18n)
 
+The boilerplate provides an easy way to use internationalization, it provides through context a function called `i18n` that does not break when translations are missing. No more `react-intl/IntlMixin` to load everywhere.
+
+```javascript
+static contextTypes = { i18n: PropTypes.func.isRequired }
+
+render() {
+  const { i18n } = this.context;
+  return (
+    <div>
+      {/* You can pass values to `i18n` fn like `<FormattedMessage />` component */}
+      <h1>{ i18n('some.random.i18n.key', { now: new Date() }) }</h1>
+
+      {/* FormattedRelative, FormattedCurrency works out the box :+1: */}
+      <FormattedRelative value={Date.now() - (1000 * 60 * 60 * 24)} />
+    </div>
+  );
+}
+```
+
+
 We use [react-intl](https://github.com/yahoo/react-intl) for internationalization, it uses browser implementation of [Intl](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl). For older browser and for node, we load the polyfill.
 
 * Support localized strings (see [data/en.js](https://github.com/iam4x/isomorphic-flux-boilerplate/blob/master/app%2Fdata%2Fen.js))
@@ -73,23 +93,6 @@ Lang files and Intl polyfill are compiled into webpack chunks, for lazy-loading 
 If user changes locale, it is saved into a cookie `_lang` and used by the server to know the locale of rendering. If there's no `_lang` cookie, server will rely on `Accept-Language` request header. Server will set `<html lang='x'>` on rendering.
 
 Thank's to [gpbl/react-locale-hot-switch](https://github.com/gpbl/react-locale-hot-switch) for the implementation example!
-
-In order to use `FormattedRelative` you have to require `messages` && `locales` from context and pass them as props:
-
-```javascript
-static contextTypes = {
-  messages: PropTypes.object.isRequired,
-  locales: PropTypes.array.isRequired
-}
-
-render() {
-  return (
-    <FormattedRelative
-      { ...this.context }
-      value={Date.now() - (1000 * 60 * 60 * 24)} />
-  );
-}
-```
 
 ## Localized routes
 
