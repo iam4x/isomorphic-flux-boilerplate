@@ -50,7 +50,11 @@ export default (locale, force) => {
       // We need to define `ReactIntl` on the global scope
       // in order to load specific locale data from `ReactIntl`
       // see: https://github.com/iam4x/isomorphic-flux-boilerplate/issues/64
-      if (process.env.BROWSER) window.ReactIntl = require('react-intl');
+      if (process.env.BROWSER) {
+        window.ReactIntl = require('react-intl');
+        require(`react-intl/dist/locale-data/${locale}.js`);
+      }
+
       return resolve(result);
     }, force);
   });
