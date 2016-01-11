@@ -10,6 +10,7 @@ import AltContainer from 'alt-container';
 
 import intlLoader from 'utils/intl-loader';
 import ErrorPage from 'pages/server-error';
+import I18nContainer from 'utils/i18n-container';
 
 const { BROWSER, NODE_ENV } = process.env;
 
@@ -41,9 +42,11 @@ export default async function({ flux, history, location }) {
 
     const element = (
       <AltContainer flux={ flux }>
-        <Router
-          history={ history }
-          routes={ routes(flux) } />
+        <I18nContainer>
+          <Router
+            history={ history }
+            routes={ routes(flux) } />
+        </I18nContainer>
       </AltContainer>
     );
 
@@ -61,7 +64,9 @@ export default async function({ flux, history, location }) {
 
     const element = (
       <AltContainer flux={ flux }>
-        <RoutingContext { ...renderProps } />
+        <I18nContainer>
+          <RoutingContext { ...renderProps } />
+        </I18nContainer>
       </AltContainer>
     );
 
