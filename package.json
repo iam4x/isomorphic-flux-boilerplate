@@ -40,7 +40,7 @@
     "history": "^1.17.0",
     "image-webpack-loader": "^1.6.2",
     "intl": "^1.0.0",
-    "iso": "^5.0.0",
+    "iso": "github:iam4x/iso#master",
     "json-loader": "^0.5.3",
     "koa": "^2.0.0-alpha.3",
     "koa-compressor": "^1.0.3",
