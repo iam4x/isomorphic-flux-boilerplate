@@ -10,7 +10,6 @@ import AltContainer from 'alt-container';
 
 import intlLoader from 'utils/intl-loader';
 import ErrorPage from 'pages/server-error';
-import I18nContainer from 'utils/i18n-container';
 
 const { BROWSER, NODE_ENV } = process.env;
 
@@ -39,6 +38,7 @@ export default async function({ flux, history, location }) {
     flux.getActions('locale').switchLocale({ locale, messages });
 
     const routes = require('routes');
+    const I18nContainer = require('utils/i18n-container');
 
     const element = (
       <AltContainer flux={ flux }>
@@ -58,6 +58,7 @@ export default async function({ flux, history, location }) {
     flux.resolver.firstRender = false;
   } else {
     const routes = require('routes')(flux);
+    const I18nContainer = require('utils/i18n-container');
     const [ error, redirect, renderProps ] = await runRouter(location, routes);
 
     if (error || redirect) throw ({ error, redirect });
