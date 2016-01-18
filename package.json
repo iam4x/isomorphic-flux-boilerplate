@@ -23,7 +23,7 @@
     "alt-container": "^1.0.0",
     "alt-utils": "^1.0.0",
     "autoprefixer": "^6.1.0",
-    "axios": "^0.8.1",
+    "axios": "^0.9.0",
     "babel": "^5.8.3",
     "babel-core": "^5.8.34",
     "babel-loader": "^5.4.0",
