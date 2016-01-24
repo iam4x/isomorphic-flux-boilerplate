@@ -19,7 +19,7 @@ if (process.env.CIRCLECI) {
 
 export default function(config) {
   config.set({
-    browsers: ['Firefox'],
+    browsers: ['Chrome'],
     browserNoActivityTimeout: 30000,
     frameworks: ['mocha', 'chai', 'sinon-chai'],
     files: ['tests.webpack.js'],
