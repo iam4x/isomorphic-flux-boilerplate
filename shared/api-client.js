@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { port } from '../server/config/init';
+import initConfig from '../server/config/init';
 
 const { BROWSER } = process.env;
 
@@ -10,7 +10,7 @@ class ApiClient {
       this.baseURL = '/api';
     } else {
       this.cookie = cookie;
-      this.baseURL = `http://localhost:${port}/api`;
+      this.baseURL = `http://localhost:${initConfig.port}/api`;
     }
   }
 

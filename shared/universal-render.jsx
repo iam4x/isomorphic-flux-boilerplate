@@ -37,7 +37,7 @@ export default async function({ flux, history, location }) {
     const { messages } = await intlLoader(locale);
     flux.getActions('locale').switchLocale({ locale, messages });
 
-    const routes = require('routes');
+    const routes = require('routes').default;
     const I18nContainer = require('utils/i18n-container');
 
     const element = (
@@ -57,7 +57,7 @@ export default async function({ flux, history, location }) {
     // next promises will be resolved
     flux.resolver.firstRender = false;
   } else {
-    const routes = require('routes')(flux);
+    const routes = require('routes').default(flux);
     const I18nContainer = require('utils/i18n-container');
     const [ error, redirect, renderProps ] = await runRouter(location, routes);
 

@@ -10,13 +10,13 @@ const loaders = {
       ], (require) => {
         require('intl');
         require('intl/locale-data/jsonp/en.js');
-        const lang = require('data/en');
+        const lang = require('data/en').default;
         return callback(lang);
       });
     } else {
       require.ensure(
         [ 'data/en' ],
-        (require) => callback(require('data/en'))
+        (require) => callback(require('data/en').default)
       );
     }
   },
@@ -30,13 +30,13 @@ const loaders = {
       ], (require) => {
         require('intl');
         require('intl/locale-data/jsonp/fr.js');
-        const lang = require('data/fr');
+        const lang = require('data/fr').default;
         return callback(lang);
       });
     } else {
       require.ensure(
         [ 'data/fr' ],
-        (require) => callback(require('data/fr'))
+        (require) => callback(require('data/fr').default)
       );
     }
   }

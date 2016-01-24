@@ -5,7 +5,7 @@ const { NODE_ENV = 'development' } = process.env;
 let config;
 
 try {
-  config = require(`./${NODE_ENV}`);
+  config = require(`./${NODE_ENV}`).default;
 } catch (error) {
   debug('dev')(`No specific configuration for env ${NODE_ENV}`);
 }

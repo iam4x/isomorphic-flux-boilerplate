@@ -1,3 +1,4 @@
+
 import { users } from './data.json';
 
 const simplifyUsers = (collection) => collection
@@ -9,7 +10,7 @@ export default function (router) {
     ctx.body = simplifyUsers(users.slice(0, 10));
   });
 
-  router.get('/users/:seed', async function (ctx) {
+  router.get('/users/:seed', function *(ctx) {
     const { seed } = ctx.params;
     const [ result ] = simplifyUsers(users.filter(user => user.seed === seed));
 

@@ -60,7 +60,7 @@ if (env === 'development') {
 
 // mount `/api` router
 const apiRouter = new Router({ prefix: '/api' });
-require('./api/routes')(apiRouter);
+require('./api/routes').default(apiRouter);
 app.use(apiRouter.routes());
 
 // mount react-router
