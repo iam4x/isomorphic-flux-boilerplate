@@ -5,7 +5,7 @@ const simplifyUsers = (collection) => collection
   .map(({ email, name, seed, picture }) => ({ email, name, seed, picture }));
 
 export default function (router) {
-  router.get('/users', async function (ctx) {
+  router.get('/users', function *(ctx) {
     ctx.body = simplifyUsers(users.slice(0, 10));
   });
 
