@@ -97,6 +97,7 @@
     "react-transform-catch-errors": "^1.0.0",
     "react-transform-hmr": "^1.0.0",
     "redbox-react": "^1.0.4",
+    "url-loader": "^0.5.7",
     "webpack-hot-middleware": "^2.0.2"
   },
   "tags": [
