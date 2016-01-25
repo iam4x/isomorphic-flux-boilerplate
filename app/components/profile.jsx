@@ -3,23 +3,19 @@ import defer from 'lodash/function/defer';
 
 import React, { Component, PropTypes } from 'react';
 import connect from 'connect-alt';
-import { IntlMixin } from 'react-intl';
 
 @connect(({ users: { collection } }) => ({ collection }))
 class Profile extends Component {
 
   static contextTypes = {
     flux: PropTypes.object.isRequired,
-    messages: PropTypes.object.isRequired
-  }
+    i18n: PropTypes.func.isRequired
+  };
 
   static propTypes = {
     params: PropTypes.object.isRequired,
     collection: PropTypes.array
-  }
-
-  i18n = IntlMixin.getIntlMessage
-  formatMessage = IntlMixin.formatMessage.bind({ ...this, ...IntlMixin })
+  };
 
   componentWillMount() {
     const { flux } = this.context;
@@ -42,7 +38,7 @@ class Profile extends Component {
   }
 
   updatePageTitle() {
-    const { flux } = this.context;
+    const { flux, i18n } = this.context;
     const user = this.getUser();
 
     let title;
@@ -50,10 +46,9 @@ class Profile extends Component {
       const { name: { first, last } } = user;
       const fullName = `${capitalize(first)} ${capitalize(last)}`;
 
-      title = this.i18n('profile.page-title');
-      title = this.formatMessage(title, { fullName });
+      title = i18n('profile.page-title', { fullName });
     } else {
-      title = this.i18n('profile.not-found-page-title');
+      title = i18n('profile.not-found-page-title');
     }
 
     flux.getActions('helmet').update({ title });

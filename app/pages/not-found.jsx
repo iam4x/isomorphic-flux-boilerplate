@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 
 class NotFound extends Component {
 
-  static contextTypes = { flux: PropTypes.object.isRequired }
+  static contextTypes = { flux: PropTypes.object.isRequired };
 
   componentWillMount() {
     const { flux } = this.context;

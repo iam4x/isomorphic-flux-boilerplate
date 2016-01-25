@@ -1,14 +1,11 @@
 import React, { Component, PropTypes } from 'react';
-import { IntlMixin } from 'react-intl';
 
 class LoginPage extends Component {
 
   static contextTypes = {
     flux: PropTypes.object.isRequired,
-    messages: PropTypes.object.isRequired
-  }
-
-  i18n = IntlMixin.getIntlMessage
+    i18n: PropTypes.func.isRequired
+  };
 
   handleSubmit(e) {
     e.preventDefault();
@@ -22,24 +19,26 @@ class LoginPage extends Component {
   }
 
   render() {
+    const { i18n } = this.context;
+
     return (
       <form onSubmit={ ::this.handleSubmit }>
-        <p className='alert alert-info'>{ this.i18n('login.help') }</p>
+        <p className='alert alert-info'>{ i18n('login.help') }</p>
         <div className='form-group'>
           <label htmlFor='username'>
-            { this.i18n('login.username.label') }
+            { i18n('login.username.label') }
           </label>
           <input
             ref='username'
             type='text'
             name='username'
             className='form-control'
-            placeholder={ this.i18n('login.username.placeholder') }
+            placeholder={ i18n('login.username.placeholder') }
             required />
         </div>
         <div className='form-group'>
           <label htmlFor='username'>
-            { this.i18n('login.password.label') }
+            { i18n('login.password.label') }
           </label>
           <input
             ref='password'
@@ -50,7 +49,7 @@ class LoginPage extends Component {
         </div>
         <div className='form-group'>
           <button className='btn btn-primary'>
-            { this.i18n('login.submit') }
+            { i18n('login.submit') }
           </button>
         </div>
       </form>

@@ -42,7 +42,7 @@ describe('Profile', () => {
     instance = ReactDOM.render(React.createElement(Stubbed), node);
   });
 
-  afterEach(function() {
+  afterEach(function () {
     if (instance) ReactDOM.unmountComponentAtNode(node);
   });
 

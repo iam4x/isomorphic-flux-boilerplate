@@ -9,17 +9,17 @@ import ServerHTML from './server-html';
 import ApiClient from '../shared/api-client';
 import universalRender from '../shared/universal-render';
 
-export default function *() {
+export default async function (ctx) {
   // Init alt instance
-  const client = new ApiClient(this.get('cookie'));
+  const client = new ApiClient(ctx.get('cookie'));
   const flux = createFlux(client);
 
   // Get request locale for rendering
-  const locale = this.cookies.get('_lang') || this.acceptsLanguages(require('./config/init').locales) || 'en';
-  const { messages } = require(`data/${locale}`);
+  const locale = ctx.cookies.get('_lang') || ctx.acceptsLanguages(require('./config/init').default.locales) || 'en';
+  const { messages } = require(`data/${locale}`).default;
 
   // Get auth-token from cookie
-  const username = this.cookies.get('_auth');
+  const username = ctx.cookies.get('_auth');
 
   // Populate store with locale
   flux
@@ -37,7 +37,7 @@ export default function *() {
 
   try {
     const { body, title, statusCode, description } =
-      yield universalRender({ flux, location: this.request.url });
+      await universalRender({ flux, location: ctx.request.url });
 
     // Assets name are found into `webpack-stats`
     const assets = require('./webpack-stats.json');
@@ -49,8 +49,8 @@ export default function *() {
 
     debug('dev')('return html content');
     const props = { body, assets, locale, title, description };
-    this.status = statusCode;
-    this.body = '<!DOCTYPE html>' + renderToString(<ServerHTML { ...props } />);
+    ctx.status = statusCode;
+    ctx.body = '<!DOCTYPE html>' + renderToString(<ServerHTML { ...props } />);
   } catch (err) {
     // Render 500 error page from server
     const { error, redirect } = err;
@@ -59,7 +59,7 @@ export default function *() {
     // Handle component `onEnter` transition
     if (redirect) {
       const { pathname, search } = redirect;
-      return this.redirect(pathname + search);
+      return ctx.redirect(pathname + search);
     }
 
     throw err;

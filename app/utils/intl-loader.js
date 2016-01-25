@@ -10,13 +10,13 @@ const loaders = {
       ], (require) => {
         require('intl');
         require('intl/locale-data/jsonp/en.js');
-        const lang = require('data/en');
+        const lang = require('data/en').default;
         return callback(lang);
       });
     } else {
       require.ensure(
         [ 'data/en' ],
-        (require) => callback(require('data/en'))
+        (require) => callback(require('data/en').default)
       );
     }
   },
@@ -30,13 +30,13 @@ const loaders = {
       ], (require) => {
         require('intl');
         require('intl/locale-data/jsonp/fr.js');
-        const lang = require('data/fr');
+        const lang = require('data/fr').default;
         return callback(lang);
       });
     } else {
       require.ensure(
         [ 'data/fr' ],
-        (require) => callback(require('data/fr'))
+        (require) => callback(require('data/fr').default)
       );
     }
   }
@@ -50,7 +50,11 @@ export default (locale, force) => {
       // We need to define `ReactIntl` on the global scope
       // in order to load specific locale data from `ReactIntl`
       // see: https://github.com/iam4x/isomorphic-flux-boilerplate/issues/64
-      if (process.env.BROWSER) window.ReactIntl = require('react-intl');
+      if (process.env.BROWSER) {
+        window.ReactIntl = require('react-intl');
+        require(`react-intl/dist/locale-data/${locale}.js`);
+      }
+
       return resolve(result);
     }, force);
   });

@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import connect from 'connect-alt';
 import { Link } from 'react-router';
-import { IntlMixin } from 'react-intl';
 
 import imageResolver from 'utils/image-resolver';
 import Spinner from 'components/shared/spinner';
@@ -24,15 +23,13 @@ class Header extends Component {
   static propTypes = {
     inProgress: PropTypes.bool,
     session: PropTypes.object
-  }
+  };
 
   static contextTypes = {
     locales: PropTypes.array.isRequired,
-    messages: PropTypes.object.isRequired,
-    flux: PropTypes.object.isRequired
-  }
-
-  i18n = IntlMixin.getIntlMessage
+    flux: PropTypes.object.isRequired,
+    i18n: PropTypes.func.isRequired
+  };
 
   handleLocaleChange(locale) {
     const { flux } = this.context;
@@ -46,7 +43,7 @@ class Header extends Component {
 
   render() {
     const { inProgress, session } = this.props;
-    const { locales: [ activeLocale ] } = this.context;
+    const { locales: [ activeLocale ], i18n } = this.context;
 
     return (
       <header className='app--header'>
@@ -66,31 +63,31 @@ class Header extends Component {
         {/* Links in the navbar */}
         <ul className='app--navbar text-center reset-list un-select'>
           <li>
-            <Link to={ this.i18n('routes.users') }>
-              { this.i18n('header.users') }
+            <Link to={ i18n('routes.users') }>
+              { i18n('header.users') }
             </Link>
           </li>
           <li>
-            <Link to={ this.i18n('routes.guides') }>
-              { this.i18n('header.guides') }
+            <Link to={ i18n('routes.guides') }>
+              { i18n('header.guides') }
             </Link>
           </li>
           { session ?
             [
               <li key={ 0 }>
-                <Link to={ this.i18n('routes.account') }>
-                  { this.i18n('header.account') }
+                <Link to={ i18n('routes.account') }>
+                  { i18n('header.account') }
                 </Link>
               </li>,
               <li key={ 1 }>
                 <a href='#' onClick={ ::this.handleLogout }>
-                  { this.i18n('header.logout') }
+                  { i18n('header.logout') }
                 </a>
               </li>
             ] :
             <li>
-              <Link to={ this.i18n('routes.login') }>
-                { this.i18n('header.login') }
+              <Link to={ i18n('routes.login') }>
+                { i18n('header.login') }
               </Link>
             </li>
           }

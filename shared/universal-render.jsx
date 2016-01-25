@@ -19,8 +19,8 @@ const runRouter = (location, routes) =>
 
 const bootstrap = () =>
   new Promise((resolve) =>
-    Iso.bootstrap((initialState, __, container) =>
-      resolve({ initialState, __, container })));
+    Iso.bootstrap((initialState, container) =>
+      resolve({ initialState, container })));
 
 /* eslint space-before-function-paren:0 */
 // https://github.com/eslint/eslint/issues/4442
@@ -37,13 +37,16 @@ export default async function({ flux, history, location }) {
     const { messages } = await intlLoader(locale);
     flux.getActions('locale').switchLocale({ locale, messages });
 
-    const routes = require('routes');
+    const routes = require('routes').default;
+    const I18nContainer = require('utils/i18n-container').default;
 
     const element = (
       <AltContainer flux={ flux }>
-        <Router
-          history={ history }
-          routes={ routes(flux) } />
+        <I18nContainer>
+          <Router
+            history={ history }
+            routes={ routes(flux) } />
+        </I18nContainer>
       </AltContainer>
     );
 
@@ -54,14 +57,17 @@ export default async function({ flux, history, location }) {
     // next promises will be resolved
     flux.resolver.firstRender = false;
   } else {
-    const routes = require('routes')(flux);
+    const routes = require('routes').default(flux);
+    const I18nContainer = require('utils/i18n-container').default;
     const [ error, redirect, renderProps ] = await runRouter(location, routes);
 
     if (error || redirect) throw ({ error, redirect });
 
     const element = (
       <AltContainer flux={ flux }>
-        <RoutingContext { ...renderProps } />
+        <I18nContainer>
+          <RoutingContext { ...renderProps } />
+        </I18nContainer>
       </AltContainer>
     );
 

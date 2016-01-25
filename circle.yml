@@ -1,6 +1,6 @@
 machine:
   node:
-    version: 4.2.1
+    version: 4.2.3
 dependencies:
   pre:
     - npm i -g npm

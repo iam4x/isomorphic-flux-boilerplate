@@ -17,7 +17,7 @@ if (process.env.CIRCLECI) {
   reporters = ['progress', 'coverage'];
 }
 
-export default function(config) {
+module.exports = function(config) {
   config.set({
     browsers: ['Firefox'],
     browserNoActivityTimeout: 30000,

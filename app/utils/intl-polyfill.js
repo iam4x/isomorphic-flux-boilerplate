@@ -1,7 +1,8 @@
 import debug from 'debug';
 
 const hasBuiltInLocaleData = (locale) => {
-  return Intl.NumberFormat.supportedLocalesOf(locale)[0] === locale && Intl.DateTimeFormat.supportedLocalesOf(locale)[0] === locale;
+  return Intl.NumberFormat.supportedLocalesOf(locale)[0] === locale &&
+    Intl.DateTimeFormat.supportedLocalesOf(locale)[0] === locale;
 };
 
 export default (locales) => {

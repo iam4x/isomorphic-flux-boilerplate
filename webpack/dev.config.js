@@ -9,7 +9,13 @@ const { VIRTUAL_HOST, C9_HOSTNAME } = process.env;
 const LOCAL_IP = require('dev-ip')();
 
 const PORT = (C9_HOSTNAME) ? '443' : parseInt(process.env.PORT, 10) + 1 || 3001;
-const HOST = VIRTUAL_HOST || C9_HOSTNAME || isArray(LOCAL_IP) && LOCAL_IP[0] || LOCAL_IP || 'localhost';
+
+const HOST = VIRTUAL_HOST ||
+  C9_HOSTNAME ||
+  (isArray(LOCAL_IP) && LOCAL_IP[0]) ||
+  LOCAL_IP ||
+  'localhost';
+
 const PUBLIC_PATH = `//${HOST}:${PORT}/assets/`;
 
 export default {
@@ -38,7 +44,7 @@ export default {
         './app/index.js'
       ]
     },
-    ouput: { ...baseConfig.output, publicPath: PUBLIC_PATH },
+    output: { ...baseConfig.output, publicPath: PUBLIC_PATH },
     module: {
       ...baseConfig.module,
       loaders: [

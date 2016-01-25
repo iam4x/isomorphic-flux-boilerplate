@@ -31,6 +31,7 @@
     "react/self-closing-comp": 2,
     "react/wrap-multilines": 2,
     "react/sort-comp": 0,
+    "react/jsx-no-bind": 1,
 
     "quotes": [2, "single", "avoid-escape"],
     "jsx-quotes": [2, "prefer-single"],
@@ -42,9 +43,11 @@
     "no-underscore-dangle": 0,
     "func-names": 0,
     "no-else-return": 0,
-    "no-console": 0,
+    "no-console": 1,
     "no-throw-literal": 0,
     "id-length": 0,
-    "no-unused-expressions": 0
+    "no-unused-expressions": 0,
+    "no-param-reassign": 0,
+    "max-len": [1, 100]
   }
 }
