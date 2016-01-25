@@ -19,7 +19,7 @@ if (process.env.CIRCLECI) {
 
 module.exports = function(config) {
   config.set({
-    browsers: ['Chrome'],
+    browsers: ['Firefox'],
     browserNoActivityTimeout: 30000,
     frameworks: ['mocha', 'chai', 'sinon-chai'],
     files: ['tests.webpack.js'],

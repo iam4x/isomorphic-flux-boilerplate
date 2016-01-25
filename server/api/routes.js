@@ -6,13 +6,13 @@ const simplifyUsers = (collection) => collection
   .map(({ email, name, seed, picture }) => ({ email, name, seed, picture }));
 
 export default function (router) {
-  router.get('/users', function *(ctx) {
+  router.get('/users', async function (ctx) {
     ctx.body = simplifyUsers(users.slice(0, 10));
   });
 
-  router.get('/users/:seed', function *(ctx) {
-    const { seed } = ctx.params;
-    const [ result ] = simplifyUsers(users.filter(user => user.seed === seed));
+  router.get('/users/:seed', async function (ctx) {
+    let { seed } = ctx.params;
+    let [ result ] = simplifyUsers(users.filter(user => user.seed === seed));
 
     if (!result) {
       ctx.body = { error: { message: 'User not found' } };
