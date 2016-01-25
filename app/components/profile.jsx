@@ -10,12 +10,12 @@ class Profile extends Component {
   static contextTypes = {
     flux: PropTypes.object.isRequired,
     i18n: PropTypes.func.isRequired
-  }
+  };
 
   static propTypes = {
     params: PropTypes.object.isRequired,
     collection: PropTypes.array
-  }
+  };
 
   componentWillMount() {
     const { flux } = this.context;

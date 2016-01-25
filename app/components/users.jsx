@@ -7,12 +7,12 @@ import { replaceParams } from 'utils/localized-routes';
 @connect(({ users: { collection } }) => ({ collection }))
 class Users extends Component {
 
-  static propTypes = { collection: PropTypes.array.isRequired }
+  static propTypes = { collection: PropTypes.array.isRequired };
 
   static contextTypes = {
     flux: PropTypes.object.isRequired,
     i18n: PropTypes.func.isRequired
-  }
+  };
 
   componentWillMount() {
     const { flux, i18n } = this.context;
@@ -48,7 +48,7 @@ class Users extends Component {
         </td>
       </tr>
     );
-  }
+  };
 
   render() {
     const { collection } = this.props;

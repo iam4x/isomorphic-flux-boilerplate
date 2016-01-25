@@ -14,7 +14,7 @@ export default function stubApp(flux) {
 
       static childContextTypes = {
         flux: PropTypes.object.isRequired
-      }
+      };
 
       getChildContext() {
         return { flux };

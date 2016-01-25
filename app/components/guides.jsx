@@ -5,7 +5,7 @@ class Guides extends Component {
   static contextTypes = {
     flux: PropTypes.object.isRequired,
     i18n: PropTypes.func.isRequired
-  }
+  };
 
   componentWillMount() {
     const { flux, i18n } = this.context;

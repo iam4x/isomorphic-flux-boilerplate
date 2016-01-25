@@ -5,15 +5,15 @@ import { IntlMixin } from 'react-intl';
 
 class I18nContainer extends Component {
 
-  static propTypes = { children: PropTypes.element.isRequired }
-  static contextTypes = { flux: PropTypes.object.isRequired }
+  static propTypes = { children: PropTypes.element.isRequired };
+  static contextTypes = { flux: PropTypes.object.isRequired };
 
   static childContextTypes = {
     i18n: PropTypes.func.isRequired,
     messages: PropTypes.object.isRequired,
     formats: PropTypes.object.isRequired,
     locales: PropTypes.array.isRequired
-  }
+  };
 
   constructor(props, context) {
     super(props, context);
@@ -38,7 +38,7 @@ class I18nContainer extends Component {
 
   handleLocaleChange = (state) => {
     return this.setState(state);
-  }
+  };
 
   i18n = (key, values) => {
     try {
@@ -52,7 +52,7 @@ class I18nContainer extends Component {
       debug('dev')(error);
       return `translation missing (${this.state.locales[0]}): ${key}`;
     }
-  }
+  };
 
   render() {
     const { children } = this.props;

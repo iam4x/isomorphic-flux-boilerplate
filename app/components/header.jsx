@@ -23,13 +23,13 @@ class Header extends Component {
   static propTypes = {
     inProgress: PropTypes.bool,
     session: PropTypes.object
-  }
+  };
 
   static contextTypes = {
     locales: PropTypes.array.isRequired,
     flux: PropTypes.object.isRequired,
     i18n: PropTypes.func.isRequired
-  }
+  };
 
   handleLocaleChange(locale) {
     const { flux } = this.context;

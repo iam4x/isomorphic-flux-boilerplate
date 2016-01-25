@@ -5,7 +5,7 @@ class LoginPage extends Component {
   static contextTypes = {
     flux: PropTypes.object.isRequired,
     i18n: PropTypes.func.isRequired
-  }
+  };
 
   handleSubmit(e) {
     e.preventDefault();

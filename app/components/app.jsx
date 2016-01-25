@@ -7,11 +7,11 @@ if (process.env.BROWSER) require('styles/app.css');
 
 class App extends Component {
 
-  static propTypes = { children: PropTypes.element }
-  static contextTypes = { flux: PropTypes.object.isRequired }
+  static propTypes = { children: PropTypes.element };
+  static contextTypes = { flux: PropTypes.object.isRequired };
 
   state = { i18n: this.context
-      .flux.getStore('locale').getState() }
+      .flux.getStore('locale').getState() };
 
   componentDidMount() {
     const { flux } = this.context;
