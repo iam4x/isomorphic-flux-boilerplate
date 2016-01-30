@@ -20,39 +20,16 @@ export default {
         test: /\.(jpe?g|png|gif|svg)$/,
         loader: 'file?name=[sha512:hash:base64:7].[ext]!image?optimizationLevel=7&progressive&interlaced',
         exclude: /node_modules\/(?!font-awesome)/
-      },
-      {
-        test: /\.css$/,
-        loader: ExtractTextPlugin.extract('style', 'css?sourceMap!postcss'),
-        exclude: /node_modules/
       }
     ]
   },
   plugins: [
-    // extract css
-    new ExtractTextPlugin('[name]-[chunkhash].css'),
-
     // set env
     new webpack.DefinePlugin({
       'process.env': {
         BROWSER: JSON.stringify(true),
         NODE_ENV: JSON.stringify('production')
       }
-    }),
-
-    new PurifyCSSPlugin({
-      purifyOptions: { info: true },
-      paths: [
-        'app/**/*.jsx',
-        'app/**/*.js',
-        'server/views/**/*.hbs',
-        'shared/universal-render.jsx',
-
-        // VENDORS WHICH CREATE HTML WITH ID OR CLASSES
-        'node_modules/iso/src/iso.js',
-        'node_modules/react-router/lib/*.js',
-        'node_modules/react-intl/lib/components/*.js'
-      ]
     }),
 
     // optimizations

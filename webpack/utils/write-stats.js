@@ -24,7 +24,6 @@ export default function (stats) {
   };
 
   const script = getChunks('app', /js/);
-  const style = getChunks('app', /css/);
 
   // Find compiled images in modules
   // it will be used to map original filename to the compiled one
@@ -39,7 +38,7 @@ export default function (stats) {
       };
     });
 
-  const content = { script, style, images };
+  const content = { script, images };
 
   fs.writeFileSync(filepath, JSON.stringify(content));
   debug('dev')('`webpack-stats.json` updated');

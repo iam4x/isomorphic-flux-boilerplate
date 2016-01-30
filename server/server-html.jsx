@@ -1,4 +1,5 @@
 import React from 'react';
+import screenSizeDetect from './helpers/screen-size-detect.js';
 
 const conditional = `<!--[if IE 8]>
   <script src='//cdnjs.cloudflare.com/ajax/libs/es5-shim/4.1.1/es5-shim.min.js'></script>
@@ -11,6 +12,7 @@ export default function ServerHTML({ body, assets, locale, title, description })
   return (
     <html lang={ locale }>
       <head>
+        <script dangerouslySetInnerHTML={ { __html: screenSizeDetect } } />
         <meta
           name='description'
           content={ description } />
@@ -19,8 +21,6 @@ export default function ServerHTML({ body, assets, locale, title, description })
           dangerouslySetInnerHTML={ { __html: conditional } } />
         <meta charSet='utf-8' />
         <link rel='icon' type='image/ico' href='/favicon.ico' />
-        { assets.style.map((href, idx) =>
-          <link key={ idx } rel='stylesheet' href={ href } />) }
         <title>{ title }</title>
       </head>
       <body>
