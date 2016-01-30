@@ -1,7 +1,0 @@
-@font-face {
-  font-family: $font-0;
-  src: $url-0;
-  src: $url-1 format('embedded-opentype'), $url-2 format('woff'), $url-3 format('truetype'), $url-4 format('svg');
-  font-weight: normal;
-  font-style: normal;
-}

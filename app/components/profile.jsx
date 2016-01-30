@@ -61,7 +61,7 @@ class Profile extends Component {
       const { name: { first, last }, picture } = user;
 
       return (
-        <div className='app--profile text-center'>
+        <div>
           <h2>{ capitalize(first) } { capitalize(last) }</h2>
           <img
             src={ picture.medium }

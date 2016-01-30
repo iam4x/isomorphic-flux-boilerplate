@@ -1,11 +1,14 @@
 import React, { Component, PropTypes } from 'react';
 import connect from 'connect-alt';
 import { Link } from 'react-router';
+import radium from 'radium';
+import { cyanLink } from 'styles/shared';
 
 import imageResolver from 'utils/image-resolver';
 import Spinner from 'components/shared/spinner';
 import LangPicker from 'components/shared/lang-picker';
 
+const RadiumLink = radium(Link);
 // Load styles for the header
 // and load the `react-logo.png` image
 // for the `<img src='' />` element
@@ -18,6 +21,7 @@ if (process.env.BROWSER) {
 
 @connect(({ requests: { inProgress }, session: { session } }) =>
   ({ inProgress, session }))
+@radium
 class Header extends Component {
 
   static propTypes = {
@@ -44,9 +48,10 @@ class Header extends Component {
   render() {
     const { inProgress, session } = this.props;
     const { locales: [ activeLocale ], i18n } = this.context;
+    const { root, logo, logoImg, navbar, navbarChild, navbarLink } = this.getStyles();
 
     return (
-      <header className='app--header'>
+      <header style={ root } className='header' >
         {/* Spinner in the top right corner */}
         <Spinner active={ inProgress } />
 
@@ -56,44 +61,70 @@ class Header extends Component {
           onChange={ ::this.handleLocaleChange } />
 
         {/* React Logo in header */}
-        <Link to='/' className='app--logo'>
-          <img src={ reactLogo } alt='react-logo' />
-        </Link>
+        <RadiumLink to='/' style={ logo }>
+          <img src={ reactLogo } style={ logoImg } alt='react-logo' />
+        </RadiumLink>
 
-        {/* Links in the navbar */}
-        <ul className='app--navbar text-center reset-list un-select'>
-          <li>
-            <Link to={ i18n('routes.users') }>
+        {/* RadiumLinks in the navbar */}
+        <ul style={ navbar }>
+          <li style={ navbarChild }>
+            <RadiumLink to={ i18n('routes.users') } style={ navbarLink }>
               { i18n('header.users') }
-            </Link>
+            </RadiumLink>
           </li>
-          <li>
-            <Link to={ i18n('routes.guides') }>
+          <li style={ navbarChild }>
+            <RadiumLink to={ i18n('routes.guides') } style={ navbarLink }>
               { i18n('header.guides') }
-            </Link>
+            </RadiumLink>
           </li>
           { session ?
             [
-              <li key={ 0 }>
-                <Link to={ i18n('routes.account') }>
+              <li key={ 0 } style={ navbarChild }>
+                <RadiumLink to={ i18n('routes.account') } style={ navbarLink }>
                   { i18n('header.account') }
-                </Link>
+                </RadiumLink>
               </li>,
-              <li key={ 1 }>
+              <li key={ 1 } style={ navbarChild }>
                 <a href='#' onClick={ ::this.handleLogout }>
                   { i18n('header.logout') }
                 </a>
               </li>
             ] :
-            <li>
-              <Link to={ i18n('routes.login') }>
+            <li style={ navbarChild }>
+              <RadiumLink to={ i18n('routes.login') } style={ navbarLink }>
                 { i18n('header.login') }
-              </Link>
+              </RadiumLink>
             </li>
           }
         </ul>
       </header>
     );
+  }
+
+  getStyles() {
+    return {
+      root: {
+        position: 'relative'
+      },
+      logo: {
+        display: 'block',
+        width: 200,
+        height: 200,
+        margin: '0 auto'
+      },
+      logoImg: {
+        width: '100%'
+      },
+      navbar: {
+        textAlign: 'center',
+        padding: 0
+      },
+      navbarChild: {
+        display: 'inline-block',
+        margin: '0 10px'
+      },
+      navbarLink: [ cyanLink, { padding: '0 .4em' } ]
+    };
   }
 }
 

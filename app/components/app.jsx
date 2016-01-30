@@ -1,9 +1,10 @@
 import React, { Component, PropTypes } from 'react';
+import { StyleRoot, Style } from 'radium';
+import { getUserAgent, matchMedia } from 'utils/radium';
+import normalize from 'styles/normalize';
 
 import Header from 'components/header';
 import Footer from 'components/footer';
-
-if (process.env.BROWSER) require('styles/app.css');
 
 class App extends Component {
 
@@ -29,18 +30,42 @@ class App extends Component {
 
   render() {
     const { children } = this.props;
+    const userAgent = getUserAgent();
 
     return (
       <div>
-        <Header />
-        <hr />
-        { children }
-        <hr />
-        <Footer />
+        <StyleRoot radiumConfig={ { userAgent, matchMedia } } >
+          <Style rules={ normalize } />
+          <Style rules={ this.styles } />
+          <Header />
+          <hr />
+          { children }
+          <hr />
+          <Footer />
+        </StyleRoot>
       </div>
     );
   }
 
+  styles = {
+    body: {
+      background: '#fff',
+      WebkitTapHighlightColor: 'transparent',
+      fontFamily: 'Roboto,Helvetica Neue,Helvetica,Arial,sans-serif'
+    },
+    mediaQueries: {
+      '(min-width: 380px)': {
+        body: {
+          fontSize: '105%'
+        }
+      },
+      '(min-width: 600px)': {
+        body: {
+          fontSize: '110%'
+        }
+      }
+    }
+  }
 }
 
 export default App;
