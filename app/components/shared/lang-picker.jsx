@@ -2,8 +2,6 @@ import React, { Component, PropTypes } from 'react';
 import radium from 'radium';
 import { blackColor, whiteColor } from 'styles/shared';
 
-console.log(blackColor, whiteColor);
-
 @radium
 class LangPicker extends Component {
 
