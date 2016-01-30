@@ -5,7 +5,6 @@ const expect = chai.expect;
 chai.should();
 
 describe('Radium utils', () => {
-
   it('should return matchMedia function', () => {
     expect(matchMedia).to.not.be.undefined;
     matchMedia.should.be.func;
