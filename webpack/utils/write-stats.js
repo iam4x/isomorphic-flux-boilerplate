@@ -32,12 +32,8 @@ export default function (stats) {
   const imagesRegex = /\.(jpe?g|png|gif|svg)$/;
   const images = json.modules
     .filter(module => imagesRegex.test(module.name))
-    .map(image => {
-      return {
-        original: image.name,
-        compiled: `${publicPath}${image.assets[0]}`
-      };
-    });
+    .map(image =>
+      ({ original: image.name, compiled: `${publicPath}${image.assets[0]}` }));
 
   const content = { script, style, images };
 

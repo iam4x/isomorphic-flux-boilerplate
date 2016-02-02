@@ -52,8 +52,9 @@ export default async function (ctx) {
 
     debug('dev')('return html content');
     const props = { body, assets, locale, title, description };
+    const html = renderToString(<ServerHTML { ...props } />);
     ctx.status = statusCode;
-    ctx.body = '<!DOCTYPE html>' + renderToString(<ServerHTML { ...props } />);
+    ctx.body = `<!DOCTYPE html>${html}`;
   } catch (err) {
     // Render 500 error page from server
     const { error, redirect } = err;

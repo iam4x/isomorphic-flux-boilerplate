@@ -16,7 +16,7 @@ describe('UsersStore', () => {
     actions = flux.getActions('users');
   });
 
-  it('should add users into collection', function (done) {
+  it('should add users into collection', (done) => {
     function respond(request) {
       request.respond(
         200,
@@ -40,7 +40,7 @@ describe('UsersStore', () => {
     actions.index();
   });
 
-  it('should update user with same seed', function () {
+  it('should update user with same seed', () => {
     actions.showSuccess({ name: 'foo', seed: 'bar' });
 
     store.getState().collection[0].should.eql({ name: 'foo', seed: 'bar' });

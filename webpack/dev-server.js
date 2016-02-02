@@ -16,6 +16,5 @@ debug.enable('dev');
 app.use(convert(require('koa-webpack-dev-middleware')(compiler, config.server.options)));
 app.use(convert(require('koa-webpack-hot-middleware')(compiler)));
 
-app.listen(config.server.port, '0.0.0.0', function () {
-  debug('dev')('`webpack-dev-server` listening on port %s', config.server.port);
-});
+app.listen(config.server.port, '0.0.0.0', () =>
+  debug('dev')('`webpack-dev-server` listening on port %s', config.server.port));

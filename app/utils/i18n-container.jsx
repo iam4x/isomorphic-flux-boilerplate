@@ -36,9 +36,7 @@ class I18nContainer extends Component {
     flux.getStore('locale').unlisten(this.handleLocaleChange);
   }
 
-  handleLocaleChange = (state) => {
-    return this.setState(state);
-  }
+  handleLocaleChange = (state) => this.setState(state)
 
   i18n = (key, values) => {
     try {

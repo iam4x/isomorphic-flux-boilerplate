@@ -37,7 +37,7 @@ describe('Header', () => {
     langs.children.length.should.eql(2);
   });
 
-  it('should handle requests change', function () {
+  it('should handle requests change', () => {
     flux.getActions('requests').start();
     const spinner = TestUtils.findRenderedDOMComponentWithClass(instance, 'app--spinner');
     spinner.className.indexOf('active').should.not.eql(-1);

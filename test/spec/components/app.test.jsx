@@ -23,7 +23,7 @@ describe('App', () => {
     instance = ReactDOM.render(element, node);
   });
 
-  afterEach(function () {
+  afterEach(() => {
     if (instance) ReactDOM.unmountComponentAtNode(node);
   });
 
@@ -37,12 +37,12 @@ describe('App', () => {
     should.exist(logo);
   });
 
-  it('should change page title', function () {
+  it('should change page title', () => {
     flux.getActions('helmet').update({ title: 'foobar', titleBase: '' });
     document.title.should.eql('foobar');
   });
 
-  it('should handle locale change', function (done) {
+  it('should handle locale change', (done) => {
     function handleChange({ locales }) {
       locales[0].should.eql('fr');
       const { locales: [ locale ] } = flux.getStore('locale').getState();
@@ -55,7 +55,7 @@ describe('App', () => {
     flux.getActions('locale').switchLocale({ locale: 'fr' });
   });
 
-  it('should render children component', function () {
+  it('should render children component', () => {
     ReactDOM.unmountComponentAtNode(node);
     const Stubbed = stubApp(flux)(App, { flux });
     const Element = <Stubbed><h1 className='foobar'>foobar</h1></Stubbed>;

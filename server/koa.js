@@ -50,8 +50,8 @@ const cacheOpts = { maxAge: 86400000, gzip: true };
 if (env === 'development') {
   const webpackConfig = require('./../webpack/dev.config');
   const proxy = require('koa-proxy')({
-    host: 'http://0.0.0.0:' + webpackConfig.server.port,
-    map: (filePath) => 'assets/' + filePath
+    host: `http://0.0.0.0:${webpackConfig.server.port}`,
+    map: (filePath) => `assets/${filePath}`
   });
   app.use(convert(mount('/assets', proxy)));
 } else {

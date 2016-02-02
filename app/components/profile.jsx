@@ -1,5 +1,5 @@
-import capitalize from 'lodash/string/capitalize';
-import defer from 'lodash/function/defer';
+import capitalize from 'lodash/capitalize';
+import defer from 'lodash/defer';
 
 import React, { Component, PropTypes } from 'react';
 import connect from 'connect-alt';

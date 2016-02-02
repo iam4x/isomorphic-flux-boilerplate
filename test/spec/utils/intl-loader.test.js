@@ -10,7 +10,7 @@ describe('IntlLoader', () => {
       lang.should.be.an('object');
       lang.should.have.any.keys('messages');
       return done();
-    })();
+    }());
   });
 
   it('should load french lang without polyfill', (done) => {
@@ -20,7 +20,7 @@ describe('IntlLoader', () => {
       lang.should.be.an('object');
       lang.should.have.any.keys('messages');
       return done();
-    })();
+    }());
   });
 
   it('should load english and with polyfill', (done) => {
@@ -30,7 +30,7 @@ describe('IntlLoader', () => {
       lang.should.be.an('object');
       lang.should.have.any.keys('messages');
       return done();
-    })();
+    }());
   });
 
   it('should load french and with polyfill', (done) => {
@@ -40,6 +40,6 @@ describe('IntlLoader', () => {
       lang.should.be.an('object');
       lang.should.have.any.keys('messages');
       return done();
-    })();
+    }());
   });
 });
