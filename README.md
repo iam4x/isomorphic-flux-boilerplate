@@ -66,6 +66,8 @@ There's also `alt-devtools` enabled in development, it's a Chrome Extension that
 The boilerplate provides an easy way to use internationalization, it provides through context a function called `i18n` that does not break when translations are missing. No more `react-intl/IntlMixin` to load everywhere.
 
 ```javascript
+import { FormattedRelative } from 'react-intl';
+...
 static contextTypes = { i18n: PropTypes.func.isRequired }
 
 render() {
@@ -76,7 +78,7 @@ render() {
       <h1>{ i18n('some.random.i18n.key', { now: new Date() }) }</h1>
 
       {/* FormattedRelative, FormattedCurrency works out the box :+1: */}
-      <FormattedRelative value={Date.now() - (1000 * 60 * 60 * 24)} />
+      <FormattedRelative value={ Date.now() - (1000 * 60 * 60 * 24) } />
     </div>
   );
 }
