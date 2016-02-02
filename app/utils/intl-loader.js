@@ -45,8 +45,8 @@ const loaders = {
 
 export default (locale, force) => {
   debug('dev')(`loading lang ${locale}`);
-  return new Promise((resolve) => {
-    return loaders[locale]((result) => {
+  return new Promise(resolve =>
+    loaders[locale](result => {
       // We need to define `ReactIntl` on the global scope
       // in order to load specific locale data from `ReactIntl`
       // see: https://github.com/iam4x/isomorphic-flux-boilerplate/issues/64
@@ -56,6 +56,6 @@ export default (locale, force) => {
       }
 
       return resolve(result);
-    }, force);
-  });
+    }, force)
+  );
 };
