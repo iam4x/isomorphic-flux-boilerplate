@@ -2,7 +2,7 @@
 
 import webpack from 'webpack';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
-import PurifyCSSPlugin from 'bird3-purifycss-webpack-plugin';
+import PurifyCSSPlugin from 'purifycss-webpack-plugin';
 
 import baseConfig from './base.config';
 
