@@ -70,7 +70,7 @@
     "webpack": "^1.12.6"
   },
   "devDependencies": {
-    "babel-eslint": "^4.0.5",
+    "babel-eslint": "^5.0.0",
     "babel-plugin-react-transform": "^1.0.3",
     "blocked": "^1.1.0",
     "browser-sync": "^2.8.0",
