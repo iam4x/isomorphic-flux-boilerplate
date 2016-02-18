@@ -1,5 +1,5 @@
 .app--spinner {
-  background-image: url('../../../images/spinner.svg');
+  background-image: url('./spinner.svg');
   background-repeat: no-repeat;
   display: none;
   height: 44px;
