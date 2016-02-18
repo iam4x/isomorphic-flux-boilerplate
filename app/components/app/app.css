@@ -4,11 +4,11 @@
 @import './_fonts';
 @import './_variables';
 
-@import './footer';
-@import './header';
-@import './lang-picker';
-@import './spinner';
-@import './users';
+@import '../footer/footer';
+@import '../header/header';
+@import '../shared/lang-picker/lang-picker';
+@import '../shared/spinner/spinner';
+@import '../users/users';
 
 body {
   font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
