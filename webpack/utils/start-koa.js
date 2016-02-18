@@ -36,7 +36,7 @@ const startServer = () => {
         // Start browserSync
         browserSync({
           port: parseInt(process.env.PORT, 10) + 2 || 3002,
-          proxy: `0.0.0.0:${parseInt(process.env.PORT, 10) || 3000}`
+          proxy: `localhost:${parseInt(process.env.PORT, 10) || 3000}`
         });
 
         // Listen for `rs` in stdin to restart server
