@@ -6,7 +6,7 @@ import createFlux from 'flux/createFlux';
 import stubApp from '../../utils/stub-app';
 import ApiClient from '../../../shared/api-client';
 
-import LangPicker from 'components/shared/lang-picker';
+import LangPicker from 'components/shared/lang-picker/lang-picker';
 
 const should = chai.should();
 

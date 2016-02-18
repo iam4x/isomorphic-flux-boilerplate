@@ -10,7 +10,7 @@ import createFlux from 'flux/createFlux';
 import ApiClient from '../../../shared/api-client';
 import stubApp from '../../utils/stub-app';
 
-import Users from 'components/users';
+import Users from 'components/users/users';
 
 const should = chai.should();
 

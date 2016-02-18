@@ -8,7 +8,7 @@ import fauxJax from 'faux-jax';
 import stubApp from '../../utils/stub-app';
 
 import createFlux from 'flux/createFlux';
-import Profile from 'components/profile';
+import Profile from 'components/profile/profile';
 
 import ApiClient from '../../../shared/api-client';
 import { users } from '../../../server/api/data.json';
