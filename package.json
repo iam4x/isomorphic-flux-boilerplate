@@ -76,7 +76,7 @@
     "browser-sync": "^2.8.0",
     "dev-ip": "^1.0.1",
     "eslint": "^1.4.1",
-    "eslint-config-airbnb": "^5.0.1",
+    "eslint-config-airbnb": "^6.0.2",
     "eslint-loader": "^1.0.0",
     "eslint-plugin-react": "^3.0.0",
     "faux-jax": "^4.1.0",
