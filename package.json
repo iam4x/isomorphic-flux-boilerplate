@@ -89,7 +89,7 @@
     "eslint-loader": "^1.0.0",
     "eslint-plugin-react": "^3.0.0",
     "faux-jax": "^4.1.0",
-    "isparta-loader": "^1.0.0",
+    "isparta-loader": "^2.0.0",
     "karma": "^0.13.3",
     "karma-chai-plugins": "^0.7.0",
     "karma-cli": "^0.1.0",
