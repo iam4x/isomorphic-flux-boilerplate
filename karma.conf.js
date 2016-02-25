@@ -8,23 +8,23 @@ if (process.env.CIRCLECI) {
     type: 'lcov',
     dir: process.env.CIRCLE_ARTIFACTS
   };
-  reporters = ['coverage', 'coveralls'];
+  reporters = [ 'coverage', 'coveralls' ];
 } else {
   coverage = {
     type: 'html',
     dir: 'coverage/'
   };
-  reporters = ['progress', 'coverage'];
+  reporters = [ 'progress', 'coverage' ];
 }
 
-export default function(config) {
+export default function (config) {
   config.set({
-    browsers: ['Firefox'],
+    reporters,
+    browsers: [ 'Firefox' ],
     browserNoActivityTimeout: 30000,
-    frameworks: ['mocha', 'chai', 'sinon-chai'],
-    files: ['tests.webpack.js'],
-    preprocessors: { 'tests.webpack.js': ['webpack'] },
-    reporters: reporters,
+    frameworks: [ 'mocha', 'chai', 'sinon-chai' ],
+    files: [ 'tests.webpack.js' ],
+    preprocessors: { 'tests.webpack.js': [ 'webpack' ] },
     coverageReporter: coverage,
     webpack: {
       ...baseConfig,
@@ -35,7 +35,7 @@ export default function(config) {
           ...baseConfig.module.loaders,
           {
             test: /\.js$|.jsx$/,
-            loader: 'isparta?{babel: {stage: 0}}',
+            loader: 'isparta',
             exclude: /node_modules|test|utils/
           },
           {
@@ -58,6 +58,9 @@ export default function(config) {
         })
       ]
     },
-    webpackServer: { noInfo: true }
+    webpackServer: {
+      noInfo: true,
+      stats: 'errors-only'
+    }
   });
 }

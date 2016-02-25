@@ -14,24 +14,24 @@
 
 * [react ^0.14](https://facebook.github.io/react/)
 * [react-router ^1.0.0](https://github.com/rackt/react-router)
-* [react-intl](https://github.com/yahoo/react-intl)
+* [react-intl ^1.2.0](https://github.com/yahoo/react-intl)
 * [react-redbox](https://github.com/KeywordBrain/redbox-react)
 * [alt ^0.18](https://github.com/goatslacker/alt)
 * [alt-devtools](https://github.com/goatslacker/alt-devtool)
 * [connect-alt](http://github.com/iam4x/connect-alt)
 * [iso ^5.0.0](https://github.com/goatslacker/iso)
-* [koa](http://koajs.com/)
+* [koa ^2.0.0-alpha.3](http://koajs.com/)
 * [webpack](http://webpack.github.io/)
 * [webpack-hot-middleware](https://github.com/glenjamin/webpack-hot-middleware)
 * [webpack-dev-middleware](https://github.com/webpack/webpack-dev-middleware)
-* [babeljs](https://babeljs.io/)
+* [babeljs ^6.2](https://babeljs.io/)
 * [postcss ^0.7](https://github.com/postcss/postcss)
 * [precss](https://github.com/jonathantneal/precss)
 * [purifyCSS](https://github.com/purifycss/purifycss)
 
 ## TL;DR
 
-Use with `nodejs@4.2.1`, clone the repo, `npm install` and `npm run dev`.
+Use with `nodejs@4.3.1`, clone the repo, `npm install` and `npm run dev`.
 
 Learn React ([react-prime-draft](https://github.com/mikechau/react-primer-draft)), learn Flux and Alt ([alt guide](http://alt.js.org/guide/)).
 

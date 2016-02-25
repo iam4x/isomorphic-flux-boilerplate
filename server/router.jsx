@@ -16,7 +16,7 @@ export default async function (ctx) {
 
   // Get request locale for rendering
   const locale = ctx.cookies.get('_lang') ||
-    ctx.acceptsLanguages(require('./config/init').locales) ||
+    ctx.acceptsLanguages(require('./config').locales) ||
     'en';
 
   const { messages } = require(`data/${locale}`);
@@ -63,9 +63,9 @@ export default async function (ctx) {
     // Handle component `onEnter` transition
     if (redirect) {
       const { pathname, search } = redirect;
-      return ctx.redirect(pathname + search);
+      ctx.redirect(pathname + search);
+    } else {
+      throw err;
     }
-
-    throw err;
   }
 }

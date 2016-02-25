@@ -13,7 +13,6 @@
     "sinon": true
   },
   "rules": {
-    "react/display-name": [2, { "acceptTranspilerName": true }],
     "react/jsx-curly-spacing": [2, "always"],
     "react/jsx-no-duplicate-props": 2,
     "react/jsx-no-undef": 2,
