@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import TestUtils from 'react-addons-test-utils';
 
 import createFlux from 'flux/createFlux';
-import NotFound from 'pages/not-found/not-found';
+import NotFound from 'pages/not-found';
 
 import stubApp from '../../utils/stub-app';
 import ApiClient from '../../../shared/api-client';

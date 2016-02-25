@@ -6,7 +6,7 @@ import createFlux from 'flux/createFlux';
 import stubApp from '../../utils/stub-app';
 import ApiClient from '../../../shared/api-client';
 
-import Header from 'components/header/header';
+import Header from 'components/header';
 
 chai.should();
 

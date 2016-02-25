@@ -10,7 +10,7 @@ import Router, { RoutingContext, match } from 'react-router';
 import AltContainer from 'alt-container';
 
 import intlLoader from 'utils/intl-loader';
-import ErrorPage from 'pages/server-error/server-error';
+import ErrorPage from 'pages/server-error';
 
 const { BROWSER, NODE_ENV } = process.env;
 
