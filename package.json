@@ -164,6 +164,6 @@
     "intl"
   ],
   "engines": {
-    "nodejs": "^4.2.3"
+    "nodejs": "^4.3.1"
   }
 }
