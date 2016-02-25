@@ -4,7 +4,7 @@ const hasBuiltInLocaleData = (locale) =>
   (Intl.NumberFormat.supportedLocalesOf(locale)[0] === locale &&
     Intl.DateTimeFormat.supportedLocalesOf(locale)[0] === locale);
 
-export default (locales) => {
+module.exports = (locales) => {
   if (!process.env.BROWSER) {
     if (global.Intl) {
       if (!locales.every(hasBuiltInLocaleData)) {
