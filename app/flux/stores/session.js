@@ -19,7 +19,7 @@ class SessionStore {
     // transition app to `/account`
     // or to the original asked page
     if (BROWSER) {
-      const history = require('utils/router-history');
+      const { browserHistory } = require('react-router');
       const [ , nextPath = '/account' ] = window
         .location.search.match(/\?redirect=(.+)$/) || [];
 
@@ -27,7 +27,7 @@ class SessionStore {
       Cookies.set('_auth', username);
 
       debug('dev')('redirect after login to %s', nextPath);
-      history.replaceState(null, nextPath);
+      browserHistory.replace(nextPath);
     }
   }
 
@@ -35,8 +35,9 @@ class SessionStore {
     this.session = null;
     if (BROWSER) {
       const Cookies = require('cookies-js');
+      const { browserHistory } = require('react-router');
       Cookies.expire('_auth');
-      require('utils/router-history').replaceState(null, '/login');
+      browserHistory.replace('/login');
     }
   }
 
