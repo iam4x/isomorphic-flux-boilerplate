@@ -12,7 +12,7 @@ import Router from 'koa-router';
 import convert from 'koa-convert';
 
 import router from './router';
-import config from './config/init';
+import config from './config';
 
 const app = new Koa();
 const env = process.env.NODE_ENV || 'development';
