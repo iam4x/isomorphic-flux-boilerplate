@@ -58,6 +58,9 @@ export default function (config) {
         })
       ]
     },
-    webpackServer: { noInfo: true }
+    webpackServer: {
+      noInfo: true,
+      stats: 'errors-only'
+    }
   });
 }
