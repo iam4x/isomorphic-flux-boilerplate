@@ -35,7 +35,7 @@ Use with `nodejs@4.3.1`, clone the repo, `npm install` and `npm run dev`.
 
 Learn React ([react-prime-draft](https://github.com/mikechau/react-primer-draft)), learn Flux and Alt ([alt guide](http://alt.js.org/guide/)).
 
-Wrap you async actions into promises, send them to `altResolver` with `altResolver.resolve(xxx)` for async server side rendering (see [app/actions/users.js:31](https://github.com/iam4x/isomorphic-flux-boilerplate/blob/master/app/actions/users.js#L31)).
+Wrap you async actions into promises, send them to `altResolver` with `altResolver.resolve(xxx)` for async server side rendering (see [app/flux/actions/users.js:11](https://github.com/iam4x/isomorphic-flux-boilerplate/blob/master/app/flux/actions/users.js#L11-L29)).
 
 Build for production with `npm run build`, don't forget to run the tests before `npm test`.
 
