@@ -44,7 +44,7 @@ const startServer = () => {
         process.stdin.setEncoding('utf8');
         process.stdin.on('data', (data) => {
           const parsedData = `${data}`.trim().toLowerCase();
-          if (parsedData === 'rs') return restartServer();
+          if (parsedData === 'rs') restartServer();
         });
 
         // Start watcher on server files

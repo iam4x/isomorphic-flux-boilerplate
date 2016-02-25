@@ -1,4 +1,5 @@
 /* eslint react/display-name: 0 */
+/* eslint consistent-return: 0 */
 
 import Iso from 'iso';
 import React from 'react';
@@ -95,6 +96,7 @@ export default async function({ flux, history, location }) {
     }
 
     // Get status code, page title and page description for rendering
+    /* eslint no-use-before-define: 0 */
     const { titleBase, title, ...helmet } = flux.getStore('helmet').getState();
 
     return {

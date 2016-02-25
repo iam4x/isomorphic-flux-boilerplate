@@ -63,9 +63,9 @@ export default async function (ctx) {
     // Handle component `onEnter` transition
     if (redirect) {
       const { pathname, search } = redirect;
-      return ctx.redirect(pathname + search);
+      ctx.redirect(pathname + search);
+    } else {
+      throw err;
     }
-
-    throw err;
   }
 }

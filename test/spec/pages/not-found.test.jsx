@@ -11,9 +11,9 @@ import ApiClient from '../../../shared/api-client';
 chai.should();
 
 describe('NotFoundPage', () => {
-  let instance;
-  let node;
-  let flux;
+  let instance = null;
+  let node = null;
+  let flux = null;
 
   beforeEach(() => {
     flux = createFlux(new ApiClient());
