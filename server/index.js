@@ -8,10 +8,11 @@ process.env.NODE_PATH = 'app';
 require('module').Module._initPaths();
 
 // Install `babel` hook for ES6
-require('babel/register');
+require('babel-core/register');
+require('babel-polyfill');
 
 // Load Intl polyfill
-require('utils/intl-polyfill')(require('./config/init').locales);
+require('utils/intl-polyfill')(require('./config').locales);
 
 // Start the server
 require('./koa.js');

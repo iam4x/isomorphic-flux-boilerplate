@@ -4,7 +4,7 @@ const simplifyUsers = (collection) => collection
   .map(({ user, seed }) => ({ ...user, seed }))
   .map(({ email, name, seed, picture }) => ({ email, name, seed, picture }));
 
-export default function (router) {
+function routes(router) {
   router.get('/users', async function (ctx) {
     ctx.body = simplifyUsers(users.slice(0, 10));
   });
@@ -20,3 +20,7 @@ export default function (router) {
     }
   });
 }
+
+// can't export directly function, run into const issue
+// see: https://phabricator.babeljs.io/T2892
+export default routes;
