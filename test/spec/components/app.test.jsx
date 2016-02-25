@@ -6,7 +6,7 @@ import createFlux from 'flux/createFlux';
 import stubApp from '../../utils/stub-app';
 import ApiClient from '../../../shared/api-client';
 
-import App from 'components/app/app';
+import App from 'components/app';
 
 const should = chai.should();
 

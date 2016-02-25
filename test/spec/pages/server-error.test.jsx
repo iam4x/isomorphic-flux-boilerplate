@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import TestUtils from 'react-addons-test-utils';
 
-import ServerError from 'pages/server-error/server-error';
+import ServerError from 'pages/server-error';
 
 chai.should();
 

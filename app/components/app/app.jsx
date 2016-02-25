@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 
-import Header from 'components/header/header';
-import Footer from 'components/footer/footer';
+import Header from 'components/header';
+import Footer from 'components/footer';
 
 if (process.env.BROWSER) require('app.css');
 
