@@ -6,9 +6,9 @@ import ApiClient from '../../../shared/api-client';
 chai.should();
 
 describe('UsersStore', () => {
-  let flux;
-  let store;
-  let actions;
+  let flux = null;
+  let store = null;
+  let actions = null;
 
   beforeEach(() => {
     flux = createFlux(new ApiClient());

@@ -27,7 +27,7 @@ class SessionStore {
       Cookies.set('_auth', username);
 
       debug('dev')('redirect after login to %s', nextPath);
-      return history.replaceState(null, nextPath);
+      history.replaceState(null, nextPath);
     }
   }
 

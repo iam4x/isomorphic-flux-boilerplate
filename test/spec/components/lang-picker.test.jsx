@@ -11,10 +11,10 @@ import LangPicker from 'components/shared/lang-picker/lang-picker';
 const should = chai.should();
 
 describe('LangPicker', () => {
-  let node;
-  let instance;
-  let flux;
-  let spy;
+  let node = null;
+  let instance = null;
+  let flux = null;
+  let spy = null;
 
   beforeEach(() => {
     flux = createFlux(new ApiClient());
