@@ -1,6 +1,6 @@
 export function isConnected(flux) {
-  return function ({ location: { pathname } }, replaceState) {
+  return function ({ location: { pathname } }, replace) {
     const { session } = flux.getStore('session').getState();
-    if (!session) replaceState(null, `/login?redirect=${pathname}`);
+    if (!session) replace(null, `/login?redirect=${pathname}`);
   };
 }

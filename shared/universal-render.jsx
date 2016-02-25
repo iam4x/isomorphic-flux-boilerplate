@@ -6,7 +6,7 @@ import React from 'react';
 import debug from 'debug';
 import { render } from 'react-dom';
 import { renderToString } from 'react-dom/server';
-import Router, { RoutingContext, match } from 'react-router';
+import { Router, RouterContext, match } from 'react-router';
 import AltContainer from 'alt-container';
 
 import intlLoader from 'utils/intl-loader';
@@ -67,7 +67,7 @@ export default async function({ flux, history, location }) {
     const element = (
       <AltContainer flux={ flux }>
         <I18nContainer>
-          <RoutingContext { ...renderProps } />
+          <RouterContext { ...renderProps } />
         </I18nContainer>
       </AltContainer>
     );
