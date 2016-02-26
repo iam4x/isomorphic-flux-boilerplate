@@ -5,7 +5,7 @@ import { IntlMixin } from 'react-intl';
 
 class I18nContainer extends Component {
 
-  static propTypes = { children: PropTypes.element.isRequired }
+  static propTypes = { children: PropTypes.node.isRequired }
   static contextTypes = { flux: PropTypes.object.isRequired }
 
   static childContextTypes = {

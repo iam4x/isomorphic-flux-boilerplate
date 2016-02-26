@@ -7,7 +7,7 @@ if (process.env.BROWSER) require('styles/app.css');
 
 class App extends Component {
 
-  static propTypes = { children: PropTypes.element }
+  static propTypes = { children: PropTypes.node }
   static contextTypes = { flux: PropTypes.object.isRequired }
 
   state = { i18n: this.context
@@ -23,7 +23,7 @@ class App extends Component {
     flux.getStore('helmet').unlisten(this.handleTitleChange);
   }
 
-  handleTitleChange({ titleBase, title }) {
+  handleTitleChange({ titleBase, title }: { title: string, title: string }) {
     document.title = titleBase + title;
   }
 

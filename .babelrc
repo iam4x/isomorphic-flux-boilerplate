@@ -2,13 +2,15 @@
   "presets": [ "es2015", "react", "stage-0" ],
   "plugins": [
     "transform-decorators-legacy",
-    "add-module-exports"
+    "add-module-exports",
+    ["typecheck", { "disable": { "production": true } }]
   ],
   "env": {
     "browser": {
       "plugins": [
         "transform-decorators-legacy",
         "add-module-exports",
+        ["typecheck", { "disable": { "production": true } }],
         ["react-transform", {
           "transforms": [
             {
