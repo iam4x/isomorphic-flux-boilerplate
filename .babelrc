@@ -23,6 +23,13 @@
           ]
         }]
       ]
+    },
+    "production": {
+      "plugins": [
+        "transform-decorators-legacy",
+        "add-module-exports",
+        "react-remove-prop-types"
+      ]
     }
   }
 }
