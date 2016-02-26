@@ -31,12 +31,12 @@ class Header extends Component {
     i18n: PropTypes.func.isRequired
   }
 
-  handleLocaleChange(locale) {
+  handleLocaleChange = (locale: string) => {
     const { flux } = this.context;
     flux.getActions('locale').switchLocale({ locale });
   }
 
-  handleLogout() {
+  handleLogout = () => {
     const { flux } = this.context;
     flux.getActions('session').logout();
   }
@@ -53,7 +53,7 @@ class Header extends Component {
         {/* LangPicker on the right side */}
         <LangPicker
           activeLocale={ activeLocale }
-          onChange={ ::this.handleLocaleChange } />
+          onChange={ this.handleLocaleChange } />
 
         {/* React Logo in header */}
         <Link to='/' className='app--logo'>
@@ -80,7 +80,7 @@ class Header extends Component {
                 </Link>
               </li>,
               <li key={ 1 }>
-                <a href='#' onClick={ ::this.handleLogout }>
+                <a href='#' onClick={ this.handleLogout }>
                   { i18n('header.logout') }
                 </a>
               </li>

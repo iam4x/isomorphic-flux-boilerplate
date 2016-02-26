@@ -9,7 +9,7 @@ class LocaleStore {
     this.formats = {};
   }
 
-  onSwitchLocale({ messages, locale }) {
+  onSwitchLocale({ messages, locale }: { messages: Object, locale: string }) {
     // Save locale into a cookie
     // that will be read from server on requests
     if (process.env.BROWSER) {

@@ -1,3 +1,10 @@
+type State = {
+  title: ?string,
+  titleBase: ?string,
+  description: ?string,
+  statusCode: ?number
+};
+
 class HelmetStore {
 
   constructor() {
@@ -11,7 +18,7 @@ class HelmetStore {
     };
   }
 
-  onUpdate(props) {
+  onUpdate(props: State) {
     this.setState({ ...this.state, ...props });
   }
 

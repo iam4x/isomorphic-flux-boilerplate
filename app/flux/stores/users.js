@@ -8,16 +8,16 @@ class UsersStore {
   }
 
 
-  onIndexSuccess(users) {
+  onIndexSuccess(users: Object[]) {
     this.collection = users;
     this.error = null;
   }
 
-  onIndexFail({ error }) {
+  onIndexFail({ error }: { error: ?Object }) {
     this.error = error;
   }
 
-  onShowSuccess(user) {
+  onShowSuccess(user: { seed: string }) {
     const index = this.collection
       .findIndex(({ seed }) => seed === user.seed);
 
@@ -31,11 +31,11 @@ class UsersStore {
     this.error = null;
   }
 
-  onShowFail({ error }) {
+  onShowFail({ error }: { error: ?Object }) {
     this.error = error;
   }
 
-  onRemove(index) {
+  onRemove(index: number) {
     this.collection = this.collection
       .filter((user, idx) => idx !== index);
   }

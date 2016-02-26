@@ -21,21 +21,19 @@ class Users extends Component {
     flux.getActions('users').index();
   }
 
-  handleRemove(index) {
+  handleRemove(index: number) {
     const { flux } = this.context;
     flux.getActions('users').remove(index);
   }
 
-  renderUser = (user, index) => {
+  renderUser = (user: { seed: string, email: string }, index: number) => {
     const { i18n } = this.context;
-    const profileRoute = replaceParams(
-      i18n('routes.profile'),
-      { seed: user.seed }
-    );
+    const { seed, email } = user;
+    const profileRoute: string = replaceParams(i18n('routes.profile'), { seed });
 
     return (
       <tr className='user--row' key={ index }>
-        <td>{ user.email }</td>
+        <td>{ email }</td>
         <td className='text-center'>
           <Link to={ profileRoute }>{ i18n('users.profile') }</Link>
         </td>
