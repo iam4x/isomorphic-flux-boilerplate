@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 
 const conditional = `<!--[if IE 8]>
   <script src='//cdnjs.cloudflare.com/ajax/libs/es5-shim/4.1.1/es5-shim.min.js'></script>
@@ -7,7 +7,17 @@ const conditional = `<!--[if IE 8]>
   <script src='//cdn.uriit.ru/console-polyfill/index.js'></script>
 <![endif]-->`;
 
-function ServerHTML({ body, assets, locale, title, description }) {
+type Props = {
+  body: string,
+  assets: Object,
+  locale: string,
+  title: string,
+  description: string
+};
+
+function ServerHTML(props: Props) {
+  const { body, assets, locale, title, description } = props;
+
   return (
     <html lang={ locale }>
       <head>
@@ -31,13 +41,5 @@ function ServerHTML({ body, assets, locale, title, description }) {
     </html>
   );
 }
-
-ServerHTML.propTypes = {
-  body: PropTypes.string.isRequired,
-  assets: PropTypes.object.isRequired,
-  locale: PropTypes.string.isRequired,
-  title: PropTypes.string,
-  description: PropTypes.string
-};
 
 export default ServerHTML;

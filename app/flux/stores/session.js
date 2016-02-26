@@ -9,11 +9,11 @@ class SessionStore {
     this.session = null;
   }
 
-  onUpdate({ username }) {
+  onUpdate({ username }: { username: string }) {
     this.session = { username };
   }
 
-  onLogin({ username }) {
+  onLogin({ username }: { username: string }) {
     this.session = { username };
 
     // transition app to `/account`

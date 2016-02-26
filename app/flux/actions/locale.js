@@ -2,7 +2,7 @@ import intlLoader from 'utils/intl-loader';
 
 class LocaleActions {
 
-  switchLocale(payload) {
+  switchLocale(payload: { messages: ?Object, locale: string }) {
     // return directly action payload to stores when:
     //   - on app bootstrap (client-side)
     //   - on server routing (server-side)
