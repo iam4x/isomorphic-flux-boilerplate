@@ -25,7 +25,7 @@ const bootstrap = () =>
 
 /* eslint space-before-function-paren:0 */
 // https://github.com/eslint/eslint/issues/4442
-export default async function({ flux, history, location }) {
+export default async function({ flux, location }) {
   if (BROWSER) {
     if (NODE_ENV === 'development') require('alt-utils/lib/chromeDebug')(flux);
 
@@ -41,11 +41,15 @@ export default async function({ flux, history, location }) {
     const routes = require('routes');
     const I18nContainer = require('utils/i18n-container');
 
+    const { browserHistory } = require('react-router');
+    const useScroll = require('scroll-behavior/lib/useStandardScroll');
+    const scrollHistory = useScroll(() => browserHistory)();
+
     const element = (
       <AltContainer flux={ flux }>
         <I18nContainer>
           <Router
-            history={ history }
+            history={ scrollHistory }
             routes={ routes(flux) } />
         </I18nContainer>
       </AltContainer>

@@ -1,5 +1,4 @@
 import debug from 'debug';
-import { browserHistory } from 'react-router';
 // Paths are relative to `app` directory
 import createFlux from 'flux/createFlux';
 
@@ -12,5 +11,4 @@ if (NODE_ENV === 'development') debug.enable('dev,koa');
 const client = new ApiClient();
 const flux = createFlux(client);
 
-universalRender({ flux, history: browserHistory })
-  .catch(err => debug('dev')(err));
+universalRender({ flux }).catch(err => debug('dev')(err));
