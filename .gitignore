@@ -8,3 +8,4 @@ dist
 .sass-cache
 .env
 .c9
+.idea
