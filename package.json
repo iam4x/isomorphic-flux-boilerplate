@@ -9,8 +9,8 @@
     "start": "cross-env NODE_ENV=production node ./server/index.js",
     "predev": "rimraf dist",
     "dev": "babel-node ./webpack/dev-server.js",
-    "test": "babel-node karma start --single-run",
-    "dev-test": "babel-node karma start",
+    "test": "karma start --single-run",
+    "dev-test": "karma start",
     "lint": "eslint app server webpack shared test --ext .jsx,.js"
   },
   "repository": {
