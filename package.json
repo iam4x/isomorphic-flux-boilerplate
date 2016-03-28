@@ -85,7 +85,7 @@
     "blocked": "^1.1.0",
     "browser-sync": "^2.8.0",
     "dev-ip": "^1.0.1",
-    "eslint": "^2.2.0",
+    "eslint": "^2.5.3",
     "eslint-config-airbnb": "^6.0.2",
     "eslint-loader": "^1.0.0",
     "eslint-plugin-react": "^4.1.0",
