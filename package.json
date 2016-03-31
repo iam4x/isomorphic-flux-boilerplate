@@ -27,7 +27,7 @@
     "babel": "^6.5.2",
     "babel-cli": "^6.5.1",
     "babel-core": "^6.5.2",
-    "babel-eslint": "^5.0.0",
+    "babel-eslint": "^6.0.2",
     "babel-loader": "^6.2.3",
     "babel-plugin-add-module-exports": "^0.1.2",
     "babel-plugin-react-remove-prop-types": "^2.0.2",
