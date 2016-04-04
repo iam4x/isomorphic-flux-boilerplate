@@ -1,6 +1,6 @@
-import imageResolver from 'utils/image-resolver';
+import imageResolver from 'utils/image-resolver'
 
-const should = chai.should();
+const should = chai.should()
 
 describe('ImageResolver', () => {
   // TODO: Set up TDD for server
@@ -8,9 +8,9 @@ describe('ImageResolver', () => {
 
   it('should throw an error using on browser', () => {
     try {
-      imageResolver();
+      imageResolver()
     } catch (error) {
-      should.exist(error);
+      should.exist(error)
     }
-  });
-});
+  })
+})

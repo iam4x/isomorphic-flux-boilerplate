@@ -1,13 +1,13 @@
 /* eslint react/display-name: 0 */
-import React, { Component, PropTypes } from 'react';
-import I18nContainer from 'utils/i18n-container';
+import React, { Component, PropTypes } from 'react'
+import I18nContainer from 'utils/i18n-container'
 
 export default function stubApp(flux) {
-  const { messages } = require('data/en');
+  const { messages } = require('data/en')
 
   flux
     .getActions('locale')
-    .switchLocale({ locale: 'en', messages });
+    .switchLocale({ locale: 'en', messages })
 
   return function (DecoratedComponent, props) {
     return class Wrapper extends Component {
@@ -17,18 +17,18 @@ export default function stubApp(flux) {
       }
 
       getChildContext() {
-        return { flux };
+        return { flux }
       }
 
       render() {
-        const customProps = { ...this.props, ...props };
+        const customProps = { ...this.props, ...props }
         return (
           <I18nContainer>
             <DecoratedComponent { ...customProps } />
           </I18nContainer>
-        );
+        )
       }
 
-    };
-  };
+    }
+  }
 }

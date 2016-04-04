@@ -1,17 +1,17 @@
 class RequestsStore {
 
   constructor() {
-    this.bindActions(this.alt.getActions('requests'));
-    this.inProgress = false;
+    this.bindActions(this.alt.getActions('requests'))
+    this.inProgress = false
   }
 
   onStart() {
-    this.inProgress = true;
+    this.inProgress = true
   }
 
   onStop() {
-    this.inProgress = false;
+    this.inProgress = false
   }
 }
 
-export default RequestsStore;
+export default RequestsStore

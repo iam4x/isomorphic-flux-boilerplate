@@ -1,8 +1,8 @@
-import React from 'react';
-import { Route } from 'react-router';
+import React from 'react'
+import { Route } from 'react-router'
 
-import { generateRoute } from 'utils/localized-routes';
-import { isConnected } from 'utils/routes-hooks';
+import { generateRoute } from 'utils/localized-routes'
+import { isConnected } from 'utils/routes-hooks'
 
 export default function (flux) { /* eslint react/display-name: 0 */
   return (
@@ -30,5 +30,5 @@ export default function (flux) { /* eslint react/display-name: 0 */
       }) }
       <Route path='*' component={ require('./pages/not-found') } />
     </Route>
-  );
+  )
 }

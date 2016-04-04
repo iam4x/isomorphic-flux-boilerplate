@@ -1,58 +1,58 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import TestUtils from 'react-addons-test-utils';
-import createFlux from 'flux/createFlux';
+import React from 'react'
+import ReactDOM from 'react-dom'
+import TestUtils from 'react-addons-test-utils'
+import createFlux from 'flux/createFlux'
 
-import stubApp from '../../utils/stub-app';
-import ApiClient from '../../../shared/api-client';
+import stubApp from '../../utils/stub-app'
+import ApiClient from '../../../shared/api-client'
 
-import LangPicker from 'components/shared/lang-picker';
+import LangPicker from 'components/shared/lang-picker'
 
-const should = chai.should();
+const should = chai.should()
 
 describe('LangPicker', () => {
-  let node = null;
-  let instance = null;
-  let flux = null;
-  let spy = null;
+  let node = null
+  let instance = null
+  let flux = null
+  let spy = null
 
   beforeEach(() => {
-    flux = createFlux(new ApiClient());
-    spy = sinon.spy();
+    flux = createFlux(new ApiClient())
+    spy = sinon.spy()
 
-    const Stubbed = stubApp(flux)(LangPicker, { activeLocale: 'en', onChange: spy });
-    const element = React.createElement(Stubbed);
+    const Stubbed = stubApp(flux)(LangPicker, { activeLocale: 'en', onChange: spy })
+    const element = React.createElement(Stubbed)
 
-    node = window.document.createElement('div');
-    instance = ReactDOM.render(element, node);
-  });
+    node = window.document.createElement('div')
+    instance = ReactDOM.render(element, node)
+  })
 
   afterEach(() => {
-    if (instance) ReactDOM.unmountComponentAtNode(node);
-  });
+    if (instance) ReactDOM.unmountComponentAtNode(node)
+  })
 
   it('should have en locale active', () => {
-    const active = TestUtils.findRenderedDOMComponentWithClass(instance, 'active');
-    should.exist(active);
-    active.innerHTML.should.eql('en');
-  });
+    const active = TestUtils.findRenderedDOMComponentWithClass(instance, 'active')
+    should.exist(active)
+    active.innerHTML.should.eql('en')
+  })
 
   it('should call `onChange` handler', () => {
-    const locales = TestUtils.scryRenderedDOMComponentsWithTag(instance, 'a');
-    locales.length.should.eql(2);
+    const locales = TestUtils.scryRenderedDOMComponentsWithTag(instance, 'a')
+    locales.length.should.eql(2)
 
-    const inactive = locales.find(l => !l.className);
-    TestUtils.Simulate.click(inactive);
+    const inactive = locales.find(l => !l.className)
+    TestUtils.Simulate.click(inactive)
 
-    spy.should.have.been.calledOnce;
-    spy.should.have.been.calledWith('fr');
-  });
+    spy.should.have.been.calledOnce
+    spy.should.have.been.calledWith('fr')
+  })
 
   it('should do nothing on same locale click', () => {
-    const active = TestUtils.findRenderedDOMComponentWithClass(instance, 'active');
-    should.exist(active);
-    active.innerHTML.should.eql('en');
-    TestUtils.Simulate.click(active);
-    active.className.should.eql('active');
-  });
-});
+    const active = TestUtils.findRenderedDOMComponentWithClass(instance, 'active')
+    should.exist(active)
+    active.innerHTML.should.eql('en')
+    TestUtils.Simulate.click(active)
+    active.className.should.eql('active')
+  })
+})

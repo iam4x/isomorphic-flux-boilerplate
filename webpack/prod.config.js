@@ -1,10 +1,10 @@
 /* eslint max-len: 0 */
 
-import webpack from 'webpack';
-import ExtractTextPlugin from 'extract-text-webpack-plugin';
-import PurifyCSSPlugin from 'purifycss-webpack-plugin';
+import webpack from 'webpack'
+import ExtractTextPlugin from 'extract-text-webpack-plugin'
+import PurifyCSSPlugin from 'purifycss-webpack-plugin'
 
-import baseConfig from './base.config';
+import baseConfig from './base.config'
 
 export default {
   ...baseConfig,
@@ -84,4 +84,4 @@ export default {
 
     ...baseConfig.plugins
   ]
-};
+}

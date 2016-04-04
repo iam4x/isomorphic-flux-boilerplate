@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react'
 
 class Guides extends Component {
 
@@ -8,10 +8,10 @@ class Guides extends Component {
   }
 
   componentWillMount() {
-    const { flux, i18n } = this.context;
+    const { flux, i18n } = this.context
 
     return flux.getActions('helmet')
-      .update({ title: i18n('guides.page-title') });
+      .update({ title: i18n('guides.page-title') })
   }
 
   render() {
@@ -20,9 +20,9 @@ class Guides extends Component {
         <h1>Guides</h1>
         <p>Coming soon...</p>
       </div>
-    );
+    )
   }
 
 }
 
-export default Guides;
+export default Guides

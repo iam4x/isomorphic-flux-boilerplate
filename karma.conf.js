@@ -1,20 +1,20 @@
-import webpack from 'webpack';
-import baseConfig from './webpack/base.config';
+import webpack from 'webpack'
+import baseConfig from './webpack/base.config'
 
-let coverage;
-let reporters;
+let coverage
+let reporters
 if (process.env.CIRCLECI) {
   coverage = {
     type: 'lcov',
     dir: process.env.CIRCLE_ARTIFACTS
-  };
-  reporters = [ 'coverage', 'coveralls' ];
+  }
+  reporters = [ 'coverage', 'coveralls' ]
 } else {
   coverage = {
     type: 'html',
     dir: 'coverage/'
-  };
-  reporters = [ 'progress', 'coverage' ];
+  }
+  reporters = [ 'progress', 'coverage' ]
 }
 
 export default function (config) {
@@ -62,5 +62,5 @@ export default function (config) {
       noInfo: true,
       stats: 'errors-only'
     }
-  });
+  })
 }

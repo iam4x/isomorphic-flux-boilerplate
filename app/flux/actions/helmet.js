@@ -1,9 +1,9 @@
 class HelmetActions {
 
   constructor() {
-    this.generateActions('update');
+    this.generateActions('update')
   }
 
 }
 
-export default HelmetActions;
+export default HelmetActions

@@ -1,8 +1,8 @@
-import path from 'path';
+import path from 'path'
 
-import writeStats from './utils/write-stats';
+import writeStats from './utils/write-stats'
 
-const JS_REGEX = /\.js$|\.jsx$|\.es6$|\.babel$/;
+const JS_REGEX = /\.js$|\.jsx$|\.es6$|\.babel$/
 
 export default {
   devtool: 'source-map',
@@ -26,7 +26,7 @@ export default {
   },
   plugins: [
     // write webpack stats
-    function () { this.plugin('done', writeStats); }
+    function () { this.plugin('done', writeStats) }
   ],
   resolve: {
     extensions: [ '', '.js', '.json', '.jsx', '.es6', '.babel' ],
@@ -38,4 +38,4 @@ export default {
     require('precss')(),
     require('autoprefixer')({ browsers: [ 'last 2 versions' ] })
   ]
-};
+}

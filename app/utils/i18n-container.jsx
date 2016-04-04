@@ -1,7 +1,7 @@
-import debug from 'debug';
+import debug from 'debug'
 
-import { Component, PropTypes } from 'react';
-import { IntlMixin } from 'react-intl';
+import { Component, PropTypes } from 'react'
+import { IntlMixin } from 'react-intl'
 
 class I18nContainer extends Component {
 
@@ -16,24 +16,24 @@ class I18nContainer extends Component {
   }
 
   constructor(props, context) {
-    super(props, context);
+    super(props, context)
 
-    const { flux } = this.context;
-    this.state = flux.getStore('locale').getState();
+    const { flux } = this.context
+    this.state = flux.getStore('locale').getState()
   }
 
   getChildContext() {
-    return { ...this.state, i18n: this.i18n };
+    return { ...this.state, i18n: this.i18n }
   }
 
   componentDidMount() {
-    const { flux } = this.context;
-    flux.getStore('locale').listen(this.handleLocaleChange);
+    const { flux } = this.context
+    flux.getStore('locale').listen(this.handleLocaleChange)
   }
 
   componentWillUnmount() {
-    const { flux } = this.context;
-    flux.getStore('locale').unlisten(this.handleLocaleChange);
+    const { flux } = this.context
+    flux.getStore('locale').unlisten(this.handleLocaleChange)
   }
 
   handleLocaleChange = (state) => this.setState(state)
@@ -42,21 +42,21 @@ class I18nContainer extends Component {
     try {
       // Fake IntlMixin context with `messages`, `formats` and `locales`
       // into `this.props` and `this.context`
-      const ctx = { ...IntlMixin, context: this.state, props: this.state };
+      const ctx = { ...IntlMixin, context: this.state, props: this.state }
 
-      const messages = IntlMixin.getIntlMessage.call(ctx, key);
-      return IntlMixin.formatMessage.call(ctx, messages, values);
+      const messages = IntlMixin.getIntlMessage.call(ctx, key)
+      return IntlMixin.formatMessage.call(ctx, messages, values)
     } catch (error) {
-      debug('dev')(error);
-      return `translation missing (${this.state.locales[0]}): ${key}`;
+      debug('dev')(error)
+      return `translation missing (${this.state.locales[0]}): ${key}`
     }
   }
 
   render() {
-    const { children } = this.props;
-    return children;
+    const { children } = this.props
+    return children
   }
 
 }
 
-export default I18nContainer;
+export default I18nContainer

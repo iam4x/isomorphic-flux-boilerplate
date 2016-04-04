@@ -1,8 +1,8 @@
-import React, { Component, PropTypes } from 'react';
-import connect from 'connect-alt';
-import { Link } from 'react-router';
+import React, { Component, PropTypes } from 'react'
+import connect from 'connect-alt'
+import { Link } from 'react-router'
 
-import { replaceParams } from 'utils/localized-routes';
+import { replaceParams } from 'utils/localized-routes'
 
 @connect(({ users: { collection } }) => ({ collection }))
 class Users extends Component {
@@ -15,21 +15,21 @@ class Users extends Component {
   }
 
   componentWillMount() {
-    const { flux, i18n } = this.context;
+    const { flux, i18n } = this.context
 
-    flux.getActions('helmet').update({ title: i18n('users.page-title') });
-    flux.getActions('users').index();
+    flux.getActions('helmet').update({ title: i18n('users.page-title') })
+    flux.getActions('users').index()
   }
 
   handleRemove(index: number) {
-    const { flux } = this.context;
-    flux.getActions('users').remove(index);
+    const { flux } = this.context
+    flux.getActions('users').remove(index)
   }
 
   renderUser = (user: { seed: string, email: string }, index: number) => {
-    const { i18n } = this.context;
-    const { seed, email } = user;
-    const profileRoute: string = replaceParams(i18n('routes.profile'), { seed });
+    const { i18n } = this.context
+    const { seed, email } = user
+    const profileRoute: string = replaceParams(i18n('routes.profile'), { seed })
 
     return (
       <tr className='user--row' key={ index }>
@@ -45,12 +45,12 @@ class Users extends Component {
           </button>
         </td>
       </tr>
-    );
+    )
   }
 
   render() {
-    const { collection } = this.props;
-    const { i18n } = this.context;
+    const { collection } = this.props
+    const { i18n } = this.context
 
     return (
       <div>
@@ -69,9 +69,9 @@ class Users extends Component {
           </tbody>
         </table>
       </div>
-    );
+    )
   }
 
 }
 
-export default Users;
+export default Users

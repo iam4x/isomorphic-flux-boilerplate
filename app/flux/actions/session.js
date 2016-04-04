@@ -1,9 +1,9 @@
 class SessionActions {
 
   constructor() {
-    this.generateActions('login', 'logout', 'update');
+    this.generateActions('login', 'logout', 'update')
   }
 
 }
 
-export default SessionActions;
+export default SessionActions

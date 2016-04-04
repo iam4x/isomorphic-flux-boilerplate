@@ -1,26 +1,26 @@
-import { users } from './data.json';
+import { users } from './data.json'
 
 const simplifyUsers = (collection) => collection
   .map(({ user, seed }) => ({ ...user, seed }))
-  .map(({ email, name, seed, picture }) => ({ email, name, seed, picture }));
+  .map(({ email, name, seed, picture }) => ({ email, name, seed, picture }))
 
 function routes(router) {
   router.get('/users', async function (ctx) {
-    ctx.body = simplifyUsers(users.slice(0, 10));
-  });
+    ctx.body = simplifyUsers(users.slice(0, 10))
+  })
 
   router.get('/users/:seed', async function (ctx) {
-    const { seed } = ctx.params;
-    const [ result ] = simplifyUsers(users.filter(user => user.seed === seed));
+    const { seed } = ctx.params
+    const [ result ] = simplifyUsers(users.filter(user => user.seed === seed))
 
     if (!result) {
-      ctx.body = { error: { message: 'User not found' } };
+      ctx.body = { error: { message: 'User not found' } }
     } else {
-      ctx.body = result;
+      ctx.body = result
     }
-  });
+  })
 }
 
 // can't export directly function, run into const issue
 // see: https://phabricator.babeljs.io/T2892
-export default routes;
+export default routes

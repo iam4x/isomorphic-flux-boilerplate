@@ -1,8 +1,8 @@
-import capitalize from 'lodash/capitalize';
-import defer from 'lodash/defer';
+import capitalize from 'lodash/capitalize'
+import defer from 'lodash/defer'
 
-import React, { Component, PropTypes } from 'react';
-import connect from 'connect-alt';
+import React, { Component, PropTypes } from 'react'
+import connect from 'connect-alt'
 
 @connect(({ users: { collection } }) => ({ collection }))
 class Profile extends Component {
@@ -18,47 +18,47 @@ class Profile extends Component {
   }
 
   componentWillMount() {
-    const { flux } = this.context;
-    const { params: { seed } } = this.props;
+    const { flux } = this.context
+    const { params: { seed } } = this.props
 
-    this.updatePageTitle();
-    flux.getActions('users').show(seed);
+    this.updatePageTitle()
+    flux.getActions('users').show(seed)
   }
 
   componentWillReceiveProps({ collection, params: { seed } }) {
     if ((collection.length !== this.props.collection.length) ||
         (seed !== this.props.params.seed)) {
-      defer(() => this.updatePageTitle());
+      defer(() => this.updatePageTitle())
     }
   }
 
   getUser() {
-    const { collection, params: { seed } } = this.props;
-    return collection.find(u => u.seed === seed);
+    const { collection, params: { seed } } = this.props
+    return collection.find(u => u.seed === seed)
   }
 
   updatePageTitle() {
-    const { flux, i18n } = this.context;
-    const user = this.getUser();
+    const { flux, i18n } = this.context
+    const user = this.getUser()
 
-    let title;
+    let title
     if (user) {
-      const { name: { first, last } } = user;
-      const fullName = `${capitalize(first)} ${capitalize(last)}`;
+      const { name: { first, last } } = user
+      const fullName = `${capitalize(first)} ${capitalize(last)}`
 
-      title = i18n('profile.page-title', { fullName });
+      title = i18n('profile.page-title', { fullName })
     } else {
-      title = i18n('profile.not-found-page-title');
+      title = i18n('profile.not-found-page-title')
     }
 
-    flux.getActions('helmet').update({ title });
+    flux.getActions('helmet').update({ title })
   }
 
   render() {
-    const user = this.getUser();
+    const user = this.getUser()
 
     if (user) {
-      const { name: { first, last }, picture } = user;
+      const { name: { first, last }, picture } = user
 
       return (
         <div className='app--profile text-center'>
@@ -67,12 +67,12 @@ class Profile extends Component {
             src={ picture.medium }
             alt='profile picture' />
         </div>
-      );
+      )
     }
 
-    return (<h2>User not found</h2>);
+    return (<h2>User not found</h2>)
   }
 
 }
 
-export default Profile;
+export default Profile

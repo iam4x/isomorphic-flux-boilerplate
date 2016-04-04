@@ -1,19 +1,19 @@
-import React, { Component, PropTypes } from 'react';
-import connect from 'connect-alt';
-import { Link } from 'react-router';
+import React, { Component, PropTypes } from 'react'
+import connect from 'connect-alt'
+import { Link } from 'react-router'
 
-import imageResolver from 'utils/image-resolver';
-import Spinner from 'components/shared/spinner';
-import LangPicker from 'components/shared/lang-picker';
+import imageResolver from 'utils/image-resolver'
+import Spinner from 'components/shared/spinner'
+import LangPicker from 'components/shared/lang-picker'
 
 // Load styles for the header
 // and load the `react-logo.png` image
 // for the `<img src='' />` element
-let reactLogo;
+let reactLogo
 if (process.env.BROWSER) {
-  reactLogo = require('images/react-logo.png');
+  reactLogo = require('images/react-logo.png')
 } else {
-  reactLogo = imageResolver('images/react-logo.png');
+  reactLogo = imageResolver('images/react-logo.png')
 }
 
 @connect(({ requests: { inProgress }, session: { session } }) =>
@@ -32,18 +32,18 @@ class Header extends Component {
   }
 
   handleLocaleChange = (locale: string) => {
-    const { flux } = this.context;
-    flux.getActions('locale').switchLocale({ locale });
+    const { flux } = this.context
+    flux.getActions('locale').switchLocale({ locale })
   }
 
   handleLogout = () => {
-    const { flux } = this.context;
-    flux.getActions('session').logout();
+    const { flux } = this.context
+    flux.getActions('session').logout()
   }
 
   render() {
-    const { inProgress, session } = this.props;
-    const { locales: [ activeLocale ], i18n } = this.context;
+    const { inProgress, session } = this.props
+    const { locales: [ activeLocale ], i18n } = this.context
 
     return (
       <header className='app--header'>
@@ -93,8 +93,8 @@ class Header extends Component {
           }
         </ul>
       </header>
-    );
+    )
   }
 }
 
-export default Header;
+export default Header

@@ -5,7 +5,7 @@ class UsersActions {
       'indexSuccess', 'indexFail',
       'showSuccess', 'showFail',
       'remove'
-    );
+    )
   }
 
   index() {
@@ -18,30 +18,30 @@ class UsersActions {
       // this data before server side rendering
       alt.resolve(async () => {
         try {
-          alt.getActions('requests').start();
-          const response = await alt.request({ url: '/users' });
-          this.indexSuccess(response);
+          alt.getActions('requests').start()
+          const response = await alt.request({ url: '/users' })
+          this.indexSuccess(response)
         } catch (error) {
-          this.indexFail({ error });
+          this.indexFail({ error })
         }
-        alt.getActions('requests').stop();
-      });
+        alt.getActions('requests').stop()
+      })
   }
 
   show(seed) {
     return (dispatch, alt) =>
       alt.resolve(async () => {
         try {
-          alt.getActions('requests').start();
-          const response = await alt.request({ url: `/users/${seed}` });
-          this.showSuccess(response);
+          alt.getActions('requests').start()
+          const response = await alt.request({ url: `/users/${seed}` })
+          this.showSuccess(response)
         } catch (error) {
-          this.showFail({ error });
+          this.showFail({ error })
         }
-        alt.getActions('requests').stop();
-      });
+        alt.getActions('requests').stop()
+      })
   }
 
 }
 
-export default UsersActions;
+export default UsersActions

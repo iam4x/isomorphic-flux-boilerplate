@@ -1,4 +1,4 @@
-const { NODE_ENV, PORT = 3000 } = process.env;
+const { NODE_ENV, PORT = 3000 } = process.env
 
 const config = {
 
@@ -19,8 +19,8 @@ const config = {
     port: 3010
   }
 
-};
+}
 
 export default config[NODE_ENV] ?
   { ...config.default, ...config[NODE_ENV] } :
-  { ...config.default, ...config.development };
+  { ...config.default, ...config.development }

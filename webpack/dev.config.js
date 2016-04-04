@@ -1,22 +1,22 @@
-import webpack from 'webpack';
-import { isArray } from 'lodash';
+import webpack from 'webpack'
+import { isArray } from 'lodash'
 
-import baseConfig from './base.config';
-import startKoa from './utils/start-koa';
+import baseConfig from './base.config'
+import startKoa from './utils/start-koa'
 
-const { VIRTUAL_HOST, C9_HOSTNAME } = process.env;
+const { VIRTUAL_HOST, C9_HOSTNAME } = process.env
 
-const LOCAL_IP = require('dev-ip')();
+const LOCAL_IP = require('dev-ip')()
 
-const PORT = (C9_HOSTNAME) ? '443' : parseInt(process.env.PORT, 10) + 1 || 3001;
+const PORT = (C9_HOSTNAME) ? '443' : parseInt(process.env.PORT, 10) + 1 || 3001
 
 const HOST = VIRTUAL_HOST ||
   C9_HOSTNAME ||
   (isArray(LOCAL_IP) && LOCAL_IP[0]) ||
   LOCAL_IP ||
-  'localhost';
+  'localhost'
 
-const PUBLIC_PATH = `//${HOST}:${PORT}/assets/`;
+const PUBLIC_PATH = `//${HOST}:${PORT}/assets/`
 
 export default {
   server: {
@@ -78,7 +78,7 @@ export default {
 
       ...baseConfig.plugins,
 
-      function () { this.plugin('done', startKoa); }
+      function () { this.plugin('done', startKoa) }
     ]
   }
-};
+}

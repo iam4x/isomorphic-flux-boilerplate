@@ -1,9 +1,9 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react'
 
-import Header from 'components/header';
-import Footer from 'components/footer';
+import Header from 'components/header'
+import Footer from 'components/footer'
 
-if (process.env.BROWSER) require('styles/app.css');
+if (process.env.BROWSER) require('styles/app.css')
 
 class App extends Component {
 
@@ -14,21 +14,21 @@ class App extends Component {
       .flux.getStore('locale').getState() }
 
   componentDidMount() {
-    const { flux } = this.context;
-    flux.getStore('helmet').listen(this.handleTitleChange);
+    const { flux } = this.context
+    flux.getStore('helmet').listen(this.handleTitleChange)
   }
 
   componentWillUnmount() {
-    const { flux } = this.context;
-    flux.getStore('helmet').unlisten(this.handleTitleChange);
+    const { flux } = this.context
+    flux.getStore('helmet').unlisten(this.handleTitleChange)
   }
 
   handleTitleChange({ titleBase, title }) {
-    document.title = titleBase + title;
+    document.title = titleBase + title
   }
 
   render() {
-    const { children } = this.props;
+    const { children } = this.props
 
     return (
       <div>
@@ -38,9 +38,9 @@ class App extends Component {
         <hr />
         <Footer />
       </div>
-    );
+    )
   }
 
 }
 
-export default App;
+export default App

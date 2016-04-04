@@ -1,15 +1,15 @@
-import React from 'react';
-import cx from 'classnames';
+import React from 'react'
+import cx from 'classnames'
 
 type Props = {
   activeLocale: string,
   onChange: Function<string>
 };
 
-const locales = [ 'fr', 'en' ];
+const locales = [ 'fr', 'en' ]
 
 function LangPicker(props: Props) {
-  const { activeLocale, onChange } = props;
+  const { activeLocale, onChange } = props
 
   return (
     <ul className='lang--picker un-select'>
@@ -22,7 +22,7 @@ function LangPicker(props: Props) {
           </a>
         </li>) }
     </ul>
-  );
+  )
 }
 
-export default LangPicker;
+export default LangPicker
