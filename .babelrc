@@ -1,16 +1,10 @@
 {
-  "presets": [ "es2015", "react", "stage-0" ],
-  "plugins": [
-    "transform-decorators-legacy",
-    "add-module-exports",
-    ["typecheck", { "disable": { "production": true } }]
-  ],
+  "presets": ["save"],
+  "plugins": [],
   "env": {
     "browser": {
       "plugins": [
-        "transform-decorators-legacy",
-        "add-module-exports",
-        ["typecheck", { "disable": { "production": true } }],
+        "typecheck",
         ["react-transform", {
           "transforms": [
             {
@@ -27,11 +21,7 @@
       ]
     },
     "production": {
-      "plugins": [
-        "transform-decorators-legacy",
-        "add-module-exports",
-        "react-remove-prop-types"
-      ]
+      "plugins": ["react-remove-prop-types"]
     }
   }
 }
