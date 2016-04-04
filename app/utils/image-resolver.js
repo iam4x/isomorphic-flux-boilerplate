@@ -4,6 +4,8 @@ export default (imagePath) => {
   if (process.env.BROWSER) {
     debug('dev')('`image-resolver` should not be used in browser, something went wrong')
     throw new Error('image-resolver called on browser')
+  } else if (process.env.NODE_ENV === 'test') {
+    return ''
   } else {
     // Load images compiled from `webpack-stats`
     // don't cache the `webpack-stats.json` on dev
