@@ -23,7 +23,7 @@ class App extends Component {
     flux.getStore('helmet').unlisten(this.handleTitleChange);
   }
 
-  handleTitleChange({ titleBase, title }: { title: string, title: string }) {
+  handleTitleChange({ titleBase, title }) {
     document.title = titleBase + title;
   }
 
