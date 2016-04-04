@@ -1,61 +1,28 @@
-import debug from 'debug';
-
 const loaders = {
-  en(callback, force = false) {
-    if (!window.Intl || force) {
-      require.ensure([
-        'intl',
-        'intl/locale-data/jsonp/en.js',
-        'data/en'
-      ], (require) => {
-        require('intl');
-        require('intl/locale-data/jsonp/en.js');
-        const lang = require('data/en');
-        return callback(lang);
-      });
-    } else {
-      require.ensure(
-        [ 'data/en' ],
-        (require) => callback(require('data/en'))
-      );
+  en: async () => {
+    if (!window.Intl) {
+      await require('promise?global!intl')();
+      await require('promise?global!intl/locale-data/jsonp/en.js')();
     }
+    return await require('promise?global!data/en')();
   },
 
-  fr(callback, force = false) {
-    if (!window.Intl || force) {
-      require.ensure([
-        'intl',
-        'intl/locale-data/jsonp/fr.js',
-        'data/fr'
-      ], (require) => {
-        require('intl');
-        require('intl/locale-data/jsonp/fr.js');
-        const lang = require('data/fr');
-        return callback(lang);
-      });
-    } else {
-      require.ensure(
-        [ 'data/fr' ],
-        (require) => callback(require('data/fr'))
-      );
+  fr: async () => {
+    if (!window.Intl) {
+      await require('promise?global!intl')();
+      await require('promise?global!intl/locale-data/jsonp/fr.js')();
     }
+    return await require('promise?global!data/fr');
   }
-
 };
 
-export default (locale, force) => {
-  debug('dev')(`loading lang ${locale}`);
-  return new Promise(resolve =>
-    loaders[locale](result => {
-      // We need to define `ReactIntl` on the global scope
-      // in order to load specific locale data from `ReactIntl`
-      // see: https://github.com/iam4x/isomorphic-flux-boilerplate/issues/64
-      if (process.env.BROWSER) {
-        window.ReactIntl = require('react-intl');
-        require(`react-intl/dist/locale-data/${locale}.js`);
-      }
+export default async (locale) => {
+  const result = await loaders[locale]();
 
-      return resolve(result);
-    }, force)
-  );
+  if (process.env.BROWSER) {
+    window.ReactIntl = require('react-intl');
+    require(`react-intl/dist/locale-data/${locale}.js`);
+  }
+
+  return result;
 };
