@@ -1,3 +1,5 @@
+import isFunc from 'lodash/isFunction';
+
 import Alt from 'alt';
 import makeFinalStore from 'alt-utils/lib/makeFinalStore';
 
@@ -22,9 +24,12 @@ class Flux extends Alt {
     this.request = ::client.request;
 
     // Load actions into alt
-    Object.keys(actions).forEach(key => this.addActions(key, actions[key]));
+    Object.keys(actions).forEach(key =>
+      isFunc(actions[key]) && this.addActions(key, actions[key]));
+
     // Load stores into alt
-    Object.keys(stores).forEach(key => this.addStore(key, stores[key]));
+    Object.keys(stores).forEach(key =>
+      isFunc(stores[key]) && this.addStore(key, stores[key]));
 
     // Our `FinalStore` for using `connect-alt`
     this.FinalStore = makeFinalStore(this);
