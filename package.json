@@ -6,8 +6,7 @@
   "scripts": {
     "build": "rm -rf dist && BABEL_ENV=production babel-node ./node_modules/.bin/webpack --stats --config ./webpack/prod.config.js",
     "dev": "babel-node ./webpack/dev-server.js",
-    "test": "babel-node ./node_modules/.bin/karma start --single-run",
-    "dev-test": "babel-node ./node_modules/.bin/karma start",
+    "test": "NODE_ENV=test NODE_PATH=app ava",
     "lint": "eslint app server webpack shared test --ext .jsx,.js"
   },
   "repository": {
@@ -18,6 +17,14 @@
   "bugs": "https://github.com/iam4x/isomorphic-flux-boilerplate/issues",
   "author": "iam4x",
   "license": "MIT",
+  "ava": {
+    "babel": "inherit",
+    "require": [
+      "./test/helpers/setup-browser-env",
+      "babel-register",
+      "babel-polyfill"
+    ]
+  },
   "dependencies": {
     "alt": "^0.18.4",
     "alt-container": "^1.0.0",
@@ -76,32 +83,30 @@
     "webpack": "^1.12.6"
   },
   "devDependencies": {
+    "ava": "^0.13.0",
     "blocked": "^1.1.0",
     "browser-sync": "^2.8.0",
+    "chai": "^3.5.0",
+    "chai-enzyme": "^0.4.1",
     "dev-ip": "^1.0.1",
+    "enzyme": "^2.2.0",
     "eslint": "^2.2.0",
     "eslint-config-airbnb": "^6.2.0",
     "eslint-loader": "^1.0.0",
     "eslint-plugin-react": "^4.2.3",
     "faux-jax": "^5.0.0",
     "isparta-loader": "^2.0.0",
-    "karma": "^0.13.3",
-    "karma-chai-plugins": "^0.7.0",
-    "karma-cli": "^0.1.0",
-    "karma-coverage": "^0.5.2",
-    "karma-coveralls": "^1.1.2",
-    "karma-firefox-launcher": "^0.1.6",
-    "karma-mocha": "^0.2.0",
-    "karma-webpack": "^1.7.0",
+    "jsdom": "^8.2.0",
     "koa-proxy": "^0.5.0",
     "koa-webpack-dev-middleware": "^1.0.1",
     "koa-webpack-hot-middleware": "^1.0.1",
-    "mocha": "^2.3.4",
     "node-watch": "^0.3.4",
     "react-addons-test-utils": "^0.14.0",
     "react-transform-catch-errors": "^1.0.0",
     "react-transform-hmr": "^1.0.0",
     "redbox-react": "^1.0.4",
+    "sinon": "^1.17.3",
+    "sinon-chai": "^2.8.0",
     "url-loader": "^0.5.7",
     "webpack-hot-middleware": "^2.0.2"
   },
