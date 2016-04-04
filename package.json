@@ -6,7 +6,8 @@
   "scripts": {
     "build": "rm -rf dist && BABEL_ENV=production babel-node ./node_modules/.bin/webpack --stats --config ./webpack/prod.config.js",
     "dev": "babel-node ./webpack/dev-server.js",
-    "test": "NODE_ENV=test NODE_PATH=app nyc --extension .jsx ava",
+    "test": "NODE_ENV=test NODE_PATH=app nyc --cache --extension .jsx ava",
+    "coverage": "nyc report --reporter=text-lcov | coveralls",
     "lint": "eslint app server webpack shared test --ext .jsx,.js"
   },
   "repository": {
@@ -23,6 +24,13 @@
       "./test/helpers/setup-browser-env",
       "babel-register",
       "babel-polyfill"
+    ]
+  },
+  "nyc": {
+    "exclude": [
+      "**/*.test.js",
+      "server/**/*",
+      "app/data/*"
     ]
   },
   "dependencies": {
@@ -88,6 +96,7 @@
     "browser-sync": "^2.8.0",
     "chai": "^3.5.0",
     "chai-enzyme": "^0.4.1",
+    "coveralls": "^2.11.9",
     "dev-ip": "^1.0.1",
     "enzyme": "^2.2.0",
     "eslint": "^2.2.0",
