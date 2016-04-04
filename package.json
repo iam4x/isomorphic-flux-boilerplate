@@ -6,7 +6,7 @@
   "scripts": {
     "build": "rm -rf dist && BABEL_ENV=production babel-node ./node_modules/.bin/webpack --stats --config ./webpack/prod.config.js",
     "dev": "babel-node ./webpack/dev-server.js",
-    "test": "NODE_ENV=test NODE_PATH=app ava",
+    "test": "NODE_ENV=test NODE_PATH=app nyc --extension .jsx ava",
     "lint": "eslint app server webpack shared test --ext .jsx,.js"
   },
   "repository": {
@@ -95,12 +95,12 @@
     "eslint-loader": "^1.0.0",
     "eslint-plugin-react": "^4.2.3",
     "faux-jax": "^5.0.0",
-    "isparta-loader": "^2.0.0",
     "jsdom": "^8.2.0",
     "koa-proxy": "^0.5.0",
     "koa-webpack-dev-middleware": "^1.0.1",
     "koa-webpack-hot-middleware": "^1.0.1",
     "node-watch": "^0.3.4",
+    "nyc": "^6.1.1",
     "react-addons-test-utils": "^0.14.0",
     "react-transform-catch-errors": "^1.0.0",
     "react-transform-hmr": "^1.0.0",
