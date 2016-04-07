@@ -91,7 +91,7 @@
     "webpack": "^1.12.6"
   },
   "devDependencies": {
-    "ava": "^0.13.0",
+    "ava": "^0.14.0",
     "blocked": "^1.1.0",
     "browser-sync": "^2.8.0",
     "chai": "^3.5.0",
