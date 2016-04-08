@@ -110,7 +110,7 @@
     "koa-webpack-hot-middleware": "^1.0.1",
     "node-watch": "^0.3.4",
     "nyc": "^6.1.1",
-    "react-addons-test-utils": "^0.14.0",
+    "react-addons-test-utils": "^15.0.1",
     "react-transform-catch-errors": "^1.0.0",
     "react-transform-hmr": "^1.0.0",
     "redbox-react": "^1.0.4",
