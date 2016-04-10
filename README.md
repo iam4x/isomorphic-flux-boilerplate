@@ -6,38 +6,61 @@
 
 # A complete ES7 <s>Isomorphic</s> [Universal](https://medium.com/@mjackson/universal-javascript-4761051b7ae9) ReactJS boilerplate with [alt](https://github.com/goatslacker/alt) as Flux library.
 
-> A wonderfull boilerplate for **Flux/ReactJS** [universal](http://nerds.airbnb.com/isomorphic-javascript-future-web-apps/) applications, running on **Koa**.
+> A wonderfull boilerplate for **Flux/ReactJS** [universal](http://nerds.airbnb.com/isomorphic-javascript-future-web-apps/) applications, running on [koajs](http://koajs.com/).
 
 **Demo:** http://isomorphic.iam4x.fr
 
-## Libraries Included
+## Libraries used
 
-* [react ^0.14](https://facebook.github.io/react/)
-* [react-router ^2.0.0](https://github.com/rackt/react-router)
-* [react-intl ^1.2.0](https://github.com/yahoo/react-intl)
-* [react-redbox](https://github.com/KeywordBrain/redbox-react)
-* [alt ^0.18](https://github.com/goatslacker/alt)
-* [alt-devtools](https://github.com/goatslacker/alt-devtool)
-* [connect-alt](http://github.com/iam4x/connect-alt)
-* [iso ^5.0.0](https://github.com/goatslacker/iso)
-* [koa ^2.0.0-alpha.3](http://koajs.com/)
-* [webpack](http://webpack.github.io/)
-* [webpack-hot-middleware](https://github.com/glenjamin/webpack-hot-middleware)
-* [webpack-dev-middleware](https://github.com/webpack/webpack-dev-middleware)
-* [babeljs ^6.2](https://babeljs.io/)
-* [postcss ^0.7](https://github.com/postcss/postcss)
-* [precss](https://github.com/jonathantneal/precss)
-* [purifyCSS](https://github.com/purifycss/purifycss)
+  * #### react
+    * [react ^0.14](https://facebook.github.io/react/)
+    * [react-router ^2.0.0](https://github.com/rackt/react-router)
+    * [react-intl ^1.2.0](https://github.com/yahoo/react-intl)
+    * [alt ^0.18](https://github.com/goatslacker/alt)
+    * [alt-devtools](https://github.com/goatslacker/alt-devtool)
+    * [connect-alt](http://github.com/iam4x/connect-alt)
 
-## TL;DR
+  * #### css
+    * [postcss ^0.7](https://github.com/postcss/postcss)
+    * [precss](https://github.com/jonathantneal/precss) (same as .SCSS syntax)
+    * [purifyCSS](https://github.com/purifycss/purifycss)
 
-Use with `nodejs@4.3.1`, clone the repo, `npm install` and `npm run dev`.
+  * #### server side rendering
+    * [koa ^2.0.0-alpha.3](http://koajs.com/)
+    * [iso ^5.0.0](https://github.com/goatslacker/iso)
 
-Learn React ([react-prime-draft](https://github.com/mikechau/react-primer-draft)), learn Flux and Alt ([alt guide](http://alt.js.org/guide/)).
+  * #### build tools
+    * [webpack](http://webpack.github.io/)
+    * [webpack-hot-middleware](https://github.com/glenjamin/webpack-hot-middleware)
+    * [webpack-dev-middleware](https://github.com/webpack/webpack-dev-middleware)
+    * [babeljs ^6.2](https://babeljs.io/)
 
-Wrap you async actions into promises, send them to `altResolver` with `altResolver.resolve(xxx)` for async server side rendering (see [app/flux/actions/users.js:11](https://github.com/iam4x/isomorphic-flux-boilerplate/blob/master/app/flux/actions/users.js#L11-L29)).
+## Setup
 
-Build for production with `npm run build`, don't forget to run the tests before `npm test`.
+  * ### 1. Requirements
+    * nodejs@4.4.2
+    * npm@3 (`$ npm i -g npm`)
+
+  * ### 2. How to / Installation
+    * `$ git clone -o upstream https://github.com/iam4x/isomorphic-flux-boilerplate.git app`
+    * `$ cd app && npm install`
+
+    (Don't forget to add your remote origin: `$ git remote add origin git@github.com:xxx/xxx.git`)
+
+## Run
+
+  * ### dev
+    * `$ npm run dev` OR
+    * `$ PORT=xxxx npm run dev`
+
+  * ### test
+    * `$ npm test` OR
+    * `$ npm test -- --watch`
+
+  * ### build
+    * `$ NODE_ENV=[production/staging] npm run build`
+    * `$ NODE_ENV=[production/staging] npm run prod`
+
 
 ## Concepts
 
@@ -204,21 +227,6 @@ The utils/image-resolver with match the original image name with the compiled on
 
 Voilà! You can `require()` images on server side too.
 
-## Installation / How-to
-
-It's super easy to do with [nvm](https://github.com/creationix/nvm):
-
-* `$ nvm install stable`
-* `$ nvm use stable`
-* `$ nvm alias default stable`
-
-After that, you will just need to clone the repo and install dependancies:
-
-* `$ git clone -o upstream https://github.com/iam4x/isomorphic-flux-boilerplate.git app`
-* `$ cd app && npm install`
-
-(Don't forget to add your remote origin: `$ git remote add origin git@github.com:xxx/xxx.git`)
-
 ### Run the project in development:
 
 * `$ npm run dev`
@@ -226,19 +234,6 @@ After that, you will just need to clone the repo and install dependancies:
 Open your browser to `http://localhost:3002` and you will see the magic happens! Try to disable JavaScript in your browser, you will still be able to navigate between pages of the application. Enjoy the power of isomorphic applications!
 
 (Note: ports 3000-3002 are needed, you can change this with `$ PORT=3050 npm run dev` it will run on 3050-3052)
-
-### Run tests
-
-* `$ npm test` will run the tests once
-* `$ npm run dev-test` will watch for changes and run the tests on change
-
-### Build project:
-
-Just run `$ npm run build`, it will produce these tasks:
-
-* Run tests from `test/spec/**/*.jsx`
-* Concat & minify styles to `/dist/app-[hash].css`
-* Concat & minify scripts to `/dist/js/app-[hash].js`
 
 ### Update the boilerplate
 
