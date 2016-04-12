@@ -83,7 +83,7 @@
     "promise-loader": "^1.0.0",
     "purifycss-webpack-plugin": "^2.0.3",
     "react": "^0.14.0",
-    "react-dom": "^0.14.0",
+    "react-dom": "^15.0.0",
     "react-intl": "1.2.0",
     "react-router": "^2.0.0",
     "scroll-behavior": "^0.3.3",
