@@ -9,7 +9,7 @@ import chaiEnzyme from 'chai-enzyme'
 
 chai.use(chaiEnzyme())
 
-test('it sould listen for document title change', t => {
+test('it should listen for document title change', t => {
   const { flux } = mount(App)
   flux.getActions('helmet').update({ title: 'foobar', titleBase: '' })
   t.is(document.title, 'foobar')

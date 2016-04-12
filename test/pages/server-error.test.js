@@ -7,7 +7,7 @@ import ServerError from 'pages/server-error'
 
 chai.use(chaiEnzyme())
 
-test('it should render 404 message', () => {
+test('it should render 500 message', () => {
   const { wrapper } = mount(ServerError)
   expect(wrapper.find('h1')).to.have.text('500')
 })
