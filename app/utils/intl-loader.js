@@ -12,7 +12,7 @@ const loaders = {
       await require('promise?global!intl')()
       await require('promise?global!intl/locale-data/jsonp/fr.js')()
     }
-    return await require('promise?global!data/fr')
+    return await require('promise?global!data/fr')()
   }
 }
 
