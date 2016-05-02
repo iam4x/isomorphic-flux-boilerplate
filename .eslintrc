@@ -1,7 +1,14 @@
 {
   "parser": "babel-eslint",
   "extends": "eslint-config-airbnb",
-  "plugins": ["react"],
+  "plugins": ["react", "jsx-a11y"],
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "moduleDirectory": [ "node_modules", "app" ]
+      }
+    }
+  },
   "env": {
     "browser": true,
     "node": true,
@@ -49,6 +56,8 @@
     "no-param-reassign": 0,
     "max-len": [1, 100],
     "no-confusing-arrow": 0,
-    "semi": [2, "never"]
+    "semi": [2, "never"],
+    "global-require": 0,
+    "import/no-unresolved": 0
   }
 }

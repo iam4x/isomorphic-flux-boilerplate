@@ -13,7 +13,7 @@
 ## Libraries used
 
   * #### react
-    * [react ^0.14](https://facebook.github.io/react/)
+    * [react ^15](https://facebook.github.io/react/)
     * [react-router ^2.0.0](https://github.com/rackt/react-router)
     * [react-intl ^1.2.0](https://github.com/yahoo/react-intl)
     * [alt ^0.18](https://github.com/goatslacker/alt)

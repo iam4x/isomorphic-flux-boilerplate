@@ -65,7 +65,7 @@ class Profile extends Component {
           <h2>{ capitalize(first) } { capitalize(last) }</h2>
           <img
             src={ picture.medium }
-            alt='profile picture' />
+            alt='profile' />
         </div>
       )
     }
