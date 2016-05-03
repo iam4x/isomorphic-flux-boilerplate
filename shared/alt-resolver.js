@@ -6,6 +6,7 @@ class AltResolver {
   pendingActions = []
 
   resolve(action, setImmediate = (NODE_ENV === 'test')) {
+    /* istanbul ignore else */
     if ((BROWSER && !this.firstRender) || setImmediate) {
       action()
     } else {
@@ -13,6 +14,7 @@ class AltResolver {
     }
   }
 
+  /* istanbul ignore next */
   async dispatchPendingActions() {
     for (const action of this.pendingActions) await action()
   }

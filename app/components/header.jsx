@@ -10,6 +10,7 @@ import LangPicker from 'components/shared/lang-picker'
 // and load the `react-logo.png` image
 // for the `<img src='' />` element
 let reactLogo
+/* istanbul ignore next */
 if (process.env.BROWSER) {
   reactLogo = require('images/react-logo.png')
 } else {

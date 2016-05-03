@@ -3,6 +3,7 @@ import React, { Component, PropTypes } from 'react'
 import Header from 'components/header'
 import Footer from 'components/footer'
 
+/* istanbul ignore next */
 if (process.env.BROWSER) require('styles/app.css')
 
 class App extends Component {

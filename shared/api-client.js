@@ -6,6 +6,7 @@ const { BROWSER } = process.env
 class ApiClient {
 
   constructor(cookie) {
+    /* istanbul ignore if */
     if (BROWSER) {
       this.baseURL = '/api'
     } else {
@@ -18,6 +19,7 @@ class ApiClient {
     config.method = config.method || 'get'
 
     // Append correct `baseURL` to `config.url`
+    /* istanbul ignore else */
     if (config.baseURL === undefined) {
       config.url = config.url ? this.baseURL + config.url : this.baseURL
     } else {
@@ -25,6 +27,7 @@ class ApiClient {
     }
 
     // Add CORS credentials on browser side
+    /* istanbul ignore if */
     if (BROWSER) {
       config.withCredentials = (config.withCredentials === undefined) ?
         true : config.withCredentials

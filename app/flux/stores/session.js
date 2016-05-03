@@ -18,6 +18,7 @@ class SessionStore {
 
     // transition app to `/account`
     // or to the original asked page
+    /* istanbul ignore if */
     if (BROWSER) {
       const { browserHistory } = require('react-router')
       const [ , nextPath = '/account' ] = window
@@ -33,6 +34,8 @@ class SessionStore {
 
   onLogout() {
     this.session = null
+
+    /* istanbul ignore if */
     if (BROWSER) {
       const Cookies = require('cookies-js')
       const { browserHistory } = require('react-router')

@@ -30,7 +30,11 @@
     "exclude": [
       "**/*.test.js",
       "server/**/*",
-      "app/data/*"
+      "app/data/*",
+
+      "app/utils/intl-loader.js",
+      "app/utils/image-resolver.js",
+      "app/utils/localized-routes.jsx"
     ]
   },
   "dependencies": {

@@ -17,6 +17,8 @@ const loaders = {
 }
 
 export default async (locale) => {
+  if (process.env.NODE_ENV === 'test') return { messages: {} }
+
   const result = await loaders[locale]()
 
   if (process.env.BROWSER) {

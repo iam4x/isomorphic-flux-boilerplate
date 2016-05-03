@@ -6,9 +6,12 @@ import ApiClient from '../../shared/api-client'
 
 import I18nContainer from 'utils/i18n-container'
 
-export default (Component, props = {}) => {
+export default (Component, props = {}, customfluxInstance) => {
   const client = new ApiClient()
-  const flux = createFlux(client)
+  const flux = (typeof customfluxInstance === 'object') ?
+    customfluxInstance : createFlux(client)
+
+  if (customfluxInstance === true) return flux
 
   const { messages } = require('data/en')
 

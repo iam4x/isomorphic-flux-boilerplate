@@ -12,6 +12,7 @@ class LocaleStore {
   onSwitchLocale({ messages, locale }: { messages: Object, locale: string }) {
     // Save locale into a cookie
     // that will be read from server on requests
+    /* istanbul ignore if */
     if (process.env.BROWSER) {
       const Cookies = require('cookies-js')
       Cookies.set('_lang', locale, { expires: Infinity })
