@@ -21,7 +21,7 @@
     * [connect-alt](http://github.com/iam4x/connect-alt)
 
   * #### css
-    * [postcss ^0.7](https://github.com/postcss/postcss)
+    * [postcss ^0.9](https://github.com/postcss/postcss)
     * [precss](https://github.com/jonathantneal/precss) (same as .SCSS syntax)
     * [purifyCSS](https://github.com/purifycss/purifycss)
 
@@ -33,12 +33,12 @@
     * [webpack](http://webpack.github.io/)
     * [webpack-hot-middleware](https://github.com/glenjamin/webpack-hot-middleware)
     * [webpack-dev-middleware](https://github.com/webpack/webpack-dev-middleware)
-    * [babeljs ^6.2](https://babeljs.io/)
+    * [babeljs ^6.8](https://babeljs.io/)
 
 ## Setup
 
   * ### 1. Requirements
-    * nodejs@4.4.2
+    * nodejs@4.4.3
     * npm@3 (`$ npm i -g npm`)
 
   * ### 2. How to / Installation
@@ -58,8 +58,8 @@
     * `$ npm test -- --watch`
 
   * ### build
-    * `$ NODE_ENV=[production/staging] npm run build`
-    * `$ NODE_ENV=[production/staging] npm run prod`
+    * `$ NODE_ENV=production npm run build`
+    * `$ NODE_ENV=production node server`
 
 
 ## Concepts
