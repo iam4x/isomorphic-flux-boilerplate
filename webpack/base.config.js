@@ -1,4 +1,5 @@
 import path from 'path'
+import webpack from 'webpack'
 
 import writeStats from './utils/write-stats'
 
@@ -25,6 +26,8 @@ export default {
     ]
   },
   plugins: [
+    new webpack.optimize.AggressiveMergingPlugin(),
+
     // write webpack stats
     function () { this.plugin('done', writeStats) }
   ],

@@ -31,7 +31,6 @@
       "**/*.test.js",
       "server/**/*",
       "app/data/*",
-
       "app/utils/intl-loader.js",
       "app/utils/image-resolver.js",
       "app/utils/localized-routes.jsx"
@@ -49,6 +48,7 @@
     "babel-eslint": "^6.0.2",
     "babel-loader": "^6.2.3",
     "babel-plugin-react-remove-prop-types": "^2.0.2",
+    "babel-plugin-transform-react-constant-elements": "^6.8.0",
     "babel-plugin-typecheck": "^3.7.0",
     "babel-polyfill": "^6.5.0",
     "babel-preset-save": "^1.1.3",
@@ -97,6 +97,8 @@
   "devDependencies": {
     "ava": "^0.14.0",
     "babel-plugin-react-transform": "^2.0.2",
+    "babel-plugin-transform-react-inline-elements": "^6.8.0",
+    "babel-plugin-transform-react-pure-class-to-function": "^1.0.1",
     "blocked": "^1.1.0",
     "browser-sync": "^2.8.0",
     "chai": "^3.5.0",
