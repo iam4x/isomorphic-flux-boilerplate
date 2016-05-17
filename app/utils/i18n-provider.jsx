@@ -24,7 +24,7 @@ class I18nProvider extends Component {
       return toPath(key).reduce((prec, x) => prec[x], this.context.intl.messages)
     } catch (error) {
       debug('dev')(error)
-      return `translation missing (${this.state.locales[0]}): ${key}`
+      return `translation missing (${this.context.intl.locale}): ${key}`
     }
   }
 
