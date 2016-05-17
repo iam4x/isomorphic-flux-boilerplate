@@ -38,11 +38,13 @@ class I18nContainer extends Component {
 
   render() {
     const { children } = this.props
-    return (<IntlProvider locale={ this.state.locales[0] } messages={ this.state.messages } >
-      <I18nProvider>
-        { children }
-      </I18nProvider>
-    </IntlProvider>)
+    return (
+      <IntlProvider locale={ this.state.locales[0] } messages={ this.state.messages } >
+        <I18nProvider>
+          { children }
+        </I18nProvider>
+      </IntlProvider>
+    )
   }
 
 }
