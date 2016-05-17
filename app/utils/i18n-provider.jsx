@@ -19,7 +19,7 @@ class I18nProvider extends Component {
     return { i18n: this.i18n }
   }
 
-  i18n = (key, values) => {
+  i18n = (key) => {
     try {
       return toPath(key).reduce((prec, x) => prec[x], this.context.intl.messages)
     } catch (error) {
