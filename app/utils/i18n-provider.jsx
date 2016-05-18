@@ -1,7 +1,7 @@
 import debug from 'debug'
 
 import React, { Component, PropTypes } from 'react'
-import { toPath } from 'lodash'
+import { intlShape, defineMessages } from 'react-intl'
 
 class I18nProvider extends Component {
 
@@ -12,16 +12,23 @@ class I18nProvider extends Component {
   }
 
   static contextTypes = {
-    intl: PropTypes.object.isRequired
+    intl: intlShape.isRequired
   }
 
   getChildContext() {
     return { i18n: this.i18n }
   }
 
-  i18n = (key) => {
+  i18n = (key, values) => {
     try {
-      return toPath(key).reduce((prec, x) => prec[x], this.context.intl.messages)
+      const { formatMessage, locale, messages } = this.context.intl
+      const messageObject = { }
+      messageObject[locale] = {
+        id: key,
+        defaultMessage: messages[key]
+      }
+
+      return formatMessage({ messages: defineMessages(messageObject), id: key }, values)
     } catch (error) {
       debug('dev')(error)
       return `translation missing (${this.context.intl.locale}): ${key}`
