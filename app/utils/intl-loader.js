@@ -20,10 +20,10 @@ export default async (locale) => {
   if (process.env.NODE_ENV === 'test') return { messages: {} }
 
   const result = await loaders[locale]()
-
   if (process.env.BROWSER) {
     window.ReactIntl = require('react-intl')
-    require(`react-intl/dist/locale-data/${locale}.js`)
+    const { addLocaleData } = require('react-intl')
+    addLocaleData(require(`react-intl/locale-data/${locale}.js`))
   }
 
   return result

@@ -1,7 +1,6 @@
-import debug from 'debug'
-
-import { Component, PropTypes } from 'react'
-import { IntlMixin } from 'react-intl'
+import React, { Component, PropTypes } from 'react'
+import { IntlProvider } from 'react-intl'
+import I18nProvider from './i18n-provider'
 
 class I18nContainer extends Component {
 
@@ -9,7 +8,6 @@ class I18nContainer extends Component {
   static contextTypes = { flux: PropTypes.object.isRequired }
 
   static childContextTypes = {
-    i18n: PropTypes.func.isRequired,
     messages: PropTypes.object.isRequired,
     formats: PropTypes.object.isRequired,
     locales: PropTypes.array.isRequired
@@ -23,7 +21,7 @@ class I18nContainer extends Component {
   }
 
   getChildContext() {
-    return { ...this.state, i18n: this.i18n }
+    return { ...this.state }
   }
 
   componentDidMount() {
@@ -38,23 +36,16 @@ class I18nContainer extends Component {
 
   handleLocaleChange = (state) => this.setState(state)
 
-  i18n = (key, values) => {
-    try {
-      // Fake IntlMixin context with `messages`, `formats` and `locales`
-      // into `this.props` and `this.context`
-      const ctx = { ...IntlMixin, context: this.state, props: this.state }
-
-      const messages = IntlMixin.getIntlMessage.call(ctx, key)
-      return IntlMixin.formatMessage.call(ctx, messages, values)
-    } catch (error) {
-      debug('dev')(error)
-      return `translation missing (${this.state.locales[0]}): ${key}`
-    }
-  }
-
   render() {
     const { children } = this.props
-    return children
+    const { locales, messages } = this.state
+    return (
+      <IntlProvider locale={ locales[0] } messages={ messages } >
+        <I18nProvider>
+          { children }
+        </I18nProvider>
+      </IntlProvider>
+    )
   }
 
 }
