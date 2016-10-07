@@ -9,3 +9,4 @@ dist
 .env
 .c9
 .nyc_output
+.idea

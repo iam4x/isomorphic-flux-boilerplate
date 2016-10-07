@@ -32,7 +32,7 @@ if (env === 'production') {
   // load production middleware
   app.use(convert(require('koa-conditional-get')()))
   app.use(convert(require('koa-etag')()))
-  app.use(convert(require('koa-compressor')()))
+  app.use(require('koa-compress')())
 }
 
 if (env === 'development') {

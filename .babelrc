@@ -22,7 +22,7 @@
     },
     "production": {
       "plugins": [
-        "react-remove-prop-types",
+        "transform-react-remove-prop-types",
         "transform-react-constant-elements",
         "transform-react-inline-elements",
         "transform-react-pure-class-to-function"
