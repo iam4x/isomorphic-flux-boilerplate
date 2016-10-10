@@ -1,9 +1,11 @@
-const { NODE_ENV, PORT = 3000 } = process.env
+import { port } from './public'
+
+const { NODE_ENV } = process.env
 
 const config = {
 
   default: {
-    port: parseInt(PORT, 10),
+    port,
     locales: [ 'fr', 'en' ]
   },
 
@@ -16,7 +18,7 @@ const config = {
   },
 
   production: {
-    port: 3010
+
   }
 
 }

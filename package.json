@@ -4,8 +4,8 @@
   "description": "An ES7 universal ReactJS with AltJS boilerplate",
   "main": "server/index.js",
   "scripts": {
-    "build": "rm -rf dist && BABEL_ENV=production babel-node ./node_modules/.bin/webpack --stats --config ./webpack/prod.config.js",
-    "dev": "babel-node ./webpack/dev-server.js",
+    "build": "rm -rf dist && BABEL_ENV=production babel-node ./node_modules/.bin/webpack --stats --config ./internals/webpack/prod.config.js",
+    "dev": "babel-node ./internals/webpack/dev-server.js",
     "test": "NODE_ENV=test NODE_PATH=app nyc --cache --extension .jsx ava",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "lint": "eslint app server webpack shared test --ext .jsx,.js"
@@ -21,7 +21,7 @@
   "ava": {
     "babel": "inherit",
     "require": [
-      "./test/helpers/setup-browser-env",
+      "./internals/test/helpers/setup-browser-env",
       "babel-register",
       "babel-polyfill"
     ]

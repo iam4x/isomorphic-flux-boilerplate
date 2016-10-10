@@ -12,7 +12,7 @@ require('babel-core/register')
 require('babel-polyfill')
 
 // Load Intl polyfill
-require('utils/intl-polyfill')(require('./config').locales)
+require('utils/intl-polyfill')(require('../internals/config/private').locales)
 
 // Start the server
 require('./koa.js')
