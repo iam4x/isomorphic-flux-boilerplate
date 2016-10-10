@@ -48,20 +48,20 @@ class Header extends Component {
 
     return (
       <header className='app--header'>
-        {/* Spinner in the top right corner */}
+        { /* Spinner in the top right corner */ }
         <Spinner active={ inProgress } />
 
-        {/* LangPicker on the right side */}
+        { /* LangPicker on the right side */ }
         <LangPicker
           activeLocale={ activeLocale }
           onChange={ this.handleLocaleChange } />
 
-        {/* React Logo in header */}
+        { /* React Logo in header */ }
         <Link to='/' className='app--logo'>
           <img src={ reactLogo } alt='react-logo' />
         </Link>
 
-        {/* Links in the navbar */}
+        { /* Links in the navbar */ }
         <ul className='app--navbar text-center reset-list un-select'>
           <li>
             <Link to={ i18n('routes.users') }>

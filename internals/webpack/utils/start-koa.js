@@ -8,7 +8,7 @@ import { noop } from 'lodash'
 let server
 let started
 let serverReload
-const KOA_PATH = path.join(__dirname, '../../server/index')
+const KOA_PATH = path.join(__dirname, '../../../server/index')
 
 const startServer = () => {
   // Define `restartServer`
@@ -50,7 +50,7 @@ const startServer = () => {
         // Start watcher on server files
         // and reload browser on change
         watch(
-          path.join(__dirname, '../../server'),
+          path.join(__dirname, '../../../server'),
           (file) => !file.match('webpack-stats.json') ? restartServer() : noop()
         )
       }

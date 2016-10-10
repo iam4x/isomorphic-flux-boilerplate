@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { port } from '../server/config'
+import { port, apiPrefix } from '../internals/config/public'
 
 const { BROWSER } = process.env
 
@@ -8,10 +8,10 @@ class ApiClient {
   constructor(cookie) {
     /* istanbul ignore if */
     if (BROWSER) {
-      this.baseURL = '/api'
+      this.baseURL = apiPrefix
     } else {
       this.cookie = cookie
-      this.baseURL = `http://localhost:${port}/api`
+      this.baseURL = `http://localhost:${port}${apiPrefix}`
     }
   }
 

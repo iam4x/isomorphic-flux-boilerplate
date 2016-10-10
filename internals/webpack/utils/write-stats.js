@@ -3,7 +3,7 @@ import fs from 'fs'
 import path from 'path'
 import debug from 'debug'
 
-const filepath = path.resolve(__dirname, '../../server/webpack-stats.json')
+const filepath = path.resolve(__dirname, '../../../server/webpack-stats.json')
 
 export default function (stats) {
   const publicPath = this.options.output.publicPath

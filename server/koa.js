@@ -12,7 +12,8 @@ import Router from 'koa-router'
 import convert from 'koa-convert'
 
 import router from './router'
-import config from './config'
+import config from '../internals/config/private'
+import { apiPrefix } from '../internals/config/public'
 
 const app = new Koa()
 const env = process.env.NODE_ENV || 'development'
@@ -38,6 +39,7 @@ if (env === 'production') {
 if (env === 'development') {
   // set debug env, must be programmaticaly for windows
   debug.enable('dev,koa')
+
   // log when process is blocked
   require('blocked')((ms) => debug('koa')(`blocked for ${ms}ms`))
 }
@@ -48,7 +50,7 @@ const cacheOpts = { maxAge: 86400000, gzip: true }
 
 // Proxy asset folder to webpack development server in development mode
 if (env === 'development') {
-  const webpackConfig = require('./../webpack/dev.config')
+  const webpackConfig = require('./../internals/webpack/dev.config')
   const proxy = require('koa-proxy')({
     host: `http://0.0.0.0:${webpackConfig.server.port}`,
     map: (filePath) => `assets/${filePath}`
@@ -58,8 +60,8 @@ if (env === 'development') {
   app.use(convert(mount('/assets', staticCache(path.join(__dirname, '../dist'), cacheOpts))))
 }
 
-// mount `/api` router
-const apiRouter = new Router({ prefix: '/api' })
+// mount the Api router
+const apiRouter = new Router({ prefix: apiPrefix })
 require('./api/routes')(apiRouter)
 app.use(apiRouter.routes())
 
