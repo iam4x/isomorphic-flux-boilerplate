@@ -40,10 +40,11 @@
   * ### 1. Requirements
     * nodejs@4.4.3
     * npm@3 (`$ npm i -g npm`)
+    * yarn@1 (optional) (`$ curl -o- -L https://yarnpkg.com/install.sh | bash`)
 
   * ### 2. How to / Installation
     * `$ git clone -o upstream https://github.com/iam4x/isomorphic-flux-boilerplate.git app`
-    * `$ cd app && npm install`
+    * `$ cd app && npm install` or `$ cd app && yarn install`
 
     (Don't forget to add your remote origin: `$ git remote add origin git@github.com:xxx/xxx.git`)
 
