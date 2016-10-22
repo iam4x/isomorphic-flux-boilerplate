@@ -16,7 +16,7 @@ export default async function (ctx) {
 
   // Get request locale for rendering
   const locale = ctx.cookies.get('_lang') ||
-    ctx.acceptsLanguages(require('./config').locales) ||
+    ctx.acceptsLanguages(require('../internals/config/private').locales) ||
     'en'
 
   const { messages } = require(`data/${locale}`)
