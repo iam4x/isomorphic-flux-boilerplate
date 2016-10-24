@@ -106,7 +106,7 @@
     "coveralls": "^2.11.9",
     "dev-ip": "^1.0.1",
     "enzyme": "^2.2.0",
-    "eslint": "^2.2.0",
+    "eslint": "^3.8.1",
     "eslint-config-airbnb": "^8.0.0",
     "eslint-loader": "^1.0.0",
     "eslint-plugin-import": "^1.6.1",
