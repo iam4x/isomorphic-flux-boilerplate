@@ -127,7 +127,7 @@
     "sinon": "^1.17.3",
     "sinon-chai": "^2.8.0",
     "url-loader": "^0.5.7",
-    "webpack-hot-middleware": "^2.0.2"
+    "webpack-hot-middleware": "^2.13.1"
   },
   "tags": [
     "react",
