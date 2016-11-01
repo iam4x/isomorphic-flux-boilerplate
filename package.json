@@ -62,6 +62,7 @@
     "extract-text-webpack-plugin": "^1.0.1",
     "file-loader": "^0.8.4",
     "font-awesome": "^4.4.0",
+    "glob": "^7.1.1",
     "image-webpack-loader": "^1.6.2",
     "intl": "^1.0.0",
     "iso": "^5.1.0",
@@ -92,6 +93,7 @@
     "react-router": "^2.0.0",
     "scroll-behavior": "^0.5.0",
     "style-loader": "^0.13.0",
+    "sw-precache-webpack-plugin": "^0.5.1",
     "webpack": "^1.12.6"
   },
   "devDependencies": {

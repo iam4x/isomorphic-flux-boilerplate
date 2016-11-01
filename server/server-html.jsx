@@ -8,8 +8,12 @@ type Props = {
   description: string
 };
 
+function serviceWorkerScript() {
+  return '(function(){if("serviceWorker" in navigator){navigator.serviceWorker.register("/assets/serviceWorker.js");}})()';
+}
+
 function ServerHTML(props: Props) {
-  const { body, assets, locale, title, description } = props
+  const { body, assets, locale, title, description, isProd } = props
 
   return (
     <html lang={ locale }>
@@ -29,6 +33,7 @@ function ServerHTML(props: Props) {
         <div id='content' dangerouslySetInnerHTML={ { __html: body } } />
         <script src={ assets.script[0] } />
         <script async={ true } defer={ true } id='github-bjs' src='https://buttons.github.io/buttons.js' />
+        { isProd ? <script dangerouslySetInnerHTML={ { __html: serviceWorkerScript() } }></script> : '' }
       </body>
     </html>
   )
