@@ -3,8 +3,13 @@
 import webpack from 'webpack'
 import ExtractTextPlugin from 'extract-text-webpack-plugin'
 import PurifyCSSPlugin from 'purifycss-webpack-plugin'
+import SWPrecacheWebpackPlugin from 'sw-precache-webpack-plugin'
+import glob from 'glob'
+import path from 'path'
 
 import baseConfig from './base.config'
+
+const appName = require('../../package.json').name
 
 export default {
   ...baseConfig,
@@ -23,7 +28,7 @@ export default {
       },
       {
         test: /\.css$/,
-        loader: ExtractTextPlugin.extract('style', 'css?sourceMap!postcss'),
+        loader: ExtractTextPlugin.extract('style', 'css!postcss'),
         exclude: /node_modules/
       }
     ]
@@ -59,6 +64,7 @@ export default {
     new webpack.optimize.DedupePlugin(),
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.optimize.UglifyJsPlugin({
+      sourceMap: false,
       compress: {
         warnings: false,
         screw_ie8: true,
@@ -81,6 +87,31 @@ export default {
         comments: false
       }
     }),
+    new SWPrecacheWebpackPlugin(
+      {
+        cacheId: `${appName}-sw`,
+        filename: 'serviceWorker.js',
+        maximumFileSizeToCacheInBytes: 4194304,
+        dynamicUrlToDependencies: (() => {
+          const clientBundleAssets = glob.sync(
+            path.resolve(__dirname, '../../dist', '*.js')
+          );
+          return glob.sync(path.resolve(__dirname, '../../dist'))
+            .reduce((acc, cur) => {
+                // We will precache our public asset, with it being invalidated
+                // any time our client bundle assets change.
+                acc[`/${path.basename(cur)}`] = clientBundleAssets;
+                return acc;
+              },
+              {
+                // Our index.html page will be precatched and it will be
+                // invalidated and refetched any time our client bundle
+                // assets change.
+                '/': clientBundleAssets,
+              });
+        })(),
+      }
+    ),
 
     ...baseConfig.plugins
   ]
