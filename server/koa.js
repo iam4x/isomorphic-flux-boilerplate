@@ -1,5 +1,6 @@
 import path from 'path'
 import debug from 'debug'
+import fs from 'fs'
 
 import Koa from 'koa'
 import mount from 'koa-mount'
@@ -59,6 +60,27 @@ if (env === 'development') {
 } else {
   app.use(mount('/assets', staticCache(path.join(__dirname, '../dist'), cacheOpts)))
   app.use(mount('/static', staticCache(path.join(__dirname, '../app/static'), cacheOpts)))
+
+  // serve serwice worker file direcly under root.
+  app.use(async (ctx, next) => {
+    let serviceWorkerJS
+    const swPath = path.join(__dirname, '../dist/serviceWorker.js')
+    const { method, url } = ctx.request
+    if (method !== 'GET' || url !== '/serviceWorker.js') return next()
+
+    if (!serviceWorkerJS) serviceWorkerJS = await new Promise((resolve) => {
+      fs.readFile(swPath, 'utf8', (err, data) => {
+        if (err) {
+          throw new Error(`Could not read file: ${swPath}`)
+        }
+
+        resolve(data);
+      })
+    })
+
+    ctx.type = 'application/javascript; charset=utf-8'
+    ctx.body = serviceWorkerJS
+  });
 }
 
 // mount the Api router

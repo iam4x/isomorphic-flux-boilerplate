@@ -9,7 +9,7 @@ type Props = {
 };
 
 function serviceWorkerScript() {
-  return '(function(){if("serviceWorker" in navigator){navigator.serviceWorker.register("/assets/serviceWorker.js");}})()';
+  return '(function(){if("serviceWorker" in navigator){navigator.serviceWorker.register("/serviceWorker.js");}})()';
 }
 
 function ServerHTML(props: Props) {
