@@ -58,6 +58,7 @@ if (env === 'development') {
   app.use(convert(mount('/assets', proxy)))
 } else {
   app.use(convert(mount('/assets', staticCache(path.join(__dirname, '../dist'), cacheOpts))))
+  app.use(convert(mount('/static', staticCache(path.join(__dirname, '../app/static'), cacheOpts))))
 }
 
 // mount the Api router

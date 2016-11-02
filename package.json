@@ -9,7 +9,7 @@
     "test": "NODE_ENV=test NODE_PATH=app nyc --cache --extension .jsx ava",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "lint": "eslint app server webpack shared test --ext .jsx,.js",
-    "start": "npm run build && BABEL_ENV=production node server"
+    "start": "NODE_ENV=production npm run build && NODE_ENV=production node server"
   },
   "repository": {
     "type": "git",
