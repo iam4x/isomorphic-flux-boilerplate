@@ -79,7 +79,7 @@
     "koa-router": "^7.0.0",
     "koa-static-cache": "^3.1.2",
     "lodash": "^4.2.0",
-    "normalize.css": "^4.0.0",
+    "normalize.css": "^4.2.0",
     "postcss-import": "^8.0.2",
     "postcss-loader": "^0.9.1",
     "postcss-url": "^5.0.2",
