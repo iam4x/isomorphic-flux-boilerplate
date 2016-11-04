@@ -3,15 +3,21 @@
   "short_name": "Iso-react",
   "description": "A complete ES7 Isomorphic/Universal ReactJS boilerplate with alt as Flux library.",
   "lang": "en",
-  "start_url": "./",
-  "icons": [
-    {
-      "src": "\/favicon.ico",
-      "sizes": "16x16",
-      "type": "image\/ico"
-    }
-  ],
-  "theme_color": "#333",
-  "background_color": "#ffffff",
+  "start_url": "/",
+  "icons": [{
+    "src": "app-icon-144x144.png",
+    "sizes": "144x144",
+    "type": "image/png"
+  }, {
+    "src": "app-icon-180x180.png",
+    "sizes": "180x180",
+    "type": "image/png"
+  }, {
+    "src": "app-icon-310x310.png",
+    "sizes": "310x310",
+    "type": "image/png"
+  }],
+  "theme_color": "#fff",
+  "background_color": "#fff",
   "display": "standalone"
 }
