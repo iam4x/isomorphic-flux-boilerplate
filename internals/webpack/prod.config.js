@@ -4,9 +4,6 @@ import webpack from 'webpack'
 import ExtractTextPlugin from 'extract-text-webpack-plugin'
 import PurifyCSSPlugin from 'purifycss-webpack-plugin'
 import SWPrecacheWebpackPlugin from 'sw-precache-webpack-plugin'
-import glob from 'glob'
-import path from 'path'
-import debug from 'debug'
 
 import baseConfig from './base.config'
 
