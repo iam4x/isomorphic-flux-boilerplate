@@ -6,6 +6,7 @@ import PurifyCSSPlugin from 'purifycss-webpack-plugin'
 import SWPrecacheWebpackPlugin from 'sw-precache-webpack-plugin'
 import glob from 'glob'
 import path from 'path'
+import debug from 'debug'
 
 import baseConfig from './base.config'
 
@@ -92,24 +93,10 @@ export default {
         cacheId: `${appName}-sw`,
         filename: 'serviceWorker.js',
         maximumFileSizeToCacheInBytes: 4194304,
-        dynamicUrlToDependencies: (() => {
-          const clientBundleAssets = glob.sync(
-            path.resolve(__dirname, '../../dist', '*.js')
-          );
-          return glob.sync(path.resolve(__dirname, '../../dist'))
-            .reduce((acc, cur) => {
-                // We will precache our public asset, with it being invalidated
-                // any time our client bundle assets change.
-                acc[`/${path.basename(cur)}`] = clientBundleAssets;
-                return acc;
-              },
-              {
-                // Our index.html page will be precatched and it will be
-                // invalidated and refetched any time our client bundle
-                // assets change.
-                '/': clientBundleAssets,
-              });
-        })(),
+        runtimeCaching: [{
+          urlPattern: /\//,
+          handler: 'fastest'
+        }]
       }
     ),
 
