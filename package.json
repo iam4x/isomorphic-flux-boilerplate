@@ -102,7 +102,7 @@
     "blocked": "^1.1.0",
     "browser-sync": "^2.8.0",
     "chai": "^3.5.0",
-    "chai-enzyme": "^0.4.1",
+    "chai-enzyme": "^0.6.1",
     "coveralls": "^2.11.9",
     "dev-ip": "^1.0.1",
     "enzyme": "^2.2.0",
