@@ -1,10 +1,12 @@
+/* eslint react/jsx-filename-extension: 0 */
+
 import React from 'react'
 import { mount } from 'enzyme'
 
 import createFlux from 'flux/createFlux'
-import ApiClient from '../../../shared/api-client'
-
 import I18nContainer from 'utils/i18n-container'
+
+import ApiClient from '../../../shared/api-client'
 
 export default (Component, props = {}, customfluxInstance) => {
   const client = new ApiClient()

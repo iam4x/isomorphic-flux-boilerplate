@@ -12,7 +12,7 @@ import mount from './helpers/mount'
 chai.use(chaiEnzyme())
 
 let testCount = 0
-test.beforeEach.cb(t => {
+test.beforeEach.cb((t) => {
   const error = ++testCount >= 3
   const responseCode = error ? 500 : 200
   const responseBody = error ?
@@ -35,20 +35,20 @@ test.beforeEach.cb(t => {
   t.context.data = mount(Users)
 })
 
-test.afterEach(t => t.context.data.wrapper.unmount())
+test.afterEach((t) => t.context.data.wrapper.unmount())
 
-test.serial('it should render users after request', t => {
+test.serial('it should render users after request', (t) => {
   const { wrapper } = t.context.data
   expect(wrapper).to.have.exactly(1).descendants('.user--row')
 })
 
-test.serial('it should remove an user', t => {
+test.serial('it should remove an user', (t) => {
   const { wrapper } = t.context.data
   wrapper.find('.user--remove').first().simulate('click')
   expect(wrapper).to.not.have.descendants('.user--row')
 })
 
-test.serial('it should handle errors', t => {
+test.serial('it should handle errors', (t) => {
   const { flux } = t.context.data
   const { error } = flux.getStore('users').getState()
   t.is(error.error, 'foobar')

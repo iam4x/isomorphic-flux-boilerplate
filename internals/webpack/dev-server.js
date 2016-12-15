@@ -1,3 +1,5 @@
+/* eslint import/first: 0 */
+
 process.env.BABEL_ENV = 'browser'
 process.env.NODE_ENV = 'development'
 

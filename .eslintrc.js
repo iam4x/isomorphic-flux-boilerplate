@@ -30,9 +30,10 @@ module.exports = {
     "react/style-prop-object": 0,
 
     "import/no-extraneous-dependencies": [2, { "devDependencies": [
-      "**/*.spec.{js,jsx}",
+      "**/*.{spec,test}.{js,jsx}",
       "**/*.config.js",
-      "server/koa.js"
+      "server/koa.js",
+      "internals/**"
     ] }],
 
     "import/extensions": [2, "never", { "svg": "always", "css": "always", "json": "always" }],
@@ -55,6 +56,7 @@ module.exports = {
     "arrow-parens": [2, "always"],
     "class-methods-use-this": 0,
     "no-param-reassign": 0,
-    "global-require": 0
+    "global-require": 0,
+    "no-plusplus": 0
   }
 }

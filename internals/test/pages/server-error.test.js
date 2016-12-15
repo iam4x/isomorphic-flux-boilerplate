@@ -1,9 +1,10 @@
 import test from 'ava'
 import chai, { expect } from 'chai'
 import chaiEnzyme from 'chai-enzyme'
-import mount from '../helpers/mount'
 
 import ServerError from 'pages/server-error'
+
+import mount from '../helpers/mount'
 
 chai.use(chaiEnzyme())
 

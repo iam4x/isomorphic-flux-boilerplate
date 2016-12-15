@@ -1,15 +1,16 @@
 import defer from 'lodash/defer'
 import test from 'ava'
 
-import mount from './helpers/mount'
-import Header from 'components/header'
-
 import chai, { expect } from 'chai'
 import chaiEnzyme from 'chai-enzyme'
 
+import Header from 'components/header'
+
+import mount from './helpers/mount'
+
 chai.use(chaiEnzyme())
 
-test.beforeEach(t => {
+test.beforeEach((t) => {
   t.context.data = mount(Header)
 })
 
@@ -31,7 +32,7 @@ test('it should handle requests change', ({ context: { data: { wrapper, flux } }
   expect(wrapper.find('.app--spinner')).to.not.have.className('active')
 })
 
-test.cb('it should handle lang change', t => {
+test.cb('it should handle lang change', (t) => {
   const { context: { data: { wrapper, flux } } } = t
 
   const { node } = wrapper.find(Header.decoratedComponent)
@@ -45,7 +46,7 @@ test.cb('it should handle lang change', t => {
   })
 })
 
-test.cb('it should handle logout user', t => {
+test.cb('it should handle logout user', (t) => {
   const { context: { data: { wrapper, flux } } } = t
   flux.getActions('session').login({ username: 'foo' })
 

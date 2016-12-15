@@ -1,12 +1,15 @@
+/* eslint no-unused-expressions: 0 */
+
 import test from 'ava'
 import sinon from 'sinon'
-
-import mount from './helpers/mount'
-import LangPicker from 'components/shared/lang-picker'
 
 import chai, { expect } from 'chai'
 import chaiEnzyme from 'chai-enzyme'
 import sinonChai from 'sinon-chai'
+
+import LangPicker from 'components/shared/lang-picker'
+
+import mount from './helpers/mount'
 
 chai.use(sinonChai)
 chai.use(chaiEnzyme())

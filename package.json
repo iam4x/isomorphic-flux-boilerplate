@@ -8,7 +8,7 @@
     "dev": "babel-node ./internals/webpack/dev-server.js",
     "test": "NODE_ENV=test NODE_PATH=app nyc --cache --extension .jsx ava",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
-    "lint": "eslint app server webpack shared test --ext .jsx,.js"
+    "lint": "eslint app server shared internals --ext .jsx,.js"
   },
   "repository": {
     "type": "git",

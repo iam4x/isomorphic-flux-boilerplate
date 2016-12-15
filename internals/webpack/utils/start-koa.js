@@ -51,7 +51,7 @@ const startServer = () => {
         // and reload browser on change
         watch(
           path.join(__dirname, '../../../server'),
-          (file) => !file.match('webpack-stats.json') ? restartServer() : noop()
+          (file) => (!file.match('webpack-stats.json') ? restartServer() : noop())
         )
       }
     }
@@ -60,4 +60,4 @@ const startServer = () => {
 
 // kill server on exit
 process.on('exit', () => server.kill('SIGTERM'))
-export default () => !server ? startServer() : noop()
+export default () => (!server ? startServer() : noop())

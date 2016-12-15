@@ -5,12 +5,12 @@ import debug from 'debug'
 
 const filepath = path.resolve(__dirname, '../../../server/webpack-stats.json')
 
-export default function (stats) {
+export default function(stats) {
   const publicPath = this.options.output.publicPath
   const json = stats.toJson()
 
   // get chunks by name and extensions
-  const getChunks = function (name, ext = /.js$/) {
+  const getChunks = (name, ext = /.js$/) => {
     let chunks = json.assetsByChunkName[name]
 
     // a chunk could be a string or an array, so make sure it is an array
@@ -19,8 +19,8 @@ export default function (stats) {
     }
 
     return chunks
-      .filter(chunk => ext.test(path.extname(chunk))) // filter by extension
-      .map(chunk => `${publicPath}${chunk}`) // add public path to it
+      .filter((chunk) => ext.test(path.extname(chunk))) // filter by extension
+      .map((chunk) => `${publicPath}${chunk}`) // add public path to it
   }
 
   const script = getChunks('app', /js/)
@@ -31,8 +31,8 @@ export default function (stats) {
   // for server side rendering
   const imagesRegex = /\.(jpe?g|png|gif|svg)$/
   const images = json.modules
-    .filter(module => imagesRegex.test(module.name))
-    .map(image =>
+    .filter((module) => imagesRegex.test(module.name))
+    .map((image) =>
       ({ original: image.name, compiled: `${publicPath}${image.assets[0]}` }))
 
   const content = { script, style, images }

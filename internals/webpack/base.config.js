@@ -29,14 +29,14 @@ export default {
     new webpack.optimize.AggressiveMergingPlugin(),
 
     // write webpack stats
-    function () { this.plugin('done', writeStats) }
+    function onDone() { this.plugin('done', writeStats) }
   ],
   resolve: {
     extensions: [ '', '.js', '.json', '.jsx', '.es6', '.babel' ],
     modulesDirectories: [ 'node_modules', 'app' ]
   },
-  postcss: (webpack) => [
-    require('postcss-import')({ addDependencyTo: webpack }),
+  postcss: (webpackInstance) => [
+    require('postcss-import')({ addDependencyTo: webpackInstance }),
     require('postcss-url')(),
     require('precss')(),
     require('autoprefixer')({ browsers: [ 'last 2 versions' ] })
