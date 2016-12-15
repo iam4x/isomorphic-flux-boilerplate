@@ -4730,10 +4730,6 @@ klaw@^1.0.0:
   optionalDependencies:
     graceful-fs "^4.1.9"
 
-koa-compose@^2.2.0:
-  version "2.5.1"
-  resolved "https://registry.yarnpkg.com/koa-compose/-/koa-compose-2.5.1.tgz#726cfb17694de5cb9fbf03c0adf172303f83f156"
-
 koa-compose@^3.0.0:
   version "3.2.1"
   resolved "https://registry.yarnpkg.com/koa-compose/-/koa-compose-3.2.1.tgz#a85ccb40b7d986d8e5a345b3a1ace8eabcf54de7"
@@ -4749,9 +4745,9 @@ koa-compress@^2.0.0:
     koa-is-json "^1.0.0"
     statuses "^1.0.0"
 
-koa-conditional-get@^1.0.3:
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/koa-conditional-get/-/koa-conditional-get-1.0.3.tgz#91aa03f2888aec0ae2f636f18b0cd95f158510c7"
+koa-conditional-get@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/koa-conditional-get/-/koa-conditional-get-2.0.0.tgz#a43f3723c1d014b730a34ece8adf30b93c8233f2"
 
 koa-convert@^1.2.0:
   version "1.2.0"
@@ -4767,9 +4763,9 @@ koa-etag@^2.0.0:
     etag "^1.3.0"
     mz "^2.1.0"
 
-koa-favicon@^1.2.0:
-  version "1.2.1"
-  resolved "https://registry.yarnpkg.com/koa-favicon/-/koa-favicon-1.2.1.tgz#c001a6db6da6d71272b93fb5b924c392194821d0"
+koa-favicon@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/koa-favicon/-/koa-favicon-2.0.0.tgz#1c4e5023e71fcbfa64c59def00ae10e6942e5a6e"
   dependencies:
     mz "^2.0.0"
 
@@ -4792,12 +4788,12 @@ koa-logger@^2.0.0:
     humanize-number "~0.0.1"
     passthrough-counter "^1.0.0"
 
-koa-mount@^1.3.0:
-  version "1.3.0"
-  resolved "https://registry.yarnpkg.com/koa-mount/-/koa-mount-1.3.0.tgz#de6ab775ec4b71ba6e67f2925a3d40dd5fab3ed0"
+koa-mount@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/koa-mount/-/koa-mount-2.0.0.tgz#728b7d01ab23e7e58dc588e52fc554d67ee981db"
   dependencies:
     debug "*"
-    koa-compose "^2.2.0"
+    koa-compose "^3.0.0"
 
 koa-proxy@^0.6.0:
   version "0.6.0"
@@ -4806,9 +4802,9 @@ koa-proxy@^0.6.0:
     co-request "^0.2.0"
     iconv-lite "^0.2.11"
 
-koa-response-time@^1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/koa-response-time/-/koa-response-time-1.0.2.tgz#35ea38df719fc7c1d2eddb8544a74b3650712884"
+koa-response-time@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/koa-response-time/-/koa-response-time-2.0.0.tgz#9590b54284dc59a9ec10f80b69048a66188342bb"
 
 koa-router@^7.0.0:
   version "7.0.1"
@@ -4842,7 +4838,7 @@ koa-webpack-hot-middleware@^1.0.1:
   dependencies:
     webpack-hot-middleware "2.x"
 
-koa@^2.0.0-alpha.3:
+koa@^2.0.0-alpha.7:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/koa/-/koa-2.0.0.tgz#da865ae8ee4afae070425290455d2cdf4885f9dc"
   dependencies:

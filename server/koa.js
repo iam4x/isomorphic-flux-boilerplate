@@ -19,7 +19,7 @@ const app = new Koa()
 const env = process.env.NODE_ENV || 'development'
 
 // add header `X-Response-Time`
-app.use(convert(responseTime()))
+app.use(responseTime())
 app.use(convert(logger()))
 
 // various security headers
@@ -31,7 +31,7 @@ if (env === 'production') {
   debug.enable('koa')
 
   // load production middleware
-  app.use(convert(require('koa-conditional-get')()))
+  app.use(require('koa-conditional-get')())
   app.use(convert(require('koa-etag')()))
   app.use(require('koa-compress')())
 }
@@ -44,7 +44,7 @@ if (env === 'development') {
   require('blocked')((ms) => debug('koa')(`blocked for ${ms}ms`))
 }
 
-app.use(convert(favicon(path.join(__dirname, '../app/images/favicon.ico'))))
+app.use(favicon(path.join(__dirname, '../app/images/favicon.ico')))
 
 const cacheOpts = { maxAge: 86400000, gzip: true }
 
@@ -55,9 +55,9 @@ if (env === 'development') {
     host: `http://0.0.0.0:${webpackConfig.server.port}`,
     map: (filePath) => `assets/${filePath}`
   })
-  app.use(convert(mount('/assets', proxy)))
+  app.use(mount('/assets', proxy))
 } else {
-  app.use(convert(mount('/assets', staticCache(path.join(__dirname, '../dist'), cacheOpts))))
+  app.use(mount('/assets', staticCache(path.join(__dirname, '../dist'), cacheOpts)))
 }
 
 // mount the Api router
