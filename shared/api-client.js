@@ -44,7 +44,7 @@ class ApiClient {
       const { data } = await axios(this.getConfig(config))
       return data
     } catch (error) {
-      throw error && error.data || error.stack
+      throw (error && error.data) || error.stack
     }
   }
 

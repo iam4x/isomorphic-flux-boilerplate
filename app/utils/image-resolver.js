@@ -23,7 +23,7 @@ export default (imagePath) => {
 
     // Find the correct image
     const regex = new RegExp(`${imagePath}$`)
-    const image = images.find(img => regex.test(img.original))
+    const image = images.find((img) => regex.test(img.original))
 
     // Serve image.
     if (image) return image.compiled

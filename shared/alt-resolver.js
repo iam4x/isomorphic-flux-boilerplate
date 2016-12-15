@@ -15,6 +15,7 @@ class AltResolver {
   }
 
   /* istanbul ignore next */
+  /* eslint no-restricted-syntax: 0 */
   async dispatchPendingActions() {
     for (const action of this.pendingActions) await action()
   }

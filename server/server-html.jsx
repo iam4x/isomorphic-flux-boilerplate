@@ -28,7 +28,7 @@ function ServerHTML(props: Props) {
       <body>
         <div id='content' dangerouslySetInnerHTML={ { __html: body } } />
         <script src={ assets.script[0] } />
-        <script async defer id='github-bjs' src='https://buttons.github.io/buttons.js' />
+        <script async={ true } defer={ true } id='github-bjs' src='https://buttons.github.io/buttons.js' />
       </body>
     </html>
   )

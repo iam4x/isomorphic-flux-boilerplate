@@ -24,11 +24,11 @@ class Flux extends Alt {
     this.request = ::client.request
 
     // Load actions into alt
-    Object.keys(actions).forEach(key =>
+    Object.keys(actions).forEach((key) =>
       isFunc(actions[key]) && this.addActions(key, actions[key]))
 
     // Load stores into alt
-    Object.keys(stores).forEach(key =>
+    Object.keys(stores).forEach((key) =>
       isFunc(stores[key]) && this.addStore(key, stores[key]))
 
     // Our `FinalStore` for using `connect-alt`
@@ -37,4 +37,4 @@ class Flux extends Alt {
 
 }
 
-export default function (config) { return new Flux(config) }
+export default function(config) { return new Flux(config) }

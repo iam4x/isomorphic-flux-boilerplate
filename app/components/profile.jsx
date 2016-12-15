@@ -12,9 +12,9 @@ class Profile extends Component {
     i18n: PropTypes.func.isRequired
   }
 
-  static propTypes = {
-    params: PropTypes.object.isRequired,
-    collection: PropTypes.array
+  props: {
+    params: { seed: string; };
+    collection: Array<Object>;
   }
 
   componentWillMount() {
@@ -34,7 +34,7 @@ class Profile extends Component {
 
   getUser() {
     const { collection, params: { seed } } = this.props
-    return collection.find(u => u.seed === seed)
+    return collection.find((u) => u.seed === seed)
   }
 
   updatePageTitle() {

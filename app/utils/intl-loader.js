@@ -1,3 +1,7 @@
+/* eslint import/no-webpack-loader-syntax: 0 */
+/* eslint import/no-extraneous-dependencies: 0 */
+/* eslint import/no-unresolved: 0 */
+
 const loaders = {
   en: async () => {
     if (!window.Intl) {

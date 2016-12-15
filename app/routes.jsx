@@ -4,7 +4,7 @@ import { Route } from 'react-router'
 import { generateRoute } from 'utils/localized-routes'
 import { isConnected } from 'utils/routes-hooks'
 
-export default function (flux) { /* eslint react/display-name: 0 */
+export default function(flux) { /* eslint react/display-name: 0 */
   return (
     <Route component={ require('./components/app') }>
       { generateRoute({

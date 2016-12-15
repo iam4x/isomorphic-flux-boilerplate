@@ -21,15 +21,15 @@ if (process.env.BROWSER) {
   ({ inProgress, session }))
 class Header extends Component {
 
-  static propTypes = {
-    inProgress: PropTypes.bool,
-    session: PropTypes.object
-  }
-
   static contextTypes = {
     locales: PropTypes.array.isRequired,
     flux: PropTypes.object.isRequired,
     i18n: PropTypes.func.isRequired
+  }
+
+  props: {
+    inProgress: boolean;
+    session: Object;
   }
 
   handleLocaleChange = (locale: string) => {
@@ -74,23 +74,23 @@ class Header extends Component {
             </Link>
           </li>
           { session ?
-            [
-              <li key={ 0 }>
-                <Link to={ i18n('routes.account') }>
-                  { i18n('header.account') }
-                </Link>
-              </li>,
-              <li key={ 1 }>
-                <a href='#' onClick={ this.handleLogout }>
-                  { i18n('header.logout') }
-                </a>
-              </li>
-            ] :
-            <li>
-              <Link to={ i18n('routes.login') }>
-                { i18n('header.login') }
+          [
+            <li key={ 0 }>
+              <Link to={ i18n('routes.account') }>
+                { i18n('header.account') }
               </Link>
+            </li>,
+            <li key={ 1 }>
+              <a href='/' onClick={ this.handleLogout }>
+                { i18n('header.logout') }
+              </a>
             </li>
+          ] :
+          <li>
+            <Link to={ i18n('routes.login') }>
+              { i18n('header.login') }
+            </Link>
+          </li>
           }
         </ul>
       </header>

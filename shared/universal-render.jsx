@@ -65,6 +65,7 @@ export default async function({ flux, location }) {
     const I18nContainer = require('utils/i18n-container')
     const [ error, redirect, renderProps ] = await runRouter(location, routes)
 
+    /* eslint no-throw-literal: 0 */
     if (error || redirect) throw ({ error, redirect })
 
     const element = (

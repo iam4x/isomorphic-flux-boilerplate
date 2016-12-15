@@ -29,7 +29,12 @@ module.exports = {
     "react/no-unused-prop-types": 0,
     "react/style-prop-object": 0,
 
-    "import/no-extraneous-dependencies": [2, { "devDependencies": [ "**/*.spec.{js,jsx}", "**/*.config.js" ] }],
+    "import/no-extraneous-dependencies": [2, { "devDependencies": [
+      "**/*.spec.{js,jsx}",
+      "**/*.config.js",
+      "server/koa.js"
+    ] }],
+
     "import/extensions": [2, "never", { "svg": "always", "css": "always", "json": "always" }],
     "import/no-dynamic-require": 0,
 

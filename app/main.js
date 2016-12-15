@@ -11,4 +11,4 @@ if (NODE_ENV === 'development') debug.enable('dev,koa')
 const client = new ApiClient()
 const flux = createFlux(client)
 
-universalRender({ flux }).catch(err => debug('dev')(err))
+universalRender({ flux }).catch((err) => debug('dev')(err))

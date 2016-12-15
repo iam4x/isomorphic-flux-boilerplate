@@ -9,7 +9,7 @@ import ServerHTML from './server-html'
 import ApiClient from '../shared/api-client'
 import universalRender from '../shared/universal-render'
 
-export default async function (ctx) {
+export default async function(ctx) {
   // Init alt instance
   const client = new ApiClient(ctx.get('cookie'))
   const flux = createFlux(client)

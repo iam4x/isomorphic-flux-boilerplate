@@ -18,12 +18,10 @@ class UsersStore {
   }
 
   onShowSuccess(user: { seed: string }) {
-    const index = this.collection
-      .findIndex(({ seed }) => seed === user.seed)
+    const index = this.collection.findIndex(({ seed }) => seed === user.seed)
 
     if (index > -1) {
-      this.collection = this.collection
-        .map((u, idx) => idx === index ? user : u)
+      this.collection = this.collection.map((u, idx) => (idx === index ? user : u))
     } else {
       this.collection = [ ...this.collection, user ]
     }
@@ -36,8 +34,7 @@ class UsersStore {
   }
 
   onRemove(index: number) {
-    this.collection = this.collection
-      .filter((user, idx) => idx !== index)
+    this.collection = this.collection.filter((user, idx) => idx !== index)
   }
 
 }

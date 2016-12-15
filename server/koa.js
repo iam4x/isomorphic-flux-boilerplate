@@ -63,6 +63,7 @@ if (env === 'development') {
 // mount the Api router
 const apiRouter = new Router({ prefix: apiPrefix })
 require('./api/routes')(apiRouter)
+
 app.use(apiRouter.routes())
 
 // mount react-router
