@@ -1142,9 +1142,9 @@ babel-preset-react@^6.5.0:
     babel-plugin-transform-react-jsx-self "^6.11.0"
     babel-plugin-transform-react-jsx-source "^6.3.13"
 
-babel-preset-save@^1.1.6:
-  version "1.1.6"
-  resolved "https://registry.yarnpkg.com/babel-preset-save/-/babel-preset-save-1.1.6.tgz#26243eb9f254dbc7fb9d525745827a45d22c39ae"
+babel-preset-save@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/babel-preset-save/-/babel-preset-save-1.2.0.tgz#419228b6b6989a0204762072b619a855d4deda3b"
   dependencies:
     babel-plugin-add-module-exports "^0.1.2"
     babel-plugin-transform-decorators-legacy "^1.3.4"
@@ -1155,7 +1155,6 @@ babel-preset-save@^1.1.6:
     babel-preset-es2015 "^6.5.0"
     babel-preset-react "^6.5.0"
     babel-preset-stage-0 "^6.5.0"
-    modify-babel-preset "^3.2.0"
 
 babel-preset-stage-0@^6.5.0:
   version "6.16.0"
@@ -5417,12 +5416,6 @@ mkdirp@0.5.x, "mkdirp@>=0.5 0", mkdirp@^0.5.0, mkdirp@^0.5.1, mkdirp@~0.5.0, mkd
   dependencies:
     minimist "0.0.8"
 
-modify-babel-preset@^3.2.0:
-  version "3.2.0"
-  resolved "https://registry.yarnpkg.com/modify-babel-preset/-/modify-babel-preset-3.2.0.tgz#3c524a33de19576abec03904fda07f07251b441b"
-  dependencies:
-    require-relative "^0.8.7"
-
 ms@0.7.1:
   version "0.7.1"
   resolved "https://registry.yarnpkg.com/ms/-/ms-0.7.1.tgz#9cd13c03adbff25b65effde7ce864ee952017098"
@@ -7109,10 +7102,6 @@ require-main-filename@^1.0.1:
 require-precompiled@^0.1.0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/require-precompiled/-/require-precompiled-0.1.0.tgz#5a1b52eb70ebed43eb982e974c85ab59571e56fa"
-
-require-relative@^0.8.7:
-  version "0.8.7"
-  resolved "https://registry.yarnpkg.com/require-relative/-/require-relative-0.8.7.tgz#7999539fc9e047a37928fa196f8e1563dabd36de"
 
 require-uncached@^1.0.2:
   version "1.0.3"
