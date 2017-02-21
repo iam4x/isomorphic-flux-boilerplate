@@ -77,7 +77,7 @@
     "koa-mount": "^2.0.0",
     "koa-response-time": "^2.0.0",
     "koa-router": "^7.0.0",
-    "koa-static-cache": "^3.1.2",
+    "koa-static-cache": "^4.0.0",
     "lodash": "^4.2.0",
     "normalize.css": "^5.0.0",
     "postcss-import": "^8.0.2",
