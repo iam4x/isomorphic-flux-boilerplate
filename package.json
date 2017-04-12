@@ -8,7 +8,8 @@
     "dev": "babel-node ./internals/webpack/dev-server.js",
     "test": "NODE_ENV=test NODE_PATH=app nyc --cache --extension .jsx ava",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
-    "lint": "eslint app server shared internals --ext .jsx,.js"
+    "lint": "eslint app server shared internals --ext .jsx,.js",
+    "start": "NODE_ENV=production npm run build && NODE_ENV=production node server"
   },
   "repository": {
     "type": "git",
@@ -66,7 +67,7 @@
     "intl": "^1.0.0",
     "iso": "^5.1.0",
     "json-loader": "^0.5.3",
-    "koa": "^2.0.0-alpha.7",
+    "koa": "^2.2.0",
     "koa-compress": "^2.0.0",
     "koa-conditional-get": "^2.0.0",
     "koa-convert": "^1.2.0",
@@ -74,10 +75,10 @@
     "koa-favicon": "^2.0.0",
     "koa-helmet": "^2.0.0-alpha.1",
     "koa-logger": "^2.0.0",
-    "koa-mount": "^2.0.0",
+    "koa-mount": "^3.0.0",
     "koa-response-time": "^2.0.0",
     "koa-router": "^7.0.0",
-    "koa-static-cache": "^3.1.2",
+    "koa-static-cache": "^5.0.0",
     "lodash": "^4.2.0",
     "normalize.css": "^5.0.0",
     "postcss-import": "^8.0.2",
@@ -92,6 +93,7 @@
     "react-router": "^2.0.0",
     "scroll-behavior": "^0.5.0",
     "style-loader": "^0.13.0",
+    "sw-precache-webpack-plugin": "^0.9.1",
     "webpack": "^1.12.6"
   },
   "devDependencies": {
@@ -184,6 +186,6 @@
     "intl"
   ],
   "engines": {
-    "nodejs": "^4.4.3"
+    "nodejs": "^7.6.0"
   }
 }

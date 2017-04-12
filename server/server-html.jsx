@@ -8,8 +8,12 @@ type Props = {
   description: string
 };
 
+function serviceWorkerScript() {
+  return '(function(){if("serviceWorker" in navigator){navigator.serviceWorker.register("/serviceWorker.js");}})()';
+}
+
 function ServerHTML(props: Props) {
-  const { body, assets, locale, title, description } = props
+  const { body, assets, locale, title, description, isProd } = props
 
   return (
     <html lang={ locale }>
@@ -18,12 +22,14 @@ function ServerHTML(props: Props) {
 
         {/* Styles */}
         <link rel='icon' type='image/ico' href='/favicon.ico' />
+        <link rel='manifest' href='/static/manifest.json' />
         { assets.style.map((href, idx) =>
           <link key={ idx } rel='stylesheet' href={ href } />) }
 
         {/* SEO */}
         <title>{ title }</title>
         <meta name='description' content={ description } />
+        { isProd ? <script dangerouslySetInnerHTML={ { __html: serviceWorkerScript() } }></script> : '' }
       </head>
       <body>
         <div id='content' dangerouslySetInnerHTML={ { __html: body } } />
