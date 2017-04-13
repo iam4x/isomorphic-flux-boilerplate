@@ -39,11 +39,9 @@ if (env === 'production') {
   app.use(convert(require('koa-etag')()))
   app.use(require('koa-compress')())
 
-  app.use(convert(mount('/assets', staticCache(path.join(__dirname, '../dist')), cacheOpts)))
+  app.use(mount('/assets', staticCache(path.join(__dirname, '../dist'), cacheOpts)))
   // mount static folder for SW
   app.use(mount('/static', staticCache(path.join(__dirname, '../app/static'), cacheOpts)))
-
-  debug('koa')('have mounted assets!')
 
   // serve serwice worker file direcly under root.
   app.use(async (ctx, next) => {
