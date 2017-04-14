@@ -56,9 +56,12 @@
     * `$ npm test` OR
     * `$ npm test -- --watch`
 
-  * ### build
+  * ### build and run in separate commands
     * `$ NODE_ENV=production npm run build`
     * `$ NODE_ENV=production node server`
+    
+  * ### Build and run prod env short version:
+    * `$ npm run start`
 
 
 ## Concepts
@@ -123,6 +126,11 @@ Thank's to [gpbl/react-locale-hot-switch](https://github.com/gpbl/react-locale-h
 We have an utility to generate severals routes for the same component (see `app/utils/localized-routes.js`).
 
 Use the same logic as localized string, declare the localized routes into `app/routes.js` and into your `data/{lang}` file.
+
+
+## Progressive web app approach
+
+We have included a service worker set-up using `sw-precache-webpack-plugin` into the boilerplate so your assets generated with webpack would get proxied to your users via service worker if it is available in the browser (see service worker browser support). Meaning faster loading times, offline support and many more. This only works in production mode, you can change the behavior though. More information on service workers could be found here: [here](https://developers.google.com/web/fundamentals/getting-started/primers/service-workers) 
 
 ## Async data-fetching
 
