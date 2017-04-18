@@ -41,15 +41,16 @@ export default async function({ flux, location }) {
     const routes = require('routes')
     const I18nContainer = require('utils/i18n-container')
 
-    const { browserHistory } = require('react-router')
-    const withScroll = require('scroll-behavior/lib/withStandardScroll')
+    const { applyRouterMiddleware, browserHistory } = require('react-router')
+    const useScroll = require('react-router-scroll')
 
     const element = (
       <AltContainer flux={ flux }>
         <I18nContainer>
           <Router
-            history={ withScroll(browserHistory) }
-            routes={ routes(flux) } />
+            history={ browserHistory }
+            routes={ routes(flux) }
+            render={ applyRouterMiddleware(useScroll()) } />
         </I18nContainer>
       </AltContainer>
     )
