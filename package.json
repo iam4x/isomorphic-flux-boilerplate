@@ -123,7 +123,7 @@
     "react-addons-test-utils": "^15.0.2",
     "react-transform-catch-errors": "^1.0.0",
     "react-transform-hmr": "^1.0.0",
-    "redbox-react": "^1.0.4",
+    "redbox-react": "^1.2.10",
     "sinon": "^1.17.3",
     "sinon-chai": "^2.8.0",
     "url-loader": "^0.5.7",
