@@ -113,7 +113,7 @@
     "eslint-plugin-jsx-a11y": "^2.2.3",
     "eslint-plugin-react": "^6.6.0",
     "faux-jax": "^5.0.0",
-    "jsdom": "^9.1.0",
+    "jsdom": "^9.3.0",
     "koa-proxy": "^0.6.0",
     "koa-webpack-dev-middleware": "^1.0.1",
     "koa-webpack-hot-middleware": "^1.0.1",
