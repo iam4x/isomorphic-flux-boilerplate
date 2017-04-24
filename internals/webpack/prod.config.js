@@ -12,28 +12,72 @@ const appName = require('../../package.json').name
 export default {
   ...baseConfig,
   module: {
-    loaders: [
-      ...baseConfig.module.loaders,
+    rules: [
+      ...baseConfig.module.rules,
       {
         test: /\.(woff|woff2|eot|ttf|svg)(\?v=[0-9].[0-9].[0-9])?$/,
-        loader: 'file?name=[sha512:hash:base64:7].[ext]',
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[sha512:hash:base64:7].[ext]'
+            }
+          }
+        ],
         exclude: /node_modules\/(?!font-awesome)/
       },
       {
         test: /\.(jpe?g|png|gif|svg)$/,
-        loader: 'file?name=[sha512:hash:base64:7].[ext]!image?optimizationLevel=7&progressive&interlaced',
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[sha512:hash:base64:7].[ext]'
+            }
+          }
+          // TODO: optimize images for prod
+          // {
+          //   loader: 'image-webpack-loader',
+          //   options: {
+          //     optimizationLevel: 7,
+          //     progressive: true,
+          //     interlaced: true
+          //   }
+          // }
+        ],
         exclude: /node_modules\/(?!font-awesome)/
       },
       {
         test: /\.css$/,
-        loader: ExtractTextPlugin.extract('style', 'css!postcss'),
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: [
+            {
+              loader: 'css-loader'
+            },
+            {
+              loader: 'postcss-loader',
+              options: {
+                plugins: (webpackInstance) => [
+                  require('postcss-import')({ addDependencyTo: webpackInstance }),
+                  require('postcss-url')(),
+                  require('precss')(),
+                  require('autoprefixer')({ browsers: [ 'last 2 versions' ] })
+                ]
+              }
+            }
+          ]
+        }),
         exclude: /node_modules/
       }
     ]
   },
   plugins: [
     // extract css
-    new ExtractTextPlugin('[name]-[chunkhash].css'),
+    new ExtractTextPlugin({
+      filename: '[name]-[chunkhash].css',
+      allChunks: true
+    }),
 
     // set env
     new webpack.DefinePlugin({
@@ -59,8 +103,6 @@ export default {
     }),
 
     // optimizations
-    new webpack.optimize.DedupePlugin(),
-    new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.optimize.UglifyJsPlugin({
       sourceMap: false,
       compress: {
@@ -90,10 +132,10 @@ export default {
         cacheId: `${appName}-sw`,
         filename: 'serviceWorker.js',
         maximumFileSizeToCacheInBytes: 4194304,
-        runtimeCaching: [{
+        runtimeCaching: [ {
           urlPattern: /\//,
           handler: 'fastest'
-        }]
+        } ]
       }
     ),
 

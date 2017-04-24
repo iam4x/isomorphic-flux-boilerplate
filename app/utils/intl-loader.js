@@ -5,18 +5,18 @@
 const loaders = {
   en: async () => {
     if (!window.Intl) {
-      await require('promise?global!intl')()
-      await require('promise?global!intl/locale-data/jsonp/en.js')()
+      await require('promise-loader?global!intl')()
+      await require('promise-loader?global!intl/locale-data/jsonp/en.js')()
     }
-    return await require('promise?global!data/en')()
+    return await require('promise-loader?global!data/en')()
   },
 
   fr: async () => {
     if (!window.Intl) {
-      await require('promise?global!intl')()
-      await require('promise?global!intl/locale-data/jsonp/fr.js')()
+      await require('promise-loader?global!intl')()
+      await require('promise-loader?global!intl/locale-data/jsonp/fr.js')()
     }
-    return await require('promise?global!data/fr')()
+    return await require('promise-loader?global!data/fr')()
   }
 }
 

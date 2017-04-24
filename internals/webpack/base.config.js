@@ -17,12 +17,18 @@ export default {
     publicPath: '/assets/'
   },
   module: {
-    preLoaders: [
-      { test: JS_REGEX, exclude: /node_modules/, loader: 'eslint' }
-    ],
-    loaders: [
-      { test: /\.json$/, exclude: /node_modules/, loader: 'json' },
-      { test: JS_REGEX, exclude: /node_modules/, loader: 'babel' }
+    rules: [
+      {
+        test: JS_REGEX,
+        enforce: 'pre',
+        exclude: /node_modules/,
+        loader: 'eslint-loader'
+      },
+      {
+        test: JS_REGEX,
+        exclude: /node_modules/,
+        loader: 'babel-loader'
+      }
     ]
   },
   plugins: [
@@ -32,13 +38,10 @@ export default {
     function onDone() { this.plugin('done', writeStats) }
   ],
   resolve: {
-    extensions: [ '', '.js', '.json', '.jsx', '.es6', '.babel' ],
-    modulesDirectories: [ 'node_modules', 'app' ]
-  },
-  postcss: (webpackInstance) => [
-    require('postcss-import')({ addDependencyTo: webpackInstance }),
-    require('postcss-url')(),
-    require('precss')(),
-    require('autoprefixer')({ browsers: [ 'last 2 versions' ] })
-  ]
+    extensions: [ '.js', '.json', '.jsx', '.es6', '.babel' ],
+    modules: [
+      'app',
+      'node_modules'
+    ]
+  }
 }
