@@ -9,6 +9,8 @@ import ServerHTML from './server-html'
 import ApiClient from '../shared/api-client'
 import universalRender from '../shared/universal-render'
 
+const env = process.env.NODE_ENV || 'development'
+
 export default async function(ctx) {
   // Init alt instance
   const client = new ApiClient(ctx.get('cookie'))
@@ -51,7 +53,9 @@ export default async function(ctx) {
     }
 
     debug('dev')('return html content')
-    const props = { body, assets, locale, title, description }
+
+    const isProd = env === 'production';
+    const props = { body, assets, locale, title, description, isProd }
     const html = renderToString(<ServerHTML { ...props } />)
     ctx.status = statusCode
     ctx.body = `<!DOCTYPE html>${html}`

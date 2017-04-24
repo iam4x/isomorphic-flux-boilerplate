@@ -1,5 +1,6 @@
 import path from 'path'
 import debug from 'debug'
+import fs from 'fs'
 
 import Koa from 'koa'
 import mount from 'koa-mount'
@@ -25,6 +26,9 @@ app.use(convert(logger()))
 // various security headers
 app.use(helmet())
 
+const cacheOpts = { maxAge: 86400000, gzip: true }
+app.use(favicon(path.join(__dirname, '../app/images/favicon.ico')))
+
 if (env === 'production') {
   // set debug env to `koa` only
   // must be set programmaticaly for windows
@@ -34,30 +38,49 @@ if (env === 'production') {
   app.use(require('koa-conditional-get')())
   app.use(convert(require('koa-etag')()))
   app.use(require('koa-compress')())
-}
 
-if (env === 'development') {
+  app.use(mount('/assets', staticCache(path.join(__dirname, '../dist'), cacheOpts)))
+  // mount static folder for SW
+  app.use(mount('/static', staticCache(path.join(__dirname, '../app/static'), cacheOpts)))
+
+  // serve serwice worker file direcly under root.
+  app.use(async (ctx, next) => {
+    let serviceWorkerJS
+    const swPath = path.join(__dirname, '../dist/serviceWorker.js')
+    const { method, url } = ctx.request
+    if (method !== 'GET' || url !== '/serviceWorker.js') {
+      return next()
+    }
+
+    if (!serviceWorkerJS) {
+      serviceWorkerJS = await new Promise((resolve) => {
+        fs.readFile(swPath, 'utf8', (err, data) => {
+          if (err) {
+            throw new Error(`Could not read file: ${swPath}`)
+          }
+
+          resolve(data)
+        })
+      })
+    }
+
+    ctx.type = 'application/javascript; charset=utf-8'
+    ctx.body = serviceWorkerJS
+  })
+} else if (env === 'development') {
   // set debug env, must be programmaticaly for windows
   debug.enable('dev,koa')
 
   // log when process is blocked
   require('blocked')((ms) => debug('koa')(`blocked for ${ms}ms`))
-}
 
-app.use(favicon(path.join(__dirname, '../app/images/favicon.ico')))
-
-const cacheOpts = { maxAge: 86400000, gzip: true }
-
-// Proxy asset folder to webpack development server in development mode
-if (env === 'development') {
+  // Proxy asset folder to webpack development server in development mode
   const webpackConfig = require('./../internals/webpack/dev.config')
   const proxy = require('koa-proxy')({
     host: `http://0.0.0.0:${webpackConfig.server.port}`,
     map: (filePath) => `assets/${filePath}`
   })
   app.use(mount('/assets', proxy))
-} else {
-  app.use(mount('/assets', staticCache(path.join(__dirname, '../dist'), cacheOpts)))
 }
 
 // mount the Api router
