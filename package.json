@@ -119,7 +119,7 @@
     "koa-proxy": "^0.6.0",
     "koa-webpack-dev-middleware": "^1.0.1",
     "koa-webpack-hot-middleware": "^1.0.1",
-    "node-watch": "^0.3.4",
+    "node-watch": "^0.5.2",
     "nyc": "^6.1.1",
     "postcss-loader": "^0.9.1",
     "react-addons-test-utils": "^15.0.2",
