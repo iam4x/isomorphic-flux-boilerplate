@@ -126,7 +126,7 @@
     "react-transform-catch-errors": "^1.0.0",
     "react-transform-hmr": "^1.0.0",
     "redbox-react": "^1.0.4",
-    "sinon": "^1.17.3",
+    "sinon": "^2.0.0",
     "sinon-chai": "^2.8.0",
     "url-loader": "^0.5.7",
     "webpack-hot-middleware": "^2.0.2"
