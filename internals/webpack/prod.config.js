@@ -32,18 +32,27 @@ export default {
           {
             loader: 'file-loader',
             options: {
-              name: '[sha512:hash:base64:7].[ext]'
+              query: {
+                name: '[sha512:hash:base64:7].[ext]'
+              }
+            }
+          },
+          {
+            loader: 'image-webpack-loader',
+            options: {
+              query: {
+                mozjpeg: {
+                  progressive: true
+                },
+                gifsicle: {
+                  interlaced: true
+                },
+                optipng: {
+                  optimizationLevel: 7
+                }
+              }
             }
           }
-          // TODO: optimize images for prod
-          // {
-          //   loader: 'image-webpack-loader',
-          //   options: {
-          //     optimizationLevel: 7,
-          //     progressive: true,
-          //     interlaced: true
-          //   }
-          // }
         ],
         exclude: /node_modules\/(?!font-awesome)/
       },
