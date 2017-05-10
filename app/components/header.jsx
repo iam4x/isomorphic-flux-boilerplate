@@ -29,7 +29,7 @@ class Header extends Component {
 
   props: {
     inProgress: boolean;
-    session: Object;
+    session: ?Object;
   }
 
   handleLocaleChange = (locale: string) => {
