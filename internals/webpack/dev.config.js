@@ -47,25 +47,50 @@ export default {
     output: { ...baseConfig.output, publicPath: PUBLIC_PATH },
     module: {
       ...baseConfig.module,
-      loaders: [
-        ...baseConfig.module.loaders,
+      rules: [
+        ...baseConfig.module.rules,
         {
           test: /\.(jpe?g|png|gif|svg|woff|woff2|eot|ttf)(\?v=[0-9].[0-9].[0-9])?$/,
-          loader: 'url?name=[sha512:hash:base64:7].[ext]',
+          use: {
+            loader: 'file-loader',
+            options: {
+              name: '[sha512:hash:base64:7].[ext]'
+            }
+          },
           exclude: /node_modules\/(?!font-awesome)/
         },
         {
           test: /\.css$/,
-          loader: 'style!css?sourceMap!postcss',
+          use: [
+            {
+              loader: 'style-loader'
+            },
+            {
+              loader: 'css-loader',
+              options: {
+                sourceMap: true
+              }
+            },
+            {
+              loader: 'postcss-loader',
+              options: {
+                plugins: (webpackInstance) => [
+                  require('postcss-import')({ addDependencyTo: webpackInstance }),
+                  require('postcss-url')(),
+                  require('precss')(),
+                  require('autoprefixer')({ browsers: [ 'last 2 versions' ] })
+                ]
+              }
+            }
+          ],
           exclude: /node_modules/
         }
       ]
     },
     plugins: [
       // hot reload
-      new webpack.optimize.OccurenceOrderPlugin(),
       new webpack.HotModuleReplacementPlugin(),
-      new webpack.NoErrorsPlugin(),
+      new webpack.NoEmitOnErrorsPlugin(),
 
       new webpack.DefinePlugin({
         'process.env': {
@@ -73,8 +98,6 @@ export default {
           NODE_ENV: JSON.stringify('development')
         }
       }),
-
-      new webpack.optimize.DedupePlugin(),
 
       ...baseConfig.plugins,
 
