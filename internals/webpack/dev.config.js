@@ -52,7 +52,7 @@ export default {
         {
           test: /\.(jpe?g|png|gif|svg|woff|woff2|eot|ttf)(\?v=[0-9].[0-9].[0-9])?$/,
           use: {
-            loader: 'url-loader',
+            loader: 'file-loader',
             options: {
               name: '[sha512:hash:base64:7].[ext]'
             }
